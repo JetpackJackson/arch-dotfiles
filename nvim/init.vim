@@ -6,7 +6,7 @@ Plug 'JetpackJackson/farin-colors'
 "Plug 'pablopunk/sick.vim'
 
 call plug#end()
-colorscheme helldunkel2
+colorscheme dusche
 "colorscheme sick
 
 if has('termguicolors')

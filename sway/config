@@ -31,6 +31,7 @@ exec export XDG_CURRENT_DESKTOP=sway
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/jet/Pictures/archbox.png fill
+#output LVDS-1 bg /home/jet/Pictures/drum2.png fill
 #output LVDS-1 bg /home/jet/Pictures/dieaerzte.jpg fit
 # use * for all
 #exec_always export XDG_CURRENT_DESKTOP=sway
@@ -123,23 +124,23 @@ input * {
     xkb_options "grp:rctrl_toggle"
 }
 
-# Basics:
-#
+set $mybindsym bindsym --to-code
+
     # Start a terminal
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    $mybindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+
+    $mybindsym $mod+d exec $menu
 
 #bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
-bindsym $mod+x exec clipman pick -t rofi
-bindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
-bindsym Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-#rofi -modi "clipboard:greenclip print" -show clipboard
-
+$mybindsym $mod+x exec clipman pick -t rofi
+$mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
+#bindsym $mod+Home exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
+bindsym $mod+Home exec 'grim ~/Pictures/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -148,7 +149,7 @@ bindsym Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    $mybindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
