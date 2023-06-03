@@ -9,5 +9,10 @@ unity3d/
 pulse/
 i3status/
 dconf/
-Raspberry Pi
-Pinta
+Raspberry\ Pi/
+Pinta/
+QtProject.conf
+greenclip.toml
+mimeapps.list
+user-dirs.dirs
+user-dirs.locale
