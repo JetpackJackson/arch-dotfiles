@@ -122,7 +122,7 @@
 		"format-disconnected": "No connection",
 		//"format-alt": " {ipaddr}/{cidr}",
 		"tooltip": false,
-		"on-click": "kitty -e btop",
+		"on-click": "kitty -e ping archlinux.org",
 		"on-click-right": "kitty -e iwctl station wlan0 show"
 	},
 
