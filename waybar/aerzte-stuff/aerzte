@@ -10,6 +10,7 @@
 
 	"modules-right": [
 		"custom/arrow9",
+		"custom/arrow9",
 		"custom/media",
 		"custom/arrow8",
 		"pulseaudio",
@@ -66,7 +67,7 @@
 			"",
 			""
 		],
-		//"on-click": "exec ~/.config/waybar/launchbar2.sh",
+		//"on-click": "exec ~/.config/waybar/launchbar1.sh",
 		"tooltip": false
 	},
 

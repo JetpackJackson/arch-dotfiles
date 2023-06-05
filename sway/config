@@ -30,7 +30,8 @@ exec export XDG_CURRENT_DESKTOP=sway
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/jet/Pictures/archbox.png fill
+#output * bg /home/jet/Pictures/archbox.png fill
+output * bg /home/jet/Pictures/bigdaddy.jpg fill
 #output LVDS-1 bg /home/jet/Pictures/drum2.png fill
 #output LVDS-1 bg /home/jet/Pictures/dieaerzte.jpg fit
 # use * for all
@@ -274,7 +275,8 @@ bindsym $mod+r mode "resize"
 #bar {
 #	status_command i3status
 #}
-exec_always waybar
+exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
+##exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
 #bar { 
 #     swaybar_command waybar
 #}
