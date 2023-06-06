@@ -98,3 +98,4 @@ highlight User20 ctermfg=default ctermbg=default
 highlight OtherWin ctermfg=default ctermbg=default
 highlight LineNr ctermfg=default ctermbg=default
 highlight OddLine ctermfg=default ctermbg=default
+

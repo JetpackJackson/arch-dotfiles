@@ -70,7 +70,8 @@ workspace 10 output $disp2
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+#         timeout 300 'swaylock -f -c 000000' \
+	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/Pictures/lock.jpg'" \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 #
@@ -107,8 +108,10 @@ bindsym Menu exec kitty -e btop
 
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
-bindsym XF86Calculator exec swaylock -f -c 000000
-bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
+##bindsym XF86Calculator exec swaylock -f -c 000000
+bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/lock.jpg
+##bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
+bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
 default_border none

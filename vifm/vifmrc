@@ -102,7 +102,7 @@ endif
 set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 " List of color schemes to try (picks the first one supported by the terminal)
-colorscheme Default-256 Default
+colorscheme zenburn Default-256 Default
 
 " ------------------------------------------------------------------------------
 " Bookmarks
@@ -278,6 +278,10 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
         \ shotwell,
 fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
          \ identify %f
+filextype {*.png,*.jpeg,*.jpg,*.webp}
+	\ feh %f
+fileviewer *.exe
+	\ echo Binary file: no preview available. %i
 
 " OpenRaster
 filextype *.ora
@@ -533,6 +537,11 @@ nnoremap <a-i> :sync<cr>
 nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
+
+set vicmd=nvim
+"only
+set fillchars='vborder:│'
+set tuioptions-=s
 
 " ------------------------------------------------------------------------------
 " Various customization examples
