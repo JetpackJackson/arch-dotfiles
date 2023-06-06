@@ -107,8 +107,8 @@ bindsym Menu exec kitty -e btop
 
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
-bindsym XF86Calculator exec swaylock
-bindsym $mod+XF86Calculator exec swaylock & systemctl suspend
+bindsym XF86Calculator exec swaylock -f -c 000000
+bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
 default_border none
