@@ -5,6 +5,9 @@ set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
+map gi cd /run/media
+map gg cd /home
+map gt cd ~/trash
 #map d # leave the command name empty like this for unmapping
 #map dd delete
 #map dD $IFS=':'; rm -rf $fx
