@@ -201,15 +201,15 @@
 #language {
 /*	background: @layout;
 	color: @black;*/
-	background: @mgray;
-	color: @white;
+	background: @pale;
+	color: @black;
 }
 
 #battery {
 /*	background: @battery;
 	color: @black;*/
-	background: @silver;
-	color: @black;
+	background: @dbrown;
+	color: @white;
 }
 
 #tray {
@@ -222,7 +222,7 @@
 }
 
 #clock.time {
-	background: @dbrown;
+	background: @mbrown;
 	color: @white;
 }
 
@@ -233,19 +233,19 @@
 
 #custom-arrow1 {
 	font-size: 11pt;
-	color: @dbrown;
-	background: @mgray;
+	color: @mbrown;
+	background: @pale;
 }
 
 #custom-arrow2 {
 	font-size: 11pt;
-	color: @mgray;
-	background: @silver;
+	color: @pale;
+	background: @dbrown;
 }
 
 #custom-arrow3 {
 	font-size: 11pt;
-	color: @silver;
+	color: @dbrown;
 	background: @mbrown;
 }
 

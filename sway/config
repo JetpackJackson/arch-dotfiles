@@ -281,7 +281,7 @@ bindsym $mod+r mode "resize"
 #bar {
 #	status_command i3status
 #}
-exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
+exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock2.css
 ##exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
 #bar { 
 #     swaybar_command waybar
