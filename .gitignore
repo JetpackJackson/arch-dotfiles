@@ -1,20 +1,21 @@
-google-chrome/
+btop/
 cef_user_data/
-dolphin-emu/
+dconf/
 discord/
+dolphin-emu/
+dunst/
+flameshot/
+google-chrome/
 gtk-2.0/
 gtk-3.0/
+i3status/
+Pinta/
+pulse/
+ranger/
+Raspberry\ Pi/
 retroarch/
 unity3d/
-pulse/
-i3status/
-dconf/
-Raspberry\ Pi/
-Pinta/
-QtProject.conf
-greenclip.toml
+whoozle.github.io/
 mimeapps.list
 user-dirs.dirs
 user-dirs.locale
-whoozle.github.io/
-spacefm/
