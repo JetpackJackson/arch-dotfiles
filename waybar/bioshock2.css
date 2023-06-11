@@ -9,11 +9,7 @@
 }
 
 
-/* Styles */
-
-/* Colors (gruvbox) */
-/*@define-color black	#282828;*/
-@define-color red	#cc241d;
+/*@define-color red	#cc241d;
 @define-color green	#98971a;
 @define-color yellow	#d79921;
 @define-color blue	#458588;
@@ -26,7 +22,7 @@
 @define-color bryellow	#fabd2f;
 @define-color brblue	#83a598;
 @define-color brpurple	#d3869b;
-@define-color braqua	#8ec07c;
+@define-color braqua	#8ec07c;*/
 /*@define-color white	#ebdbb2;*/
 @define-color bg2	#504945;
 
@@ -40,23 +36,27 @@
 @define-color pale 	#a8a38e;
 @define-color silver 	#9b9c94;
 @define-color white	#d1cdc2;
+@define-color palemid	#6d6853;
 
 @define-color warning 	@bryellow;
 @define-color critical	@red;
 @define-color mode	@black;
-@define-color unfocused	@bg2;
-@define-color focused	@braqua;
-@define-color inactive	@purple;
-@define-color purple	@brpurple;
-@define-color sound	@white;
-@define-color network	@aqua;
-@define-color memory	@braqua;
-@define-color cpu	@green;
-@define-color temp	@brgreen;
-@define-color layout	@bryellow;
-@define-color battery	@brblue;
-@define-color date	@black;
+@define-color unfocused	@mbrown;
+@define-color focused	@pale;
+@define-color inactive	@white;
+/*@define-color purple	@brpurple;*/
+@define-color music	@dbrown;
+@define-color sound	@pale;
+@define-color network	@mbrown;
+@define-color memory	@pale;
+@define-color cpu	@lbrown;
+@define-color temp	@silver;
+@define-color layout	@pale;
+@define-color battery	@dbrown;
+@define-color date	@palemid;
 @define-color time	@white;
+@define-color clock	@mbrown;
+@define-color clear	transparent;
 
 /* Reset all styles */
 * {
@@ -137,23 +137,19 @@
 	padding-left: 2pt;
 	padding-right: 2pt;
 	color: @white;
-/*	background: @unfocused;*/
-	background: @dbrown;
+	background: @unfocused;
 }
 
 /* Inactive (on unfocused output) */
 #workspaces button.visible {
 	color: @black;
-/*	background: @inactive;*/
-	background: @white;
+	background: @inactive;
 }
 
 /* Active (on focused output) */
 #workspaces button.focused {
-/*	color: @black;
-	background: @focused;*/
 	color: @black;
-	background: @pale;
+	background: @focused;
 }
 
 /* Contains an urgent window */
@@ -168,22 +164,35 @@
 	color: @white;
 }
 
+#scratchpad {
+	color: @white;
+	background: @unfocused;
+/*	padding-left: 2pt;
+	padding-right: 2pt;*/
+	padding-left: 5pt;
+	padding-right: 5pt;
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
 #window {
 	margin-right: 35pt;
 	margin-left: 35pt;
 }
 
 #pulseaudio {
-	background: @pale;
+	background: @sound;
 	color: @black;
 }
 
 #network {
-	background: @mbrown;
+	background: @network;
 	color: @white;
 }
 
-/*#memory {
+#memory {
 	background: @memory;
 	color: @black;
 }
@@ -197,18 +206,14 @@
 	background: @temp;
 	color: @black;
 }
-*/
+
 #language {
-/*	background: @layout;
-	color: @black;*/
-	background: @pale;
+	background: @layout;
 	color: @black;
 }
 
 #battery {
-/*	background: @battery;
-	color: @black;*/
-	background: @dbrown;
+	background: @battery;
 	color: @white;
 }
 
@@ -222,72 +227,71 @@
 }
 
 #clock.time {
-	background: @mbrown;
+	background: @clock;
 	color: @white;
 }
 
 #custom-media {
-	background: @dbrown;
+	background: @music;
 	color: @white;
 }
 
 #custom-arrow1 {
 	font-size: 11pt;
-	color: @mbrown;
-	background: @pale;
+	color: @clock;
+	background: @layout;
 }
 
 #custom-arrow2 {
 	font-size: 11pt;
-	color: @pale;
-	background: @dbrown;
+	color: @layout;
+	background: @battery;
 }
 
 #custom-arrow3 {
 	font-size: 11pt;
-	color: @dbrown;
-	background: @mbrown;
+	color: @battery;
+	background: @network;
 }
 
 #custom-arrow4 {
 	font-size: 11pt;
-	color: @mgray;
-	background: @mbrown;
-}
-
-#custom-arrow5 {
-	font-size: 11pt;
-	color: @network;
+	color: @temp;
 	background: @cpu;
 }
 
-#custom-arrow6 {
+#custom-arrow5 {
 	font-size: 11pt;
 	color: @cpu;
 	background: @memory;
 }
 
+#custom-arrow6 {
+	font-size: 11pt;
+	color: @memory;
+	background: @network;
+}
+
 #custom-arrow7 {
 	font-size: 11pt;
-	color: @mbrown;
-	background: @pale;
+	color: @network;
+	background: @sound;
 }
 
 #custom-arrow8 {
 	font-size: 11pt;
-	color: @pale;
-	background: @dbrown;
+	color: @sound;
+	background: @music;
 }
 
 #custom-arrow9 {
 	font-size: 11pt;
-	color: @dbrown;
+	color: @music;
 	background: transparent;
 }
 
 #custom-arrow10 {
 	font-size: 11pt;
-/*	color: @unfocused;*/
-	color: @dbrown;
+	color: @unfocused;
 	background: transparent;
 }

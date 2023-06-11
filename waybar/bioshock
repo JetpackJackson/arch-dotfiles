@@ -5,6 +5,7 @@
 	"modules-left": [
 		"sway/mode",
 		"sway/workspaces",
+		"sway/scratchpad",
 		"custom/arrow10"
 	],
 
@@ -24,8 +25,8 @@
 		"custom/arrow3",
 		"battery",
 		"custom/arrow2",
+		"keyboard-state",
 		"sway/language",
-		//"custom/arrow2",
 		//"tray",
 		//"clock#date",
 		"custom/arrow1",
@@ -46,6 +47,14 @@
 	    "exec": "/home/jet/.config/waybar/mediaplayer.py 2> /dev/null"
 	    // Script in resources/custom_modules folder
 	},
+	
+	"sway/scratchpad": {
+        	"format": "{icon} {count}",
+	        "show-empty": false,
+        	"format-icons": ["", ""],
+	        "tooltip": true,
+        	"tooltip-format": "{app}: {title}"
+    	},
 
 	"battery": {
 		"interval": 10,
@@ -94,6 +103,28 @@
 			"critical": 90
 		}
 	},
+
+	//"keyboard-state": {
+    	//	"numlock": true,
+	//	"capslock": true,
+	//	"format": "{name} {icon}",
+	//	"format-icons": {
+	//		"locked": "",
+	//		"unlocked": ""
+	  //  	}
+	//},
+
+	"keyboard-state": {
+        	"numlock": true,
+	        "capslock": true,
+        	"format": "{name} {icon}",
+//        "format-icons": {
+//            "locked": "",
+//            "unlocked": ""
+//        }
+		"format-icons": {"us1": "1", "us2": "2", "de": "3"}
+    	},
+
 
 	"sway/language": {
 		//"format": "  {}",
