@@ -32,7 +32,7 @@ exec export XDG_CURRENT_DESKTOP=sway
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /home/jet/Pictures/archbox.png fill
 #output * bg /home/jet/Pictures/bigdaddy.jpg fill
-output * bg /home/jet/Pictures/rapture.jpg fill
+output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
 #output LVDS-1 bg /home/jet/Pictures/drum2.png fill
 #output LVDS-1 bg /home/jet/Pictures/dieaerzte.jpg fit
 # use * for all
@@ -72,7 +72,7 @@ workspace 10 output $disp2
 #
 exec swayidle -w \
 #         timeout 300 'swaylock -f -c 000000' \
-	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/Pictures/lock.jpg'" \
+	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/Pictures/Wallpapers/lock.jpg'" \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 #
@@ -110,9 +110,9 @@ bindsym Menu exec kitty -e btop
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
 ##bindsym XF86Calculator exec swaylock -f -c 000000
-bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/lock.jpg
+bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/Wallpapers/lock.jpg
 ##bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
-bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/lock.jpg & systemctl suspend
+bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/Wallpapers/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
 default_border none
@@ -146,8 +146,11 @@ set $mybindsym bindsym --to-code
 #bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
 $mybindsym $mod+x exec clipman pick -t rofi
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
-#bindsym $mod+Home exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-bindsym $mod+Home exec 'grim ~/Pictures/ps_$(date +"%Y%m%d%H%M%S").png', mode "default"
+#bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
+bindsym $mod+Home exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+#bindsym $mod+Home exec "'grim ~/Pictures/Screenshots/test_$(date + "%Y%m%d%H%M%S").png' -o LVDS-1"
+bindsym $mod+End exec 'grim ~/Pictures/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
+#, mode "default"
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
