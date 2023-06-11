@@ -8,7 +8,9 @@
 		"sway/scratchpad",
 		"custom/arrow10"
 	],
-
+	"modules-center": [
+		"keyboard-state"	
+	],
 	"modules-right": [
 		"custom/arrow9",
 		"custom/media",
@@ -24,8 +26,9 @@
 		//"temperature",
 		"custom/arrow3",
 		"battery",
+//		"custom/arrow2",
+//		"keyboard-state",
 		"custom/arrow2",
-		"keyboard-state",
 		"sway/language",
 		//"tray",
 		//"clock#date",
@@ -117,12 +120,15 @@
 	"keyboard-state": {
         	"numlock": true,
 	        "capslock": true,
-        	"format": "{name} {icon}",
-//        "format-icons": {
-//            "locked": "",
-//            "unlocked": ""
-//        }
-		"format-icons": {"us1": "1", "us2": "2", "de": "3"}
+		"show-empty": false,
+        	//"format": "{name}"
+
+		"format": " {name} ",
+	        "format-icons": {
+			"locked": "locked",
+			"unlocked": ""
+        	}
+	//	"format-icons": {"us1": "1", "us2": "2", "de": "3"}
     	},
 
 

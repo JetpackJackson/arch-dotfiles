@@ -56,6 +56,7 @@
 @define-color date	@palemid;
 @define-color time	@white;
 @define-color clock	@mbrown;
+@define-color lock	@pale;
 @define-color clear	transparent;
 
 /* Reset all styles */
@@ -221,6 +222,27 @@
 	background: @date;
 }
 
+#keyboard-state label.capslock {
+	background: @clear;
+	color: @clear;
+}
+
+
+#keyboard-state label.capslock.locked {
+	background: @lock;
+	color: @black;
+}
+
+#keyboard-state label.numlock {
+	background: @clear;
+	color: @clear;
+}
+
+#keyboard-state label.numlock.locked {
+	background: @lock;
+	color: @black;
+}
+
 #clock.date {
 	background: @date;
 	color: @white;
@@ -234,6 +256,12 @@
 #custom-media {
 	background: @music;
 	color: @white;
+}
+
+#custom-arrow0 {
+	font-size: 11pt;
+	color: @clock;
+	background: @layout;
 }
 
 #custom-arrow1 {
