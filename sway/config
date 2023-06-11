@@ -1,11 +1,3 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -30,15 +22,9 @@ exec export XDG_CURRENT_DESKTOP=sway
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /home/jet/Pictures/archbox.png fill
-#output * bg /home/jet/Pictures/bigdaddy.jpg fill
 output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-#output LVDS-1 bg /home/jet/Pictures/drum2.png fill
-#output LVDS-1 bg /home/jet/Pictures/dieaerzte.jpg fit
-# use * for all
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always killall waybar
-#exec_always waybar
 exec_always --no-startup-id dunst
 exec_always killall udiskie
 exec_always killall wl-paste
@@ -46,6 +32,7 @@ exec_always --no-startup-id udiskie &
 exec_always wl-paste -t text --watch clipman store
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 #exec_always pkill kanshi; exec kanshi
+#exec_always "pkill kanshi; exec kanshi"
 
 output LVDS-1 pos 0 0 res 1600x900
 output HDMI-1 pos 1600 0 res 1920x1080
@@ -63,6 +50,19 @@ workspace 7 output $disp2
 workspace 8 output $disp2
 workspace 9 output $disp2
 workspace 10 output $disp2
+
+mode "mon" {
+	#swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'dunstify exit' -b 'Restart' 'echo 'shutdown -r now'' -b 'Shutdown'  'echo 'shutdown -h now'' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33
+#	bindsym $mod+KP_Equal exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+	bindsym Left exec wlr-randr --output HDMI-A-1 --pos 1600,0 --off
+	bindsym Right exec wlr-randr --output HDMI-A-1 --pos 1600,0 --on
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+KP_Equal mode "mon"
+
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -148,7 +148,7 @@ $mybindsym $mod+x exec clipman pick -t rofi
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 bindsym $mod+Home exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
-#bindsym $mod+Home exec "'grim ~/Pictures/Screenshots/test_$(date + "%Y%m%d%H%M%S").png' -o LVDS-1"
+bindsym $mod+Delete exec 'grim -o LVDS-1 ~/Pictures/Screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
 bindsym $mod+End exec 'grim ~/Pictures/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 #, mode "default"
     # Drag floating windows by holding down $mod and left mouse button.
@@ -301,5 +301,5 @@ exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock2.cs
 #        inactive_workspace #32323200 #32323200 #5c5c5c
 #    }
 #}
-#
+exec_always systemctl --user start sway-session.target
 include /etc/sway/config.d/*

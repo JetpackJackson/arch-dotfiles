@@ -7,7 +7,11 @@ set cleaner ctpvclear
 &ctpvquit $id
 map gi cd /run/media
 map gg cd /home
-map gt cd ~/trash
+map gc cd ~/.config
+#map gt cd ~/Trash
+map gt %mv $fx ~/.trash
+map w
+map ww %rm -rf ~/.trash && mkdir ~/.trash
 #map d # leave the command name empty like this for unmapping
 #map dd delete
 #map dD $IFS=':'; rm -rf $fx
@@ -67,7 +71,7 @@ map a :push %mkdir<space>
 # map r push :rename<space>
 
 # make sure trash folder exists
-# %mkdir -p ~/.trash
+%mkdir -p ~/.trash
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)

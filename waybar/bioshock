@@ -3,13 +3,14 @@
 	"position": "top",
 
 	"modules-left": [
-		"sway/mode",
+		//"sway/mode",
 		"sway/workspaces",
 		"sway/scratchpad",
 		"custom/arrow10"
 	],
 	"modules-center": [
-		"keyboard-state"	
+		"sway/mode",
+		"keyboard-state"
 	],
 	"modules-right": [
 		"custom/arrow9",
