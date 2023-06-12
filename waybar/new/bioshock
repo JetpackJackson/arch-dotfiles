@@ -3,17 +3,21 @@
 	"position": "top",
 
 	"modules-left": [
-		"sway/mode",
-		"sway/workspaces"
-		//"custom/arrow10"
+		//"sway/mode",
+		"sway/workspaces",
+		"sway/scratchpad",
+		"custom/arrow10"
 	],
-
+	"modules-center": [
+		"sway/mode",
+		"keyboard-state"
+	],
 	"modules-right": [
-		//"custom/arrow9",
+		"custom/arrow9",
 		"custom/media",
-		//"custom/arrow8",
+		"custom/arrow8",
 		"pulseaudio",
-		//"custom/arrow7",
+		"custom/arrow7",
 		"network",
 		//"custom/arrow6",
 		//"memory",
@@ -21,20 +25,22 @@
 		//"cpu",
 		//"custom/arrow4",
 		//"temperature",
-		//"custom/arrow3",
+		"custom/arrow3",
 		"battery",
-		//"custom/arrow2",
+//		"custom/arrow2",
+//		"keyboard-state",
+		"custom/arrow2",
 		"sway/language",
-		//"custom/arrow2",
 		//"tray",
 		//"clock#date",
-		//"custom/arrow1",
+		"custom/arrow1",
 		"clock#time"
 	],
 
 	// Modules
 	"custom/media": {
 	    "format": " {} ",
+	    "show-empty": false,
 	    "escape": true,
 	    "return-type": "json",
 	    "max-length": 60, // original 40
@@ -46,6 +52,14 @@
 	    "exec": "/home/jet/.config/waybar/mediaplayer.py 2> /dev/null"
 	    // Script in resources/custom_modules folder
 	},
+	
+	"sway/scratchpad": {
+        	"format": "{icon} {count}",
+	        "show-empty": false,
+        	"format-icons": ["", ""],
+	        "tooltip": true,
+        	"tooltip-format": "{app}: {title}"
+    	},
 
 	"battery": {
 		"interval": 10,
@@ -94,6 +108,31 @@
 			"critical": 90
 		}
 	},
+
+	//"keyboard-state": {
+    	//	"numlock": true,
+	//	"capslock": true,
+	//	"format": "{name} {icon}",
+	//	"format-icons": {
+	//		"locked": "",
+	//		"unlocked": ""
+	  //  	}
+	//},
+
+	"keyboard-state": {
+        	"numlock": true,
+	        "capslock": true,
+		"show-empty": false,
+        	//"format": "{name}"
+
+		"format": " {name} ",
+	        "format-icons": {
+			"locked": "locked",
+			"unlocked": ""
+        	}
+	//	"format-icons": {"us1": "1", "us2": "2", "de": "3"}
+    	},
+
 
 	"sway/language": {
 		//"format": "  {}",

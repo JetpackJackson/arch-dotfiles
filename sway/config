@@ -5,7 +5,6 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -19,11 +18,9 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec export XDG_CURRENT_DESKTOP=sway
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
+exec_always pkill -f mediaplayer.py
 exec_always killall waybar
 exec_always --no-startup-id dunst
 exec_always killall udiskie
@@ -52,10 +49,8 @@ workspace 9 output $disp2
 workspace 10 output $disp2
 
 mode "mon" {
-	#swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'dunstify exit' -b 'Restart' 'echo 'shutdown -r now'' -b 'Shutdown'  'echo 'shutdown -h now'' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33
-#	bindsym $mod+KP_Equal exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-    bindsym Left exec wlr-randr --output HDMI-A-1 --pos 1600,0 --off
-    bindsym Right exec wlr-randr --output HDMI-A-1 --pos 1600,0 --on
+    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --off"
+    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on"
 
     # Return to default mode
     bindsym Return mode "default"
@@ -147,7 +142,7 @@ set $mybindsym bindsym --to-code
 $mybindsym $mod+x exec clipman pick -t rofi
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-bindsym $mod+Home exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+bindsym $mod+Home exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Pictures/Screenshots/focused_$(date +"%Y%m%d%H%M%S").png
 bindsym $mod+Delete exec 'grim -o LVDS-1 ~/Pictures/Screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
 bindsym $mod+End exec 'grim ~/Pictures/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 #, mode "default"
@@ -283,7 +278,7 @@ bindsym $mod+r mode "resize"
 #bar {
 #	status_command i3status
 #}
-exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock2.css
+exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
 ##exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
 #bar { 
 #     swaybar_command waybar

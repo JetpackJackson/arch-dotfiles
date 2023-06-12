@@ -45,7 +45,7 @@
 @define-color focused	@pale;
 @define-color inactive	@white;
 /*@define-color purple	@brpurple;*/
-@define-color music	@dbrown;
+/*@define-color music	@dbrown;
 @define-color sound	@pale;
 @define-color network	@mbrown;
 @define-color memory	@pale;
@@ -57,14 +57,28 @@
 @define-color time	@white;
 @define-color clock	@mbrown;
 @define-color lock	@pale;
+*/
+@define-color music	@clears;
+@define-color sound	@clears;
+@define-color network	@clears;
+@define-color memory	@clears;
+@define-color cpu	@clears;
+@define-color temp	@clears;
+@define-color layout	@clears;
+@define-color battery	@clears;
+@define-color date	@clears;
+@define-color time	@clears;
+@define-color clock	@clears;
+@define-color lock	@clears;
 @define-color clear	transparent;
+@define-color clears	rgba(0, 16, 19, 1);
 
 /* Reset all styles */
 * {
 	border: none;
-	border-radius: 0;
+	border-radius: 2px;
 	min-height: 0;
-	margin: 0;
+	margin: 2px 2px 0px 0px;
 	padding: 0;
 	box-shadow: none;
 	text-shadow: none;

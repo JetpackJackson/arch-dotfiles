@@ -20,7 +20,8 @@ window#waybar {
     /*margin: 2px 10px 0 0;*/
 }
 .modules-center {
-	background-color: rgba(0,43,51,0.85);
+	/*background-color: rgba(0,43,51,0.85);*/
+	background: transparent;
     margin: 2px 0 0 0;
 }
 .modules-left {
@@ -88,6 +89,27 @@ window#waybar {
 }
 #temperature.critical {
     color: #cc3436;
+}
+
+#keyboard-state label.capslock {
+	background: transparent;
+	color: transparent;
+}
+
+
+#keyboard-state label.capslock.locked {
+	background: @lock;
+	color: @black;
+}
+
+#keyboard-state label.numlock {
+	background: transparent;
+	color: transparent;
+}
+
+#keyboard-state label.numlock.locked {
+	background: @lock;
+	color: @black;
 }
 /*-----Colors----*/
 /*
