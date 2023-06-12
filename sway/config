@@ -54,8 +54,8 @@ workspace 10 output $disp2
 mode "mon" {
 	#swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'dunstify exit' -b 'Restart' 'echo 'shutdown -r now'' -b 'Shutdown'  'echo 'shutdown -h now'' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33
 #	bindsym $mod+KP_Equal exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-	bindsym Left exec wlr-randr --output HDMI-A-1 --pos 1600,0 --off
-	bindsym Right exec wlr-randr --output HDMI-A-1 --pos 1600,0 --on
+    bindsym Left exec wlr-randr --output HDMI-A-1 --pos 1600,0 --off
+    bindsym Right exec wlr-randr --output HDMI-A-1 --pos 1600,0 --on
 
     # Return to default mode
     bindsym Return mode "default"
@@ -301,5 +301,5 @@ exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock2.cs
 #        inactive_workspace #32323200 #32323200 #5c5c5c
 #    }
 #}
-exec_always systemctl --user start sway-session.target
+##exec_always systemctl --user start sway-session.target
 include /etc/sway/config.d/*
