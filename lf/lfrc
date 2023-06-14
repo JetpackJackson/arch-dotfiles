@@ -67,7 +67,9 @@ cmd open &{{
 map a :push %mkdir<space>
 
 # define a custom 'rename' command without prompt for overwrite
-cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+#cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+#cmd rename %mv $f "$1""$(sed -e 's/.*\(\..*\)/\1/' <<< $f)"
+cmd rename %mv $f "$1"".${f##*.}"
 map r push :rename<space>
 
 # make sure trash folder exists

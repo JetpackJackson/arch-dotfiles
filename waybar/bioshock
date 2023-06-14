@@ -135,8 +135,10 @@
 
 
 	"sway/language": {
-		//"format": "  {}",
-		"format": "{}",
+		//"format": "  {variant}",
+		//"format": "{variant}",
+		//"format": "{}",
+		"format": "{short} {variant}",
 		"min-length": 3,
 		"on-click": "swaymsg 'input * xkb_switch_layout next'",
 		"tooltip": false
