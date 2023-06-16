@@ -2,6 +2,7 @@
 set shell sh
 
 set previewer ctpv
+#set previewer "~/.config/ranger/scope.sh"
 set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
@@ -15,6 +16,11 @@ map ww %rm -rf ~/.trash && mkdir ~/.trash
 #map d # leave the command name empty like this for unmapping
 #map dd delete
 #map dD $IFS=':'; rm -rf $fx
+
+#cmd open-with-gui &$@ $fx ## opens with a gui application outside lf client
+#cmd open-with-cli $$@ $fx ## opens with a cli application inside lf client
+#map O push :open-with-gui<space> ## input application
+#map o push :open-with-cli<space> ## input application
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -52,6 +58,22 @@ map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
+#cmd open ${{
+#cmd open ${{
+#    case "$f" in
+#	*.html|*.htm|*.xml) nvim $fx  >/dev/null 2>&1 &;;
+#	*.wav|*.mp3|*.flac|*.m4a|*.wma|*.ape|*.ac3|*.og[agx]|*.spx|*.opus) mpv $fx >/dev/null 2>&1 &;;
+#	*.bmp|*.jpg|*.jpeg|*.png|*.gif|*.xpm) feh $fx >/dev/null 2>&1 &;;
+#	*.pdf) zathura $fx >/dev/null 2>&1 &;;
+#	#*.xopp) xournalpp.AppImage $fx >/dev/null 2>&1 &;;
+##	*.odt|*.doc|*.docx|*.xls|*.xlsx|*.odp|*.pptx) libreoffice $fx >/dev/null 2>&1 &;; 
+#	*) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+#	#*) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+#    esac
+#}}
+
+map aa push :open<space>
+
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
 # use either file extensions and/or mime types here. Below uses an editor for
@@ -64,7 +86,7 @@ cmd open &{{
 }}
 
 # mkdir command. See wiki if you want it to select created dir
-map a :push %mkdir<space>
+map ab :push %mkdir<space>
 
 # define a custom 'rename' command without prompt for overwrite
 #cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1

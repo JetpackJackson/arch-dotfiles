@@ -12,7 +12,6 @@ gtk-3.0/
 i3status/
 Pinta/
 pulse/
-ranger/
 Raspberry\ Pi/
 retroarch/
 unity3d/
@@ -20,3 +19,4 @@ whoozle.github.io/
 mimeapps.list
 user-dirs.dirs
 user-dirs.locale
+.mpdasrc

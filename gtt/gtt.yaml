@@ -5,8 +5,8 @@ destination:
         argos: English
         bing: English
         chatgpt: English
-        deepl: English
-        google: English
+        deepl: German
+        google: German
         reverso: English
 hide_below: false
 source:
@@ -17,7 +17,7 @@ source:
         bing: English
         chatgpt: English
         deepl: English
-        google: German
+        google: English
         reverso: English
 theme: gruvbox
 translator: Google
