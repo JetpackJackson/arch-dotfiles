@@ -56,6 +56,7 @@
 @define-color date	@palemid;
 @define-color time	@white;
 @define-color clock	@mbrown;
+@define-color mpd	@dbrown;
 @define-color lock	@pale;
 @define-color clear	transparent;
 
@@ -83,6 +84,7 @@
 
 /* Each module */
 #battery,
+#mpd,
 #clock,
 #cpu,
 #language,
@@ -186,6 +188,11 @@
 #pulseaudio {
 	background: @sound;
 	color: @black;
+}
+
+#mpd {
+	background: @mpd;
+	color: @white;
 }
 
 #network {
