@@ -1,0 +1,392 @@
+/*----------------------------------------------------------------------------------------------------FONT IMPORTS-------------------------------------------------------------------------------------------*/
+@font-face {
+    font-family: 'Ärzte Sans Roman';
+    src: url('ArzteSans-BoldItalic.woff2') format('woff2'),
+        url('ArzteSans-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ärzte Sans Roman';
+    src: url('ArzteSans-Bold.woff2') format('woff2'),
+        url('ArzteSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ärzte Sans Roman';
+    src: url('ArzteSans-Italic.woff2') format('woff2'),
+        url('ArzteSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ärzte Sans Roman';
+    src: url('ArzteSans-Roman.woff2') format('woff2'),
+        url('ArzteSans-Roman.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Anastasia';
+    src: url('Anastasia.woff2') format('woff2'),
+        url('Anastasia.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rammstein by Wojciech';
+  src: url('Rammstein.woff2') format('woff2'),
+      url('Rammstein.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Folio XBd BT';
+  src: url('FolioBT-ExtraBold.woff2') format('woff2'),
+      url('FolioBT-ExtraBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eisbrecher';
+  src: url('Eisbrecher.woff2') format('woff2'),
+      url('Eisbrecher.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------HTML-------------------------------------------------------------------------------------------*/
+html {
+  /*background-color: #033557;*/
+  /*background-color: #370050;*/
+  /*background-color: #4D4D4D;*/
+  background-color: #1a0e0e;
+  color: white;
+  box-sizing: border-box;
+  font-size: 18px;
+  height: 100%;
+  font-family: "Ärzte Sans Mono", monospace;
+}
+
+/*----------------------------------------------------------------------------------------------------TEXT-------------------------------------------------------------------------------------------*/
+p {
+  color: white;
+  /* margin: 12px 0; */
+  display: block;
+  font-size: 18px;
+}
+
+a {
+  color: white;
+}
+
+h1 {/*page title*/
+  /* display: inline; */
+  /* display: block; */
+  text-decoration: underline overline;
+  /* text-align: center; */
+  font-size: 50px;
+  font-weight: normal;
+  font-family: 'Anastasia', sans-serif;
+  margin: 0px;
+}
+
+h2 {/*site dir*/
+  /* display: inline; */
+  display: block;
+  text-decoration: underline overline;
+  /* text-align: center; */
+  font-size: 30px;
+  font-weight: normal;
+  font-family: 'Anastasia', sans-serif;
+}
+
+h3 {
+  display: block;
+  font-size: 20px;
+  font-weight: normal;
+  font-family: "Ärzte Sans Mono", 'Verdana', sans-serif;
+}
+
+/*h3 {
+	background-color: #033557;
+	text-decoration: none;
+	text-align: center;
+  display: inline;
+}*/
+
+p1 {
+  font-family: "Ärzte Sans Mono", monospace;
+  display: block;
+  /*text-decoration: none;*/
+}
+p2 {
+  font-family: 'Josefin Sans', sans-serif;
+  display: block;
+}
+
+p3 {
+  font-family: 'Anastasia', sans-serif;
+  /*font-size: 22px;*/
+  display: block;
+}
+
+/* p4 {
+  font-family: 'Rammstein by Wojciech', sans-serif;
+  display: block;
+  /*text-decoration: none;
+} */
+
+p4 {
+  font-family: 'Folio XBd BT', sans-serif;
+  display: block;
+  /*text-decoration: none;*/
+}
+
+p5 {
+  font-family: "Ärzte Sans Roman", sans-serif;
+  display: block;
+  /*text-decoration: none;*/
+}
+
+/* p7 {
+  font-family: 'Eisbrecher', sans-serif;
+  display: block;
+  /*text-decoration: none;
+} */
+
+body {
+	font-family: Verdana;
+  /*max-width: 768px;
+  min-height: 100vh;*/
+}
+
+/*----------------------------------------------------------------------------------------------------AREA DIVS-------------------------------------------------------------------------------------------*/
+.bigboy {
+  border: 2px solid rgb(0, 0, 0);
+  background-color: #2b0d0d;
+  width: 40%;
+  min-width: 460px;
+  height: auto;
+  margin: auto;
+  /*display: inline-block;*/
+  min-width: 0;
+  min-height: 0;
+  padding: 10px;
+}
+
+/* .sitemain {
+  /*display: flex;
+  border: 2px solid rgb(99, 161, 17);
+  justify-content: center;
+  align-items: center;
+  display: block;
+  padding: 10px 20px 10px 20px;
+  border-top: #000000;
+} */
+
+/* .sitemain2 {
+  display: flex;
+  border: 2px solid rgb(99, 161, 17);
+  justify-content: center;
+  align-items: center;
+  display: block;
+  padding: 10px 20px 10px 20px;
+  border-top: #000000;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  flex-direction: row;
+} */
+
+.bottom {
+  margin: auto;
+  width: 50%;
+  border: 2px solid rgb(80, 134, 130);
+  padding: 10px;
+  min-width: 400px;
+  /*background-color: #3f3f3f;*/
+  background-color: #4D4D4D;
+  justify-content: center;
+}
+
+.flexmaincon {
+  /*display: flex;*/
+  margin: auto;
+  width: 50%;
+  /*border: 2px solid rgb(255, 251, 17);*/
+  /* padding: 2px 0px 10px 10px; */
+  padding: 10px;
+  min-width: 400px;
+  background-color: #4D4D4D;
+  /* justify-content: center; */
+  /* box-sizing:border-box; */
+  /* flex-direction: row; */
+  /* display: inline-flex; */
+}
+
+/* .column { /*right div
+  flex: 3;
+  border: 2px solid orange;
+  padding: 10px;
+  background-color: #4D4D4D;
+  /* max-height: inherit;
+  max-width: inherit; */
+  /* box-sizing:border-box; 
+  align-items: center;
+  /* display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  box-align: center;
+}  
+
+.column:first-child { /*left div
+  margin-right: 20px;
+  flex: 1;
+  padding: 10px;
+  background-color: #4D4D4D;
+  /* max-height: inherit;
+  max-width: inherit; */
+  /* box-sizing:border-box; 
+  text-align: center;
+  align-items: center;
+} */
+
+.navparent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 2px dashed pink; */
+  border: 2px solid rgb(99, 161, 17);
+  text-align: center;
+  border-top: 0px;
+}
+/* 
+.navparent2 {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* border: 2px dashed pink; 
+  border: 2px solid rgb(99, 161, 17);
+  text-align: center;
+  border-top: 0px;
+}
+
+.child {
+  display: flex;
+  border: 2px dashed black;
+  justify-content: center;
+  align-items: center;
+}
+
+.parentmain {/*parent for image text div
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border: 2px dashed #df5cb7;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.childmain {/*child for image page text
+  display: flex;
+  border: 2px dashed rgb(36, 255, 171);
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.siteheads {/*page titles
+  display: flex;
+  border: 2px solid rgb(99, 161, 17);
+  justify-content: center;
+  align-items: center;
+  /* margin: 0px; */
+  /* border-radius: 10px; 
+}
+
+.font {/*child2 but for the fonts
+  display: flex;
+  /* border: 2px solid black; 
+  justify-content: left;
+  align-items: left;
+  margin: 0px;
+  padding: 10px;
+
+}
+
+.fontsort {
+  display: flex;
+  /* border: 2px dashed rgb(76, 36, 255); 
+  border: 2px solid rgb(99, 161, 17);
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  border-top: 0px;
+}
+
+.hover {/*child but with hover
+  display: flex;
+  /* border: 1px solid rgb(206, 60, 211); 
+  justify-content: center;
+  align-items: center;
+}
+
+.hover:hover{
+  background-color:#033557;
+  box-shadow: 3px 3px #000000;
+}
+
+.langchild {
+  display: flex;
+  /* border: 1px solid rgb(206, 60, 211); 
+  justify-content: center;
+  /* align-items: center; 
+  flex-grow: 2;
+  flex: auto;
+  align-items: center;
+  text-align: center;
+}
+
+.langchild:hover{
+  background-color:#033557;
+  box-shadow: 3px 3px #000000;
+} */
+
+img {
+  object-fit: contain;
+}
+
+/*img.test {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}*/
+
+/*img.test:hover {
+  /* box-shadow: 0 0 2px 1px #033557;
+  box-shadow: 0 0 2px 1px rgb(255, 251, 17);
+}*/
+

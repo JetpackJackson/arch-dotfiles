@@ -142,8 +142,8 @@ set $mybindsym bindsym --to-code
 $mybindsym $mod+x exec clipman pick -t rofi
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-bindsym $mod+Home exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Pictures/Screenshots/focused_$(date +"%Y%m%d%H%M%S").png
-bindsym $mod+Delete exec 'grim -o LVDS-1 ~/Pictures/Screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
+bindsym $mod+Home exec 'grim -o LVDS-1 ~/Pictures/Screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
+bindsym $mod+Delete exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Pictures/Screenshots/focused_$(date +"%Y%m%d%H%M%S").png
 bindsym $mod+End exec 'grim ~/Pictures/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 #, mode "default"
     # Drag floating windows by holding down $mod and left mouse button.

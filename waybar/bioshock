@@ -40,7 +40,7 @@
 
 	// Modules
 	"mpd": {
-    		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+    		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
 		"format-disconnected": "Disconnected",
 		"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
 		"interval": 10,
@@ -107,7 +107,6 @@
 			"",
 			""
 		],
-		//"on-click": "exec ~/.config/waybar/launchbar2.sh",
 		"tooltip": false
 	},
 
@@ -136,28 +135,15 @@
 		}
 	},
 
-	//"keyboard-state": {
-    	//	"numlock": true,
-	//	"capslock": true,
-	//	"format": "{name} {icon}",
-	//	"format-icons": {
-	//		"locked": "",
-	//		"unlocked": ""
-	  //  	}
-	//},
-
 	"keyboard-state": {
         	"numlock": true,
 	        "capslock": true,
 		"show-empty": false,
-        	//"format": "{name}"
-
 		"format": " {name} ",
 	        "format-icons": {
 			"locked": "locked",
 			"unlocked": ""
         	}
-	//	"format-icons": {"us1": "1", "us2": "2", "de": "3"}
     	},
 
 
@@ -165,7 +151,8 @@
 		//"format": "  {variant}",
 		//"format": "{variant}",
 		//"format": "{}",
-		"format": "{short} {variant}",
+		//"format": "{short} {variant}",
+		"format": "{shortDescription}",
 		"min-length": 3,
 		"on-click": "swaymsg 'input * xkb_switch_layout next'",
 		"tooltip": false
@@ -190,7 +177,7 @@
 		//"format-alt": " {ipaddr}/{cidr}",
 		"tooltip": false,
 		"on-click": "kitty -e ping archlinux.org",
-		"on-click-right": "kitty -e iwctl station wlan0 show"
+		"on-click-right": "kitty -e iwctl && station wlan0 show"
 	},
 
 	"sway/mode": {
@@ -214,7 +201,7 @@
 	"pulseaudio": {
 		//"format": "{icon} {volume}%",
 		"format": "VOL {volume}%",
-		"format-bluetooth": "{icon} {volume}%",
+		"format-bluetooth": " {volume}%",
 		//"format-muted": "",
 		"format-muted": "muted",
 		"format-icons": {

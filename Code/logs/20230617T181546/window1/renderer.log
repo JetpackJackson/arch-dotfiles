@@ -1,0 +1,57 @@
+2023-06-17 18:15:51.306 [info] Started initializing default profile extensions in extensions installation folder. file:///home/jet/.vscode/extensions
+2023-06-17 18:15:53.418 [info] Completed initializing default profile extensions in extensions installation folder. file:///home/jet/.vscode/extensions
+2023-06-17 18:15:59.830 [info] [perf] Render performance baseline is 88ms
+2023-06-17 18:16:40.167 [info] [perf] Render performance baseline is 131ms
+2023-06-17 19:37:47.394 [error] Cannot read properties of undefined (reading 'find'): TypeError: Cannot read properties of undefined (reading 'find')
+	at t.DefaultCompletionItemProvider.b (/opt/visual-studio-code/resources/app/extensions/emmet/dist/node/emmetNodeMain.js:1:130379)
+	at t.DefaultCompletionItemProvider.provideCompletionItems (/opt/visual-studio-code/resources/app/extensions/emmet/dist/node/emmetNodeMain.js:1:128898)
+	at q.provideCompletionItems (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:51252)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:72248
+	at oe.s (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:63904)
+	at oe.$provideCompletionItems (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:72235)
+	at s.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11717)
+	at s.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11435)
+	at s.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10477)
+	at s.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9494)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:8282
+	at b.invoke (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at d.deliver (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:73:14783)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:32461
+	at b.invoke (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at d.deliver (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:73:14783)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30587)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-06-17 19:42:47.577 [error] Cannot read properties of undefined (reading 'find'): TypeError: Cannot read properties of undefined (reading 'find')
+	at t.DefaultCompletionItemProvider.b (/opt/visual-studio-code/resources/app/extensions/emmet/dist/node/emmetNodeMain.js:1:130379)
+	at t.DefaultCompletionItemProvider.provideCompletionItems (/opt/visual-studio-code/resources/app/extensions/emmet/dist/node/emmetNodeMain.js:1:128898)
+	at q.provideCompletionItems (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:51252)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:72248
+	at oe.s (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:63904)
+	at oe.$provideCompletionItems (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:101:72235)
+	at s.N (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11717)
+	at s.M (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:11435)
+	at s.H (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:10477)
+	at s.G (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:9494)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:111:8282
+	at b.invoke (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at d.deliver (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:73:14783)
+	at /opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:32461
+	at b.invoke (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at d.deliver (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:73:14783)
+	at MessagePortMain.<anonymous> (/opt/visual-studio-code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:127:30587)
+	at MessagePortMain.emit (node:events:513:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:367)
+2023-06-17 21:43:28.933 [error] Error: Aborted onWillSaveTextDocument-event after 1750ms
+    at vscode-file://vscode-app/opt/visual-studio-code/resources/app/out/vs/workbench/workbench.desktop.main.js:1853:13556
+2023-06-17 21:43:33.920 [error] [Extension Host] Error: Unexpected SIGPIPE
+	at process.<anonymous> (/opt/visual-studio-code/resources/app/out/bootstrap.js:1:419)
+	at process.emit (node:events:513:28)
