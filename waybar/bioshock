@@ -42,7 +42,9 @@
 	"mpd": {
     		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
 		"format-disconnected": "Disconnected",
-		"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
+		//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
+		"format-stopped": "",
+		"show-empty": false,
 		"interval": 10,
 		"consume-icons": {
 			"on": " " // Icon shows only when "consume" is on
@@ -200,7 +202,7 @@
 
 	"pulseaudio": {
 		//"format": "{icon} {volume}%",
-		"format": "VOL {volume}%",
+		"format": " VOL {volume}%",
 		"format-bluetooth": " {volume}%",
 		//"format-muted": "",
 		"format-muted": "muted",

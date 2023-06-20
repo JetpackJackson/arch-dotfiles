@@ -13,6 +13,7 @@ gtk-3.0/
 i3status/
 Pinta/
 pulse/
+qBittorrent/
 Raspberry\ Pi/
 retroarch/
 unity3d/
@@ -21,3 +22,6 @@ mimeapps.list
 user-dirs.dirs
 user-dirs.locale
 mpdasrc
+QtProject.conf
+greenclip.toml
+music-notif.sh
