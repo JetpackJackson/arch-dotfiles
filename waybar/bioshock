@@ -41,6 +41,7 @@
 	// Modules
 	"mpd": {
     		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+		//"format": "{stateIcon} {artist} - {title}",
 		"format-disconnected": "Disconnected",
 		//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
 		"format-stopped": "",

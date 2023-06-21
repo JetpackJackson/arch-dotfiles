@@ -111,6 +111,7 @@ bindsym XF86Launch8 exec mpc prev
 ##playerctl previous & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch9 exec mpc next
 ##playerctl next & exec $HOME/.config/music-notif.sh
+bindsym XF86Launch7 exec mpc shuffle
 
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"

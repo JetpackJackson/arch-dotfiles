@@ -25,7 +25,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 #exec --no-startup-id xautolock -time 15 -locker 'systemctl suspend' -notify 600 -notifier 'i3lock | xset dpms force off' &
 
-exec_always --no-startup-id feh --bg-fill /home/jet/Pictures/bigdaddy.jpg
+exec_always --no-startup-id feh --bg-fill /home/jet/Pictures/Wallpapers/bigdaddy.jpg
 
 
 #multi, way 1

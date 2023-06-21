@@ -1,4 +1,5 @@
 btop/
+balena-etcher/
 cef_user_data/
 Code/
 dconf/
@@ -11,6 +12,7 @@ google-chrome/
 gtk-2.0/
 gtk-3.0/
 i3status/
+OpenUtau/
 Pinta/
 pulse/
 qBittorrent/
