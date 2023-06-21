@@ -102,6 +102,16 @@ bindsym XF86Launch8 exec playerctl previous & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch9 exec playerctl next & exec $HOME/.config/music-notif.sh
 bindsym Menu exec kitty -e btop
 
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+#& exec $HOME/.config/music-notif.sh
+bindsym XF86AudioPrev exec mpc prev
+##playerctl previous & exec $HOME/.config/music-notif.sh
+bindsym XF86Launch8 exec mpc prev
+##playerctl previous & exec $HOME/.config/music-notif.sh
+bindsym XF86Launch9 exec mpc next
+##playerctl next & exec $HOME/.config/music-notif.sh
+
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
 ##bindsym XF86Calculator exec swaylock -f -c 000000

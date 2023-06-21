@@ -22,6 +22,7 @@ mimeapps.list
 user-dirs.dirs
 user-dirs.locale
 mpdasrc
+.mpdasrc
 QtProject.conf
 greenclip.toml
 music-notif.sh
