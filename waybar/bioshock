@@ -15,7 +15,7 @@
 	"modules-right": [
 		"custom/arrow9",
 		"mpd",
-		"custom/media",
+		//"custom/media",
 		"custom/arrow8",
 		"pulseaudio",
 		"custom/arrow7",
@@ -41,7 +41,7 @@
 	// Modules
 	"mpd": {
     		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-		//"format": "{stateIcon} {artist} - {title}",
+		//"format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon} {singleIcon} {artist} - {title}",
 		"format-disconnected": "Disconnected",
 		//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
 		"format-stopped": "",
