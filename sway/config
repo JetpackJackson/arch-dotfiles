@@ -18,7 +18,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec export XDG_CURRENT_DESKTOP=sway
 
-output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
+#output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
+output * bg /home/jet/Pictures/Wallpapers/tighnaricyno.jpeg fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
@@ -49,8 +50,9 @@ workspace 9 output $disp2
 workspace 10 output $disp2
 
 mode "mon" {
-    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --off"
-    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on"
+    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --off & wlr-randr --output LVDS-1 --pos 0,0 --on"
+    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on & wlr-randr --output LVDS-1 --pos 0,0 --on"
+    bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on & wlr-randr --output LVDS-1 --pos 0,0 --off"
 
     # Return to default mode
     bindsym Return mode "default"
