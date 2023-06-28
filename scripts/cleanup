@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo pacman -Qtdq | sudo pacman -Rns -
+sudo pacman -Qqd | sudo pacman -Rsu -
+sudo paccache -rk1
+sudo paccache -ruk0
+pacman -Qqe > ~/Documents/paclist/pkglist.txt
+comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > ~/Documents/paclist/optdeplist.txt
+pacman -Qqem > ~/Documents/paclist/foreignpkglist.txt

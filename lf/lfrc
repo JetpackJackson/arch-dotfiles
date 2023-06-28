@@ -10,9 +10,9 @@ map gi cd /run/media
 map gg cd /home
 map gc cd ~/.config
 #map gt cd ~/Trash
-map gt %mv $fx ~/.trash
+map gt %mv $fx ~/.cache/mytrash
 map w
-map ww %rm -rf ~/.trash && mkdir ~/.trash
+map ww %rm -rf ~/.cache/mytrash && mkdir ~/.cache/mytrash
 #map d # leave the command name empty like this for unmapping
 #map dd delete
 #map dD $IFS=':'; rm -rf $fx
@@ -95,11 +95,11 @@ cmd rename %mv $f "$1"".${f##*.}"
 map r push :rename<space>
 
 # make sure trash folder exists
-%mkdir -p ~/.trash
+%mkdir -p ~/.cache/mytrash
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+cmd trash %set -f; mv $fx ~/.cache/mytrash
 
 # define a custom 'delete' command
 # cmd delete ${{

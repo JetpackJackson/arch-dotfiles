@@ -293,8 +293,9 @@ bindsym $mod+r mode "resize"
 #}
 exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
 ##exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
+#exec i3bar
 #bar { 
-#     swaybar_command waybar
+#     swaybar_command i3status
 #}
 #bar {
 #    position top

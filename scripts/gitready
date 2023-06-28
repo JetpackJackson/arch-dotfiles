@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rsync -a --delete .config/kitty/ Documents/newdots/kitty/
+rsync -a --delete .config/nvim/ Documents/newdots/nvim/
+rsync -a --delete .config/sway/ Documents/newdots/sway/
+rsync -a --delete .config/waybar/ Documents/newdots/waybar/
+rsync -a --delete .config/lf/ Documents/newdots/lf/
+rsync -a --delete Documents/scripts/ Documents/newdots/scripts/
+
+#cp -Tr .config/kitty/ Documents/newdots/kitty/
+#cp -Tr .config/nvim/ Documents/newdots/nvim/
+#cp -Tr .config/sway/ Documents/newdots/sway/
+#cp -Tr .config/waybar/ Documents/newdots/waybar/
+#cp -Tr .config/lf/ Documents/newdots/lf/

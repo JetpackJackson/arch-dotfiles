@@ -1,0 +1,6 @@
+#!/bin/bash
+a='/home/jet/Music/'
+b="$(ncmpcpp --current-song %D/%f -q)"
+c="${a}${b}"
+ffprobe "${c}" > lyrics.txt 2>&1
+exec sed '/lyrics-XXX/,/Duration/!d' lyrics.txt | less
