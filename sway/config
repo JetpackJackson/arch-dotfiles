@@ -19,10 +19,13 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec export XDG_CURRENT_DESKTOP=sway
 
 #output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-output * bg /home/jet/Pictures/Wallpapers/tighnaricyno.jpeg fill
+output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
+exec_always killall yambar
+#exec_always pkill -f capslock.sh
+#exec_always bash capslock.sh
 exec_always --no-startup-id dunst
 exec_always killall udiskie
 exec_always killall wl-paste
@@ -69,7 +72,7 @@ bindsym $mod+KP_Equal mode "mon"
 #
 exec swayidle -w \
 #         timeout 300 'swaylock -f -c 000000' \
-	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/Pictures/Wallpapers/lock.jpg'" \
+	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg'" \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 #
@@ -102,7 +105,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 ##bindsym XF86AudioPrev exec playerctl previous & exec $HOME/.config/music-notif.sh
 ##bindsym XF86Launch8 exec playerctl previous & exec $HOME/.config/music-notif.sh
 ##bindsym XF86Launch9 exec playerctl next & exec $HOME/.config/music-notif.sh
-bindsym Menu exec kitty -e btop
+bindsym Menu exec kitty -e pulsemixer
 
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
@@ -118,9 +121,9 @@ bindsym XF86Launch7 exec mpc shuffle
 ##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
 ##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
 ##bindsym XF86Calculator exec swaylock -f -c 000000
-bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/Wallpapers/lock.jpg
+bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
 ##bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
-bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/Pictures/Wallpapers/lock.jpg & systemctl suspend
+bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
 default_border none
@@ -155,9 +158,9 @@ set $mybindsym bindsym --to-code
 $mybindsym $mod+x exec clipman pick -t rofi
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-bindsym $mod+Home exec 'grim -o LVDS-1 ~/Pictures/Screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
-bindsym $mod+Delete exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/Pictures/Screenshots/focused_$(date +"%Y%m%d%H%M%S").png
-bindsym $mod+End exec 'grim ~/Pictures/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
+bindsym $mod+Home exec 'grim -o LVDS-1 ~/pics/screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
+bindsym $mod+Delete exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/pics/screenshots/focused_$(date +"%Y%m%d%H%M%S").png
+bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 #, mode "default"
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -287,28 +290,30 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+exec_always waybar -c ~/.config/waybar/solid -s ~/.config/waybar/solid.css
+include /etc/sway/config.d/*
 
 #bar {
-#	status_command i3status
-#}
-exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
-##exec_always waybar -c ~/.config/waybar/bioshock -s ~/.config/waybar/bioshock.css
-#exec i3bar
-#bar { 
-#     swaybar_command i3status
-#}
-#bar {
-#    position top
-#
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-#    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-#
+#	status_command  i3status
+#	position top
+#	font pango:Ärzte Sans Mono Roman 11
+#	separator_symbol "  |  "
+#	mode dock
+#   
 #    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
+#        statusline   #78da59
+#        background #000000cc
+#	separator #fff32e
+#				#border	#bg	#txt
+#        focused_workspace	#332f2e	#332f2e	#ffba08
+#        inactive_workspace	#332f2e	#332f2e	#cde4e6
+#	active_workspace	#777F8B	#777F8B	#cde4e6
+#    	urgent_workspace	#DEDFE3	#DEDFE3	#767E8A   
+#
+#	}
 #}
+
+
+##exec_always yambar
 ##exec_always systemctl --user start sway-session.target
-include /etc/sway/config.d/*
+

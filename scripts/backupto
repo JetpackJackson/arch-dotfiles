@@ -12,6 +12,7 @@ else
 		#echo "1: full backup, excludes home and etc"
 		echo -n "2: only changed files, excludes: "
 		echo $(<$XDG_DOCUMENTS_DIR/rsync-list.txt)
+		echo $(<rsync-list.txt)
 		#echo "3: just music folder"
 		read choice
 
@@ -24,7 +25,7 @@ else
 		#	echo "USB unmounted."
 		if [[ $choice = "2" && $confirm = "f" ]]
 		then
-			sudo rsync -avu --delete --exclude-from='$XDG_DOCUMENTS_DIR/rsync-list.txt' /home/ /run/media/jet/pony/sharky/home/
+			sudo rsync -avu --delete --exclude-from='rsync-list.txt' /home/ /run/media/jet/pony/sharky/home/
 			sync &&
 			udisksctl unmount --block-device /dev/sd$1
 			echo "USB unmounted."

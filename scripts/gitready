@@ -1,14 +1,14 @@
 #!/bin/bash
 
-rsync -a --delete .config/kitty/ Documents/newdots/kitty/
-rsync -a --delete .config/nvim/ Documents/newdots/nvim/
-rsync -a --delete .config/sway/ Documents/newdots/sway/
-rsync -a --delete .config/waybar/ Documents/newdots/waybar/
-rsync -a --delete .config/lf/ Documents/newdots/lf/
-rsync -a --delete Documents/scripts/ Documents/newdots/scripts/
+rsync -a --delete .config/kitty/ docs/newdots/kitty/
+rsync -a --delete .config/nvim/ docs/newdots/nvim/
+rsync -a --delete .config/sway/ docs/newdots/sway/
+rsync -a --delete .config/waybar/ docs/newdots/waybar/
+rsync -a --delete .config/lf/ docs/newdots/lf/
+rsync -a --delete docs/scripts/ docs/newdots/scripts/
 
-#cp -Tr .config/kitty/ Documents/newdots/kitty/
-#cp -Tr .config/nvim/ Documents/newdots/nvim/
-#cp -Tr .config/sway/ Documents/newdots/sway/
-#cp -Tr .config/waybar/ Documents/newdots/waybar/
-#cp -Tr .config/lf/ Documents/newdots/lf/
+#cp -Tr .config/kitty/ docs/newdots/kitty/
+#cp -Tr .config/nvim/ docs/newdots/nvim/
+#cp -Tr .config/sway/ docs/newdots/sway/
+#cp -Tr .config/waybar/ docs/newdots/waybar/
+#cp -Tr .config/lf/ docs/newdots/lf/

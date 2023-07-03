@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo mount --bind /run/media/jet/Crucial\ X6/MUSIC/ /home/jet/music/external

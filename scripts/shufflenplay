@@ -1,0 +1,4 @@
+#!/bin/bash
+mpc load $1
+mpc random on
+mpc play

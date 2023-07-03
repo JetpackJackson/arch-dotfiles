@@ -1,0 +1,294 @@
+{
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+		//"sway/mode",
+		"sway/workspaces",
+		"sway/scratchpad"
+		//"custom/arrow10"
+	],
+	"modules-center": [
+		"sway/mode",
+		"keyboard-state"
+	],
+	"modules-right": [
+		"custom/arrow9",
+		"mpd",
+		//"custom/media",
+		//"custom/arrow8",
+		"pulseaudio",
+		//"custom/arrow7",
+		"network",
+		//"custom/arrow6",
+		//"memory",
+		//"custom/arrow5",
+		//"cpu",
+		//"custom/arrow4",
+		//"temperature",
+		//"custom/arrow3",
+		"battery",
+//		//"custom/arrow2",
+//		"keyboard-state",
+		//"custom/arrow2",
+		"sway/language",
+		//"tray",
+		//"clock#date",
+		//"custom/arrow1",
+		"clock#time"
+	],
+
+	// Modules
+	"mpd": {
+    		"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+		//"format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon} {singleIcon} {artist} - {title}",
+		"format-disconnected": "Disconnected",
+		//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
+		"format-stopped": "",
+		"show-empty": false,
+		"interval": 10,
+		"consume-icons": {
+			"on": " " // Icon shows only when "consume" is on
+		},
+		"random-icons": {
+			"off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+		        "on": " "
+		},
+		"repeat-icons": {
+		        "on": " "
+		},
+		"single-icons": {
+			"on": "1 "
+		},
+		"state-icons": {
+		        "paused": "",
+ 		        "playing": ""
+		},
+		"tooltip-format": "MPD (connected)",
+		"tooltip-format-disconnected": "MPD (disconnected)"
+	},
+
+	"custom/media": {
+	    "format": " {} ",
+	    "show-empty": false,
+	    "escape": true,
+	    "return-type": "json",
+	    "max-length": 60, // original 40
+	    "on-click": "playerctl play-pause",
+	    "on-click-right": "playerctl stop",
+	    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+	    "on-scroll-up": "playerctl next",
+	    "on-scroll-down": "playerctl previous",
+	    "exec": "/home/jet/.config/waybar/mediaplayer.py 2> /dev/null"
+	    // Script in resources/custom_modules folder
+	},
+	
+	"sway/scratchpad": {
+        	"format": "{icon} {count}",
+	        "show-empty": false,
+        	"format-icons": ["", ""],
+	        "tooltip": true,
+        	"tooltip-format": "{app}: {title}"
+    	},
+
+	"battery": {
+		"interval": 10,
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format-time": "{H}:{M:02}",
+		"format": "{capacity}% ({time})",
+		"format-charging": " {capacity}% ({time})",
+		"format-charging-full": " {capacity}%",
+		"format-full": "{capacity}%",
+		"format-alt": "{power}W",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"tooltip": false
+	},
+
+	"clock#time": {
+		"interval": 10,
+		"format": "{:%H:%M}",
+		"format-alt": "{:%e %b %Y}",
+		"tooltip": false
+	},
+
+	"clock#date": {
+		"interval": 20,
+		"format": "{:%e %b %Y}",
+		"tooltip": false
+		//"tooltip-format": "{:%e %B %Y}"
+	},
+
+	"cpu": {
+		"interval": 5,
+		"tooltip": false,
+		"format": "  {usage}%",
+		"format-alt": "  {load}",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		}
+	},
+
+	"keyboard-state": {
+        	"numlock": true,
+	        "capslock": true,
+		"show-empty": false,
+		"format": " {name} ",
+	        "format-icons": {
+			"locked": "locked",
+			"unlocked": ""
+        	}
+    	},
+
+
+	"sway/language": {
+		//"format": "  {variant}",
+		//"format": "{variant}",
+		//"format": "{}",
+		//"format": "{short} {variant}",
+		"format": "{shortDescription}",
+		"min-length": 3,
+		"on-click": "swaymsg 'input * xkb_switch_layout next'",
+		"tooltip": false
+	},
+
+	"memory": {
+		"interval": 5,
+		"format": "  {used:0.1f}G/{total:0.1f}G",
+		"states": {
+			"warning": 70,
+			"critical": 90
+		},
+		"tooltip": false
+	},
+
+	"network": {
+		"interval": 5,
+		//"format-wifi": "  {essid} ({signalStrength}%)",
+		"format-wifi": "connected",
+		"format-ethernet": " {ifname}",
+		"format-disconnected": "No connection",
+		//"format-alt": " {ipaddr}/{cidr}",
+		"tooltip": false,
+		"on-click": "kitty -e ping archlinux.org",
+		"on-click-right": "kitty -e iwctl && station wlan0 show"
+	},
+
+	"sway/mode": {
+		"format": "{}",
+		"tooltip": false
+	},
+
+	"sway/window": {
+		"format": "{}",
+		"max-length": 30,
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"disable-scroll-wraparound": true,
+		"smooth-scrolling-threshold": 4,
+		"enable-bar-scroll": true,
+		"format": "{name}"
+	},
+
+	"pulseaudio": {
+		//"format": "{icon} {volume}%",
+		"format": "VOL {volume}%",
+		"format-bluetooth": " {volume}%",
+		//"format-muted": "",
+		"format-muted": "muted",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+		"scroll-step": 1,
+		"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"tooltip": false
+	},
+
+	"temperature": {
+		"critical-threshold": 90,
+		"interval": 5,
+		"format": "{icon} {temperatureC}°",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"tooltip": false
+	},
+
+	"tray": {
+		"icon-size": 18
+		//"spacing": 10
+	},
+
+	"custom/arrow1": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow2": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow3": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow4": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow5": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow6": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow7": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow8": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow9": {
+		"format": "",
+		"tooltip": false
+	},
+
+	"custom/arrow10": {
+		"format": "",
+		"tooltip": false
+	}
+}
+
+// vi:ft=jsonc
