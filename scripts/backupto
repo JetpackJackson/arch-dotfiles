@@ -31,7 +31,7 @@ else
 			echo "USB unmounted."
 		elif [[ $choice = "2" && $confirm = "b" ]]
 		then
-			sudo rsync -au --info=progress2 --delete --exclude-from='$XDG_DOCUMENTS_DIR/rsync-list.txt' /home/ /run/media/jet/pony/sharky/home/
+			sudo rsync -au --info=progress2 --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/ /run/media/jet/pony/sharky/home/
 			udisksctl unmount --block-device /dev/sd$1
 			echo "USB unmounted."
 		else

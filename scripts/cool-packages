@@ -1,2 +1,2 @@
 #!/bin/bash
-cat ~/Documents/cool-packages.txt
+cat ~/docs/cool-packages.txt
