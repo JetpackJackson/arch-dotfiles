@@ -19,7 +19,10 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec export XDG_CURRENT_DESKTOP=sway
 
 #output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+#output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+
+#output * bg $WALLPAPER_DIR/cyno-full-q.png fill
+output * bg $WALLPAPER_DIR/asuka.png fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
