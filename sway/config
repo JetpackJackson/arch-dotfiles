@@ -291,7 +291,7 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
-exec_always waybar -c ~/.config/waybar/solid -s ~/.config/waybar/solid.css
+exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
 include /etc/sway/config.d/*
 
 #bar {
