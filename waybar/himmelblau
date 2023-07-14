@@ -11,6 +11,7 @@
 	"modules-center": [
 		"sway/mode",
 		"keyboard-state"
+		//"wlr/taskbar"
 	],
 	"modules-right": [
 		"custom/arrow9",
@@ -67,6 +68,16 @@
 		"tooltip-format": "MPD (connected)",
 		"tooltip-format-disconnected": "MPD (disconnected)"
 	},
+	
+	//"wlr/taskbar": {
+        //	"all-outputs": true,
+        //	"format": "{icon} {title:.15}",
+        //	"icon-theme": "Papirus-Dark",
+        //	"icon-size": 16,
+        //	"on-click": "activate",
+        //	"on-click-middle": "close",
+        //	"on-click-right": "minimize"
+    	//},
 
 	"custom/media": {
 	    "format": " {} ",

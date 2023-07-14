@@ -1,0 +1,4 @@
+#!/bin/bash
+
+neofetch
+fortune $1 | cowsay

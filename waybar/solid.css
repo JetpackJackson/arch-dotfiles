@@ -19,9 +19,10 @@
 @define-color brgray	#928374;
 @define-color brred	#fb4934;
 @define-color brgreen	#b8bb26;*/
-@define-color frost	rgba(0,16,0,0.6);
+@define-color frost	rgba(0,16,19,0.6);
 @define-color frosts	rgba(0,16,0,0.6);
-@define-color frosty	#a80086;
+@define-color frosty	#831c1c;
+@define-color frosty2	#a80086;
 @define-color frosty1	rgba(100, 165, 255, 0.37);
 @define-color darkfrost	rgba(0,16,0,1);
 @define-color bryellow	#fabd2f;
@@ -80,8 +81,8 @@
 /* The whole bar */
 #waybar {
 	/*background: rgba(40, 40, 40, 0.8784313725);*/ /* #282828e0 */
-	/*background: transparent;*/
-	background: @frosts;
+	background: transparent;
+	/*background: @frosts;*/
 	color: @white;
 	font-family: "Ärzte Sans", JetBrains Mono, Siji;
 	font-size: 10pt;

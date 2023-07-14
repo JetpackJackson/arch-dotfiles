@@ -19,14 +19,14 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec export XDG_CURRENT_DESKTOP=sway
 
 #output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-#output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
 
 #output * bg $WALLPAPER_DIR/cyno-full-q.png fill
-output * bg $WALLPAPER_DIR/asuka.png fill
+#output * bg $WALLPAPER_DIR/asuka.png fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
-exec_always killall yambar
+#exec_always killall yambar
 #exec_always pkill -f capslock.sh
 #exec_always bash capslock.sh
 exec_always --no-startup-id dunst
@@ -39,7 +39,7 @@ exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/sh
 #exec_always "pkill kanshi; exec kanshi"
 
 output LVDS-1 pos 0 0 res 1600x900
-output HDMI-1 pos 1600 0 res 1920x1080
+output HDMI-A-1 pos 1600 0 res 1920x1080
 
 set $disp1 LVDS-1
 set $disp2 HDMI-A-1
@@ -103,6 +103,18 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+# Pipewire-pulse
+##bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+##bindsym --release XF86AudioMute exec pkill -RTMIN+1 i3blocks
+##bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+##bindsym --release XF86AudioLowerVolume exec pkill -RTMIN+1 i3blocks
+##bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+##bindsym --release XF86AudioRaiseVolume exec pkill -RTMIN+1 i3blocks
+
+#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && exec pkill -RTMIN+1 i3blocks
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && exec pkill -RTMIN+1 i3blocks
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && exec pkill -RTMIN+1 i3blocks
+
 ##bindsym XF86AudioPlay exec playerctl play-pause
 ##bindsym XF86AudioNext exec playerctl next & exec $HOME/.config/music-notif.sh
 ##bindsym XF86AudioPrev exec playerctl previous & exec $HOME/.config/music-notif.sh
@@ -156,6 +168,10 @@ set $mybindsym bindsym --to-code
     # Start your launcher
 
     $mybindsym $mod+d exec $menu
+    $mybindsym $mod+Shift+d exec kitty -e --class=launcher sway-launcher-desktop
+    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 0
+#set $menu exec $term -a launcher -e /path/to/repo/sway-launcher-desktop.sh
+#bindsym $mod+d exec $menu
 
 #bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
 $mybindsym $mod+x exec clipman pick -t rofi
@@ -294,11 +310,12 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
+#exec_always waybar -c ~/.config/waybar/solid -s ~/.config/waybar/solid.css
 exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
 include /etc/sway/config.d/*
 
 #bar {
-#	status_command  i3status
+#	status_command  i3blocks
 #	position top
 #	font pango:Ärzte Sans Mono Roman 11
 #	separator_symbol "  |  "
