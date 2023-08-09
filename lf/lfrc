@@ -59,17 +59,16 @@ map o &mimeopen $f
 map O $mimeopen --ask $f
 
 #cmd open ${{
-#cmd open &{{
+#cmd open ${{
 #    case "$f" in
 #	*.html|*.htm|*.xml) nvim $fx  >/dev/null 2>&1 &;;
 #	*.wav|*.mp3|*.flac|*.m4a|*.wma|*.ape|*.ac3|*.og[agx]|*.spx|*.opus) mpv $fx >/dev/null 2>&1 &;;
 #	*.bmp|*.jpg|*.jpeg|*.png|*.gif|*.xpm) feh $fx >/dev/null 2>&1 &;;
 #	*.pdf) zathura $fx >/dev/null 2>&1 &;;
-#	*.xopp) xournalpp $fx >/dev/null 2>&1 &;;
-#	*.doc|*.docx|*.xls|*.xlsx|*.odp|*.pptx) libreoffice $fx >/dev/null 2>&1 &;;
-#	*.odt) abiword $fx >/dev/null 2>&1 &;;
-#	#*) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
-#	*) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+#	#*.xopp) xournalpp.AppImage $fx >/dev/null 2>&1 &;;
+##	*.odt|*.doc|*.docx|*.xls|*.xlsx|*.odp|*.pptx) libreoffice $fx >/dev/null 2>&1 &;; 
+#	*) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+#	#*) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
 #    esac
 #}}
 

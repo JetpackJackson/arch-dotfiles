@@ -1,3 +1,2 @@
 #!/bin/bash
 sudo umount /home/jet/music/external
-notify-send "music unmounted"
