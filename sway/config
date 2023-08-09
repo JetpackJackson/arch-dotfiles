@@ -1,10 +1,16 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+# home rebinding
+set $left j
+set $down k
+set $up l
+set $right semicolon
+
+#set $left n
+#set $down r
+#set $up s
+#set $right k 
+
 set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -19,21 +25,17 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec export XDG_CURRENT_DESKTOP=sway
 
 #output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+#output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+output * bg /home/jet/pics/wallpapers/windmill.jpg fill
 
-#output * bg $WALLPAPER_DIR/cyno-full-q.png fill
-#output * bg $WALLPAPER_DIR/asuka.png fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
-#exec_always killall yambar
-#exec_always pkill -f capslock.sh
-#exec_always bash capslock.sh
 exec_always --no-startup-id dunst
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
-exec_always wl-paste -t text --watch clipman store
+exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 #exec_always pkill kanshi; exec kanshi
 #exec_always "pkill kanshi; exec kanshi"
@@ -167,15 +169,16 @@ set $mybindsym bindsym --to-code
 
     # Start your launcher
 
-    $mybindsym $mod+d exec $menu
-    $mybindsym $mod+Shift+d exec kitty -e --class=launcher sway-launcher-desktop
-    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 0
+    $mybindsym $mod+Shift+d exec $menu
+    $mybindsym $mod+d exec kitty -e --class=launcher sway-launcher-desktop
+    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 #set $menu exec $term -a launcher -e /path/to/repo/sway-launcher-desktop.sh
 #bindsym $mod+d exec $menu
 
 #bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
-$mybindsym $mod+x exec clipman pick -t rofi
-$mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
+#$mybindsym $mod+Shift+x exec clipman pick -t rofi
+$mybindsym $mod+x exec kitty -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
+$mybindsym $mod+g exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 bindsym $mod+Home exec 'grim -o LVDS-1 ~/pics/screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
 bindsym $mod+Delete exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/pics/screenshots/focused_$(date +"%Y%m%d%H%M%S").png
@@ -189,7 +192,7 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     floating_modifier $mod normal
 
     # Reload the configuration file
-    $mybindsym $mod+Shift+c reload
+    $mybindsym $mod+Shift+z reload
 
     # Exit sway (logs you out of your Wayland session)
     $mybindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -254,7 +257,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     $mybindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    $mybindsym $mod+s layout stacking
+    #$mybindsym $mod+s layout stacking
+    $mybindsym $mod+t layout stacking
     $mybindsym $mod+w layout tabbed
     $mybindsym $mod+e layout toggle split
 
@@ -263,13 +267,14 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
-    bindsym $mod+Shift+Caps_Lock floating toggle
-
+    #bindsym $mod+Shift+Caps_Lock floating toggle
+    bindsym $mod+Shift+ISO_Level3_Shift floating toggle
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    $mybindsym $mod+a focus parent
+    #$mybindsym $mod+a focus parent
+    $mybindsym $mod+c focus parent
 #
 # Scratchpad:
 #
@@ -278,7 +283,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
-    bindsym $mod+Shift+Tab move scratchpad
+    bindsym $mod+Shift+Tab floating enable, resize set width 1550 height 850, move scratchpad
+    #move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
@@ -308,7 +314,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-$mybindsym $mod+r mode "resize"
+$mybindsym $mod+a mode "resize"
 
 #exec_always waybar -c ~/.config/waybar/solid -s ~/.config/waybar/solid.css
 exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
