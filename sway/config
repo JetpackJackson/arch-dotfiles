@@ -1,15 +1,17 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+# home rebinding
+set $left j
+set $down k
+set $up l
+set $right semicolon
+
+#set $left n
+#set $down r
+#set $up s
+#set $right k 
+
 set $term kitty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run'
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -18,25 +20,17 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec export XDG_CURRENT_DESKTOP=sway
 
-#output * bg /home/jet/Pictures/Wallpapers/rapture.jpg fill
-output * bg /home/jet/pics/wallpapers/tighnaricyno.jpeg fill
+output * bg /home/jet/pics/wallpapers/windmill.jpg fill
 
-#output * bg $WALLPAPER_DIR/cyno-full-q.png fill
-#output * bg $WALLPAPER_DIR/asuka.png fill
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
 exec_always killall waybar
-#exec_always killall yambar
-#exec_always pkill -f capslock.sh
-#exec_always bash capslock.sh
 exec_always --no-startup-id dunst
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
-exec_always wl-paste -t text --watch clipman store
+exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
-#exec_always pkill kanshi; exec kanshi
-#exec_always "pkill kanshi; exec kanshi"
 
 output LVDS-1 pos 0 0 res 1600x900
 output HDMI-A-1 pos 1600 0 res 1920x1080
@@ -66,22 +60,10 @@ mode "mon" {
 }
 bindsym $mod+KP_Equal mode "mon"
 
-
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-#
-# Example configuration:
-#
-exec swayidle -w \
-#         timeout 300 'swaylock -f -c 000000' \
-	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg'" \
+exec_always killall swayidle; swayidle -w \
+	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+         before-sleep 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"'
 
 ### Input configuration
 #
@@ -133,11 +115,7 @@ bindsym XF86Launch9 exec mpc next
 ##playerctl next & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch7 exec mpc shuffle
 
-##bindcode 105 exec notify-send "keyboard:" "$(xkblayout-state print '%n %s %v')"
-##bindsym F4 exec notify-send "time:" "$(date +%c----%A-%T-%D)"
-##bindsym XF86Calculator exec swaylock -f -c 000000
 bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
-##bindsym $mod+XF86Calculator exec swaylock -f -c 000000 & systemctl suspend
 bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
@@ -151,9 +129,15 @@ titlebar_border_thickness 0
 gaps inner 5
 #gaps outer 0
 
+#input * {
+#    xkb_layout "us,us,de"
+#    xkb_variant ",intl,bone"
+#    xkb_options "grp:rctrl_toggle"
+#}
+
 input * {
-    xkb_layout "us,us,de"
-    xkb_variant ",intl,bone"
+    xkb_layout "us,de"
+    xkb_variant ",bone"
     xkb_options "grp:rctrl_toggle"
 }
 
@@ -167,14 +151,15 @@ set $mybindsym bindsym --to-code
 
     # Start your launcher
 
-    $mybindsym $mod+d exec $menu
-    $mybindsym $mod+Shift+d exec kitty -e --class=launcher sway-launcher-desktop
-    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 0
+    $mybindsym $mod+Shift+d exec $menu
+    $mybindsym $mod+d exec kitty -e --class=launcher sway-launcher-desktop
+    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 #set $menu exec $term -a launcher -e /path/to/repo/sway-launcher-desktop.sh
 #bindsym $mod+d exec $menu
 
 #bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
-$mybindsym $mod+x exec clipman pick -t rofi
+#$mybindsym $mod+Shift+x exec clipman pick -t rofi
+$mybindsym $mod+x exec kitty -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 bindsym $mod+Home exec 'grim -o LVDS-1 ~/pics/screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
@@ -189,7 +174,7 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     floating_modifier $mod normal
 
     # Reload the configuration file
-    $mybindsym $mod+Shift+c reload
+    $mybindsym $mod+Shift+z reload
 
     # Exit sway (logs you out of your Wayland session)
     $mybindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -254,7 +239,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     $mybindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    $mybindsym $mod+s layout stacking
+    #$mybindsym $mod+s layout stacking
+    $mybindsym $mod+t layout stacking
     $mybindsym $mod+w layout tabbed
     $mybindsym $mod+e layout toggle split
 
@@ -263,12 +249,13 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
-    bindsym $mod+Shift+Caps_Lock floating toggle
-
+    #bindsym $mod+Shift+Caps_Lock floating toggle
+    bindsym $mod+Shift+ISO_Level3_Shift floating toggle
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
+    #$mybindsym $mod+a focus parent
     $mybindsym $mod+a focus parent
 #
 # Scratchpad:
@@ -278,7 +265,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
-    bindsym $mod+Shift+Tab move scratchpad
+    bindsym $mod+Shift+Tab floating enable, resize set width 1550 height 850, move scratchpad
+    #move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
@@ -333,8 +321,4 @@ include /etc/sway/config.d/*
 #
 #	}
 #}
-
-
-##exec_always yambar
 ##exec_always systemctl --user start sway-session.target
-

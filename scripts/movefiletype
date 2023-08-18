@@ -1,0 +1,4 @@
+#!/bin/bash
+myvar="$PWD"
+mkdir "$1"
+find . -name "*.$1" -exec mv {} "$myvar"/"$1"/ \;

@@ -1,0 +1,77 @@
+# -- feeds ---------------------------------------------------------------------
+
+auto-reload yes
+#reload-time 60
+reload-threads 100
+#download-retries 4
+#download-timeout 10
+#prepopulate-query-feeds yes
+#browser "nohup $FIREFOX --new-tab %u &>/dev/null &"
+
+# -- display -------------------------------------------------------------------
+
+#show-read-feeds no
+#feed-sort-order unreadarticlecount-asc
+
+#color info default default reverse
+
+#color background          white   black   invis
+#color listnormal          white   black
+#color listfocus           yellow  blue   bold
+#color listnormal_unread   magenta black
+#color listfocus_unread    magenta blue   bold
+#color info                yellow  blue   bold
+#color article             white   black   invis
+
+#color listnormal_unread yellow default
+
+#color listfocus blue default reverse bold
+#color listfocus_unread blue default reverse bold
+
+#color background          color15   color15
+#color listnormal          color59   color15
+color listfocus           color16   color249 bold
+color listnormal_unread   color31   default  bold  invis
+color listfocus_unread    color16   color249 bold
+color info                color15   color24  bold
+#color article             color59   color15
+
+text-width 80
+
+
+# -- navigation ----------------------------------------------------------------
+
+#goto-next-feed no
+
+#browser "open -g -a 'Google Chrome' %u"
+
+bind-key k down feedlist
+bind-key l up feedlist
+bind-key k next articlelist
+bind-key l prev articlelist
+bind-key K next-feed articlelist
+bind-key L prev-feed articlelist
+bind-key k down article
+bind-key l up article
+
+
+# -- bookmarks -----------------------------------------------------------------
+
+#bookmark-cmd ~/.newsbeuter/bookmark.sh
+#bookmark-interactive no
+#bookmark-autopilot yes
+
+
+# -- misc ----------------------------------------------------------------------
+
+#macro y set browser "mpv %u" ; open-in-browser ; set browser "elinks %u"
+#macro v set browser "setsid -f mpv --really-quiet --no-terminal" ; open-in-browser ; set browser brave
+#macro o set browser ~/.config/newsboat/mpv.sh ; open-in-browser ; set browser $BROWSER
+unbind-key v
+#browser /usr/bin/librewolf
+browser /usr/bin/librewolf
+macro , open-in-browser
+macro v set browser "mpv --no-terminal %u &"; open-in-browser ; set browser /usr/bin/librewolf
+#unbind-key C feedlist
+#confirm-exit no
+#cleanup-on-quit no

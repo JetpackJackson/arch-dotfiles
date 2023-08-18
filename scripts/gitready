@@ -1,9 +1,11 @@
 #!/bin/bash
 
-rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/git-projects/newdots/kitty/
-rsync -a --delete .config/nvim/ $XDG_DOCUMENTS_DIR/git-projects/newdots/nvim/
-rsync -a --delete .config/sway/ $XDG_DOCUMENTS_DIR/git-projects/newdots/sway/
-rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/git-projects/newdots/waybar/
-rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/git-projects/newdots/lf/
-rsync -a --delete .config/fish/ $XDG_DOCUMENTS_DIR/git-projects/newdots/fish/
-rsync -a --delete docs/scripts/ $XDG_DOCUMENTS_DIR/git-projects/newdots/scripts/
+rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/projects/git/newdots/kitty/
+rsync -a --delete .config/nvim/ $XDG_DOCUMENTS_DIR/projects/git/newdots/nvim/
+rsync -a --delete .config/sway/ $XDG_DOCUMENTS_DIR/projects/git/newdots/sway/
+rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/projects/git/newdots/waybar/
+rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lf/
+rsync -a --delete .config/fish/ $XDG_DOCUMENTS_DIR/projects/git/newdots/fish/
+rsync -a --delete .config/mpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpv/
+rsync -a --delete .config/newsboat/ $XDG_DOCUMENTS_DIR/projects/git/newdots/newsboat/
+rsync -a --delete docs/scripts/ $XDG_DOCUMENTS_DIR/projects/git/newdots/scripts/
