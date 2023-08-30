@@ -1,21 +1,14 @@
 call plug#begin('~/.config/nvim/plugged')
-
 "Plug 'sainnhe/gruvbox-material'
 Plug 'JetpackJackson/farin-colors'
 Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'pablopunk/sick.vim'
-
-"Plug 'prabirshrestha/vim-lsp'
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'lighttiger2505/deoplete-vim-lsp'
-
+Plug 'rktjmp/lush.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 colorscheme dusche
-"colorscheme sick
-
+"""
 if has('termguicolors')
 	set termguicolors
 endif
@@ -54,21 +47,6 @@ require('neorg').setup {
     },
 }
 EOF
-" setting with vim-lsp
-""if executable('ccls')
-""   au User lsp_setup call lsp#register_server({
-""      \ 'name': 'ccls',
-""      \ 'cmd': {server_info->['ccls']},
-""      \ 'root_uri': {server_info->lsp#utils#path_to_uri(
-""      \   lsp#utils#find_nearest_parent_file_directory(
-""      \     lsp#utils#get_buffer_path(), ['.ccls', 'compile_commands.json', '.git/']))""},
-""      \ 'initialization_options': {
-""      \   'highlight': { 'lsRanges' : v:true },
-""      \   'cache': {'directory': stdpath('cache') . '/ccls' },
-""      \ },
-""      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-""      \ })
-""endif
 
 "" Bone layout rebinding, with hands on jkl/ (nrsk) to prevent conflicts with
 "" g on home row causing delays and stuff
@@ -77,17 +55,9 @@ noremap r j
 noremap s k
 noremap k l
 
-""noremap gg <Nop>
-""noremap g <Nop>
-""noremap G <Nop>
-""noremap n h
-""noremap r j
-""noremap s k
-""noremap g l
+noremap h n
+noremap H N
 
 "" remap replace
 noremap ß r
-
-""noremap k j|noremap <C-w>k <C-w>j|noremap <C-w><C-k> <C-w>j
-""noremap j k|noremap <C-w>j <C-w>k|noremap <C-w><C-j> <C-w>k
 

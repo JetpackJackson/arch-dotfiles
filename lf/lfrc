@@ -9,6 +9,9 @@ set cleaner ctpvclear
 map gi cd /run/media
 map gg cd /home
 map gc cd ~/.config
+map gd cd ~/docs
+map gn cd ~/docs/notes
+map gs cd ~/docs/notes/school
 #map gt cd ~/Trash
 map gt %mv $fx ~/.cache/mytrash
 map w
