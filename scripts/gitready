@@ -1,7 +1,7 @@
 #!/bin/bash
 
 rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/projects/git/newdots/kitty/
-rsync -a --delete .config/nvim/ $XDG_DOCUMENTS_DIR/projects/git/newdots/nvim/
+rsync -a --delete --exclude={"/plugged/*","/autoload/*"} .config/nvim/ $XDG_DOCUMENTS_DIR/projects/git/newdots/nvim/
 rsync -a --delete .config/sway/ $XDG_DOCUMENTS_DIR/projects/git/newdots/sway/
 rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/projects/git/newdots/waybar/
 rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lf/

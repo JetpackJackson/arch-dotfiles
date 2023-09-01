@@ -1,6 +1,8 @@
 #!/bin/bash
 sudo pacman -Qtdq | sudo pacman -Rns -
 sudo pacman -Qqd | sudo pacman -Rsu -
+sudo rm -rfiv $XDG_CACHE_HOME/paru/clone
+mkdir $XDG_CACHE_HOME/paru/clone
 sudo paccache -rk1
 sudo paccache -ruk0
 pacman -Qqe > $XDG_DOCUMENTS_DIR/paclist/pkglist.txt

@@ -5,7 +5,10 @@ Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rktjmp/lush.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'ellisonleao/glow.nvim'
+Plug '0x00-ketsu/markdown-preview.nvim'
+Plug 'wesQ3/vim-windowswap'
+  
 call plug#end()
 colorscheme dusche
 """
@@ -48,6 +51,12 @@ require('neorg').setup {
 }
 EOF
 
+lua << EOF
+require('glow').setup()
+EOF
+
+
+
 "" Bone layout rebinding, with hands on jkl/ (nrsk) to prevent conflicts with
 "" g on home row causing delays and stuff
 noremap n h
@@ -61,3 +70,7 @@ noremap H N
 "" remap replace
 noremap ß r
 
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> ,yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> ,pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> ,ww :call WindowSwap#EasyWindowSwap()<CR>
