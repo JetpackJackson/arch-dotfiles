@@ -1,11 +1,26 @@
 #!/bin/bash
 
-rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/projects/git/newdots/kitty/
 rsync -a --delete --exclude={"/plugged/*","/autoload/*"} .config/nvim/ $XDG_DOCUMENTS_DIR/projects/git/newdots/nvim/
+rsync -a --delete .config/X11/ $XDG_DOCUMENTS_DIR/projects/git/newdots/X11/
+rsync -a --delete .config/coc/ $XDG_DOCUMENTS_DIR/projects/git/newdots/coc/
+rsync -a --delete .config/ctpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/ctpv/
+rsync -a --delete .config/czkawka/ $XDG_DOCUMENTS_DIR/projects/git/newdots/czkawka/
+rsync -a --delete .config/dunst/ $XDG_DOCUMENTS_DIR/projects/git/newdots/dunst/
+rsync -a --delete .config/fish/ $XDG_DOCUMENTS_DIR/projects/git/newdots/fish/
+rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/projects/git/newdots/kitty/
+rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lf/
+rsync -a --delete .config/mpd/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpd/
+rsync -a --delete .config/mpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpv/
+rsync -a --delete .config/ncmpcpp/ $XDG_DOCUMENTS_DIR/projects/git/newdots/ncmpcpp/
+rsync -a --delete .config/neofetch/ $XDG_DOCUMENTS_DIR/projects/git/newdots/neofetch/
+rsync -a --delete .config/newsboat/ $XDG_DOCUMENTS_DIR/projects/git/newdots/newsboat/
+rsync -a --delete .config/newsboat/ $XDG_DOCUMENTS_DIR/projects/git/newdots/newsboat/
+rsync -a --delete .config/paru/ $XDG_DOCUMENTS_DIR/projects/git/newdots/paru/
+rsync -a --delete .config/swappy/ $XDG_DOCUMENTS_DIR/projects/git/newdots/swappy/
 rsync -a --delete .config/sway/ $XDG_DOCUMENTS_DIR/projects/git/newdots/sway/
 rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/projects/git/newdots/waybar/
-rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lf/
-rsync -a --delete .config/fish/ $XDG_DOCUMENTS_DIR/projects/git/newdots/fish/
-rsync -a --delete .config/mpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpv/
-rsync -a --delete .config/newsboat/ $XDG_DOCUMENTS_DIR/projects/git/newdots/newsboat/
+rsync -a --delete .config/whoozle.github.io/ $XDG_DOCUMENTS_DIR/projects/git/newdots/whoozle.github.io/
+rsync -a --delete .config/zathura/ $XDG_DOCUMENTS_DIR/projects/git/newdots/zathura/
+rsync -a --delete /etc/pacman.conf $XDG_DOCUMENTS_DIR/projects/git/newdots/pacman.conf
 rsync -a --delete docs/scripts/ $XDG_DOCUMENTS_DIR/projects/git/newdots/scripts/
+cd $XDG_DOCUMENTS_DIR/projects/git/newdots/
