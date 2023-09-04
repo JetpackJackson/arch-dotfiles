@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo pacman -Qtdq | sudo pacman -Rns -
 sudo pacman -Qqd | sudo pacman -Rsu -
-sudo rm -rfiv $XDG_CACHE_HOME/paru/clone
+sudo rm -rfv $XDG_CACHE_HOME/paru/clone
 mkdir $XDG_CACHE_HOME/paru/clone
 sudo paccache -rk1
 sudo paccache -ruk0
