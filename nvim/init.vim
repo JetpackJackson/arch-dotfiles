@@ -1,17 +1,20 @@
 call plug#begin('~/.config/nvim/plugged')
+
 "Plug 'sainnhe/gruvbox-material'
 Plug 'JetpackJackson/farin-colors'
 Plug 'nvim-neorg/neorg' | Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'rktjmp/lush.nvim'
+Plug 'nvim-tree/nvim-web-devicons' " optional
+Plug 'nvim-tree/nvim-tree.lua'
+"Plug 'rktjmp/lush.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ellisonleao/glow.nvim'
 Plug '0x00-ketsu/markdown-preview.nvim'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'wesQ3/vim-windowswap'
-  
 call plug#end()
 colorscheme dusche
-"""
+
 if has('termguicolors')
 	set termguicolors
 endif

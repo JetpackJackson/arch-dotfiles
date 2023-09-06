@@ -8,6 +8,7 @@ rsync -a --delete .config/czkawka/ $XDG_DOCUMENTS_DIR/projects/git/newdots/czkaw
 rsync -a --delete .config/dunst/ $XDG_DOCUMENTS_DIR/projects/git/newdots/dunst/
 rsync -a --delete .config/fish/ $XDG_DOCUMENTS_DIR/projects/git/newdots/fish/
 rsync -a --delete .config/kitty/ $XDG_DOCUMENTS_DIR/projects/git/newdots/kitty/
+rsync -a --delete .config/lazytest/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lazytest/
 rsync -a --delete .config/lf/ $XDG_DOCUMENTS_DIR/projects/git/newdots/lf/
 rsync -a --delete .config/mpd/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpd/
 rsync -a --delete .config/mpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/mpv/
