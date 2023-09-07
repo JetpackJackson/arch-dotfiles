@@ -33,8 +33,8 @@ exec_always --no-startup-id udiskie &
 exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 
-output LVDS-1 pos 1920 0 res 1600x900
-output HDMI-A-1 pos 0 0 res 1920x1080
+output LVDS-1 pos 0 0 res 1600x900
+output HDMI-A-1 pos 1600 0 res 1920x1080
 
 set $disp1 LVDS-1
 set $disp2 HDMI-A-1
@@ -51,9 +51,9 @@ workspace 9 output $disp2
 workspace 10 output $disp2
 
 mode "mon" {
-    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
-    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"
-    bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
+    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --off & wlr-randr --output LVDS-1 --pos 0,0 --on"
+    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on & wlr-randr --output LVDS-1 --pos 0,0 --on"
+    bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 1600,0 --on & wlr-randr --output LVDS-1 --pos 0,0 --off"
 
     # Return to default mode
     bindsym Return mode "default"
