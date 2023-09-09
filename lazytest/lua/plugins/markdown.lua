@@ -1,7 +1,7 @@
 -- Lua
 return {
-  { "0x00-ketsu/markdown-preview.nvim",
-  ft = {"md", "markdown", "mkd", "mkdn", "mdwn", "mdown", "mdtxt", "mdtext", "rmd", "wiki"},
+--  { "0x00-ketsu/markdown-preview.nvim",
+--  ft = {"md", "markdown", "mkd", "mkdn", "mdwn", "mdown", "mdtxt", "mdtext", "rmd", "wiki"},
 --  config = function()
 --    require("markdown-preview").setup {
 --      -- your configuration comes here
@@ -12,7 +12,7 @@ return {
   { 
     "iamcco/markdown-preview.nvim",
     ft = {"markdown"},
-    build = "cd app && npm install",
+    build = {"cd app && npm install"},
     --init = function() vim.g.mkdp_filetypes = { "markdown" },
-  },
-},
+  }
+
