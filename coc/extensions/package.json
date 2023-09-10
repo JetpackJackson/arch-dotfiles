@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "coc-clangd": ">=0.29.1",
-    "@yaegassy/coc-marksman": ">=0.3.5"
-  },
-  "lastUpdate": 1691115095054
-}
