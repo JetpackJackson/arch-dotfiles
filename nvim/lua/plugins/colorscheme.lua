@@ -2,7 +2,7 @@ return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
   { "JetpackJackson/farin-colors" },
-  { "sainnhe/everforest" },
+--  { "sainnhe/everforest" },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
