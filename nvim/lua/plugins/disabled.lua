@@ -11,8 +11,8 @@ return {
   { "folke/neoconf.nvim", enabled = false },
   { "folke/neodev.nvim", enabled = false },
 -- { "williamboman/mason-lspconfig.nvim", enabled = false },
-  { "ms-jpq/coq_nvim", enabled = false },
---  { "hrsh7th/nvim-cmp", enabled = false },
---  { "hrsh7th/cmp-buffer", enabled = false },
---  { "neovim/nvim-lspconfig", enabled = false },
+--  { "ms-jpq/coq_nvim", enabled = false },
+  { "folke/tokyonight.nvim", enabled = false },
+  { "nvimdev/lspsaga.nvim", enabled = false },
+  { "catppuccin/nvim", enabled = false }
 }

@@ -6,9 +6,14 @@ require("config.lazy")
 
   -- set termguicolors to enable highlight groups
   vim.opt.termguicolors = true
+  vim.cmd.colorscheme('gruvbox')
 
-  -- empty setup using defaults
---  require("nvim-tree").setup()
+--  require("lazy.nvim").setup({
+--    deps = { "sainnhe/gruvbox" },
+--    opts = {
+--      colorscheme = "gruvbox",
+--    }
+--  })
 
   -- OR setup with some options
   require("nvim-tree").setup({
@@ -47,3 +52,5 @@ require('telekasten').setup({
 		calendar_mark = "left-fit",
 	},
 })
+--require('mini.starter').setup()
+--require('startify').setup({startify_custom_header_quotes = startify#fortune#predefined_quotes() + [['quote 1', 'quote 2']]})

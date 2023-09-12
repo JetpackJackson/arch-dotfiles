@@ -9,28 +9,18 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
-
---  { 
---    "0x00-ketsu/markdown-preview.nvim",
---    ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
---    config = function()
---      require('markdown-preview').setup {
---      -- your configuration comes here
---      -- or leave it empty to use the default settings
---      -- refer to the setup section below
---      },
---    
+--  -- add gruvbox
+--  { "ellisonleao/gruvbox.nvim" },
+--
+--  -- Configure LazyVim to load gruvbox
+--  {
+----    "LazyVim/LazyVim",
+--    "folke/lazy.nvim",
+--    opts = {
+--      colorscheme = "gruvbox",
+--    },
 --  },
+
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -219,6 +209,13 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
+        "clangd",
+        "pyright",
+        "marksman",
+        "markdown-toc",
+        "lua-language-server",
+        "ltex-ls",
+        "bash-language-server",
       },
     },
   },
