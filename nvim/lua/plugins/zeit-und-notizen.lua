@@ -6,7 +6,7 @@ return {
     end
   },
   { "renerocksai/calendar-vim" },
-  { 
+  {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
@@ -28,5 +28,15 @@ return {
         -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
       },
     },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    build = "cd app && npm install",
+    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+  },
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = {'nvim-telescope/telescope.nvim'}
   },
 }
