@@ -21,7 +21,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec export XDG_CURRENT_DESKTOP=sway
 
-output * bg /home/jet/pics/wallpapers/windmill.jpg fill
+output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py

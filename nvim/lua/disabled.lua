@@ -12,7 +12,7 @@ return {
   { "folke/neodev.nvim", enabled = false },
 -- { "williamboman/mason-lspconfig.nvim", enabled = false },
 --  { "ms-jpq/coq_nvim", enabled = false },
-  { "folke/tokyonight.nvim", enabled = false },
-  { "nvimdev/lspsaga.nvim", enabled = false },
-  { "catppuccin/nvim", enabled = false }
+--  { "folke/tokyonight.nvim", enabled = false },
+--  { "nvimdev/lspsaga.nvim", enabled = false },
+--  { "catppuccin/nvim", enabled = false }
 }

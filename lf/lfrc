@@ -9,6 +9,7 @@ set cleaner ctpvclear
 map gi cd /run/media
 map gg cd /home
 map gc cd ~/.config
+map gl cd ~/.config/nvim/lua/plugins/
 map gd cd ~/docs
 map gn cd ~/docs/notes
 map gs cd ~/docs/notes/school
