@@ -1,4 +1,16 @@
+vim.g.mapleader = ' '
+vim.api.nvim_set_keymap('n', '<F1>', ':Startify<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F2>', ':Telescope buffers<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F3>', ':Telescope find_files<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F4>', ':Telekasten find_daily_notes<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F5>', ':Lazy<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gn', ':Gitsigns next_hunk<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gp', ':Gitsigns prev_hunk<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true })
+
 require("config.lazy")
+--.setup({})
+--require("keymaps")
 -- disable netrw at the very start of your init.lua
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
@@ -6,6 +18,8 @@ require("config.lazy")
   -- set termguicolors to enable highlight groups
   vim.opt.termguicolors = true
   vim.cmd.colorscheme("gruvbox")
+
+
 
 require("nvim-tree").setup({
   sort = {
@@ -25,10 +39,10 @@ require('telekasten').setup({
   home = vim.fn.expand("~/docs/notes/notes-daily"), -- Put the name of your notes directory here
   vaults = {
     dailynotes = {
-      home = "~/docs/notes/notes-daily/",
+      home = vim.fn.expand("~/docs/notes/notes-daily/"),
     },
     lectures = {
-      home = "~/docs/notes/lectures/",
+      home = vim.fn.expand("~/docs/notes/school/"),
     },
   },
   auto_set_filetype = false,
@@ -132,6 +146,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 local ts_utils = require 'nvim-treesitter.ts_utils'
+
+--require("config")
 
 vim.cmd("set noequalalways")
 vim.cmd("set expandtab")
