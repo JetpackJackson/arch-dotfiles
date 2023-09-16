@@ -15,7 +15,6 @@ vim.api.nvim_set_keymap('n', '<leader>t', ':TodoLocList<CR>', { noremap = true }
 vim.api.nvim_set_keymap('n', '<leader>n', ':NoNeckPain<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fi', ':Telekasten search_notes<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':Telekasten switch_vault<CR>', { noremap = true })
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

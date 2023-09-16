@@ -11,7 +11,7 @@ map gg cd /home
 map gc cd ~/.config
 map gl cd ~/.config/nvim/lua/plugins/
 map gd cd ~/docs
-map gn cd ~/docs/notes
+map gn cd ~/docs/notes/notes-daily
 map gs cd ~/docs/notes/school
 #map gt cd ~/Trash
 map gt %mv $fx ~/.cache/mytrash

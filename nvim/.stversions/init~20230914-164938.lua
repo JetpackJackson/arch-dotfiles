@@ -8,93 +8,38 @@ vim.api.nvim_set_keymap('n', '<F5>', ':Lazy<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>h', ':Startify<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>b', ':Telescope buffers<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fd', ':Telekasten find_daily_notes<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>dn', ':Telekasten find_daily_notes<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>t', ':TodoLocList<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>n', ':NoNeckPain<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>fi', ':Telekasten search_notes<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>sv', ':Telekasten switch_vault<CR>', { noremap = true })
 
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
-end
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
-require("lazy").setup({
---  {{"shortcuts/no-neck-pain.nvim", version = "*"}}
-  spec = {
-    -- add LazyVim and import its plugins
---    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    { import = "plugins" },
-  },
-  defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
-  },
-  checker = { enabled = true }, -- automatically check for plugin updates
-  performance = {
-    rtp = {
-      -- disable some rtp plugins
-      disabled_plugins = {
-        "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        -- "tutor",
-        "zipPlugin",
-      },
-    },
-  },
-})
-
-
---require("config.lazy")
+require("config.lazy")
 --.setup({})
 --require("keymaps")
 -- disable netrw at the very start of your init.lua
---  vim.g.loaded_netrw = 1
---  vim.g.loaded_netrwPlugin = 1
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
 
   -- set termguicolors to enable highlight groups
   vim.opt.termguicolors = true
   vim.cmd.colorscheme("gruvbox")
 
---require("lazy").setup({{"shortcuts/no-neck-pain.nvim", version = "*"}})
 
 
---require("nvim-tree").setup({
---  sort = {
---    sorter = "case_sensitive",
---  },
---  view = {
---    width = 30,
---  },
---  renderer = {
---    group_empty = true,
---  },
---  filters = {
---    dotfiles = true,
---  },
---})
-
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 require('telekasten').setup({
   home = vim.fn.expand("~/docs/notes/notes-daily"), -- Put the name of your notes directory here
   vaults = {
@@ -120,11 +65,6 @@ require('telekasten').setup({
 		calendar_mark = "left-fit",
 	},
 })
-
-require('hologram').setup{
-    auto_display = false -- WIP automatic markdown image display, may be prone to breaking
-}
-
 require('lualine').setup {
   options = {
     --icons_enabled = true,
@@ -165,51 +105,13 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
---local navic = require("nvim-navic")
---
---require("lspconfig").clangd.setup {
---    on_attach = function(client, bufnr)
---        navic.attach(client, bufnr)
---    end
---}
+local navic = require("nvim-navic")
 
---require'lspconfig'.pyright.setup{}
---require'lspconfig'.clangd.setup{}
---
---
---require'lspconfig'.lua_ls.setup {
---  on_init = function(client)
---    local path = client.workspace_folders[1].name
---    if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
---      client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
---        Lua = {
---          runtime = {
---            -- Tell the language server which version of Lua you're using
---            -- (most likely LuaJIT in the case of Neovim)
---            version = 'LuaJIT'
---          },
---          -- Make the server aware of Neovim runtime files
---          workspace = {
---            checkThirdParty = false,
---            library = {
---              vim.env.VIMRUNTIME
---              -- "${3rd}/luv/library"
---              -- "${3rd}/busted/library",
---            }
---            -- or pull in all of 'runtimepath'. this is a lot slower
---            -- library = vim.api.nvim_get_runtime_file("", true)
---          }
---        }
---      })
---
---      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
---    end
---    return true
---  end
---}
-
-
-
+require("lspconfig").clangd.setup {
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end
+}
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
@@ -222,7 +124,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
 
   -- List of parsers to ignore installing (or "all")
-  --ignore_install = { "javascript" },
+  ignore_install = { "javascript" },
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -230,11 +132,11 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
 
-    -- these are the names of the parsers and not the filetype. (for example if you want to
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    --disable = { "c", "rust" },
+    disable = { "c", "rust" },
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, buf)
         local max_filesize = 100 * 1024 -- 100 KB
@@ -255,25 +157,14 @@ local ts_utils = require 'nvim-treesitter.ts_utils'
 
 --require("config")
 
-
---vim.o.noequalalways = true
-vim.o.expandtab = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.signcolumn = "number"
-vim.o.cursorline = true
---vim.s.header_cmd = "fortune deutsch | cowsay -W 80"
---vim.g.startify_custom_header = "startify#pad(split(system(s:header_cmd), '\n'))"
-
 vim.cmd("set noequalalways")
---vim.cmd("set shiftwidth=4")
---vim.cmd("set softtabstop=4")
---vim.cmd("set number")
---vim.cmd("set relativenumber")
---vim.opt.signcolumn = "number"
---vim.cmd("set cursorline")
+vim.cmd("set expandtab")
+vim.cmd("set shiftwidth=4")
+vim.cmd("set softtabstop=4")
+vim.cmd("set number")
+vim.cmd("set relativenumber")
+vim.opt.signcolumn = "number"
+vim.cmd("set cursorline")
 vim.cmd([[
     let s:header_cmd = 'fortune deutsch | cowsay -W 80'
     let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))]])

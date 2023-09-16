@@ -1,7 +1,6 @@
 return {
   { "nvim-treesitter/nvim-treesitter" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "shortcuts/no-neck-pain.nvim" },
   { "SmiteshP/nvim-navic" },
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -37,47 +36,48 @@ return {
       --table.insert(opts.sections.lualine_x, "😄")
     --end,
   },
-  --{ "folke/flash.nvim" },
---  {
---    "akinsho/bufferline.nvim",
---    event = "VeryLazy",
---    keys = {
---      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
---      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
---    },
---    opts = {
---      options = {
---        -- stylua: ignore
---        close_command = function(n) require("mini.bufremove").delete(n, false) end,
---        -- stylua: ignore
---        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
---        diagnostics = "nvim_lsp",
---        always_show_bufferline = false,
---        diagnostics_indicator = function(_, _, diag)
---          --local icons = require("lazyvim.config").icons.diagnostics
---          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
---            .. (diag.warning and icons.Warn .. diag.warning or "")
---          return vim.trim(ret)
---        end,
---        offsets = {
---          {
---            filetype = "neo-tree",
---            text = "Neo-tree",
---            highlight = "Directory",
---            text_align = "left",
---          },
---        },
---      },
---    },
---  },
---  {
---    "echasnovski/mini.bufremove",
---    -- stylua: ignore
---    keys = {
---      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
---      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
---    },
---  },
+  { 'echasnovski/mini.nvim', version = false },
+  { "folke/flash.nvim" },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+    },
+    opts = {
+      options = {
+        -- stylua: ignore
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        -- stylua: ignore
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          --local icons = require("lazyvim.config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
+    },
+  },
+  {
+    "echasnovski/mini.bufremove",
+    -- stylua: ignore
+    keys = {
+      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+    },
+  },
 
   {
     "folke/noice.nvim",
@@ -146,35 +146,38 @@ return {
     },
   },
   { "folke/lazy.nvim" },
---  {
---    "echasnovski/mini.indentscope",
---    version = false, -- wait till new 0.7.0 release to put it back on semver
---    event = { "BufReadPre", "BufNewFile" },
---    opts = {
---      -- symbol = "▏",
---      symbol = "│",
---      options = { try_as_border = true },
---    },
---    init = function()
---      vim.api.nvim_create_autocmd("FileType", {
---        pattern = {
---          "help",
---          "alpha",
---          "dashboard",
---          "neo-tree",
---          "Trouble",
---          "lazy",
---          "mason",
---          "notify",
---          "toggleterm",
---          "lazyterm",
---        },
---        callback = function()
---          vim.b.miniindentscope_disable = true
---        end,
---      })
---    end,
---  },
+  { "nvim-tree/nvim-tree.lua" },
+  { "echasnovski/mini.pairs" },
+  { "echasnovski/mini.starter" },
+  {
+    "echasnovski/mini.indentscope",
+    version = false, -- wait till new 0.7.0 release to put it back on semver
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      -- symbol = "▏",
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+    end,
+  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",

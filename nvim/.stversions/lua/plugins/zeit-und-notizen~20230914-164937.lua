@@ -5,7 +5,6 @@ return {
       require('due_nvim').setup {}
     end
   },
-  { "edluffy/hologram.nvim" },
   { "renerocksai/calendar-vim" },
   {
     "folke/todo-comments.nvim",
