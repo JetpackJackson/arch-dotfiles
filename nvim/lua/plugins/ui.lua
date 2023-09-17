@@ -1,4 +1,6 @@
 return {
+--  { "adoyle-h/lsp-toggle.nvim" },
+
   { "nvim-treesitter/nvim-treesitter" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "shortcuts/no-neck-pain.nvim" },

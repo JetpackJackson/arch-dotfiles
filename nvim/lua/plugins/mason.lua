@@ -12,7 +12,7 @@ return {
         "marksman",
         "markdown-toc",
         "lua-language-server",
-        "ltex-ls",
+        --"ltex-ls",
         "bash-language-server",
       },
     },

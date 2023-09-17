@@ -9,13 +9,17 @@ vim.api.nvim_set_keymap('n', '<leader>h', ':Startify<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>b', ':Telescope buffers<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fd', ':Telekasten find_daily_notes<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>la', ':Lazy<CR>', { noremap = true })
+--vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>t', ':TodoLocList<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>n', ':NoNeckPain<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fi', ':Telekasten search_notes<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>sv', ':Telekasten switch_vault<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>lt', ':NoNeckPain<CR>|<C-w><Left>|:terminal<CR>i', { noremap = true })
+--vim.api.nvim_set_keymap('n', '<leader>e', ':ToggleLSP<CR>', { noremap = true })
+
+vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -276,5 +280,51 @@ vim.cmd("set noequalalways")
 --vim.cmd("set cursorline")
 vim.cmd([[
     let s:header_cmd = 'fortune deutsch | cowsay -W 80'
-    let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))]])
+    let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))
+    let g:startify_bookmarks = [ {'c': '~/.config/nvim/init.lua'}, {'n': '~/docs/notes/notes-daily/'} ]
+
+    function s:foobar()
+    return [
+          \ { 'line': 'nvim', 'cmd': 'cd ~/.config/nvim/lua' },
+          \ ]
+    endfunction
+    
+    "let s:bookmarks1 = ['foo', '~/.config/nvim/init.lua']
+    let s:bookmarks2 = ['~/docs/notes/notes-daily/', '~/docs/notes/school/EEL3111C/lectures/']
+
+    let g:startify_lists = [
+      \ { 'type': 'dir',       'header': ['   MRU '.getcwd()] },
+      \ { 'type': 'files',     'header': ['   MRU' ]           },
+      "\ { 'type': function('s:foobar'), 'header': ['   cd nvim/lua'] },
+      "\ {'header': ['   Files'],   'type': {-> map(s:bookmarks1, '{"line": v:val, "path": v:val}')}},
+      \ {'header': ['   Folders'], 'type': {-> map(s:bookmarks2, '{"line": v:val, "path": v:val}')}},
+      "\ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      "\ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+    ]])
 --#center is centered, #pad is padded
+
+require("no-neck-pain").setup({
+    buffers = {
+        left = {
+            enabled = true,
+        },
+        right = {
+--            scratchPad = {
+--            -- set to `false` to
+--            -- disable auto-saving
+--            enabled = true,
+--            -- set to `nil` to default 
+--            -- to current working directory
+--            location = "nil",
+--            --location = "~/docs/notes/notes-daily/",
+--            },
+--            bo = {
+--                filetype = "md"
+--            },
+        },
+    },
+})
+
+--require('lsp-toggle').setup()
