@@ -21,7 +21,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec export XDG_CURRENT_DESKTOP=sway
 
-output * bg /home/jet/pics/wallpapers/fox.jpg fill
+output * bg /home/jet/pics/wallpapers/windmill.jpg fill
 
 #exec_always export XDG_CURRENT_DESKTOP=sway
 exec_always pkill -f mediaplayer.py
@@ -33,6 +33,7 @@ exec_always --no-startup-id udiskie &
 exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 
+output eDP-1 pos 0 0 res 1920x1080
 output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
 
@@ -119,14 +120,14 @@ bindsym XF86Launch7 exec mpc shuffle
 bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
 bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
+bindsym $mod+XF86AudioMute exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
+bindsym $mod+Shift+XF86AudioMute exec systemctl poweroff
 
 default_border none
 default_floating_border none
 #font pango:monospace 0
 
-#not patched, original
 font pango:Ärzte Sans 12
-#font pango:ArzteSansMRoman Nerd Font 12
 
 titlebar_padding 1
 titlebar_border_thickness 0
@@ -303,8 +304,8 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
-exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
-#exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
+#exec_always waybar -c ~/.config/waybar/solid -s ~/.config/waybar/solid.css
+exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
 include /etc/sway/config.d/*
 
 #bar {

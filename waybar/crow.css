@@ -1,0 +1,355 @@
+/* Keyframes */
+
+@keyframes blink-critical {
+	to {
+		color: @black;
+		background-color: @white;
+		/*background-color: @critical;*/
+	}
+}
+
+
+/*@define-color red	#cc241d;
+@define-color green	#98971a;
+@define-color yellow	#d79921;
+@define-color blue	#458588;
+@define-color purple	#b16286;
+@define-color aqua	#689d6a;
+@define-color gray	#a89984;
+@define-color brgray	#928374;
+@define-color brred	#fb4934;
+@define-color brgreen	#b8bb26;*/
+@define-color frost	rgba(0,16,19,0.6);
+@define-color frosts	rgba(0,16,19,0.6);
+/*@define-color frosty	rgba(100, 165, 255, 0.37);*/
+@define-color frosty	#831c1c;
+@define-color frosty2	#a80086;
+@define-color frosty1	rgba(100, 165, 255, 0.37);
+@define-color darkfrost	rgba(0,16,19,1);
+@define-color bryellow	#fabd2f;
+@define-color brblue	#83a598;
+@define-color brpurple	#d3869b;
+@define-color braqua	#8ec07c;
+/*@define-color white	#ebdbb2;*/
+@define-color bg2	#504945;
+
+@define-color black 	#282828;
+@define-color lbrown 	#968963;
+@define-color mbrown 	#4f4a36;
+@define-color dbrown 	#2f2419;
+@define-color lgray 	#939788;
+@define-color mgray 	#505046;
+@define-color dgray 	#343c34;
+@define-color pale 	#a8a38e;
+@define-color silver 	#9b9c94;
+@define-color white	#d1cdc2;
+@define-color palemid	#6d6853;
+
+@define-color warning 	@bryellow;
+@define-color critical	@red;
+@define-color mode	@darkfrost;
+@define-color unfocused	@frost;
+@define-color focused	@frosty;
+@define-color inactive	@white;
+/*@define-color purple	@brpurple;*/
+@define-color music	@frost;
+@define-color sound	@frost;
+@define-color network	@frost;
+@define-color memory	@frost;
+@define-color cpu	@frost;
+@define-color temp	@frost;
+@define-color layout	@frost;
+@define-color battery	@frost;
+@define-color date	@frost;
+@define-color time	@frost;
+@define-color clock	@frost;
+@define-color mpd	@frost;
+@define-color lock	@frost;
+@define-color clear	transparent;
+@define-color task	@frost;
+
+/* Reset all styles */
+* {
+	border: none;
+	border-radius: 0;
+	min-height: 0;
+	margin: 0;
+	padding: 0;
+	box-shadow: none;
+	text-shadow: none;
+	icon-shadow: none;
+}
+
+/* The whole bar */
+#waybar {
+	/*background: rgba(40, 40, 40, 0.8784313725);*/ /* #282828e0 */
+	/*background: transparent;*/
+	background: @frosts;
+	color: @white;
+	font-family: "Ärzte Sans", JetBrains Mono, Siji;
+	font-size: 10pt;
+	/*font-weight: bold;*/
+}
+
+/* Each module */
+#battery,
+#mpd,
+#clock,
+#cpu,
+#language,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#media,
+#tray,
+#backlight,
+#idle_inhibitor,
+#disk,
+#user,
+#mpris {
+	padding-left: 8pt;
+	padding-right: 8pt;
+}
+
+/* Each critical module */
+#mode,
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical.discharging {
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-name: blink-critical;
+	animation-duration: 1s;
+}
+
+/* Each warning */
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning.discharging {
+	color: @warning;
+}
+
+/* And now modules themselves in their respective order */
+
+/* Current sway mode (resize etc) */
+#mode {
+	color: @white;
+	background: @mode;
+}
+
+/* Workspaces stuff */
+#workspaces button {
+	/*font-weight: bold;*/
+	padding-left: 2pt;
+	padding-right: 2pt;
+	color: @white;
+	background: @unfocused;
+}
+
+/* Inactive (on unfocused output) */
+#workspaces button.visible {
+	color: @black;
+	background: @inactive;
+}
+
+/* Active (on focused output) */
+#workspaces button.focused {
+	color: @white;
+	background: @focused;
+}
+
+/* Contains an urgent window */
+#workspaces button.urgent {
+	color: @black;
+	background: @warning;
+}
+
+/* Style when cursor is on the button */
+#workspaces button:hover {
+	background: @black;
+	color: @white;
+}
+
+#scratchpad {
+	color: @white;
+	background: @unfocused;
+/*	padding-left: 2pt;
+	padding-right: 2pt;*/
+	padding-left: 5pt;
+	padding-right: 5pt;
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#taskbar {
+	background: @task;
+	color: @white;
+}
+
+#window {
+	margin-right: 35pt;
+	margin-left: 35pt;
+}
+
+#pulseaudio {
+	background: @sound;
+	color: @white;
+}
+
+#mpd {
+	background: @mpd;
+	color: @white;
+}
+
+#network {
+	background: @network;
+	color: @white;
+}
+
+#memory {
+	background: @memory;
+	color: @black;
+}
+
+#cpu {
+	background: @cpu;
+	color: @white;
+}
+
+#temperature {
+	background: @temp;
+	color: @black;
+}
+
+#language {
+	background: @layout;
+	color: @white;
+}
+
+#battery {
+	background: @battery;
+	color: @white;
+}
+
+#tray {
+	background: @date;
+}
+
+#keyboard-state label.capslock {
+	background: @clear;
+	color: @clear;
+}
+
+
+#keyboard-state label.capslock.locked {
+	background: @lock;
+	color: @white;
+}
+
+#keyboard-state label.numlock {
+	background: @clear;
+	color: @clear;
+}
+
+#keyboard-state label.numlock.locked {
+	background: @lock;
+	color: @white;
+}
+
+#clock.date {
+	background: @date;
+	color: @white;
+}
+
+#clock.time {
+	background: @clock;
+	color: @white;
+}
+
+#custom-media {
+	background: @music;
+	color: @white;
+}
+
+#custom-arrow0 {
+	font-size: 11pt;
+/*	color: @clock;*/
+	color: @clear;
+	background: @layout;
+}
+
+#custom-arrow1 {
+	font-size: 11pt;
+/*	color: @clock;*/
+	color: @clear;
+	background: @layout;
+}
+
+#custom-arrow2 {
+	font-size: 11pt;
+/*	color: @layout;*/
+	color: @clear;
+	background: @battery;
+}
+
+#custom-arrow3 {
+	font-size: 11pt;
+/*	color: @battery;*/
+	color: @clear;
+	background: @network;
+}
+
+#custom-arrow4 {
+	font-size: 11pt;
+/*	color: @temp;*/
+	color: @clear;
+	background: @cpu;
+}
+
+#custom-arrow5 {
+	font-size: 11pt;
+/*	color: @cpu;*/
+	color: @clear;
+	background: @memory;
+}
+
+#custom-arrow6 {
+	font-size: 11pt;
+/*	color: @memory;*/
+	color: @clear;
+	background: @network;
+}
+
+#custom-arrow7 {
+	font-size: 11pt;
+	/*color: @network;*/
+	color: @clear;
+	background: @sound;
+}
+
+#custom-arrow8 {
+	font-size: 11pt;
+/*	color: @sound;*/
+	color: @clear;
+	background: @music;
+}
+
+#custom-arrow9 {
+	font-size: 11pt;
+	color: @music;
+	background: transparent;
+}
+
+#custom-arrow10 {
+	font-size: 11pt;
+	color: @unfocused;
+	background: transparent;
+}

@@ -103,6 +103,7 @@ return {
       end,
     },
   },
+  { "folke/lazy.nvim" },
 
   --{
   --  'folke/which-key.nvim',

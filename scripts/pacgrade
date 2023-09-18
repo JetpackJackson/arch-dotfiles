@@ -8,6 +8,8 @@ echo "==============================================="
 echo "1. AUR Only"
 echo "2. Regular Repos Only"
 echo "3. Everything"
+echo "4. View and Remove Packages"
+echo "5. Cleanup Package Cache"
 read choice
 
 case "$choice" in
@@ -30,6 +32,10 @@ case "$choice" in
         paru;
         sudo pacman -Syu;
        fi
+    ;;
+    4) pacman -Qqe | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+    ;;
+    5) cleanup
     ;;
     *) echo "Try again."
     ;;
