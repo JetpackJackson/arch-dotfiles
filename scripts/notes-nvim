@@ -1,0 +1,3 @@
+#!/bin/fish
+cd ~/docs/notes/notes-daily/
+nvim

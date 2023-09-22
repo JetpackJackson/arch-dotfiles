@@ -2,7 +2,7 @@
 
 rsync -a --delete --exclude={"/plugged/*","/autoload/*"} .config/nvim/ $XDG_DOCUMENTS_DIR/projects/git/newdots/nvim/
 rsync -a --delete .config/X11/ $XDG_DOCUMENTS_DIR/projects/git/newdots/X11/
-#rsync -a --delete .config/coc/ $XDG_DOCUMENTS_DIR/projects/git/newdots/coc/
+rsync -a --delete /etc/xdg/reflector/ $XDG_DOCUMENTS_DIR/projects/git/newdots/etc/xdg/reflector
 rsync -a --delete .config/ctpv/ $XDG_DOCUMENTS_DIR/projects/git/newdots/ctpv/
 rsync -a --delete .config/czkawka/ $XDG_DOCUMENTS_DIR/projects/git/newdots/czkawka/
 rsync -a --delete .config/dunst/ $XDG_DOCUMENTS_DIR/projects/git/newdots/dunst/
@@ -22,6 +22,6 @@ rsync -a --delete .config/sway/ $XDG_DOCUMENTS_DIR/projects/git/newdots/sway/
 rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/projects/git/newdots/waybar/
 rsync -a --delete .config/whoozle.github.io/ $XDG_DOCUMENTS_DIR/projects/git/newdots/whoozle.github.io/
 rsync -a --delete .config/zathura/ $XDG_DOCUMENTS_DIR/projects/git/newdots/zathura/
-rsync -a --delete /etc/pacman.conf $XDG_DOCUMENTS_DIR/projects/git/newdots/pacman.conf
+rsync -a --delete /etc/pacman.conf $XDG_DOCUMENTS_DIR/projects/git/newdots/etc/pacman.conf
 rsync -a --delete docs/scripts/ $XDG_DOCUMENTS_DIR/projects/git/newdots/scripts/
 cd $XDG_DOCUMENTS_DIR/projects/git/newdots/

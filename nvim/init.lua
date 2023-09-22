@@ -224,7 +224,7 @@ vim.cmd([[
       \ { 'type': 'files',     'header': ['   MRU' ]           },
       "\ { 'type': function('s:foobar'), 'header': ['   cd nvim/lua'] },
       "\ {'header': ['   Files'],   'type': {-> map(s:bookmarks1, '{"line": v:val, "path": v:val}')}},
-      \ {'header': ['   Folders'], 'type': {-> map(s:bookmarks2, '{"line": v:val, "path": v:val}')}},
+      "\ {'header': ['   Folders'], 'type': {-> map(s:bookmarks2, '{"line": v:val, "path": v:val}')}},
       "\ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       "\ { 'type': 'commands',  'header': ['   Commands']       },
