@@ -16,6 +16,9 @@ vim.api.nvim_set_keymap('n', '<leader>fi', ':Telekasten search_notes<CR>', { nor
 vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>sv', ':Telekasten switch_vault<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>lt', ':NoNeckPain<CR>|<C-w><Left>|:terminal<CR>i', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':terminal<CR>i', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bq', ':bw!<CR>', { noremap = true })
 
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 

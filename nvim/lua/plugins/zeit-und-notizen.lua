@@ -40,4 +40,11 @@ return {
     'renerocksai/telekasten.nvim',
     dependencies = {'nvim-telescope/telescope.nvim'}
   },
+
+  {
+    'nvim-telescope/telescope-media-files.nvim',
+    dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
+  },
+
+--  { '0x00-ketsu/markdown-preview.nvim' },
 }

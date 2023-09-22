@@ -6,7 +6,7 @@ vim.api.nvim_set_keymap('n', '<F4>', ':Telekasten find_daily_notes<CR>', { norem
 vim.api.nvim_set_keymap('n', '<F5>', ':Lazy<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>h', ':Startify<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>b', ':Telescope buffers<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bb', ':Telescope buffers<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fd', ':Telekasten find_daily_notes<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>la', ':Lazy<CR>', { noremap = true })
@@ -17,6 +17,25 @@ vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>sv', ':Telekasten switch_vault<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>lt', ':NoNeckPain<CR>|<C-w><Left>|:terminal<CR>i', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>e', ':terminal<CR>i', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>c', ':Calendar<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bw', ':bw!<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fl', ':Telekasten follow_link<CR>', { noremap = true })
+
+vim.keymap.set("n", "<leader>zp", "<cmd>Telekasten panel<CR>", { noremap = true })
+-- Most used functions
+--vim.keymap.set("n", "<leader>zf", "<cmd>Telekasten find_notes<CR>")
+--vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<CR>")
+vim.keymap.set("n", "<leader>zd", "<cmd>Telekasten goto_today<CR>")
+vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<CR>")
+vim.keymap.set("n", "<leader>zn", "<cmd>Telekasten new_note<CR>")
+vim.keymap.set("n", "<leader>zc", "<cmd>Telekasten show_calendar<CR>")
+vim.keymap.set("n", "<leader>zb", "<cmd>Telekasten show_backlinks<CR>")
+vim.keymap.set("n", "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
+
+-- Call insert link automatically when we start typing a link
+vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+
 
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 

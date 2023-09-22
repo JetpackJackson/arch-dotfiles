@@ -7,11 +7,23 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup("plugins",{
-  "namrabtw/rusty.nvim",
-  version = false,
-  lazy = false,
-  priority = 1000, -- make sure to load this before all the other start plugins
+--  '0x00-ketsu/markdown-preview.nvim',
+--  ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
+--  config = function()
+--    require('markdown-preview').setup {
+--      -- your configuration comes here
+--      -- or leave it empty to use the default settings
+--      -- refer to the setup section below
+--    }
+--  end
 
+
+
+--  "namrabtw/rusty.nvim",
+--  version = false,
+--  lazy = false,
+--  priority = 1000, -- make sure to load this before all the other start plugins
+--
 
 --  {'Iron-E/nvim-highlite',
 --    config = function(_, opts)
@@ -70,14 +82,17 @@ vim.cmd.colorscheme("gruvbox")
 require('telekasten').setup({
   home = vim.fn.expand("~/docs/notes/notes-daily"), -- Put the name of your notes directory here
   vaults = {
-    dailynotes = {
-      home = vim.fn.expand("~/docs/notes/notes-daily/"),
-    },
+--    dailynotes = {
+--      home = vim.fn.expand("~/docs/notes/notes-daily/"),
+--    },
     circuits = {
       home = vim.fn.expand("~/docs/notes/school/EEL3111C/lectures/"),
     },
     programming = {
       home = vim.fn.expand("~/docs/notes/school/EEL3834/lectures/"),
+    },
+    intro = {
+      home = vim.fn.expand("~/docs/notes/school/EEL3000/lectures/"),
     },
   },
   auto_set_filetype = false,
@@ -195,11 +210,11 @@ vim.cmd([[
     let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))
     let g:startify_bookmarks = [ {'c': '~/.config/nvim/init.lua'}, {'n': '~/docs/notes/notes-daily/'} ]
 
-    function s:foobar()
-    return [
-          \ { 'line': 'nvim', 'cmd': 'cd ~/.config/nvim/lua' },
-          \ ]
-    endfunction
+    "function s:foobar()
+    "return [
+    "      \ { 'line': 'nvim', 'cmd': 'cd ~/.config/nvim/lua' },
+    "      \ ]
+    "endfunction
     
     "let s:bookmarks1 = ['foo', '~/.config/nvim/init.lua']
     let s:bookmarks2 = ['~/docs/notes/notes-daily/', '~/docs/notes/school/EEL3111C/lectures/']
@@ -218,6 +233,9 @@ vim.cmd([[
 --#center is centered, #pad is padded
 
 require("no-neck-pain").setup({
+    autocmds = {
+        enableOnVimEnter = true,
+    },
     buffers = {
         left = {
             enabled = true,
@@ -238,6 +256,19 @@ require("no-neck-pain").setup({
         },
     },
 })
+require('telescope').load_extension('media_files')
+-- requires chafa
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      -- find command (defaults to `fd`)
+      find_cmd = "rg"
+    }
+  },
+}
 
 --require('lsp-toggle').setup()
 --local navic = require("nvim-navic")

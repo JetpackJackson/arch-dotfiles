@@ -1,0 +1,4 @@
+#!/bin/bash
+MYNAME=$(cat /etc/hostname)
+export $MYNAME
+echo $MYNAME

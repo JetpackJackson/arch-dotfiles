@@ -1,6 +1,7 @@
 return {
   { "nvim-treesitter/nvim-treesitter" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
+  { "itchyny/calendar.vim" },
   { "shortcuts/no-neck-pain.nvim" },
 --  { "SmiteshP/nvim-navic" },
   {

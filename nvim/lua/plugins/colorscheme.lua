@@ -1,7 +1,7 @@
 return {
   { "ellisonleao/gruvbox.nvim" },
-  { "cocopon/iceberg.vim" },
-  { "AlessandroYorba/Sierra" },
+--  { "cocopon/iceberg.vim" },
+--  { "AlessandroYorba/Sierra" },
 --  { "sainnhe/everforest" },
 --  { "rebelot/kanagawa.nvim" },
   { "JetpackJackson/farin-colors" },
