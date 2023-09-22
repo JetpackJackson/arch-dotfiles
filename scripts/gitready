@@ -23,5 +23,6 @@ rsync -a --delete .config/waybar/ $XDG_DOCUMENTS_DIR/projects/git/newdots/waybar
 rsync -a --delete .config/whoozle.github.io/ $XDG_DOCUMENTS_DIR/projects/git/newdots/whoozle.github.io/
 rsync -a --delete .config/zathura/ $XDG_DOCUMENTS_DIR/projects/git/newdots/zathura/
 rsync -a --delete /etc/pacman.conf $XDG_DOCUMENTS_DIR/projects/git/newdots/etc/pacman.conf
+rsync -a --delete ~/pics/wallpapers/fox.jpg $XDG_DOCUMENTS_DIR/projects/git/newdots/pics/wallpapers/fox.jpg
 rsync -a --delete docs/scripts/ $XDG_DOCUMENTS_DIR/projects/git/newdots/scripts/
 cd $XDG_DOCUMENTS_DIR/projects/git/newdots/
