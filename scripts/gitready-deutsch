@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rsync -a --delete /usr/share/fortune/deutsch $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/deutsch
+rsync -a --delete /usr/share/fortune/deutsch.dat $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/deutsch.dat
+cd $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/
