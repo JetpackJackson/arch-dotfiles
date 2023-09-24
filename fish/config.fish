@@ -7,10 +7,12 @@ set -gx MOZ_ENABLE_WAYLAND 0
 #neofetch shows fish shell
 set -gx SHELL /usr/bin/fish
 #fzf preview
-set -gx $FZF_PREVIEW_LINES 48
+set -gx FZF_PREVIEW_LINES 48
 #48
-set -gx $FZF_PREVIEW_COLUMNS 88
+set -gx FZF_PREVIEW_COLUMNS 88
 #88
+# fix .cargo
+set -gx CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -gx ANKI_BASE $XDG_DATA_HOME/AnkiData
 set -gx WALLPAPER_DIR $XDG_PICTURES_DIR/wallpapers
 set -gx QT_QPA_PLATFORM "wayland;xcb"

@@ -6,76 +6,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-require("lazy").setup("plugins",{
---  '0x00-ketsu/markdown-preview.nvim',
---  ft = {'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki'},
---  config = function()
---    require('markdown-preview').setup {
---      -- your configuration comes here
---      -- or leave it empty to use the default settings
---      -- refer to the setup section below
---    }
---  end
+require("lazy").setup("plugins",{})
 
-
-
---  "namrabtw/rusty.nvim",
---  version = false,
---  lazy = false,
---  priority = 1000, -- make sure to load this before all the other start plugins
---
-
---  {'Iron-E/nvim-highlite',
---    config = function(_, opts)
---      -- OPTIONAL: setup the plugin. See "Configuration" for information
---      require('highlite').setup {generator = {plugins = {vim = false}, syntax = false}}
---
---      -- or one of the alternate colorschemes (see the "Built-in Colorschemes" section)
---      vim.api.nvim_command 'colorscheme highlite'
---    end,
---    lazy = false,
---    priority = math.huge,
---    version = '^4.0.0',
---  },
-
-
---require("lazy").setup({
---  spec = {
---    -- add LazyVim and import its plugins
-----    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
---    { import = "plugins" },
---  },
---  defaults = {
---    lazy = false,
---    version = false, -- always use the latest git commit
-----    -- version = "*", -- try installing the latest stable version for plugins that support semver
---  },
---  checker = { enabled = true }, -- automatically check for plugin updates
---  performance = {
---    rtp = {
---      -- disable some rtp plugins
---      disabled_plugins = {
---        "gzip",
---        -- "matchit",
---        -- "matchparen",
---        -- "netrwPlugin",
---        "tarPlugin",
---        "tohtml",
---        -- "tutor",
---        "zipPlugin",
---      },
---    },
---  },
-})
 
 require("config.keymaps")
---require("config.cmp")
-require("config.colorscheme")
+--require("config.langmap")
 require("config.options")
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("gruvbox")
 
-
+--vim.cmd([[
+-- let maplocalleader = "\\" 
+-- let g:tex_flavor='latex'
+-- let g:vimtex_view_method='zathura'
+-- let g:vimtex_quickfix_mode=0
+-- let g:vimtex_compiler_method = 'latexrun'
+--" set conceallevel=1
+-- let g:tex_conceal='abdmg']])
 
 
 
@@ -97,61 +44,112 @@ require('telekasten').setup({
   },
   auto_set_filetype = false,
   -- integrate with calendar-vim
-	plug_into_calendar = true,
-	calendar_opts = {
-		-- calendar week display mode: 1 .. 'WK01', 2 .. 'WK 1', 3 .. 'KW01', 4 .. 'KW 1', 5 .. '1'
-		weeknm = 4,
-		-- use monday as first day of week: 1 .. true, 0 .. false
-		calendar_monday = 0,
-		-- calendar mark: where to put mark for marked days: 'left', 'right', 'left-fit'
-		calendar_mark = "left-fit",
-	},
+        plug_into_calendar = true,
+        calendar_opts = {
+                -- calendar week display mode: 1 .. 'WK01', 2 .. 'WK 1', 3 .. 'KW01', 4 .. 'KW 1', 5 .. '1'
+                weeknm = 4,
+                -- use monday as first day of week: 1 .. true, 0 .. false
+                calendar_monday = 0,
+                -- calendar mark: where to put mark for marked days: 'left', 'right', 'left-fit'
+                calendar_mark = "left-fit",
+        },
 })
 
-require('hologram').setup{
-    auto_display = false -- WIP automatic markdown image display, may be prone to breaking
-}
+--require('hologram').setup{
+--    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+--}
 
-require('lualine').setup {
-  options = {
-    --icons_enabled = true,
-    theme = 'auto',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-    ignore_focus = {},
-    always_divide_middle = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
-  },
+function searchCount()
+  local search = vim.fn.searchcount({maxcount = 0}) -- maxcount = 0 makes the number not be capped at 99
+  local searchCurrent = search.current
+  local searchTotal = search.total
+  if searchCurrent > 0 then
+    return "/"..vim.fn.getreg("/").." ["..searchCurrent.."/"..searchTotal.."]"
+  else
+    return ""
+  end
+end
+
+function MixedIdents()
+  local space_pat = [[\v^ +]]
+  local tab_pat = [[\v^\t+]]
+  local space_indent = vim.fn.search(space_pat, 'nwc')
+  local tab_indent = vim.fn.search(tab_pat, 'nwc')
+  local mixed = (space_indent > 0 and tab_indent > 0)
+  local mixed_same_line
+  if not mixed then
+    mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
+    mixed = mixed_same_line > 0
+  end
+  if not mixed then return '' end
+  if mixed_same_line ~= nil and mixed_same_line > 0 then
+     return 'MI:'..mixed_same_line
+  end
+  local space_indent_cnt = vim.fn.searchcount({pattern=space_pat, max_count=1e3}).total
+  local tab_indent_cnt =  vim.fn.searchcount({pattern=tab_pat, max_count=1e3}).total
+  if space_indent_cnt > tab_indent_cnt then
+    return 'MI:'..tab_indent
+  else
+    return 'MI:'..space_indent
+  end
+end
+
+function TrailingSpace()
+  local space = vim.fn.search([[\s\+$]], 'nwc')
+  return space ~= 0 and "TS" or ""
+end
+
+require'lualine'.setup{
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}},
+    lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
+  }
 }
+
+--require('lualine').setup {
+--  options = {
+--    --icons_enabled = true,
+--    theme = 'auto',
+--    component_separators = { left = '', right = ''},
+--    section_separators = { left = '', right = ''},
+--    disabled_filetypes = {
+--      statusline = {},
+--      winbar = {},
+--    },
+--    ignore_focus = {},
+--    always_divide_middle = true,
+--    globalstatus = false,
+--    refresh = {
+--      statusline = 1000,
+--      tabline = 1000,
+--      winbar = 1000,
+--    }
+--  },
+--  sections = {
+--    lualine_a = {'mode'},
+--    lualine_b = {'branch', 'diff', 'diagnostics'},
+--    lualine_c = {'filename'},
+--    lualine_x = {'encoding', 'fileformat', 'filetype'},
+--    lualine_y = {'progress'},
+--    lualine_z = {'location'}
+--  },
+--  inactive_sections = {
+--    lualine_a = {},
+--    lualine_b = {},
+--    lualine_c = {'filename'},
+--    lualine_x = {'location'},
+--    lualine_y = {},
+--    lualine_z = {}
+--  },
+--  tabline = {},
+--  winbar = {},
+--  inactive_winbar = {},
+--  extensions = {}
+--}
 
 
 require'nvim-treesitter.configs'.setup {
@@ -195,7 +193,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
-local ts_utils = require 'nvim-treesitter.ts_utils'
+--local ts_utils = require 'nvim-treesitter.ts_utils'
 
 vim.o.expandtab = true
 vim.o.shiftwidth = 4
@@ -256,7 +254,7 @@ require("no-neck-pain").setup({
         },
     },
 })
-require('telescope').load_extension('media_files')
+--require('telescope').load_extension('media_files')
 -- requires chafa
 require'telescope'.setup {
   extensions = {
@@ -269,50 +267,6 @@ require'telescope'.setup {
     }
   },
 }
-
---require('lsp-toggle').setup()
---local navic = require("nvim-navic")
---
---require("lspconfig").clangd.setup {
---    on_attach = function(client, bufnr)
---        navic.attach(client, bufnr)
---    end
---}
-
---require'lspconfig'.pyright.setup{}
---require'lspconfig'.clangd.setup{}
---
---
---require'lspconfig'.lua_ls.setup {
---  on_init = function(client)
---    local path = client.workspace_folders[1].name
---    if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
---      client.config.settings = vim.tbl_deep_extend('force', client.config.settings, {
---        Lua = {
---          runtime = {
---            -- Tell the language server which version of Lua you're using
---            -- (most likely LuaJIT in the case of Neovim)
---            version = 'LuaJIT'
---          },
---          -- Make the server aware of Neovim runtime files
---          workspace = {
---            checkThirdParty = false,
---            library = {
---              vim.env.VIMRUNTIME
---              -- "${3rd}/luv/library"
---              -- "${3rd}/busted/library",
---            }
---            -- or pull in all of 'runtimepath'. this is a lot slower
---            -- library = vim.api.nvim_get_runtime_file("", true)
---          }
---        }
---      })
---
---      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
---    end
---    return true
---  end
---}
 
 --local function escape(str)
 --  -- You need to escape these characters to work correctly

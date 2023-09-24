@@ -10,7 +10,7 @@ return {
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
-            for _, server in ipairs({ "clangd", "bashls", "pyright", "marksman", "lua_ls" }) do
+            for _, server in ipairs({ "clangd", "bashls", "pyright", "marksman", "lua_ls", "ltex", "texlab", }) do
                 lsp[server].setup({
                     capabilities = capabilities,
                     on_attach = on_attach,
@@ -34,70 +34,6 @@ return {
         end,
     },
 
---    {
---        "nvimdev/lspsaga.nvim",
---        dependencies = { "neovim/nvim-lspconfig" },
---        event = "LspAttach",
---        config = function()
---            require("lspsaga").setup({
---                symbol_in_winbar = {
---                    separator = " > ",
---                },
---                lightbulb = {
---                    sign = false,
---                    virtual_text = false,
---                },
---                ui = {
---                    devicon = false,
---                    expand = "+",
---                    collapse = "-",
---                    code_action = "!",
---                    actionfix = "",
---                    imp_sign = "",
---                    kind = {
---                        Array = { "# ", "Type" },
---                        Boolean = { "# ", "Boolean" },
---                        Class = { "# ", "Include" },
---                        Constant = { "# ", "Constant" },
---                        Constructor = { "# ", "@constructor" },
---                        Enum = { "# ", "@number" },
---                        EnumMember = { "# ", "Number" },
---                        Event = { "# ", "Constant" },
---                        Field = { "# ", "@field" },
---                        File = { "# ", "Tag" },
---                        Folder = { "# ", "Title" },
---                        Function = { "# ", "Function" },
---                        Interface = { "# ", "Type" },
---                        Key = { "# ", "Constant" },
---                        Macro = { "# ", "Macro" },
---                        Method = { "# ", "Function" },
---                        Module = { "# ", "Exception" },
---                        Namespace = { "# ", "Include" },
---                        Null = { "# ", "Constant" },
---                        Number = { "# ", "Number" },
---                        Object = { "# ", "Type" },
---                        Operator = { "# ", "Operator" },
---                        Package = { "# ", "Label" },
---                        Parameter = { "# ", "@parameter" },
---                        Property = { "# ", "@property" },
---                        Snippet = { "# ", "@variable" },
---                        StaticMethod = { "# ", "Function" },
---                        String = { "# ", "String" },
---                        Struct = { "# ", "Type" },
---                        Text = { "# ", "String" },
---                        TypeAlias = { "# ", "Type" },
---                        TypeParameter = { "# ", "Type" },
---                        Unit = { "# ", "Number" },
---                        Value = { "# ", "@variable" },
---                        Variable = { "# ", "@variable" },
---                    },
---                },
---                beacon = {
---                    enable = false,
---                },
---            })
---        end,
---    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {

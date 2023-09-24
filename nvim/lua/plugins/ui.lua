@@ -1,9 +1,21 @@
 return {
+    { "JetpackJackson/farin-colors" },
+    { "ellisonleao/gruvbox.nvim" },
+--  { "AlessandroYorba/Sierra" },
+--  { "EdenEast/nightfox.nvim" },
+--  { "cocopon/iceberg.vim" },
+--  { "katawful/kreative" },
+--  { "namrabtw/rusty.nvim" },
+--  { "rebelot/kanagawa.nvim" },
+--  { "rktjmp/lush.nvim" },
+--  { "sainnhe/everforest" },
+--  { "sainnhe/everforest" },
+--  {'Iron-E/nvim-highlite'},
+
+
   { "nvim-treesitter/nvim-treesitter" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-  { "itchyny/calendar.vim" },
+--  { "nvim-treesitter/nvim-treesitter-textobjects" },
   { "shortcuts/no-neck-pain.nvim" },
---  { "SmiteshP/nvim-navic" },
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },

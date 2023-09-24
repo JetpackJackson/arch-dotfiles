@@ -1,5 +1,5 @@
 require("config.keymaps")
-require("config.cmp")
+require("config.langmap")
 require("config.options")
 require("config.colorscheme")
 --require("plugins.ui")
