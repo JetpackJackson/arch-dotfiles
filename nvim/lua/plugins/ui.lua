@@ -11,7 +11,17 @@ return {
 --  { "sainnhe/everforest" },
 --  { "sainnhe/everforest" },
 --  {'Iron-E/nvim-highlite'},
-
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {
+        disabled_keys = {
+            ["<Up>"] = {},
+            ["<Down>"] = {},
+            ["<Right>"] = {},
+            ["<Left>"] = {},
+        },}
+  },
 
   { "nvim-treesitter/nvim-treesitter" },
 --  { "nvim-treesitter/nvim-treesitter-textobjects" },

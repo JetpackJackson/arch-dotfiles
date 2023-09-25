@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/.local/share/wine/drive_c/users/jet/AppData/Local/Programs/ADI/LTspice/
+./LTspice.exe

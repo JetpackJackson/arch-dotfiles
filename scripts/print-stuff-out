@@ -1,0 +1,17 @@
+#!/bin/bash
+choice=0
+echo "1: start printing"
+echo "2: stop printing"
+read choice
+
+case "$choice" in
+    1) sudo systemctl start avahi-daemon
+       sudo systemctl restart cups.service
+    ;;
+    2) sudo systemctl stop avahi-daemon
+       sudo systemctl stop cups.service
+    ;;
+    *) echo "Try again."
+    ;;
+esac
+

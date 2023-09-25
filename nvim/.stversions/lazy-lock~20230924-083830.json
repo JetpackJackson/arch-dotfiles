@@ -9,7 +9,6 @@
   "farin-colors": { "branch": "main", "commit": "59843a6be9087aba2087326f25d6746bbea930c0" },
   "friendly-snippets": { "branch": "main", "commit": "ebf6d6e83494cdd88a54a429340256f4dbb6a052" },
   "gruvbox.nvim": { "branch": "main", "commit": "31cc564a0c52355e32375efc574f412d9f1a7ea2" },
-  "hardtime.nvim": { "branch": "main", "commit": "3d98663dbd2ed51a3be97e50dfe7df6c26d62d8d" },
   "indent-blankline.nvim": { "branch": "master", "commit": "9637670896b68805430e2f72cf5d16be5b97a22a" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
   "lualine.nvim": { "branch": "master", "commit": "45e27ca739c7be6c49e5496d14fcf45a303c3a63" },

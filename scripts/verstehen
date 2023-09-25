@@ -1,0 +1,22 @@
+#!/bin/bash
+choice=0
+
+echo "1. de-en"
+echo "2. en-de"
+echo "3: de-en (more info)"
+echo "4: en-de (more info)"
+
+read choice
+
+case "$choice" in
+    1) trans de:en "$1" | head --lines 3
+    ;;
+    2) trans en:de "$1" | head --lines 3
+    ;;
+    3) trans de:en "$1"
+    ;;
+    4) trans en:de "$1"
+    ;;
+    *) echo "Try again."
+    ;;
+esac
