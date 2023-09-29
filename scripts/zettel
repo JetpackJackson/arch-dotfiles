@@ -1,0 +1,86 @@
+#!/bin/bash
+today=$(date +"%Y-%m-%d")"-0600"
+morn=$(date +"%Y-%m-%d")"-0930"
+mid=$(date +"%Y-%m-%d")"-1040"
+aft=$(date +"%Y-%m-%d")"-1355"
+now=$(date +"%Y-%m-%d-%H%M")
+#touch $now.md
+#touch "$HOME/docs/notes/notes-daily/$now.md"
+#touch "$HOME/docs/notes/school/EEL3000/lectures/$now.md"
+#touch "$HOME/docs/notes/school/EEL3111C/lectures/$now.md"
+#touch "$HOME/docs/notes/school/EEL3834/lectures/$now.md"
+
+echo "new daily, new zettelkasten or everything? (1,2,3) "
+read choice
+case "$choice" in
+    1) touch "$HOME/docs/notes/notes-daily/$today.md"
+       nvim "$HOME/docs/notes/notes-daily/$today.md"
+    ;;
+    2) touch "$HOME/docs/notes/notes-daily/$now.md"
+       nvim "$HOME/docs/notes/notes-daily/$now.md"
+    ;;
+    3)
+        if [[ $(date +%u) == 1 ]]; then
+            touch "$HOME/docs/notes/notes-daily/$today.md"
+            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+            touch "$HOME/docs/notes/school/EEL3000/lectures/$mid.md"
+            exit
+
+        elif [[ $(date +%u) == 3 ]] || [[ $(date +%u) == 5 ]]; then
+            touch "$HOME/docs/notes/notes-daily/$today.md"
+            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+            exit
+
+        elif [[ $(date +%u) == 2 ]] || [[ $(date +%u) == 4 ]]; then
+            touch "$HOME/docs/notes/notes-daily/$today.md"
+            touch "$HOME/docs/notes/school/EEL3834/lectures/$aft.md"
+            exit
+
+        else
+            touch "$HOME/docs/notes/notes-daily/$today.md"
+            exit
+        fi
+    ;;
+    *) echo "Exiting."
+    ;;
+    esac
+#
+#if [[ $(date +%u) == 1 ]]; then
+#    touch "$HOME/docs/notes/notes-daily/$today.md"
+#    touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+#    touch "$HOME/docs/notes/school/EEL3000/lectures/$mid.md"
+#    exit
+#
+#elif [[ $(date +%u) == 3 ]] || [[ $(date +%u) == 5 ]]; then
+#    touch "$HOME/docs/notes/notes-daily/$today.md"
+#    touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+#    exit
+#
+#elif [[ $(date +%u) == 2 ]] || [[ $(date +%u) == 4 ]]; then
+#    touch "$HOME/docs/notes/notes-daily/$today.md"
+#    touch "$HOME/docs/notes/school/EEL3834/lectures/$aft.md"
+#    exit
+#
+#else
+#    touch "$HOME/docs/notes/notes-daily/$today.md"
+#    exit
+#fi
+#
+#
+##touch ./$path{1..4}file.txt
+##i=1
+##
+##
+##
+##for path in i; do
+##    cd .
+##    cd $path{$i}
+##    touch $now.md
+##done
+#
+##touch $now.md
+#
+##for ((i = 1; i < 5; i++)); do
+##    echo $i
+##    touch $path{$i}$(now).md
+##done

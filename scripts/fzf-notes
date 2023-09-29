@@ -1,0 +1,5 @@
+#!/bin/bash
+#find ~/docs/notes/notes-daily/ -type f |
+cd ~/docs/notes/notes-daily/
+#ls -r -1 | 
+fzf --ansi +s -x -d '\034' --print-query --preview-window=right:50%:wrap --reverse --header='' --margin='1,2' --color='16,gutter:-1' --preview='head -$LINES {}' --bind 'enter:become(nvim {})'

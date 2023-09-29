@@ -1,5 +1,6 @@
 #!/bin/bash
-
+sudo cp ~/docs/notes/backups/deutsch /usr/share/fortune/deutsch
+sudo cp ~/docs/notes/backups/deutsch.dat /usr/share/fortune/deutsch.dat
 rsync -a --delete ~/docs/notes/backups/deutsch $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/deutsch
 rsync -a --delete ~/docs/notes/backups/deutsch.dat $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/deutsch.dat
 cd $XDG_DOCUMENTS_DIR/projects/git/fortune-deutsch/

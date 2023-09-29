@@ -6,42 +6,27 @@ return {
 --  { "cocopon/iceberg.vim" },
 --  { "katawful/kreative" },
 --  { "namrabtw/rusty.nvim" },
---    { "rebelot/kanagawa.nvim" },
-    { "rktjmp/lush.nvim" },
+--  { "rebelot/kanagawa.nvim" },
+--  { "rktjmp/lush.nvim" },
 --  { "sainnhe/everforest" },
 --  { "sainnhe/everforest" },
 --  {'Iron-E/nvim-highlite'},
---  {
---    "m4xshen/hardtime.nvim",
---    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
---    opts = {
---        disabled_keys = {
---            ["<Up>"] = {},
---            ["<Down>"] = {},
---            ["<Right>"] = {},
---            ["<Left>"] = {},
---        },}
---  },
-
-  { "nvim-treesitter/nvim-treesitter" },
   {
-    "shortcuts/no-neck-pain.nvim",
-      config = function()
-        require("no-neck-pain").setup({
-            autocmds = {
-                enableOnVimEnter = true,
-            },
-            buffers = {
-                left = {
-                    enabled = true,
-                },
-                right = {
-                },
-            },
-        })
-      end
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {
+        disabled_keys = {
+            ["<Up>"] = {},
+            ["<Down>"] = {},
+            ["<Right>"] = {},
+            ["<Left>"] = {},
+        },}
   },
 
+  { "nvim-treesitter/nvim-treesitter" },
+--  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  { "shortcuts/no-neck-pain.nvim" },
+--  { "lukas-reineke/indent-blankline.nvim",  opts = {} },
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
@@ -100,24 +85,10 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    config = function()
-        require'lualine'.setup{
-          sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'branch', 'diff', 'diagnostics'},
-            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}},
-            lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
-          }
-
-        }
-    end
+    --opts = function(_, opts)
+      --table.insert(opts.sections.lualine_x, "😄")
+    --end,
   },
-
-
-
-
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -162,27 +133,27 @@ return {
   },
 
   { "MunifTanjim/nui.nvim", lazy = true },
---  {
---    "rcarriga/nvim-notify",
---    keys = {
---      {
---        "<leader>un",
---        function()
---          require("notify").dismiss({ silent = true, pending = true })
---        end,
---        desc = "Dismiss all Notifications",
---      },
---    },
---    opts = {
---      timeout = 3000,
---      max_height = function()
---        return math.floor(vim.o.lines * 0.75)
---      end,
---      max_width = function()
---        return math.floor(vim.o.columns * 0.75)
---      end,
---    },
---  },
+  {
+    "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>un",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Dismiss all Notifications",
+      },
+    },
+    opts = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+    },
+  },
 
   --{
   --  'folke/which-key.nvim',

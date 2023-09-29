@@ -6,32 +6,16 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup("plugins",{})
+
+
 require("config.keymaps")
+--require("config.langmap")
 require("config.options")
-
 vim.opt.termguicolors = true
-vim.cmd([[set conceallevel=2]])
 vim.cmd.colorscheme("gruvbox")
-vim.cmd([[set clipboard+=unnamedplus]])
--- Initialize configuration dictionary
-vim.cmd([[ let g:fzf_vim = {} ]])
-vim.cmd([[
-        let g:fzf_vim.preview_window = 'right,50%'
-        ]])
-
-vim.cmd([[ command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
-
-
---vim.cmd([[ command! -bang -nargs=? -complete=dir Circuits
---    \ call fzf#vim#files("$XDG_DOCUMENTS_DIR/notes/school/EEL3111C/lectures", fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
---
---
---vim.cmd([[ command! -bang -nargs=? -complete=dir Config
---    \ call fzf#vim#files("$XDG_CONFIG_HOME/nvim", fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)]])
 
 --vim.cmd([[
--- let maplocalleader = "," 
+-- let maplocalleader = "\\" 
 -- let g:tex_flavor='latex'
 -- let g:vimtex_view_method='zathura'
 -- let g:vimtex_quickfix_mode=0
@@ -39,18 +23,40 @@ vim.cmd([[ command! -bang -nargs=? -complete=dir Files
 --" set conceallevel=1
 -- let g:tex_conceal='abdmg']])
 
---require("no-neck-pain").setup({
---	autocmds = {
---	    enableOnVimEnter = true,
---	},
---	buffers = {
---	    left = {
---		enabled = true,
---	    },
---	    right = {
---	    },
---	},
---})
+
+
+require('telekasten').setup({
+  home = vim.fn.expand("~/docs/notes/notes-daily"), -- Put the name of your notes directory here
+  vaults = {
+--    dailynotes = {
+--      home = vim.fn.expand("~/docs/notes/notes-daily/"),
+--    },
+    circuits = {
+      home = vim.fn.expand("~/docs/notes/school/EEL3111C/lectures/"),
+    },
+    programming = {
+      home = vim.fn.expand("~/docs/notes/school/EEL3834/lectures/"),
+    },
+    intro = {
+      home = vim.fn.expand("~/docs/notes/school/EEL3000/lectures/"),
+    },
+  },
+  auto_set_filetype = false,
+  -- integrate with calendar-vim
+        plug_into_calendar = true,
+        calendar_opts = {
+                -- calendar week display mode: 1 .. 'WK01', 2 .. 'WK 1', 3 .. 'KW01', 4 .. 'KW 1', 5 .. '1'
+                weeknm = 4,
+                -- use monday as first day of week: 1 .. true, 0 .. false
+                calendar_monday = 0,
+                -- calendar mark: where to put mark for marked days: 'left', 'right', 'left-fit'
+                calendar_mark = "left-fit",
+        },
+})
+
+--require('hologram').setup{
+--    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+--}
 
 function searchCount()
   local search = vim.fn.searchcount({maxcount = 0}) -- maxcount = 0 makes the number not be capped at 99
@@ -92,16 +98,16 @@ function TrailingSpace()
   return space ~= 0 and "TS" or ""
 end
 
---require'lualine'.setup{
---  sections = {
---    lualine_a = {'mode'},
---    lualine_b = {'branch', 'diff', 'diagnostics'},
---    lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}},
---    lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
---    lualine_y = {'progress'},
---    lualine_z = {'location'}
---  }
---}
+require'lualine'.setup{
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}},
+    lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  }
+}
 
 --require('lualine').setup {
 --  options = {
@@ -144,27 +150,6 @@ end
 --  extensions = {}
 --}
 
---require("zk").setup({
---  -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
---  -- it's recommended to use "telescope" or "fzf"
---  picker = "fzf",
---
---  lsp = {
---    -- `config` is passed to `vim.lsp.start_client(config)`
---    config = {
---      cmd = { "zk", "lsp" },
---      name = "zk",
---      -- on_attach = ...
---      -- etc, see `:h vim.lsp.start_client()`
---    },
---
---    -- automatically attach buffers in a zk notebook that match the given filetypes
---    auto_attach = {
---      enabled = true,
---      filetypes = { "markdown" },
---    },
---  },
---})
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -219,9 +204,8 @@ vim.o.cursorline = true
 vim.cmd("set noequalalways")
 vim.cmd([[
     let s:header_cmd = 'fortune deutsch | cowsay -W 80'
-    "let s:header_cmd = 'cat ~/zettel-.txt | cowsay -n'
     let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))
-    let g:startify_bookmarks = [ {'a': '$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/agenda.md'}, {'c': '~/.config/nvim/init.lua'}, {'n': '~/docs/notes/notes-zettelkasten/'} ]
+    let g:startify_bookmarks = [ {'c': '~/.config/nvim/init.lua'}, {'n': '~/docs/notes/notes-daily/'} ]
 
     "function s:foobar()
     "return [
@@ -230,11 +214,11 @@ vim.cmd([[
     "endfunction
     
     "let s:bookmarks1 = ['foo', '~/.config/nvim/init.lua']
-    let s:bookmarks2 = ['~/docs/notes/notes-zettelkasten/', '~/docs/notes/school/EEL3111C/lectures/']
+    let s:bookmarks2 = ['~/docs/notes/notes-daily/', '~/docs/notes/school/EEL3111C/lectures/']
 
     let g:startify_lists = [
       \ { 'type': 'dir',       'header': ['   MRU '.getcwd()] },
-      "\ { 'type': 'files',     'header': ['   MRU' ]           },
+      \ { 'type': 'files',     'header': ['   MRU' ]           },
       "\ { 'type': function('s:foobar'), 'header': ['   cd nvim/lua'] },
       "\ {'header': ['   Files'],   'type': {-> map(s:bookmarks1, '{"line": v:val, "path": v:val}')}},
       "\ {'header': ['   Folders'], 'type': {-> map(s:bookmarks2, '{"line": v:val, "path": v:val}')}},
@@ -245,4 +229,58 @@ vim.cmd([[
     ]])
 --#center is centered, #pad is padded
 
+require("no-neck-pain").setup({
+    autocmds = {
+        enableOnVimEnter = true,
+    },
+    buffers = {
+        left = {
+            enabled = true,
+        },
+        right = {
+--            scratchPad = {
+--            -- set to `false` to
+--            -- disable auto-saving
+--            enabled = true,
+--            -- set to `nil` to default 
+--            -- to current working directory
+--            location = "nil",
+--            --location = "~/docs/notes/notes-daily/",
+--            },
+--            bo = {
+--                filetype = "md"
+--            },
+        },
+    },
+})
+--require('telescope').load_extension('media_files')
+-- requires chafa
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      -- find command (defaults to `fd`)
+      find_cmd = "rg"
+    }
+  },
+}
 
+--local function escape(str)
+--  -- You need to escape these characters to work correctly
+--  local escape_chars = [[;,."|\]]
+--  return vim.fn.escape(str, escape_chars)
+--end
+--
+---- Recommended to use lua template string
+--local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+--local de = [[8jduaxphlmwß8ctieobnrsgqfvüäöyz]]
+--local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+--local de_shift = [[8JDUAXPHLMWẞ„CTIEOBNRSGQFVÜÄÖYZ–•]]
+--
+--vim.opt.langmap = vim.fn.join({
+--    -- | `to` should be first     | `from` should be second
+--    escape(de_shift) .. ';' .. escape(en_shift),
+--    escape(de) .. ';' .. escape(en),
+--}, ',')

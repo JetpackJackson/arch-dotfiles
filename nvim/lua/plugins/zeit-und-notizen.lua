@@ -1,14 +1,17 @@
 return {
 --    { 'lervag/vimtex' },
---  {
---    'junegunn/fzf.vim',
---    dependencies = { 'junegunn/fzf' }
---
---  },
+  {
+    'junegunn/fzf.vim',
+    dependencies = { 'junegunn/fzf' }
+
+  },
   {  'jakewvincent/mkdnflow.nvim',
      config = function()
         require('mkdnflow').setup({
-            -- Config goes here; leave blank for defaults
+            links = {
+                style = 'markdown',
+--                name_is_source = 'true',
+            }
         })
      end
   },
@@ -20,7 +23,7 @@ return {
     end
   },
 --  { "edluffy/hologram.nvim" },
-  { "renerocksai/calendar-vim" },
+--  { "renerocksai/calendar-vim" },
 
 -- install without yarn or npm
   {
@@ -37,13 +40,39 @@ return {
 --  },
 
   {
-    'renerocksai/telekasten.nvim',
-    dependencies = {'nvim-telescope/telescope.nvim'}
+    "mickael-menu/zk-nvim",
+    config = function()
+      require("zk").setup({
+        -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
+        -- it's recommended to use "telescope" or "fzf"
+        picker = "fzf",
+        lsp = {
+          -- `config` is passed to `vim.lsp.start_client(config)`
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+            -- on_attach = ...
+            -- etc, see `:h vim.lsp.start_client()`
+          },
+          -- automatically attach buffers in a zk notebook that match the given filetypes
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
+        },
+      })
+    end
   },
-  {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {'nvim-lua/plenary.nvim'}
-  },
+
+
+--  {
+--    'renerocksai/telekasten.nvim',
+--    dependencies = {'nvim-telescope/telescope.nvim'}
+--  },
+--  {
+--    'nvim-telescope/telescope.nvim',
+--    dependencies = {'nvim-lua/plenary.nvim'}
+--  },
 }
 
 --  {
