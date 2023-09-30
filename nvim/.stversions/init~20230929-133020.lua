@@ -8,8 +8,6 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup("plugins",{})
 require("config.keymaps")
 require("config.options")
---vim.cmd([[filetype plugin on]])
-
 
 vim.opt.termguicolors = true
 vim.cmd([[set conceallevel=2]])
@@ -24,9 +22,6 @@ vim.cmd([[
 vim.cmd([[ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
 
---require('hologram').setup{
---    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
---}
 
 --vim.cmd([[ command! -bang -nargs=? -complete=dir Circuits
 --    \ call fzf#vim#files("$XDG_DOCUMENTS_DIR/notes/school/EEL3111C/lectures", fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
@@ -97,9 +92,6 @@ function TrailingSpace()
   return space ~= 0 and "TS" or ""
 end
 
-function GetWords()
-  return tostring(vim.fn.wordcount().words)
-end
 --require'lualine'.setup{
 --  sections = {
 --    lualine_a = {'mode'},
@@ -151,6 +143,28 @@ end
 --  inactive_winbar = {},
 --  extensions = {}
 --}
+
+--require("zk").setup({
+--  -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
+--  -- it's recommended to use "telescope" or "fzf"
+--  picker = "fzf",
+--
+--  lsp = {
+--    -- `config` is passed to `vim.lsp.start_client(config)`
+--    config = {
+--      cmd = { "zk", "lsp" },
+--      name = "zk",
+--      -- on_attach = ...
+--      -- etc, see `:h vim.lsp.start_client()`
+--    },
+--
+--    -- automatically attach buffers in a zk notebook that match the given filetypes
+--    auto_attach = {
+--      enabled = true,
+--      filetypes = { "markdown" },
+--    },
+--  },
+--})
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -230,3 +244,5 @@ vim.cmd([[
       \ ]
     ]])
 --#center is centered, #pad is padded
+
+

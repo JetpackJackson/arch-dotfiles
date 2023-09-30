@@ -12,8 +12,8 @@ set -gx FZF_PREVIEW_LINES 48
 set -gx FZF_PREVIEW_COLUMNS 88
 #88
 set -gx FZF_DEFAULT_COMMAND "ls -r -1"
-set -gx ZK_NOTEBOOK_DIR "$HOME/$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
-set -gx ZETTELKASTEN "$HOME/$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
+set -gx ZK_NOTEBOOK_DIR "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
+set -gx ZETTELKASTEN "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
 # fix .cargo
 set -gx CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -gx ANKI_BASE $XDG_DATA_HOME/AnkiData

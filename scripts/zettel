@@ -1,49 +1,59 @@
 #!/bin/bash
-today=$(date +"%Y-%m-%d")"-0600"
-morn=$(date +"%Y-%m-%d")"-0930"
-mid=$(date +"%Y-%m-%d")"-1040"
-aft=$(date +"%Y-%m-%d")"-1355"
-now=$(date +"%Y-%m-%d-%H%M")
+#now=$(date +"%Y-%m-%d-%H%M")
+now=$(date +"%Y%m%d-%H%M%S")
+cd $ZETTELKASTEN &&
+    #touch $now.md && 
+echo "---" | tee -a $now.md
+echo "tags:" | tee -a $now.md
+echo "  - $1" | tee -a $now.md
+echo "---" | tee -a $now.md
+echo "" | tee -a $now.md
+nvim $now.md
+
+##today=$(date +"%Y-%m-%d")"-0600"
+##morn=$(date +"%Y-%m-%d")"-0930"
+##mid=$(date +"%Y-%m-%d")"-1040"
+##aft=$(date +"%Y-%m-%d")"-1355"
 #touch $now.md
 #touch "$HOME/docs/notes/notes-daily/$now.md"
 #touch "$HOME/docs/notes/school/EEL3000/lectures/$now.md"
 #touch "$HOME/docs/notes/school/EEL3111C/lectures/$now.md"
 #touch "$HOME/docs/notes/school/EEL3834/lectures/$now.md"
 
-echo "new daily, new zettelkasten or everything? (1,2,3) "
-read choice
-case "$choice" in
-    1) touch "$HOME/docs/notes/notes-daily/$today.md"
-       nvim "$HOME/docs/notes/notes-daily/$today.md"
-    ;;
-    2) touch "$HOME/docs/notes/notes-daily/$now.md"
-       nvim "$HOME/docs/notes/notes-daily/$now.md"
-    ;;
-    3)
-        if [[ $(date +%u) == 1 ]]; then
-            touch "$HOME/docs/notes/notes-daily/$today.md"
-            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
-            touch "$HOME/docs/notes/school/EEL3000/lectures/$mid.md"
-            exit
-
-        elif [[ $(date +%u) == 3 ]] || [[ $(date +%u) == 5 ]]; then
-            touch "$HOME/docs/notes/notes-daily/$today.md"
-            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
-            exit
-
-        elif [[ $(date +%u) == 2 ]] || [[ $(date +%u) == 4 ]]; then
-            touch "$HOME/docs/notes/notes-daily/$today.md"
-            touch "$HOME/docs/notes/school/EEL3834/lectures/$aft.md"
-            exit
-
-        else
-            touch "$HOME/docs/notes/notes-daily/$today.md"
-            exit
-        fi
-    ;;
-    *) echo "Exiting."
-    ;;
-    esac
+##echo "new daily, new zettelkasten or everything? (1,2,3) "
+##read choice
+##case "$choice" in
+##    1) touch "$HOME/docs/notes/notes-daily/$today.md"
+##       nvim "$HOME/docs/notes/notes-daily/$today.md"
+##    ;;
+##    2) touch "$HOME/docs/notes/notes-daily/$now.md"
+##       nvim "$HOME/docs/notes/notes-daily/$now.md"
+##    ;;
+##    3)
+##        if [[ $(date +%u) == 1 ]]; then
+##            touch "$HOME/docs/notes/notes-daily/$today.md"
+##            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+##            touch "$HOME/docs/notes/school/EEL3000/lectures/$mid.md"
+##            exit
+##
+##        elif [[ $(date +%u) == 3 ]] || [[ $(date +%u) == 5 ]]; then
+##            touch "$HOME/docs/notes/notes-daily/$today.md"
+##            touch "$HOME/docs/notes/school/EEL3111C/lectures/$morn.md"
+##            exit
+##
+##        elif [[ $(date +%u) == 2 ]] || [[ $(date +%u) == 4 ]]; then
+##            touch "$HOME/docs/notes/notes-daily/$today.md"
+##            touch "$HOME/docs/notes/school/EEL3834/lectures/$aft.md"
+##            exit
+##
+##        else
+##            touch "$HOME/docs/notes/notes-daily/$today.md"
+##            exit
+##        fi
+##    ;;
+##    *) echo "Exiting."
+##    ;;
+##    esac
 #
 #if [[ $(date +%u) == 1 ]]; then
 #    touch "$HOME/docs/notes/notes-daily/$today.md"

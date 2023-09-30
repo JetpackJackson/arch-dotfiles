@@ -105,7 +105,7 @@ return {
           sections = {
             lualine_a = {'mode'},
             lualine_b = {'branch', 'diff', 'diagnostics'},
-            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}},
+            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}, {GetWords}},
             lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
             lualine_y = {'progress'},
             lualine_z = {'location'}

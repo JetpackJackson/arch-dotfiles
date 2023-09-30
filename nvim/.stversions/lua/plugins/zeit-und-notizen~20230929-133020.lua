@@ -5,42 +5,15 @@ return {
     dependencies = { 'junegunn/fzf' }
 
   },
-{  'jakewvincent/mkdnflow.nvim',
-    config = function()
+  {  'jakewvincent/mkdnflow.nvim',
+     config = function()
         require('mkdnflow').setup({
-          links = {
---               style = 'wiki',
---               name_is_source = 'true',
-
-          transform_explicit = function(text)
-              text = text:gsub(" ", "-")
-              text = text:lower()
-              text = os.date('%Y%m%d-%H%M%S')
-              return(text)
-              end
-          },
-          new_file_template = {
-              use_template = true,
-              template = [[
-                  # {{ title }}
-                  Date: {{ date }}
-                  Filename: {{ filename }}
-                  ]],
-              placeholders = {
-                  before = {
-                      date = function()
-                          return os.date("%A, %B %d, %Y") -- Wednesday, March 1, 2023
-                      end
-                  },
-                  after = {
-                      filename = function()
-                          return vim.api.nvim_buf_get_name(0)
-                      end
-                  }
-              }
-          },
+            links = {
+                style = 'markdown',
+--                name_is_source = 'true',
+            }
         })
-    end
+     end
   },
 
   {
@@ -50,11 +23,21 @@ return {
     end
   },
 --  { "edluffy/hologram.nvim" },
+--  { "renerocksai/calendar-vim" },
 
+-- install without yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   },
+
+
+--  {
+--    "iamcco/markdown-preview.nvim",
+--    ft = "markdown",
+--    build = "cd app && npm install",
+--    init = function() vim.g.mkdp_filetypes = { "markdown" } end,
+--  },
 
   {
     "mickael-menu/zk-nvim",
@@ -80,4 +63,19 @@ return {
       })
     end
   },
+
+
+--  {
+--    'renerocksai/telekasten.nvim',
+--    dependencies = {'nvim-telescope/telescope.nvim'}
+--  },
+--  {
+--    'nvim-telescope/telescope.nvim',
+--    dependencies = {'nvim-lua/plenary.nvim'}
+--  },
 }
+
+--  {
+--    'nvim-telescope/telescope-media-files.nvim',
+--    dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
+--  },
