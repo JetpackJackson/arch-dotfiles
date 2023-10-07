@@ -1,17 +1,27 @@
 return {
+--  { "frabjous/knap" },
+--    { "yinflying/matlab-screen" },
+--  { 'daeyun/vim-matlab' },
 --    { 'lervag/vimtex' },
+--  {
   {
     'junegunn/fzf.vim',
     dependencies = { 'junegunn/fzf' }
-
   },
-{  'jakewvincent/mkdnflow.nvim',
+
+  {
+    'jakewvincent/mkdnflow.nvim',
+    ft = "markdown",
+    opts = "enabled = true",
+
     config = function()
         require('mkdnflow').setup({
+          lazy = true,
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
           links = {
---               style = 'wiki',
---               name_is_source = 'true',
-
           transform_explicit = function(text)
               text = text:gsub(" ", "-")
               text = text:lower()
@@ -22,14 +32,20 @@ return {
           new_file_template = {
               use_template = true,
               template = [[
-                  # {{ title }}
-                  Date: {{ date }}
-                  Filename: {{ filename }}
-                  ]],
+---
+tags:
+- 
+---
+
+# {{ title }}
+Date: {{ date }}
+Filename: {{ filename }}
+]],
               placeholders = {
                   before = {
                       date = function()
-                          return os.date("%A, %B %d, %Y") -- Wednesday, March 1, 2023
+                          return os.date("%A, %B %d, %Y")-- Wednesday, March 1, 2023
+--                          return os.date('%Y%m%d-%H%M%S')
                       end
                   },
                   after = {
@@ -45,19 +61,14 @@ return {
 
   {
     "NFrid/due.nvim",
-    config = function()
-      require('due_nvim').setup {}
-    end
-  },
---  { "edluffy/hologram.nvim" },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    ft = "markdown",
+    opts = "enabled = true",
   },
 
   {
     "mickael-menu/zk-nvim",
+    ft = "markdown",
+    opts = "enabled = true",
     config = function()
       require("zk").setup({
         -- can be "telescope", "fzf" or "select" (`vim.ui.select`)

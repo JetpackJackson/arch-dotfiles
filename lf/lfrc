@@ -8,10 +8,11 @@ set cleaner ctpvclear
 &ctpvquit $id
 map gi cd /run/media
 #map gg :push cd $HOME
-map gg cd /home/jet/docs/
-map gc cd /home/jet/.config/
+map gg cd 
+#/home/jet/
+map gc cd /home/jet/.local/share/
 map gl cd ~/.config/nvim/lua/plugins/
-map gd cd ~/docs
+map gd cd ~/dl
 map gn cd ~/docs/notes/notes-zettelkasten
 map gs cd ~/docs/notes/school
 #map gt cd ~/Trash

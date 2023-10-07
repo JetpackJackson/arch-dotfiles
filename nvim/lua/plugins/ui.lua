@@ -1,16 +1,20 @@
 return {
-    { "JetpackJackson/farin-colors" },
-    { "ellisonleao/gruvbox.nvim" },
---  { "AlessandroYorba/Sierra" },
+    {
+      "JetpackJackson/farin-colors",
+      dependencies = { "rktjmp/lush.nvim", "rktjmp/shipwright.nvim" },
+      lazy = true,
+      event = { "BufRead farin*.lua", "BufRead testtrack*.lua" },
+      --keys = { "<C-a>", { "<C-x>", mode = "n" } },
+--      ft = { "lua" },
+    },
+
+    { "sainnhe/sonokai" },
+    --{ "ellisonleao/gruvbox.nvim" },
+    --{ "sainnhe/gruvbox.nvim" },
 --  { "EdenEast/nightfox.nvim" },
 --  { "cocopon/iceberg.vim" },
---  { "katawful/kreative" },
 --  { "namrabtw/rusty.nvim" },
 --    { "rebelot/kanagawa.nvim" },
-    { "rktjmp/lush.nvim" },
---  { "sainnhe/everforest" },
---  { "sainnhe/everforest" },
---  {'Iron-E/nvim-highlite'},
 --  {
 --    "m4xshen/hardtime.nvim",
 --    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
@@ -23,83 +27,61 @@ return {
 --        },}
 --  },
 
-  { "nvim-treesitter/nvim-treesitter" },
-  {
-    "shortcuts/no-neck-pain.nvim",
-      config = function()
-        require("no-neck-pain").setup({
-            autocmds = {
-                enableOnVimEnter = true,
-            },
-            buffers = {
-                left = {
-                    enabled = true,
-                },
-                right = {
-                },
-            },
-        })
-      end
-  },
+   {
+     "nvim-treesitter/nvim-treesitter",
+   },
+
+   {
+     "shortcuts/no-neck-pain.nvim",
+       config = function()
+         require("no-neck-pain").setup({
+             autocmds = {
+                 enableOnVimEnter = true,
+             },
+             buffers = {
+                 left = {
+                     enabled = true,
+                 },
+                 right = {
+                 },
+             },
+         })
+       end
+   },
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+--    event = { "BufReadPost" },
     event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
     opts = {
-      -- char = "▏",
-      char = "│",
-      filetype_exclude = {
-        "help",
-        "alpha",
-        "dashboard",
-        "neo-tree",
-        "Trouble",
-        "lazy",
-        "mason",
-        "notify",
-        "toggleterm",
-        "lazyterm",
-        "startify",
-      },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-    },
-  },
-
-
-
---  {
---    "lukas-reineke/indent-blankline.nvim",
---    event = { "BufReadPost", "BufNewFile" },
---    opts = {
---      -- char = "▏",
---      char = "│",
---      filetype_exclude = {
---        "help",
---        "alpha",
---        "dashboard",
---        "neo-tree",
---        "Trouble",
---        "lazy",
---        "mason",
---        "notify",
---        "toggleterm",
---        "lazyterm",
---        "startify",
---      },
---      show_trailing_blankline_indent = false,
---      show_current_context = false,
---    },
---  },
-
-  {
-    'mhinz/vim-startify',
+--require('ibl').setup({
+--        exclude = {
+--          filetypes = {
+--            "help",
+--            "alpha",
+--            "dashboard",
+--            "neo-tree",
+--            "Trouble",
+--            "lazy",
+--            "mason",
+--            "notify",
+--            "toggleterm",
+--            "lazyterm",
+--            "startify",
+--          },
+--        },
+--        }),
+    }
   },
 
   {
     "nvim-lualine/lualine.nvim",
+    --event = "BufReadPost",
     event = "VeryLazy",
+    --lazy = true,
+    --keys = { "<C-l>", { "<C-x>", mode = "n" } },
+
     config = function()
         require'lualine'.setup{
           sections = {
@@ -109,17 +91,19 @@ return {
             lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
             lualine_y = {'progress'},
             lualine_z = {'location'}
+          },
+          options = {
+              theme = 'sonokai'
           }
 
         }
     end
   },
 
-
-
-
   {
     "folke/noice.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+--    enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -161,63 +145,12 @@ return {
     },
   },
 
-  { "MunifTanjim/nui.nvim", lazy = true },
---  {
---    "rcarriga/nvim-notify",
---    keys = {
---      {
---        "<leader>un",
---        function()
---          require("notify").dismiss({ silent = true, pending = true })
---        end,
---        desc = "Dismiss all Notifications",
---      },
---    },
---    opts = {
---      timeout = 3000,
---      max_height = function()
---        return math.floor(vim.o.lines * 0.75)
---      end,
---      max_width = function()
---        return math.floor(vim.o.columns * 0.75)
---      end,
---    },
---  },
-
-  --{
-  --  'folke/which-key.nvim',
-  --  enabled = true,
-  --  dependencies = { 'Wansmer/langmapper.nvim' },
-  --  config = function()
-  --    vim.o.timeout = true
-  --    vim.o.timeoutlen = 300
-
-  --    local lmu = require('langmapper.utils')
-  --    local view = require('which-key.view')
-  --    local execute = view.execute
-
-  --  -- wrap `execute()` and translate sequence back
-  --    view.execute = function(prefix_i, mode, buf)
-  --    -- Translate back to English characters
-  --      prefix_i = lmu.translate_keycode(prefix_i, 'default', 'ru')
-  --      execute(prefix_i, mode, buf)
-  --    end
-
-  --  -- If you want to see translated operators, text objects and motions in
-  --  -- which-key prompt
-  --  -- local presets = require('which-key.plugins.presets')
-  --  -- presets.operators = lmu.trans_dict(presets.operators)
-  --  -- presets.objects = lmu.trans_dict(presets.objects)
-  --  -- presets.motions = lmu.trans_dict(presets.motions)
-  --  -- etc
-
-  --    require('which-key').setup()
-  --  end,
-  --},
-
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    --lazy = true,
+    --keys = { "<C-k>", { "<C-x>", mode = "n" } },
+
     opts = {
       plugins = { spelling = true },
       defaults = {
@@ -245,7 +178,4 @@ return {
       wk.register(opts.defaults)
     end,
   }
-
-
 }
-

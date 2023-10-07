@@ -1,5 +1,8 @@
--- LSP and completion plugins
 return {
+--    {
+--        "jalvesaq/cmp-zotcite",
+--        dependencies = { 'jalvesaq/zotcite' },
+--    },
     {
         "neovim/nvim-lspconfig",
         dependencies = { "hrsh7th/nvim-cmp" },
@@ -29,7 +32,10 @@ return {
                     },
                 },
             })
-
+            lsp.matlab_ls.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
             lsp.ltex.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -48,14 +54,14 @@ return {
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-buffer",--buffer text
+            "hrsh7th/cmp-cmdline",--cmdline
             "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-path",--dir paths
             "l3mon4d3/luasnip",
-            "rafamadriz/friendly-snippets",
+--            "rafamadriz/friendly-snippets",
             "saadparwaiz1/cmp_luasnip",
-            "windwp/nvim-autopairs",
+            --"windwp/nvim-autopairs",--autopairs brackets
         },
         config = function()
             local has_words_before = function()
@@ -149,7 +155,7 @@ return {
                 }),
             })
 
-            cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+            --cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
             require("luasnip.loaders.from_vscode").lazy_load()
         end,

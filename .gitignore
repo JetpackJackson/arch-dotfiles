@@ -1,1 +1,4 @@
+.stversions/
+.stfolder/
 plugged/
+autoload/

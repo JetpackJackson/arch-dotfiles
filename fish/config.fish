@@ -14,6 +14,7 @@ set -gx FZF_PREVIEW_COLUMNS 88
 set -gx FZF_DEFAULT_COMMAND "ls -r -1"
 set -gx ZK_NOTEBOOK_DIR "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
 set -gx ZETTELKASTEN "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/"
+set -gx PROJECTS "$XDG_DOCUMENTS_DIR/notes/projects/"
 # fix .cargo
 set -gx CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -gx ANKI_BASE $XDG_DATA_HOME/AnkiData
@@ -21,8 +22,10 @@ set -gx WALLPAPER_DIR $XDG_PICTURES_DIR/wallpapers
 set -gx QT_QPA_PLATFORM "wayland;xcb"
 set -gx TERMINAL_COMMAND kitty
 set -gx EDITOR nvim
-set -gx LANG en_US.utf8
-set -gx LC_ALL en_US.utf8
+set -gx LANG de_DE.utf8
+#set -gx LANG de_DE.utf8
+set -gx LC_MESSAGES en_US.utf8
+set -gx LC_ALL de_DE.utf8
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_CONFIG_HOME $HOME/.config
 #PATH "${HOME}/.bin:${PATH}"
@@ -44,4 +47,4 @@ set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
 set -gx XINITRC $XDG_CONFIG_HOME/X11/xinitrc
 set -gx XAUTHORITY $XDG_RUNTIME_DIR/Xauthority
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
-set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/matlab/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl

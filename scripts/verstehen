@@ -1,22 +1,29 @@
 #!/bin/bash
-choice=0
 
-echo "1. de-en"
-echo "2. en-de"
-echo "3: de-en (more info)"
-echo "4: en-de (more info)"
+langvar=$(trans -identify "$1" | head -n 1)
+echo $langvar
 
-read choice
+if [ "$langvar" == "Deutsch" ]; then
+    trans de:en "$1"
+elif [ "$langvar" == "English" ]; then
+    trans en:de "$1"
+else
+    printf "Exiting"
+fi
 
-case "$choice" in
-    1) trans de:en "$1" | head --lines 3
-    ;;
-    2) trans en:de "$1" | head --lines 3
-    ;;
-    3) trans de:en "$1"
-    ;;
-    4) trans en:de "$1"
-    ;;
-    *) echo "Try again."
-    ;;
-esac
+#case "$choice" in
+#    1) if [[ ${#1} -gt 10 ]] ; then
+#        trans de:en "$1" | head --lines 4
+#       else
+#        trans de:en "$1"
+#       fi
+#    ;;
+#    2) if [[ ${#1} -gt 10 ]] ; then
+#        trans en:de "$1" | head --lines 4
+#       else
+#        trans en:de "$1"
+#       fi
+#    ;;
+#    *) echo "Try again."
+#    ;;
+#esac
