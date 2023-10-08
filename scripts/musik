@@ -4,7 +4,7 @@ echo "1: mount"
 echo "2: unmount"
 read choice
 case "$choice" in
-    1) sudo mount --bind /run/media/jet/Crucial\ X6/MUSIC/ /home/jet/music/external
+    1) sudo mount --bind /run/media/jet/Crucial_X6/MUSIC/ /home/jet/music/external
        notify-send "music mounted"
     ;;
     2) sudo umount /home/jet/music/external

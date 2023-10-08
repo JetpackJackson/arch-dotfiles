@@ -1,0 +1,3 @@
+#!/bin/bash
+mdpdf $1
+zathura "${1%.*}.pdf"

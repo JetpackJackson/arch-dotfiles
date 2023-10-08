@@ -1,5 +1,34 @@
 vim.g.mapleader = ' '
--- set shorter name for keymap function
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Comment /^- \[X\].*$/ ]],
+  --command = [[ syntax match Comment /^[[:space:]][-*] \[X\].*$/ ]],
+})
+
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Comment /^    - \[X\].*$/ ]],
+})
+
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Comment /^        - \[X\].*$/ ]],
+})
+
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Directory /^- \[-\].*$/ ]],
+})
+
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Directory /^    - \[-\].*$/ ]],
+})
+
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "agenda.md" },
+  command = [[ syntax match Directory /^        - \[-\].*$/ ]],
+})
 --local kmap = vim.keymap.set
 --
 ---- F5 processes the document once, and refreshes the view
@@ -26,8 +55,11 @@ local opts = { noremap = true, silent = false }
 -- Open the link under the caret.
 vim.api.nvim_set_keymap("n", "<CR>", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
 --vim.api.nvim_set_keymap("n", "<BS>", "<Cmd>bprevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader><Tab>", "<Cmd>MkdnTab<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader><BS>", "<Cmd>MkdnSTab<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>t", "<Cmd>MkdnToggleToDo<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>c", "<Cmd>nohlsearch<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>cs", "<Cmd>nohlsearch<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ct", "<Cmd>MkdnTableFormat<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<leader>s", ":'<,'>sort /[^<]*</<CR>", { noremap = true, silent = true })
 -- Create a new note after asking for its title.
 -- This overrides the global `<leader>zn` mapping to create the note in the same directory as the current buffer.

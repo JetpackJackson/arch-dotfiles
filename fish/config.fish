@@ -47,4 +47,4 @@ set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
 set -gx XINITRC $XDG_CONFIG_HOME/X11/xinitrc
 set -gx XAUTHORITY $XDG_RUNTIME_DIR/Xauthority
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
-set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/matlab/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/matlab/bin:/home/jet/.local/bin/cli-wordle:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl

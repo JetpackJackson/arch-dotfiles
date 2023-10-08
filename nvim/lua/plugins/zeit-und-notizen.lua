@@ -61,7 +61,9 @@ Filename: {{ filename }}
 
   {
     "NFrid/due.nvim",
-    ft = "markdown",
+--    ft = "markdown",
+    lazy = true,
+    event = { "BufRead agenda.md" },
     opts = "enabled = true",
   },
 

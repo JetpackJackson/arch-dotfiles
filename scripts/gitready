@@ -8,7 +8,7 @@ rsync -a --delete .config/czkawka/ $PROJECTS/git/newdots/czkawka/
 rsync -a --delete .config/dunst/ $PROJECTS/git/newdots/dunst/
 rsync -a --delete .config/fish/ $PROJECTS/git/newdots/fish/
 rsync -a --delete .config/kitty/ $PROJECTS/git/newdots/kitty/
-rsync -a --delete .config/nvim-old/ $PROJECTS/git/newdots/nvim-old/
+rsync -a --delete --exclude={"/plugged/*"} .config/nvim-old/ $PROJECTS/git/newdots/nvim-old/
 rsync -a --delete .config/lf/ $PROJECTS/git/newdots/lf/
 rsync -a --delete .config/mpd/ $PROJECTS/git/newdots/mpd/
 rsync -a --delete .config/mpv/ $PROJECTS/git/newdots/mpv/
