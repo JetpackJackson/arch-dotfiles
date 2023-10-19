@@ -1,8 +1,45 @@
 return {
+    {
+      "iurimateus/luasnip-latex-snippets.nvim",
+      dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
+--      ft = "tex",
+--      opts = "enabled = true",
+      config = function()
+        require('luasnip-latex-snippets').setup {
+--          lazy = true,
+--          auto_attach = {
+--            enabled = true,
+--            filetypes = { "latex", "tex" },
+--          },
+--          use_treesitter = false,
+--          allow_on_markdown = true,
+        }
+        require("luasnip").config.setup {
+            enable_autosnippets = true,
+            use_treesitter = false,
+            allow_on_markdown = false,
+        }
+      end,
+    },
+
 --    {
---        "jalvesaq/cmp-zotcite",
---        dependencies = { 'jalvesaq/zotcite' },
+--        'anakojm/pipe2eval',
+--        lazy = true,
+--        keys = { "<C-a>", { "<C-x>", mode = "n" } },
 --    },
+
+    {
+        "Pocco81/auto-save.nvim",
+        config = function()
+             require("auto-save").setup {
+                    -- your config goes here
+                    -- or just leave it empty :)
+             }
+        end,
+    },
+
+    { 'lervag/vimtex' },
+
     {
         "neovim/nvim-lspconfig",
         dependencies = { "hrsh7th/nvim-cmp" },
@@ -13,7 +50,7 @@ return {
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
-            for _, server in ipairs({ "clangd", "bashls", "pyright", "marksman", "lua_ls", "texlab", }) do
+            for _, server in ipairs({ "clangd", "bashls", "pyright", "marksman", "lua_ls" }) do
                 lsp[server].setup({
                     capabilities = capabilities,
                     on_attach = on_attach,
@@ -33,6 +70,10 @@ return {
                 },
             })
             lsp.matlab_ls.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+            lsp.texlab.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
             })

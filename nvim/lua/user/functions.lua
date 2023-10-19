@@ -1,3 +1,55 @@
+function _G.AdjustListchars()
+  local lead = "┊"
+  for _ = 1, vim.bo.shiftwidth - 1 do
+    lead = lead .. " "
+  end
+  vim.opt_local.listchars:append({ leadmultispace = lead })
+end
+
+function SearchCount()
+  local search = vim.fn.searchcount({maxcount = 0}) -- maxcount = 0 makes the number not be capped at 99
+  local searchCurrent = search.current
+  local searchTotal = search.total
+  if searchCurrent > 0 then
+    return "/"..vim.fn.getreg("/").." ["..searchCurrent.."/"..searchTotal.."]"
+  else
+    return ""
+  end
+end
+
+function MixedIndents()
+  local space_pat = [[\v^ +]]
+  local tab_pat = [[\v^\t+]]
+  local space_indent = vim.fn.search(space_pat, 'nwc')
+  local tab_indent = vim.fn.search(tab_pat, 'nwc')
+  local mixed = (space_indent > 0 and tab_indent > 0)
+  local mixed_same_line
+  if not mixed then
+    mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
+    mixed = mixed_same_line > 0
+  end
+  if not mixed then return '' end
+  if mixed_same_line ~= nil and mixed_same_line > 0 then
+     return 'MI:'..mixed_same_line
+  end
+  local space_indent_cnt = vim.fn.searchcount({pattern=space_pat, max_count=1e3}).total
+  local tab_indent_cnt =  vim.fn.searchcount({pattern=tab_pat, max_count=1e3}).total
+  if space_indent_cnt > tab_indent_cnt then
+    return 'MI:'..tab_indent
+  else
+    return 'MI:'..space_indent
+  end
+end
+
+function TrailingSpace()
+  local space = vim.fn.search([[\s\+$]], 'nwc')
+  return space ~= 0 and "TS" or ""
+end
+
+function GetWords()
+  return tostring(vim.fn.wordcount().words)
+end
+
 function ExportColorsKitty()
     local fn = vim.fn
     local filename = os.getenv("HOME") .. "/.config/kitty/nvim_export.conf"

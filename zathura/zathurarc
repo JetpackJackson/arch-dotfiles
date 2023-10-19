@@ -1,3 +1,4 @@
 map D set "first-page-column 1:1"
 map <C-d> set "first-page-column 1:2"
 set selection-clipboard clipboard
+include catppuccin-mocha

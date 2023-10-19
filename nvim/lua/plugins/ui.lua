@@ -27,9 +27,7 @@ return {
 --        },}
 --  },
 
-   {
-     "nvim-treesitter/nvim-treesitter",
-   },
+   { "nvim-treesitter/nvim-treesitter" },
 
    {
      "shortcuts/no-neck-pain.nvim",
@@ -49,61 +47,29 @@ return {
        end
    },
 
-  {
-    "lukas-reineke/indent-blankline.nvim",
---    event = { "BufReadPost" },
-    event = { "BufReadPost", "BufNewFile" },
-    main = "ibl",
-    opts = {
---require('ibl').setup({
---        exclude = {
---          filetypes = {
---            "help",
---            "alpha",
---            "dashboard",
---            "neo-tree",
---            "Trouble",
---            "lazy",
---            "mason",
---            "notify",
---            "toggleterm",
---            "lazyterm",
---            "startify",
+--  {
+--    "nvim-lualine/lualine.nvim",
+--    event = "VeryLazy",
+--    config = function()
+--        require'lualine'.setup{
+--          sections = {
+--            lualine_a = {'mode'},
+--            lualine_b = {'branch', 'diff', 'diagnostics'},
+--            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIndents}, {TrailingSpace}, {GetWords}},
+--            lualine_x = {'lsp_progress',{ SearchCount },'encoding', 'fileformat', 'filetype'},
+--            lualine_y = {'progress'},
+--            lualine_z = {'location'}
 --          },
---        },
---        }),
-    }
-  },
-
-  {
-    "nvim-lualine/lualine.nvim",
-    --event = "BufReadPost",
-    event = "VeryLazy",
-    --lazy = true,
-    --keys = { "<C-l>", { "<C-x>", mode = "n" } },
-
-    config = function()
-        require'lualine'.setup{
-          sections = {
-            lualine_a = {'mode'},
-            lualine_b = {'branch', 'diff', 'diagnostics'},
-            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIdents}, {TrailingSpace}, {GetWords}},
-            lualine_x = {'lsp_progress',{ searchCount },'encoding', 'fileformat', 'filetype'},
-            lualine_y = {'progress'},
-            lualine_z = {'location'}
-          },
-          options = {
-              theme = 'sonokai'
-          }
-
-        }
-    end
-  },
+--          options = {
+--              theme = 'sonokai'
+--          }
+--        }
+--    end
+--  },
 
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
---    enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -160,16 +126,16 @@ return {
 --        ["]"] = { name = "+next" },
 --        ["["] = { name = "+prev" },
 --        ["<leader><tab>"] = { name = "+tabs" },
---        ["<leader>b"] = { name = "+buffer" },
---        ["<leader>c"] = { name = "+code" },
+        ["<leader>b"] = { name = "+buffer" },
+        ["<leader>o"] = { name = "+compile" },
 --        ["<leader>f"] = { name = "+file/find" },
 --        ["<leader>g"] = { name = "+git" },
 --        ["<leader>gh"] = { name = "+hunks" },
---        ["<leader>q"] = { name = "+quit/session" },
---        ["<leader>s"] = { name = "+search" },
+        ["<leader>z"] = { name = "+zettelkasten" },
+        ["<leader>s"] = { name = "+message search" },
 --        ["<leader>u"] = { name = "+ui" },
---        ["<leader>w"] = { name = "+windows" },
---        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+        ["<leader>v"] = { name = "+windows" },
+        ["<leader>x"] = { name = "+diagnostics/quickfix" },
       },
     },
     config = function(_, opts)

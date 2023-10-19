@@ -1,0 +1,25 @@
+#!/bin/bash
+choice=0
+confirm=0
+
+#echo "==============================================="
+#echo "JetpackJackson's Paruman (Pacman + Paru) Script"
+#echo "==============================================="
+#echo "1. AUR Only"
+#echo "2. Regular Repos Only"
+#echo "3. Everything"
+echo "1. View and Remove Packages (All Repos)"
+echo "2. View and Remove Packages (AUR Only)"
+echo "3. Cleanup Package Cache"
+read choice
+
+case "$choice" in
+    1) pacman -Qqe | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+    ;;
+    2) pacman -Qqm | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+    ;;
+    3) cleanup
+    ;;
+    *) echo "Try again."
+    ;;
+esac

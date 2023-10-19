@@ -1,9 +1,0 @@
-# BEGIN_KITTY_THEME
-# Tokyo Night
-include current-theme.conf
-# END_KITTY_THEME
-font_family Ärzte Sans
-#foreground #FFFFFF
-#background #000000
-#background_opacity 0.9
-

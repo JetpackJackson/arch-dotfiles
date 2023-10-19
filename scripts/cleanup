@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo pacman -Qtdq | sudo pacman -Rns -
 sudo pacman -Qqd | sudo pacman -Rsu -
 sudo rm -rfv $XDG_CACHE_HOME/paru/clone

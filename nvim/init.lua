@@ -5,13 +5,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-vim.g.mapleader = ' '
 --require("lazy").setup({{ "sainnhe/sonokai" }})
---require("lazy").setup("plugins",{})
-require("lazy").setup("plugins",{{
+require("lazy").setup("plugins",{
+    {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function () 
+    config = function ()
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
@@ -28,11 +27,64 @@ require("lazy").setup("plugins",{{
 	}
       })
     end
-}})
+    },
+--    {
+--    'Wansmer/langmapper.nvim',
+--    lazy = false,
+--    priority = 1, -- High priority is needed if you will use `autoremap()`
+--    config = function()
+--      require('langmapper').setup({require("config.langmap")})
+--    end,
+--    },
+})
 
 require("config.keymaps")
 require("config.options")
-require "user.functions"
+require("user.functions")
+
+vim.cmd([[syntax on]])
+vim.opt.list = true
+vim.opt.listchars = {
+    tab = "⟩ ",
+    trail = "+",
+    precedes = "<",
+    extends = ">",
+    space = "·",
+    nbsp = "␣",
+}
+--local function update_lead()
+--    local lcs = vim.opt_local.listchars:get()
+--    local tab = vim.fn.str2list(lcs.tab)
+--    local space = vim.fn.str2list(lcs.multispace or lcs.space)
+--    local lead = {tab[1]}
+--    for i = 1, vim.bo.tabstop-1 do
+--        lead[#lead+1] = space[i % #space + 1]
+--    end
+--    vim.opt_local.listchars:append({ leadmultispace = vim.fn.list2str(lead) })
+--end
+--vim.api.nvim_create_autocmd("OptionSet", { pattern = { "listchars", "tabstop", "filetype" }, callback = update_lead })
+--vim.api.nvim_create_autocmd("VimEnter", { callback = update_lead, once = true })
+--
+vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp = "⍽" }
+
+vim.o.laststatus = 2
+vim.wo.number = true
+vim.o.smarttab = true
+vim.bo.expandtab = true
+vim.bo.shiftwidth = 4
+vim.bo.tabstop = 4
+
+vim.opt.showmode = true
+--vim.o.statusline = "%F"
+--vim.wo.statusline = '%F'
+vim.cmd([[set statusline=%<%f\ %h%m%r\\ 
+"vim.cmd([[set statusline=%<%f\ %h%w%m%r\\ 
+set statusline+=%{wordcount().words}\ words\ 
+"set statusline+=%lua MixedIndents()
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\[%{&fileformat}\]
+
+set statusline+=%=%-14.(%l,%c%V%)\ %P]])
 
 vim.cmd([[set background=dark]])
 vim.opt.termguicolors = true
@@ -48,67 +100,80 @@ vim.o.signcolumn = "number"
 vim.o.cursorline = true
 vim.cmd("set noequalalways")
 
+--local function git_branch()
+--    local branch = vim.fn.system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+--    if string.len(branch) > 0 then
+--        return branch
+--    else
+--        return ":"
+--    end
+--end
+--local function statusline()
+--    local set_color_1 = "%#PmenuSel#"
+--    local branch = git_branch()
+--    local set_color_2 = "%#Fg#"
+--    local file_name = " %f"
+--    local modified = "%m"
+--    local align_right = "%="
+--    local fileencoding = " %{&fileencoding?&fileencoding:&encoding}"
+--    local fileformat = " [%{&fileformat}]"
+--    local filetype = " %y"
+--    local percentage = " %p%%"
+--    local linecol = " %l:%c"
+--    return string.format(
+--        "%s %s %s%s%s%s%s%s%s%s%s",
+--        set_color_1,
+--        branch,
+--        set_color_2,
+--        file_name,
+--        modified,
+--        align_right,
+--        filetype,
+--        fileencoding,
+--        fileformat,
+--        percentage,
+--        linecol
+--    )
+--end
+--vim.opt.statusline = statusline()
+
 -- Initialize configuration dictionary
 vim.cmd([[ let g:fzf_vim = {} ]])
-vim.cmd([[
-        let g:fzf_vim.preview_window = 'right,50%'
-        ]])
+vim.cmd([[ let g:fzf_vim.preview_window = 'right,50%' ]])
+vim.cmd([[ let g:pipe2eval_map_key = "`" ]])
 
 vim.cmd([[ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
 
-vim.cmd([[ let g:knap_settings = {
-    \ "textopdfviewerlaunch": "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
-    \ "textopdfviewerrefresh": "none",
-    \ "textopdfforwardjump": "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%"
-\ }
+vim.cmd([[
+    filetype plugin indent on
+    syntax enable
+    let g:vimtex_view_method = 'zathura'
+    let g:vimtex_compiler_method = 'latexmk'
+
+    let maplocalleader = ","
 ]])
 
-
-
-function searchCount()
-  local search = vim.fn.searchcount({maxcount = 0}) -- maxcount = 0 makes the number not be capped at 99
-  local searchCurrent = search.current
-  local searchTotal = search.total
-  if searchCurrent > 0 then
-    return "/"..vim.fn.getreg("/").." ["..searchCurrent.."/"..searchTotal.."]"
-  else
-    return ""
-  end
-end
-
-function MixedIdents()
-  local space_pat = [[\v^ +]]
-  local tab_pat = [[\v^\t+]]
-  local space_indent = vim.fn.search(space_pat, 'nwc')
-  local tab_indent = vim.fn.search(tab_pat, 'nwc')
-  local mixed = (space_indent > 0 and tab_indent > 0)
-  local mixed_same_line
-  if not mixed then
-    mixed_same_line = vim.fn.search([[\v^(\t+ | +\t)]], 'nwc')
-    mixed = mixed_same_line > 0
-  end
-  if not mixed then return '' end
-  if mixed_same_line ~= nil and mixed_same_line > 0 then
-     return 'MI:'..mixed_same_line
-  end
-  local space_indent_cnt = vim.fn.searchcount({pattern=space_pat, max_count=1e3}).total
-  local tab_indent_cnt =  vim.fn.searchcount({pattern=tab_pat, max_count=1e3}).total
-  if space_indent_cnt > tab_indent_cnt then
-    return 'MI:'..tab_indent
-  else
-    return 'MI:'..space_indent
-  end
-end
-
-function TrailingSpace()
-  local space = vim.fn.search([[\s\+$]], 'nwc')
-  return space ~= 0 and "TS" or ""
-end
-
-function GetWords()
-  return tostring(vim.fn.wordcount().words)
-end
+vim.g.vimtex_compiler_latexmk = {
+  options = {
+    '-shell-escape',
+    '-verbose',
+    '-file-line-error',
+    '-synctex=1',
+    '-interaction=nonstopmode'
+  }
+}
+--vim.cmd([[let g:UltiSnipsExpandTrigger = '<Home>'
+--    let g:UltiSnipsJumpForwardTrigger = '<Home>'
+--    let g:UltiSnipsJumpBackwardTrigger = '<End>'
+--    let g:tex_flavor='latex'
+--    let g:vimtex_view_method='zathura'
+--    let g:vimtex_quickfix_mode=0
+--    set conceallevel=1
+--    let g:tex_conceal='abdmg'
+--    "hi Conceal ctermbg=none
+--    inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+--]])
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
@@ -118,27 +183,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
   highlight = {
     enable = true,
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
+    disable = { "markdown", "tex" },
     additional_vim_regex_highlighting = false,
   },
 }
-
---vim.cmd([[
---    let s:header_cmd = 'fortune deutsch | cowsay -W 80'
---    "let s:header_cmd = 'cat ~/zettel-.txt | cowsay -n'
---    let g:startify_custom_header = startify#pad(split(system(s:header_cmd), '\n'))
---    let g:startify_bookmarks = [ {'a': '$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/agenda.md'}, {'c': '~/.config/nvim/init.lua'}, {'n': '~/docs/notes/notes-zettelkasten/'} ]
---    let s:bookmarks2 = ['~/docs/notes/notes-zettelkasten/', '~/docs/notes/school/EEL3111C/lectures/']
---    let g:startify_lists = [
---      \ { 'type': 'dir',       'header': ['   MRU '.getcwd()] },
---      \ { 'type': 'files',     'header': ['   MRU' ]           },
---      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
---      \ ]
---    ]])
-----#center is centered, #pad is padded
