@@ -4,17 +4,8 @@ return {
       dependencies = { "rktjmp/lush.nvim", "rktjmp/shipwright.nvim" },
       lazy = true,
       event = { "BufRead farin*.lua", "BufRead testtrack*.lua" },
-      --keys = { "<C-a>", { "<C-x>", mode = "n" } },
---      ft = { "lua" },
     },
-
     { "sainnhe/sonokai" },
-    --{ "ellisonleao/gruvbox.nvim" },
-    --{ "sainnhe/gruvbox.nvim" },
---  { "EdenEast/nightfox.nvim" },
---  { "cocopon/iceberg.vim" },
---  { "namrabtw/rusty.nvim" },
---    { "rebelot/kanagawa.nvim" },
 --  {
 --    "m4xshen/hardtime.nvim",
 --    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
@@ -26,50 +17,32 @@ return {
 --            ["<Left>"] = {},
 --        },}
 --  },
-
-   { "nvim-treesitter/nvim-treesitter" },
-
    {
-     "shortcuts/no-neck-pain.nvim",
-       config = function()
-         require("no-neck-pain").setup({
-             autocmds = {
-                 enableOnVimEnter = true,
-             },
-             buffers = {
-                 left = {
-                     enabled = true,
-                 },
-                 right = {
-                 },
-             },
-         })
-       end
-   },
-
---  {
---    "nvim-lualine/lualine.nvim",
---    event = "VeryLazy",
---    config = function()
---        require'lualine'.setup{
---          sections = {
---            lualine_a = {'mode'},
---            lualine_b = {'branch', 'diff', 'diagnostics'},
---            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIndents}, {TrailingSpace}, {GetWords}},
---            lualine_x = {'lsp_progress',{ SearchCount },'encoding', 'fileformat', 'filetype'},
---            lualine_y = {'progress'},
---            lualine_z = {'location'}
---          },
---          options = {
---              theme = 'sonokai'
---          }
---        }
---    end
---  },
-
+     'VonHeikemen/fine-cmdline.nvim',
+     dependencies = { 'MunifTanjim/nui.nvim' },
+--   require('fine-cmdline.nvim').setup({
+--	     hooks = {
+--		 after_mount = function(input)
+--		   -- make escape go to normal mode
+--		   vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<cr>', {buffer = input.bufnr})
+--		 end
+--	     }
+--     })
+  },
+  {
+    'hachy/cmdpalette.nvim',
+    config = function ()
+      require('cmdpalette').setup({
+          win = {
+            width = 0.5,
+          },
+      })
+    end,
+  },
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
+    enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -143,5 +116,46 @@ return {
       wk.setup(opts)
       wk.register(opts.defaults)
     end,
-  }
+  },
+
+--  {
+--    "nvim-lualine/lualine.nvim",
+--    event = "VeryLazy",
+--    config = function()
+--        require'lualine'.setup{
+--          sections = {
+--            lualine_a = {'mode'},
+--            lualine_b = {'branch', 'diff', 'diagnostics'},
+--            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIndents}, {TrailingSpace}, {GetWords}},
+--            lualine_x = {'lsp_progress',{ SearchCount },'encoding', 'fileformat', 'filetype'},
+--            lualine_y = {'progress'},
+--            lualine_z = {'location'}
+--          },
+--          options = {
+--              theme = 'sonokai'
+--          }
+--        }
+--    end
+--  },
+
+
+
+   { "nvim-treesitter/nvim-treesitter" },
+   {
+     "shortcuts/no-neck-pain.nvim",
+       config = function()
+         require("no-neck-pain").setup({
+             autocmds = {
+                 enableOnVimEnter = true,
+             },
+             buffers = {
+                 left = {
+                     enabled = true,
+                 },
+                 right = {
+                 },
+             },
+         })
+       end
+   },
 }

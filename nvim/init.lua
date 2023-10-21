@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- stylua: ignore
@@ -12,19 +14,17 @@ require("lazy").setup("plugins",{
     build = ":TSUpdate",
     config = function ()
       local configs = require("nvim-treesitter.configs")
-
       configs.setup({
         require'nvim-treesitter.configs'.setup {
           ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
           sync_install = false,
-          -- Automatically install missing parsers when entering buffer
-          -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
           auto_install = true,
           highlight = {
             enable = true,
+            --disable = { "markdown", "tex" },
             additional_vim_regex_highlighting = false,
           },
-	}
+        }
       })
     end
     },
@@ -67,25 +67,76 @@ vim.opt.listchars = {
 --
 vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp = "⍽" }
 
-vim.o.laststatus = 2
+vim.o.laststatus = 2 --originally 3
 vim.wo.number = true
 vim.o.smarttab = true
 vim.bo.expandtab = true
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
-
-vim.opt.showmode = true
+vim.opt.showmode = false
+--vim.opt.cmdheight = 0
 --vim.o.statusline = "%F"
 --vim.wo.statusline = '%F'
-vim.cmd([[set statusline=%<%f\ %h%m%r\\ 
-"vim.cmd([[set statusline=%<%f\ %h%w%m%r\\ 
-set statusline+=%{wordcount().words}\ words\ 
-"set statusline+=%lua MixedIndents()
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\[%{&fileformat}\]
+--vim.cmd([[set statusline=%<%f\ %h%m%r\\ 
+--set statusline+=%{toupper(g:currentmode[mode()])}\
 
-set statusline+=%=%-14.(%l,%c%V%)\ %P]])
+--%{''.(&fenc!=''?&fenc:&enc).''}
 
+-- vimscript statusline
+--vim.cmd([[
+--"set statusline=%{luaeval(RedrawModeColors('Mode()'))}
+--set statusline+=%<\ %{luaeval('Mode()')}\ 
+--set statusline+=%f\ %=%h%m%r\ 
+--set statusline+=%{wordcount().words}\ words\ 
+--set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+--]])
+--vim.cmd([[
+--set statusline+=\[%{&fileformat}\]
+--set statusline+=%=%-14.(%l,%c%V%)\ %P
+--]])
+
+--lua status line
+Statusline = {}
+Statusline.active = function()
+  return table.concat {
+--    "%#Statusline#",
+    "%#Grey#",
+    Update_mode_colors(),
+    Mode(),
+--    "%#Normal# ",
+    "%#StatusLineExtra# ",
+    Filepath(),
+    Filename(),
+    "%=",
+    "%#StatusLineExtra#",
+  --  "%#Normal#",
+    Words(),
+    "%=",
+    "%#StatusLineExtra#",
+    FileEncoding(),
+    "%=",
+    Filetype(),
+    "%=",
+    "%#StatusLineExtra#",
+    Lineinfo(),
+  }
+end
+function Statusline.inactive()
+  return " %F"
+end
+function Statusline.short()
+  return "%#StatusLineNC#   NvimTree"
+end
+vim.api.nvim_exec([[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+  au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline.short()
+  augroup END
+]], false)
+
+-- colors
 vim.cmd([[set background=dark]])
 vim.opt.termguicolors = true
 vim.cmd([[set conceallevel=2]])
@@ -162,28 +213,4 @@ vim.g.vimtex_compiler_latexmk = {
     '-synctex=1',
     '-interaction=nonstopmode'
   }
-}
---vim.cmd([[let g:UltiSnipsExpandTrigger = '<Home>'
---    let g:UltiSnipsJumpForwardTrigger = '<Home>'
---    let g:UltiSnipsJumpBackwardTrigger = '<End>'
---    let g:tex_flavor='latex'
---    let g:vimtex_view_method='zathura'
---    let g:vimtex_quickfix_mode=0
---    set conceallevel=1
---    let g:tex_conceal='abdmg'
---    "hi Conceal ctermbg=none
---    inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
---]])
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
-  sync_install = false,
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-  highlight = {
-    enable = true,
-    disable = { "markdown", "tex" },
-    additional_vim_regex_highlighting = false,
-  },
 }

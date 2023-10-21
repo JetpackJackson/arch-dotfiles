@@ -1,9 +1,4 @@
 return {
---  { "frabjous/knap" },
---    { "yinflying/matlab-screen" },
---  { 'daeyun/vim-matlab' },
---    { 'lervag/vimtex' },
---  {
   {
     'junegunn/fzf.vim',
     dependencies = { 'junegunn/fzf' }
@@ -36,7 +31,7 @@ return {
 tags:
 - 
 ---
-
+ 
 # {{ title }}
 Date: {{ date }}
 Filename: {{ filename }}

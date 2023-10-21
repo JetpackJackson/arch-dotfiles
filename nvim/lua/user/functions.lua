@@ -1,3 +1,93 @@
+Modes = {
+  ["n"] = "NORMAL",
+  ["no"] = "NORMAL",
+  ["v"] = "VISUAL",
+  ["V"] = "VISUAL LINE",
+  [""] = "VISUAL BLOCK",
+  ["s"] = "SELECT",
+  ["S"] = "SELECT LINE",
+  [""] = "SELECT BLOCK",
+  ["i"] = "INSERT",
+  ["ic"] = "INSERT",
+  ["R"] = "REPLACE",
+  ["Rv"] = "VISUAL REPLACE",
+  ["c"] = "COMMAND",
+  ["cv"] = "VIM EX",
+  ["ce"] = "EX",
+  ["r"] = "PROMPT",
+  ["rm"] = "MOAR",
+  ["r?"] = "CONFIRM",
+  ["!"] = "SHELL",
+  ["t"] = "TERMINAL",
+}
+function Mode()
+  Current_mode = vim.api.nvim_get_mode().mode
+  return string.format(" %s ", Modes[Current_mode]):upper()
+end
+
+function Update_mode_colors()
+  Current_mode = vim.api.nvim_get_mode().mode
+  Mode_color = "%#Grey#"
+  if Current_mode == "n" then
+      Mode_color = "%#Fg#"
+  elseif Current_mode == "i" or Current_mode == "ic" then
+      Mode_color = "%#Green#"
+  elseif Current_mode == "v" or Current_mode == "V" or Current_mode == "" then
+      Mode_color = "%#Blue#"
+  elseif Current_mode == "R" then
+      Mode_color = "%#Orange#"
+  elseif Current_mode == "c" then
+      Mode_color = "%#Red#"
+  elseif Current_mode == "t" then
+      Mode_color = "%#Purple#"
+  end
+  return Mode_color
+end
+
+function Filepath()
+  Fpath = vim.fn.fnamemodify(vim.fn.expand "%", ":~:.:h")
+  if Fpath == "" or Fpath == "." then
+      return " "
+  end
+
+  return string.format(" %%<%s/", Fpath)
+end
+
+function Filename()
+  Fname = vim.fn.expand "%:t"
+  if Fname == "" then
+      return ""
+  end
+  return Fname .. " "
+end
+
+function Filetype()
+  return string.format(" %s ", vim.bo.filetype)
+  --:upper()
+end
+
+function Lineinfo()
+  if vim.bo.filetype == "alpha" then
+    return ""
+  end
+  return " %P %l:%c "
+end
+
+function FileEncoding()
+    local encoding = vim.bo.fileencoding or vim.bo.encoding
+    local format = vim.bo.fileformat
+    return string.format("%s[%s]", encoding, format)
+end
+
+function Words()
+    local num = string.format(vim.fn.wordcount().words)
+    return string.format("%s words", num)
+--    return tostring(vim.fn.wordcount().words)
+end
+
+
+
+--- indents
 function _G.AdjustListchars()
   local lead = "┊"
   for _ = 1, vim.bo.shiftwidth - 1 do

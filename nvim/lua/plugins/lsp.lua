@@ -2,22 +2,13 @@ return {
     {
       "iurimateus/luasnip-latex-snippets.nvim",
       dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
---      ft = "tex",
---      opts = "enabled = true",
       config = function()
-        require('luasnip-latex-snippets').setup {
---          lazy = true,
---          auto_attach = {
---            enabled = true,
---            filetypes = { "latex", "tex" },
---          },
---          use_treesitter = false,
---          allow_on_markdown = true,
-        }
+        require('luasnip-latex-snippets').setup({
+          use_treesitter = true,
+          allow_on_markdown = false,
+        })
         require("luasnip").config.setup {
             enable_autosnippets = true,
-            use_treesitter = false,
-            allow_on_markdown = false,
         }
       end,
     },
