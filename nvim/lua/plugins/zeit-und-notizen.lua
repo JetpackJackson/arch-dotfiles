@@ -27,6 +27,8 @@ return {
           new_file_template = {
               use_template = true,
               template = [[
+$%! TEX root = {{ filename }}$
+ 
 ---
 tags:
 - 

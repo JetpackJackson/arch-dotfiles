@@ -17,9 +17,9 @@ return {
 --            ["<Left>"] = {},
 --        },}
 --  },
-   {
-     'VonHeikemen/fine-cmdline.nvim',
-     dependencies = { 'MunifTanjim/nui.nvim' },
+--   {
+--     'VonHeikemen/fine-cmdline.nvim',
+--     dependencies = { 'MunifTanjim/nui.nvim' },
 --   require('fine-cmdline.nvim').setup({
 --	     hooks = {
 --		 after_mount = function(input)
@@ -28,21 +28,21 @@ return {
 --		 end
 --	     }
 --     })
-  },
-  {
-    'hachy/cmdpalette.nvim',
-    config = function ()
-      require('cmdpalette').setup({
-          win = {
-            width = 0.5,
-          },
-      })
-    end,
-  },
+--  },
+--  {
+--    'hachy/cmdpalette.nvim',
+--    config = function ()
+--      require('cmdpalette').setup({
+--          win = {
+--            width = 0.5,
+--          },
+--      })
+--    end,
+--  },
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    enabled = false,
+--    enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -140,7 +140,6 @@ return {
 
 
 
-   { "nvim-treesitter/nvim-treesitter" },
    {
      "shortcuts/no-neck-pain.nvim",
        config = function()
@@ -158,4 +157,7 @@ return {
          })
        end
    },
+
+   { "nvim-treesitter/nvim-treesitter" },
+
 }

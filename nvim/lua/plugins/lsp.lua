@@ -2,6 +2,8 @@ return {
     {
       "iurimateus/luasnip-latex-snippets.nvim",
       dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
+      lazy = true,
+      ft = { "markdown", "tex" },
       config = function()
         require('luasnip-latex-snippets').setup({
           use_treesitter = true,

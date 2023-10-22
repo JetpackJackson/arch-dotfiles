@@ -20,8 +20,8 @@ require("lazy").setup("plugins",{
           sync_install = false,
           auto_install = true,
           highlight = {
-            enable = true,
-            --disable = { "markdown", "tex" },
+            --enable = true,
+            disable = { "markdown", "tex" },
             additional_vim_regex_highlighting = false,
           },
         }
