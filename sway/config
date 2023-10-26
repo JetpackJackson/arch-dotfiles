@@ -283,10 +283,10 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    $mybindsym $left resize shrink width 10px
-    $mybindsym $down resize grow height 10px
-    $mybindsym $up resize shrink height 10px
-    $mybindsym $right resize grow width 10px
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
 
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
@@ -299,7 +299,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
-$mybindsym $mod+plus mode "resize"
+bindsym $mod+Plus mode "resize"
 
 exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
 #exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css

@@ -6,33 +6,37 @@ return {
 
   {
     'jakewvincent/mkdnflow.nvim',
+    dependencies = { "nvim-lua/plenary.nvim" },
     ft = "markdown",
     opts = "enabled = true",
 
     config = function()
         require('mkdnflow').setup({
-          lazy = true,
-          auto_attach = {
-            enabled = true,
-            filetypes = { "markdown" },
-          },
-          links = {
-          transform_explicit = function(text)
-              text = text:gsub(" ", "-")
-              text = text:lower()
-              text = os.date('%Y%m%d-%H%M%S')
-              return(text)
-              end
-          },
-          new_file_template = {
-              use_template = true,
-              template = [[
-$%! TEX root = {{ filename }}$
- 
+            modules = {
+                bib = false,
+            },
+            lazy = true,
+            auto_attach = {
+              enabled = true,
+              filetypes = { "markdown" },
+            },
+            links = {
+            transform_explicit = function(text)
+                text = text:gsub(" ", "-")
+                text = text:lower()
+                text = os.date('%Y%m%d-%H%M%S')
+                return(text)
+                end
+            },
+            new_file_template = {
+                use_template = true,
+                template = [[
 ---
 tags:
 - 
 ---
+ 
+$%! TEX root = {{ filename }}$
  
 # {{ title }}
 Date: {{ date }}

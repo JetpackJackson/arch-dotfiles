@@ -5,6 +5,6 @@ sudo rm -rfv $XDG_CACHE_HOME/paru/clone
 mkdir $XDG_CACHE_HOME/paru/clone
 sudo paccache -rk1
 sudo paccache -ruk0
-pacman -Qqe > $XDG_DOCUMENTS_DIR/paclist/pkglist.txt
-comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > $XDG_DOCUMENTS_DIR/paclist/optdeplist.txt
-pacman -Qqem > $XDG_DOCUMENTS_DIR/paclist/foreignpkglist.txt
+pacman -Qqe > $XDG_DOCUMENTS_DIR/paclist/pkglist-$(cat /etc/hostname).txt
+comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > $XDG_DOCUMENTS_DIR/paclist/optdeplist-$(cat /etc/hostname).txt
+pacman -Qqem > $XDG_DOCUMENTS_DIR/paclist/foreignpkglist-$(cat /etc/hostname).txt

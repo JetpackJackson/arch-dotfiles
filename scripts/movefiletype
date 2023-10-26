@@ -1,4 +1,11 @@
 #!/bin/bash
-myvar="$PWD"
-mkdir "$1"
-find . -name "*.$1" -exec mv {} "$myvar"/"$1"/ \;
+printf "Are you sure? This moving of filetypes is irreversible! [y/n] "
+read confirm
+
+if $confirm="y"; then
+    myvar="$PWD"
+    mkdir "$1"
+    find . -name "*.$1" -exec mv {} "$myvar"/"$1"/ \;
+else
+    printf "Exiting."
+fi

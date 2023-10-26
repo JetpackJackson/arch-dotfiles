@@ -1,2 +1,0 @@
-#!/bin/bash
-cat $XDG_DOCUMENTS_DIR/paclist/cool-packages.txt

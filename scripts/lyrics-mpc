@@ -1,7 +1,6 @@
-#!/bin/bash
-#a='/home/jet/Music/'
+#!/bin/env bash
 a=$XDG_MUSIC_DIR/
 b="$(mpc current -f %file%)"
 c="${a}${b}"
-ffprobe "${c}" > /home/jet/.cache/mylyrics/lyrics.txt 2>&1
-exec sed '/lyrics-XXX/,/Duration/!d' /home/jet/.cache/mylyrics/lyrics.txt | less
+ffprobe "${c}" > $XDG_CACHE_HOME/mylyrics/lyrics.txt 2>&1
+exec sed '/lyrics-XXX/,/Duration/!d' $XDG_CACHE_HOME/mylyrics/lyrics.txt | less

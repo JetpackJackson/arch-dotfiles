@@ -1,3 +1,4 @@
+------------------------------ Statusline ---------------------------------------------------
 Modes = {
   ["n"] = "NORMAL",
   ["no"] = "NORMAL",
@@ -86,8 +87,7 @@ function Words()
 end
 
 
-
---- indents
+------------------------------ Indentation --------------------------------------------------
 function _G.AdjustListchars()
   local lead = "┊"
   for _ = 1, vim.bo.shiftwidth - 1 do
@@ -107,6 +107,7 @@ function SearchCount()
   end
 end
 
+------------------------------ Word Counts --------------------------------------------------
 function MixedIndents()
   local space_pat = [[\v^ +]]
   local tab_pat = [[\v^\t+]]

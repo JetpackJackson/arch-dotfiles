@@ -21,12 +21,12 @@ return {
 --     'VonHeikemen/fine-cmdline.nvim',
 --     dependencies = { 'MunifTanjim/nui.nvim' },
 --   require('fine-cmdline.nvim').setup({
---	     hooks = {
---		 after_mount = function(input)
---		   -- make escape go to normal mode
---		   vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<cr>', {buffer = input.bufnr})
---		 end
---	     }
+--       hooks = {
+--       after_mount = function(input)
+--         -- make escape go to normal mode
+--         vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<cr>', {buffer = input.bufnr})
+--       end
+--       }
 --     })
 --  },
 --  {
@@ -84,80 +84,58 @@ return {
     },
   },
 
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    --lazy = true,
-    --keys = { "<C-k>", { "<C-x>", mode = "n" } },
-
-    opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode = { "n", "v" },
---        ["g"] = { name = "+goto" },
---        ["gz"] = { name = "+surround" },
---        ["]"] = { name = "+next" },
---        ["["] = { name = "+prev" },
---        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>o"] = { name = "+compile" },
---        ["<leader>f"] = { name = "+file/find" },
---        ["<leader>g"] = { name = "+git" },
---        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>z"] = { name = "+zettelkasten" },
-        ["<leader>s"] = { name = "+message search" },
---        ["<leader>u"] = { name = "+ui" },
-        ["<leader>v"] = { name = "+windows" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
-    end,
-  },
-
 --  {
---    "nvim-lualine/lualine.nvim",
+--    "folke/which-key.nvim",
 --    event = "VeryLazy",
---    config = function()
---        require'lualine'.setup{
---          sections = {
---            lualine_a = {'mode'},
---            lualine_b = {'branch', 'diff', 'diagnostics'},
---            lualine_c = {'filename', {"os.date('%H:%M:%S')"}, {MixedIndents}, {TrailingSpace}, {GetWords}},
---            lualine_x = {'lsp_progress',{ SearchCount },'encoding', 'fileformat', 'filetype'},
---            lualine_y = {'progress'},
---            lualine_z = {'location'}
---          },
---          options = {
---              theme = 'sonokai'
---          }
---        }
---    end
+--    --lazy = true,
+--    --keys = { "<C-k>", { "<C-x>", mode = "n" } },
+--
+--    opts = {
+--      plugins = { spelling = true },
+--      defaults = {
+--        mode = { "n", "v" },
+----        ["g"] = { name = "+goto" },
+----        ["gz"] = { name = "+surround" },
+----        ["]"] = { name = "+next" },
+----        ["["] = { name = "+prev" },
+----        ["<leader><tab>"] = { name = "+tabs" },
+--        ["<leader>b"] = { name = "+buffer" },
+--        ["<leader>o"] = { name = "+compile" },
+----        ["<leader>f"] = { name = "+file/find" },
+----        ["<leader>g"] = { name = "+git" },
+----        ["<leader>gh"] = { name = "+hunks" },
+--        ["<leader>z"] = { name = "+zettelkasten" },
+--        ["<leader>s"] = { name = "+message search" },
+----        ["<leader>u"] = { name = "+ui" },
+--        ["<leader>v"] = { name = "+windows" },
+--        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+--      },
+--    },
+--    config = function(_, opts)
+--      local wk = require("which-key")
+--      wk.setup(opts)
+--      wk.register(opts.defaults)
+--    end,
 --  },
 
+  {
+    "shortcuts/no-neck-pain.nvim",
+      config = function()
+        require("no-neck-pain").setup({
+            autocmds = {
+                enableOnVimEnter = true,
+            },
+            buffers = {
+                left = {
+                    enabled = true,
+                },
+                right = {
+                },
+            },
+        })
+      end
+  },
 
-
-   {
-     "shortcuts/no-neck-pain.nvim",
-       config = function()
-         require("no-neck-pain").setup({
-             autocmds = {
-                 enableOnVimEnter = true,
-             },
-             buffers = {
-                 left = {
-                     enabled = true,
-                 },
-                 right = {
-                 },
-             },
-         })
-       end
-   },
-
-   { "nvim-treesitter/nvim-treesitter" },
+--   { "nvim-treesitter/nvim-treesitter" },
 
 }

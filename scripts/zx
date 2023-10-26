@@ -1,5 +1,4 @@
-#!/bin/bash
-#now=$(date +"%Y-%m-%d-%H%M")
+#!/bin/env bash
 now=$(date +"%Y%m%d-%H%M%S")
 echo "%! TEX root = $ZETTELKASTEN$now.tex" | tee -a $ZETTELKASTEN/$now.tex
 echo "\documentclass[$2]{scrartcl}" | tee -a $ZETTELKASTEN/$now.tex

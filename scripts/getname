@@ -1,4 +1,5 @@
-#!/bin/bash
-MYNAME=$(cat /etc/hostname)
-export $MYNAME
-echo $MYNAME
+#!/bin/env bash
+bat $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
+#MYNAME=$(cat /etc/hostname)
+#export $MYNAME
+#echo $MYNAME

@@ -1,0 +1,2 @@
+#!/bin/env bash
+zathura $ZETTELKASTEN/EEL3111C/manual.pdf

@@ -21,4 +21,3 @@ vim.cmd([[syntax match Comment "/^        - \[X\].*$/"]])
 vim.cmd([[syntax match Directory "/^- \[-\].*$/"]])
 vim.cmd([[syntax match Directory "/^    - \[-\].*$/"]])
 vim.cmd([[syntax match Directory "/^        - \[-\].*$/"]])
-
