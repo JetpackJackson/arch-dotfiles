@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+# requires pacman-contrib
+# https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Not_in_a_specified_group,_repository_or_meta_package
+
 sudo pacman -Qtdq | sudo pacman -Rns -
 sudo pacman -Qqd | sudo pacman -Rsu -
 sudo rm -rfv $XDG_CACHE_HOME/paru/clone
