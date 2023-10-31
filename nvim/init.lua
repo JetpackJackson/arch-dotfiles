@@ -40,7 +40,7 @@ require("lazy").setup("plugins",{})
 require("config.keymaps")
 require("config.options")
 require("user.functions")
-
+vim.cmd([[filetype plugin on]])
 vim.opt.list = true
 vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp = "⍽" }
 

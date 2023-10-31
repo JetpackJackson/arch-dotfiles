@@ -34,7 +34,7 @@ set -gx PROJECTS "$XDG_DOCUMENTS_DIR/notes/projects/"
 
 # fixes
 set -gx CARGO_HOME "$XDG_DATA_HOME"/cargo
-set -gx _JAVA_OPTIONS "$XDG_CONFIG_HOME"/java
+#set -gx _JAVA_OPTIONS $XDG_CONFIG_HOME/java
 set -gx WINEPREFIX "$XDG_DATA_HOME"/wine
 set -gx QT_QPA_PLATFORM "wayland;xcb"
 set -gx TERMINAL_COMMAND kitty
