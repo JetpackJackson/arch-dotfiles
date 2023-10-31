@@ -2,11 +2,11 @@ return {
     {
       "iurimateus/luasnip-latex-snippets.nvim",
       dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
-      lazy = true,
-      ft = { "markdown", "tex" },
+--      lazy = true,
+--      ft = { "markdown", "tex", "latex" },
       config = function()
         require('luasnip-latex-snippets').setup({
-          use_treesitter = true,
+          use_treesitter = false,
           allow_on_markdown = false,
         })
         require("luasnip").config.setup {
@@ -14,7 +14,14 @@ return {
         }
       end,
     },
-
+--    {
+--        'l3mon4d3/luasnip',
+--        version = "2.*",
+--        config = function()
+--            local ls = require 'luasnip'
+--            ls.setup({ enable_autosnippets = true })
+--        end
+--    },
 --    {
 --        'anakojm/pipe2eval',
 --        lazy = true,

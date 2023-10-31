@@ -9,4 +9,5 @@ echo "\usepackage{markdown}" | tee -a $ZETTELKASTEN/$now.tex
 echo "\begin{document}" | tee -a $ZETTELKASTEN/$now.tex
 echo "#" | tee -a $ZETTELKASTEN/$now.tex
 echo "\end{document}" | tee -a $ZETTELKASTEN/$now.tex
-nvim +/# $ZETTELKASTEN/$now.tex
+cd $ZETTELKASTEN
+nvim +/# $now.tex

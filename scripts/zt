@@ -8,4 +8,5 @@ echo "" | tee -a $ZETTELKASTEN/$now.md
 echo "$%! TEX root = $ZETTELKASTEN$now.md$" | tee -a $ZETTELKASTEN/$now.md
 echo "" | tee -a $ZETTELKASTEN/$now.md
 echo "# $1" | tee -a $ZETTELKASTEN/$now.md
-nvim +/# $ZETTELKASTEN/$now.md
+cd $ZETTELKASTEN
+nvim +/# $now.md

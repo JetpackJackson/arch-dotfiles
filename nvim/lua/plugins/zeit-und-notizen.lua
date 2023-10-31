@@ -21,12 +21,13 @@ return {
               filetypes = { "markdown" },
             },
             links = {
-            transform_explicit = function(text)
-                text = text:gsub(" ", "-")
-                text = text:lower()
-                text = os.date('%Y%m%d-%H%M%S')
-                return(text)
-                end
+                conceal = true,
+                transform_explicit = function(text)
+                    text = text:gsub(" ", "-")
+                    text = text:lower()
+                    text = os.date('%Y%m%d-%H%M%S')
+                    return(text)
+                    end
             },
             new_file_template = {
                 use_template = true,

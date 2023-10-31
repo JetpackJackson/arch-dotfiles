@@ -1,0 +1,4 @@
+#!/bin/fish
+#cd ~/.wine/drive_c/Program\ Files/ADI/LTspice/
+cd ~/.local/share/wine/drive_c/users/jet/AppData/Local/Programs/ADI/LTspice/
+./LTspice.exe
