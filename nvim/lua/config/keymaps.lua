@@ -1,5 +1,4 @@
 vim.g.mapleader = ' '
-
 local zk = require("zk")
 local commands = require("zk.commands")
 commands.add("ZkOrphans", function(options)
@@ -12,11 +11,11 @@ local sil = { noremap = true, silent = true }
 --vim.api.nvim_set_keymap('n', '<leader>lt', ':NoNeckPain<CR>|<C-w><Left>|:terminal<CR>i', { noremap = true })
 --vim.api.nvim_set_keymap('n', '<leader>t', ':TodoLocList<CR>', { noremap = true })
 --vim.api.nvim_set_keymap('n', '<leader><C-f>', ':%s@', { noremap = true })
-vim.api.nvim_set_keymap("n", "<F5>", ":retab", opts)
-vim.api.nvim_set_keymap("n", "<F6>", ":let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader><BS>", "<Cmd>MkdnSTab<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader><Tab>", "<Cmd>MkdnTab<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader>c", "<Cmd>nohlsearch<CR>", sil)
+vim.api.nvim_set_keymap("n", "<leader>r", ":retab", opts)
+vim.api.nvim_set_keymap("n", "<leader>s", ":let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>t", "<Cmd>MkdnTableFormat<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader>x", "<Cmd>MkdnToggleToDo<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", opts)
@@ -40,6 +39,7 @@ vim.api.nvim_set_keymap('n', '<leader>ob', ':VimtexCompile<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>oo', ':!zetpdf %<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>vv', '<C-w>v<CR><C-w><Right>', sil)
 vim.api.nvim_set_keymap('n', '<leader>zb', ':ZkBacklinks<CR>', sil)
+vim.api.nvim_set_keymap('n', '<leader>zz', ':lua vim.lsp.buf.code_action()<CR>', sil)
 
 vim.cmd([[tnoremap <Esc> <C-\><C-n>]])
 

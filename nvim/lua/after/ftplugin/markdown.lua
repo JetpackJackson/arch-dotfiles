@@ -7,6 +7,9 @@ vim.cmd([[syntax match Directory "/^    - \[-\].*$/"]])
 vim.cmd([[syntax match Directory "/^        - \[-\].*$/"]])
 vim.cmd([[syntax match Comment "/^- \[M\].*$/"]])
 --MoreMsg Todo
+
+-- TODO: figure out why these autocommands don't work
+
 vim.api.nvim_create_autocmd( { "BufWrite", "BufRead", "BufReadPre" }, {
   pattern = { "*.md" },
   command = [[ syntax match Comment /^- \[M\].*$/ ]],

@@ -1,0 +1,3 @@
+#!/bin/env bash
+cd $XDG_CONFIG_HOME/spotdl/
+./spotdl-4.2.1-linux download "$1" --ffmpeg /home/jet/.config/spotdl/ffmpeg

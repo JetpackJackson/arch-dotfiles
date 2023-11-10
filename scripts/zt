@@ -1,12 +1,12 @@
-#!/bin/env bash
-now=$(date +"%Y%m%d-%H%M%S")
-echo "---" | tee -a $ZETTELKASTEN/$now.md
-echo "tags:" | tee -a $ZETTELKASTEN/$now.md
-echo "- $2" | tee -a $ZETTELKASTEN/$now.md
-echo "---" | tee -a $ZETTELKASTEN/$now.md
-echo "" | tee -a $ZETTELKASTEN/$now.md
-echo "$%! TEX root = $ZETTELKASTEN$now.md$" | tee -a $ZETTELKASTEN/$now.md
-echo "" | tee -a $ZETTELKASTEN/$now.md
-echo "# $1" | tee -a $ZETTELKASTEN/$now.md
+#!/bin/env fish
 cd $ZETTELKASTEN
+set now $(date +"%Y%m%d-%H%M%S")
+echo "---" | tee -a $now.md
+echo "tags:" | tee -a $now.md
+echo "- $2" | tee -a $now.md
+echo "---" | tee -a $now.md
+echo "" | tee -a $now.md
+echo "\$%! TEX root = $ZETTELKASTEN$now.md\$" | tee -a $now.md
+echo "" | tee -a $now.md
+echo "# $1" | tee -a $now.md
 nvim +/# $now.md

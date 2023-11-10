@@ -1,4 +1,5 @@
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -40,6 +41,7 @@ require("lazy").setup("plugins",{})
 require("config.keymaps")
 require("config.options")
 require("user.functions")
+--require("user.snips")
 vim.cmd([[filetype plugin on]])
 vim.opt.list = true
 vim.opt.listchars = { tab = "⇥ ", leadmultispace = "┊ ", trail = "␣", nbsp = "⍽" }
