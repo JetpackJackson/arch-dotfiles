@@ -7,8 +7,10 @@ read choice
 case "$choice" in
     1) sudo systemctl start avahi-daemon
        sudo systemctl restart cups.service
+       system-config-printer
     ;;
-    2) sudo systemctl stop avahi-daemon
+    2) sudo systemctl stop avahi-daemon.service
+       sudo systemctl stop avahi-daemon.socket
        sudo systemctl stop cups.service
     ;;
     *) echo "Try again."

@@ -1,15 +1,8 @@
-#!/bin/env bash
+#!/bin/env fish
 
-export SDL_VIDEODRIVER=wayland
-export _JAVA_AWT_WM_NONREPARENTING=1
-export QT_QPA_PLATFORM=wayland
-export XDG_CURRENT_DESKTOP=sway
-export XDG_SESSION_DESKTOP=sway
-
-
-#export SDL_VIDEODRIVER=wayland
-#export _JAVA_AWT_WM_NONREPARENTING=1
-#export QT_QPA_PLATFORM=wayland
-#export XDG_CURRENT_DESKTOP=sway
-#export XDG_SESSION_DESKTOP=sway
-#sway
+set -gx SDL_VIDEODRIVER wayland
+set -gx _JAVA_AWT_WM_NONREPARENTING 1
+#set -gx QT_QPA_PLATFORM wayland
+set -gx XDG_CURRENT_DESKTOP sway
+set -gx XDG_SESSION_DESKTOP sway
+dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)

@@ -6,6 +6,8 @@ return {
       event = { "BufRead farin*.lua", "BufRead testtrack*.lua" },
     },
     { "sainnhe/sonokai" },
+--    { 'matsuuu/pinkmare' },
+--    { 'Yazeed1s/oh-lucy.nvim' },
 --  {
 --    "m4xshen/hardtime.nvim",
 --    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
@@ -29,16 +31,19 @@ return {
 --       }
 --     })
 --  },
---  {
---    'hachy/cmdpalette.nvim',
---    config = function ()
---      require('cmdpalette').setup({
---          win = {
---            width = 0.5,
---          },
---      })
---    end,
---  },
+  {
+    'hachy/cmdpalette.nvim',
+    config = function ()
+      require('cmdpalette').setup({
+          win = {
+              width = 0.5,
+          },
+          buf = {
+              filetype = "cmdpalette",
+          },
+      })
+    end,
+  },
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },

@@ -88,6 +88,10 @@ vim.o.expandtab = true
 vim.o.laststatus = 2 --originally 3
 vim.o.number = true
 --vim.o.relativenumber = true
+vim.cmd([[autocmd InsertEnter * :set norelativenumber]])
+vim.cmd([[autocmd InsertLeave * :set relativenumber]])
+-- two lines
+--vim.o.statuscolumn = "%s %l %r "
 vim.o.shiftwidth = 4
 vim.o.signcolumn = "number"
 vim.o.smarttab = true

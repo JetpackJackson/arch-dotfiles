@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# requires rsync
+
 choice=0
 review=0
 

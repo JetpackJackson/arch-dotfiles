@@ -1,3 +1,15 @@
+function Tip()
+    print(os.execute('curl -s -m 3 https://vtip.43z.one'))
+end
+
+vim.cmd([[function! Vtip()
+  echomsg system('curl -s -m 3 https://vtip.43z.one')
+endfunction]])
+
+local function bufmap()
+    vim.keymap.set('i', '<tab>', '<c-x><c-v>', {buffer=true})
+end
+vim.api.nvim_create_autocmd("filetype", {pattern="cmdpalette", callback=bufmap})
 ------------------------------ Statusline ---------------------------------------------------
 Modes = {
   ["n"] = "NORMAL",

@@ -6,10 +6,6 @@ cd $ZETTELKASTEN
 #movefiletype fdb_latexmk
 #movefiletype gz
 mkdir $ZETTELKASTEN.mytrash
-#mv $ZETTELKASTEN/aux/* $ZETTELKASTEN/.mytrash
-#mv $ZETTELKASTEN/fls/* $ZETTELKASTEN/.mytrash
-#mv $ZETTELKASTEN/fdb_latexmk/* $ZETTELKASTEN/.mytrash
-#mv $ZETTELKASTEN/gz/* $ZETTELKASTEN/.mytrash
 
 find . -maxdepth 1 -name "*.aux" -exec mv {} $ZETTELKASTEN/.mytrash/ \;
 find . -maxdepth 1 -name "*.fls" -exec mv {} $ZETTELKASTEN/.mytrash/ \;
