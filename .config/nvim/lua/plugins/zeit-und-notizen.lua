@@ -1,24 +1,24 @@
 return {
-    {
-        'serenevoid/kiwi.nvim',
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            {
-                name = "zettel",
-                path = "/home/jet/docs/notes/notes-zettelkasten/"
-            },
-            {
-                name = "personal",
-                path = "/home/jet/wiki_2"
-            }
-        },
-        keys = {
-            { "<leader>ww", ":lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
-            { "<leader>wp", ":lua require(\"kiwi\").open_wiki_index(\"zettel\")<cr>", desc = "Open index of personal wiki" },
-            { "<leader>t", ":lua require(\"kiwi\").todo.toggle()<cr>", desc = "Toggle Markdown Task" }
-        },
-        lazy = true
-},
+--    {
+--        'serenevoid/kiwi.nvim',
+--        dependencies = { "nvim-lua/plenary.nvim" },
+--        opts = {
+--            {
+--                name = "zettel",
+--                path = "/home/jet/docs/notes/notes-zettelkasten/"
+--            },
+--            {
+--                name = "personal",
+--                path = "/home/jet/wiki_2"
+--            }
+--        },
+--        keys = {
+--            { "<leader>ww", ":lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
+--            { "<leader>wp", ":lua require(\"kiwi\").open_wiki_index(\"zettel\")<cr>", desc = "Open index of personal wiki" },
+--            { "<leader>t", ":lua require(\"kiwi\").todo.toggle()<cr>", desc = "Toggle Markdown Task" }
+--        },
+--        lazy = true
+--    },
   {
     'junegunn/fzf.vim',
     dependencies = { 'junegunn/fzf' }

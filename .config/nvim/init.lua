@@ -73,10 +73,6 @@ vim.bo.expandtab = true
 vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
 
---vim.cmd("set noequalalways")
---vim.cmd([[set background=dark]])
---vim.cmd([[set clipboard+=unnamedplus]])
---vim.cmd([[set conceallevel=2]])
 vim.opt.equalalways = false
 vim.opt.background = "dark"
 vim.opt.clipboard:append("unnamedplus")
@@ -87,9 +83,9 @@ vim.o.cursorline = true
 vim.o.expandtab = true
 vim.o.laststatus = 2 --originally 3
 vim.o.number = true
---vim.o.relativenumber = true
-vim.cmd([[autocmd InsertEnter * :set norelativenumber]])
-vim.cmd([[autocmd InsertLeave * :set relativenumber]])
+vim.o.relativenumber = true
+--vim.cmd([[autocmd InsertEnter * :set norelativenumber]])
+--vim.cmd([[autocmd InsertLeave * :set relativenumber]])
 -- two lines
 --vim.o.statuscolumn = "%s %l %r "
 vim.o.shiftwidth = 4
@@ -104,17 +100,14 @@ vim.wo.number = true
 Statusline = {}
 Statusline.active = function()
   return table.concat {
---    "%#Statusline#",
     "%#Grey#",
     Update_mode_colors(),
     Mode(),
---    "%#Normal# ",
     "%#StatusLineExtra# ",
-    Filepath(),
+    "%{v:lua.Filepath()}",
     Filename(),
     "%=",
     "%#StatusLineExtra#",
-  --  "%#Normal#",
     Words(),
     "%=",
     "%#StatusLineExtra#",
@@ -155,7 +148,7 @@ vim.cmd([[
     syntax enable
     let g:vimtex_view_method = 'zathura'
     let g:vimtex_compiler_method = 'latexmk'
-    let maplocalleader = ","
+"    let maplocalleader = ","
 ]])
 
 vim.g.vimtex_compiler_latexmk = {

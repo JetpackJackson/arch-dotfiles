@@ -1,0 +1,5 @@
+return {
+    {
+      "jalvesaq/zotcite",
+    }
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+printf "Are you sure? This moving of filetypes is irreversible! This will only do maxdepth=1. [y/n] "
+read confirm
+
+if [[ $confirm == "y" ]]; then
+    myvar="$PWD"
+    mkdir "$1"
+    find . -maxdepth 1 -name "*.$1" -exec mv {} "$myvar"/"$1"/ \;
+else
+    printf "Exiting."
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ $1 = sda* ]]
+then
+	echo "You can't eject your home partitions!"
+else
+	sync
+	udisksctl unmount --block-device /dev/"$1"
+fi

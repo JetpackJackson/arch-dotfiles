@@ -1,0 +1,14 @@
+#!/bin/bash
+num=0
+echo "1 mon or 2?"
+read num
+if [[ $num = "1" ]]
+then
+	mons -o
+elif [[ $num = "2" ]]
+then
+	mons -e right
+else
+	echo "Exiting."
+fi
+

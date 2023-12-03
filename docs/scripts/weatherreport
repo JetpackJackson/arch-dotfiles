@@ -1,0 +1,4 @@
+#!/bin/bash
+curl 'wttr.in/'"$1"'?u'
+read -p "Press ENTER..."
+curl 'v2d.wttr.in/'"$1"'?u'

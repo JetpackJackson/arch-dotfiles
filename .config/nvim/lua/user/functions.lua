@@ -63,7 +63,8 @@ function Filepath()
       return " "
   end
 
-  return string.format(" %%<%s/", Fpath)
+--  return string.format(" %%<%s/", Fpath)
+  return string.format(" ", Fpath)
 end
 
 function Filename()

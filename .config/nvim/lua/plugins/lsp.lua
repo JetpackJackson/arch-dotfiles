@@ -37,7 +37,7 @@ return {
         end,
     },
 
-    { 'lervag/vimtex' },
+--    { 'lervag/vimtex' },
 
     {
         "neovim/nvim-lspconfig",
@@ -169,6 +169,7 @@ return {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
+                    { name = "papis" },
                 }),
                 enabled = function()
                     local context = require("cmp.config.context")

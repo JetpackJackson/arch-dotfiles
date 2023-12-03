@@ -1,0 +1,16 @@
+#!/bin/env bash
+now=$(date +"%Y%m%d-%H%M%S")
+echo "%! TEX root = $ZETTELKASTEN$now.tex" | tee -a $ZETTELKASTEN/$now.tex
+echo "\documentclass[$2]{scrartcl}" | tee -a $ZETTELKASTEN/$now.tex
+echo "\title{$1}" | tee -a $ZETTELKASTEN/$now.tex
+echo "\author{JetpackJackson}" | tee -a $ZETTELKASTEN/$now.tex
+echo "%\usepackage{babel}" | tee -a $ZETTELKASTEN/$now.tex
+echo "%\usepackage{markdown}" | tee -a $ZETTELKASTEN/$now.tex
+echo "\begin{document}" | tee -a $ZETTELKASTEN/$now.tex
+echo "\maketitle" | tee -a $ZETTELKASTEN/$now.tex
+echo "" | tee -a $ZETTELKASTEN/$now.tex
+echo "#" | tee -a $ZETTELKASTEN/$now.tex
+echo "" | tee -a $ZETTELKASTEN/$now.tex
+echo "\end{document}" | tee -a $ZETTELKASTEN/$now.tex
+cd $ZETTELKASTEN
+nvim +/# $now.tex

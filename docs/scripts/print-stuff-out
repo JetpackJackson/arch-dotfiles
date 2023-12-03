@@ -1,0 +1,19 @@
+#!/bin/bash
+choice=0
+echo "1: start printing"
+echo "2: stop printing"
+read choice
+
+case "$choice" in
+    1) sudo systemctl start avahi-daemon
+       sudo systemctl restart cups.service
+       system-config-printer
+    ;;
+    2) sudo systemctl stop avahi-daemon.socket
+       sudo systemctl stop avahi-daemon.service
+       sudo systemctl stop cups.service
+    ;;
+    *) echo "Try again."
+    ;;
+esac
+

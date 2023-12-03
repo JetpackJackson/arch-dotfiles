@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+cd $HOME
+cd $ZETTELKASTEN/fleeting
+now=$(date +"%Y%m%d-%H%M%S")
+#set now $(date +"%Y%m%d-%H%M%S")
+echo "---" | tee -a $now.md
+echo "title: $1" | tee -a $now.md
+echo "tags:" | tee -a $now.md
+echo "- $2" | tee -a $now.md
+echo "---" | tee -a $now.md
+echo "" | tee -a $now.md
+echo "\$%! TEX root = $ZETTELKASTEN/fleeting/$now.md\$" | tee -a $now.md
+echo "" | tee -a $now.md
+echo "# $1" | tee -a $now.md
+nvim +/# $now.md

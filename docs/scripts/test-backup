@@ -1,0 +1,104 @@
+#!/bin/bash
+choice=0
+review=0
+format=0
+
+#if [[ $1 = a* ]]
+#then
+#    echo "You can't backup to your home partitions!"
+#else
+if mountpoint -q /run/media/jet/pony 
+then
+    drivename="pony"
+    echo "Drive mounted."
+    echo "1: Review backup (verbose)"
+    echo "2: Backup (verbose)"
+    echo "3: Review backup (progress bar)"
+    echo "4: Backup (progress bar)"
+    echo "5: View progress of writeback"
+    read choice
+    case "$choice" in
+        1) sudo rsync -aAXHvun --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/$1/ /run/media/jet/pony/sharky/home/jet/$1/
+        ;;
+        2) sudo rsync -aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/$1/ /run/media/jet/pony/sharky/home/jet/$1/
+        ;;
+        3) sudo rsync -aAXHun --info=progress2 --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/$1/ /run/media/jet/pony/sharky/home/jet/$1/
+        ;;
+        4) sudo rsync -aAXHu --info=progress2 --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/$1/ /run/media/jet/pony/sharky/home/jet/$1/
+        ;;
+        5) watch -d grep -e Dirty: -e Writeback: /proc/meminfo
+        ;;
+        *) echo "Exiting."
+        ;;
+    esac
+fi
+
+
+        #echo "1: full backup, excludes home and etc"
+        #echo -n "excludes: "
+        #echo $(<"$XDG_DOCUMENTS_DIR"/rsync-list.txt)
+        #echo $(<rsync-list.txt)
+        #read choice
+        #echo "review files? [y/n] "
+        #read review
+        #echo "files or bars? [f/b] "
+        #read format
+        #if [[ $format == "f" ]]
+        #then
+        #    BACKUPSTYLE="v"
+        #elif [[ $format == "b" ]]
+        #then
+        #    BACKUPSTYLE=" --info=progress2"
+        #fi
+        #case "$review" in
+        #    y) sudo rsync -aAXHn"$BACKUPSTYLE" --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/ /run/media/jet/pony/sharky/home/
+        #    ;;
+        #    n) sudo rsync -aAXH"$BACKUPSTYLE" --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/ /run/media/jet/pony/sharky/home/
+        #    ;;
+        #    *) echo default
+        #    ;;
+        #esac
+
+#case "$review" in
+#            1) if (confirm == n); then
+#                sudo rsync -aAXHvn --delete --exclude={"swapfile","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found",".cache/*","/etc/*","/home/*","/usr/*"} / /run/media/jet/pony/sharky/
+#            elif (confirm == y); then
+#                sudo rsync -aAXHv --delete --exclude={"swapfile","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found",".cache/*","/etc/*","/home/*","/usr/*"} / /run/media/jet/pony/sharky/
+#            else
+#                echo "Exiting."
+#            fi
+#            ;;
+#            2) sudo rsync -aAXHvn --delete --exclude-from='rsync-list.txt' /home/ /run/media/jet/pony/sharky/home/
+#            ;;
+#            3)
+#            ;;
+#            *) echo default
+#            ;;
+#        esac
+
+
+
+                #if [[ $choice = "1" && $confirm = "f" ]]
+                #then
+                #       sudo rsync -aAXHv --delete --exclude={"swapfile","/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found",".cache/*","/etc/*","/home/*","/usr/*"} / /run/media/jet/pony/sharky/
+                #       udisksctl unmount --block-device /dev/sd$1
+                #       echo "USB unmounted."
+#                if [[ $choice = "2" && $confirm = "f" ]]
+#                then
+#                        sudo rsync -avu --delete --exclude-from='rsync-list.txt' /home/ /run/media/jet/pony/sharky/home/
+#                        sync &&
+#                        udisksctl unmount --block-device /dev/sd$1
+#                        echo "USB unmounted."
+#                elif [[ $choice = "2" && $confirm = "b" ]]
+#                then
+#                        sudo rsync -au --info=progress2 --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/ /run/media/jet/pony/sharky/home/
+#                        udisksctl unmount --block-device /dev/sd$1
+#                        echo "USB unmounted."
+#                else
+#                        echo "Exiting."
+#                        #sudo rsync -aAXHv --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found",".cache/*","/etc/*","/home/*","/usr/*"} / /run/media/jet/pony/sharky/
+#                fi
+#        else
+#                echo "dev/sd$1 is not mounted!"
+#        fi
+#fi

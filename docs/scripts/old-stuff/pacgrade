@@ -1,0 +1,45 @@
+#!/bin/bash
+choice=0
+confirm=0
+
+echo "==============================================="
+echo "JetpackJackson's Paruman (Pacman + Paru) Script"
+echo "==============================================="
+echo "1. AUR Only"
+echo "2. Regular Repos Only"
+echo "3. Everything"
+echo "4. View and Remove Packages (All Repos)"
+echo "5. View and Remove Packages (AUR Only)"
+echo "6. Cleanup Package Cache"
+read choice
+
+case "$choice" in
+    1) paru
+    ;;
+    2) echo "Refresh database? [y/n]"
+       read confirm
+       if [[ $confirm == "y" ]]; then
+        sudo pacman -Syyu
+       else
+        sudo pacman -Syu
+       fi
+    ;;
+    3) echo "Refresh database? [y/n]"
+       read confirm
+       if [[ $confirm == "y" ]]; then
+        paru;
+        sudo pacman -Syyu;
+       else
+        paru;
+        sudo pacman -Syu;
+       fi
+    ;;
+    4) pacman -Qqe | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+    ;;
+    5) pacman -Qqm | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+    ;;
+    6) cleanup
+    ;;
+    *) echo "Try again."
+    ;;
+esac

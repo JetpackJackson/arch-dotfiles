@@ -3,6 +3,7 @@ https://archlinux.org/feeds/packages/x86_64/core/
 https://archlinux.org/feeds/packages/x86_64/stable-repos/
 https://aur.archlinux.org/rss/
 https://xkcd.com/rss.xml "~xkcd"
+https://www.theglassscientists.com/comic/rss "~The Glass Scientists"
 https://ieeexplore.ieee.org/rss/TOC6.XML
 https://lemmy.ml/feeds/inbox/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzNzgzLCJpc3MiOiJsZW1teS5tbCIsImlhdCI6MTY4NjA4MzM3Nn0.0kQV3Ol7-mRsVSIF3GLigh15zuQYZc8mQCUJY9zfzTs.xml "~Lemmy Inbox"
 https://feddit.de/feeds/inbox/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjk4MjAsImlzcyI6ImZlZGRpdC5kZSIsImlhdCI6MTY5MDA1NDgwNn0.Q7zBaP-YfCcBr4YTxc7kRo3yr54vsG5zRjIbOIGJ-Dc.xml "~Feddit Inbox"
@@ -11,3 +12,4 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC79qFuymkVas5dCScbLF9fw
 https://www.youtube.com/feeds/videos.xml?channel_id=UC0Eqb484X8EiNrFLSUQVsaA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCu0PSyLD5p_J5osLk5UD0pw
 https://archiveofourown.org/admin_posts.rss?language_id=en
+https://jetpackjackson.neocities.org/feed.xml "~My Website"

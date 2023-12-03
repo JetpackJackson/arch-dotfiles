@@ -1,6 +1,5 @@
 {
   "auto-save.nvim": { "branch": "main", "commit": "979b6c82f60cfa80f4cf437d77446d0ded0addf0" },
-  "cmdpalette.nvim": { "branch": "main", "commit": "5b9fb64f39d85c8beaa1b7f1d71190d5b457a4b6" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "8ee981b4a91f536f52add291594e89fb6645e451" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
@@ -10,7 +9,6 @@
   "farin-colors": { "branch": "main", "commit": "72d116b954b48a33db87d23eac9e23e7bd28245b" },
   "fzf": { "branch": "master", "commit": "108493524110c8f996231eb5e51b93da7a9b57ca" },
   "fzf.vim": { "branch": "master", "commit": "1e054c1d075d87903647db9320116d360eb8b024" },
-  "kiwi.nvim": { "branch": "master", "commit": "235024c90bee5076ebfbf89cf06b91863298e9e5" },
   "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
   "luasnip": { "branch": "master", "commit": "a4de64570b9620875c8ea04175cd07ed8e32ac99" },
   "luasnip-latex-snippets.nvim": { "branch": "main", "commit": "c06cb4b449bdf0e2984543b7c56379409b04d3fc" },
