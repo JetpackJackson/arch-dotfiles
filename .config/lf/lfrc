@@ -1,11 +1,13 @@
 # interpreter for shell commands
 set shell sh
 
-set previewer ctpv
-#set previewer "~/.config/ranger/scope.sh"
-set cleaner ctpvclear
-&ctpv -s $id
-&ctpvquit $id
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
+
+#set previewer ctpv
+#set cleaner ctpvclear
+#&ctpv -s $id
+#&ctpvquit $id
 map gi cd /run/media
 #map gg :push cd $HOME
 map gg cd 

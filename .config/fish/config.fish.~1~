@@ -34,11 +34,11 @@ set -gx PROJECTS "$XDG_DOCUMENTS_DIR/notes/projects"
 set -gx SCRIPTS "$XDG_DOCUMENTS_DIR/scripts"
 
 # fixes
-set -gx W3M_DIR "$XDG_STATE_HOME"/w3m
-set -gx CARGO_HOME "$XDG_DATA_HOME"/cargo
-set -gx TEXMFVAR "$XDG_CACHE_HOME"/texlive/texmf-var
+set -gx W3M_DIR $XDG_STATE_HOME/w3m
+set -gx CARGO_HOME $XDG_DATA_HOME/cargo
+set -gx TEXMFVAR $XDG_CACHE_HOME/texlive/texmf-var
 #set -gx _JAVA_OPTIONS $XDG_CONFIG_HOME/java
-set -gx WINEPREFIX "$XDG_DATA_HOME"/wine
+set -gx WINEPREFIX $XDG_DATA_HOME/wine
 set -gx QT_QPA_PLATFORM "wayland;xcb"
 set -gx TERMINAL_COMMAND kitty
 set -gx EDITOR nvim
@@ -50,9 +50,9 @@ set -gx XAUTHORITY $XDG_RUNTIME_DIR/Xauthority
 set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
 set -gx ANKI_BASE $XDG_DATA_HOME/AnkiData
 set -gx GEM_HOME $XDG_DATA_HOME/gem/ruby
-set -gx BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle/
-set -gx BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
-set -gx BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
+set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle/
+set -gx BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundle
+set -gx BUNDLE_USER_PLUGIN $XDG_DATA_HOME/bundle
 
 
 # lang
