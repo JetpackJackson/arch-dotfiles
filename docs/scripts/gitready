@@ -4,7 +4,8 @@
 rsync -a --delete --exclude={"/plugged/*","/autoload/*"} .config/nvim/ $PROJECTS/git/newdots/.config/nvim/
 rsync -a --delete --exclude={"/plugged/**"} .config/nvim-old/ $PROJECTS/git/newdots/.config/nvim-old/
 rsync -a --delete .config/X11/ $PROJECTS/git/newdots/.config/X11/
-rsync -a --delete .config/ctpv/ $PROJECTS/git/newdots/.config/ctpv/
+#rsync -a --delete .config/ctpv/ $PROJECTS/git/newdots/.config/ctpv/
+rsync -a --delete .config/pistol/ $PROJECTS/git/newdots/.config/pistol/
 rsync -a --delete .config/czkawka/ $PROJECTS/git/newdots/.config/czkawka/
 rsync -a --delete .config/dunst/ $PROJECTS/git/newdots/.config/dunst/
 rsync -a --delete .config/fish/ $PROJECTS/git/newdots/.config/fish/
@@ -13,7 +14,7 @@ rsync -a --delete .config/lf/ $PROJECTS/git/newdots/.config/lf/
 rsync -a --delete .config/mpd/ $PROJECTS/git/newdots/.config/mpd/
 rsync -a --delete --exclude={"lrc.lua","lrc.conf"} .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
 #rsync -a --delete .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
-rsync -a --delete .config/ncmpcpp/ $PROJECTS/git/newdots/.config/ncmpcpp/
+#rsync -a --delete .config/ncmpcpp/ $PROJECTS/git/newdots/.config/ncmpcpp/
 rsync -a --delete .config/neofetch/ $PROJECTS/git/newdots/.config/neofetch/
 rsync -a --delete .config/newsboat/ $PROJECTS/git/newdots/.config/newsboat/
 rsync -a --delete .config/nvim/ $PROJECTS/git/newdots/.config/nvim/

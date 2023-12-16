@@ -34,7 +34,19 @@ exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/sh
 
 output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
+input 9580:100:HUION_Huion_Tablet_H640P map_to_output LVDS-1
+input 9580:100:HUION_Huion_Tablet_H640P {
+    left_handed enabled
+}
 
+input type:tablet_tool {
+    left_handed enabled
+#    tool_mode "*" relative
+#    calibration_matrix "-1" 0 1 0 "-1" 1
+}
+input type:tablet_pad {
+    left_handed enabled
+}
 set $disp1 LVDS-1
 set $disp2 HDMI-A-1
 workspace 1 output $disp1

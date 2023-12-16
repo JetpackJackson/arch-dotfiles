@@ -38,6 +38,10 @@ set -gx W3M_DIR $XDG_STATE_HOME/w3m
 set -gx CARGO_HOME $XDG_DATA_HOME/cargo
 set -gx TEXMFVAR $XDG_CACHE_HOME/texlive/texmf-var
 #set -gx _JAVA_OPTIONS $XDG_CONFIG_HOME/java
+set -gx _JAVA_OPTIONS -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
+set -gx JAVA_HOME /usr/lib/jvm/java-21-openjdk/
+set -gx ANDROID_HOME $XDG_DATA_HOME/android-studio/
+set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
 set -gx WINEPREFIX $XDG_DATA_HOME/wine
 set -gx QT_QPA_PLATFORM "wayland;xcb"
 set -gx TERMINAL_COMMAND kitty
@@ -53,7 +57,7 @@ set -gx GEM_HOME $XDG_DATA_HOME/gem/ruby
 set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle/
 set -gx BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundle
 set -gx BUNDLE_USER_PLUGIN $XDG_DATA_HOME/bundle
-
+set -gx NUGET_PACKAGES $XDG_CACHE_HOME/NuGetPackages
 
 # lang
 set -gx LANG de_DE.utf8
@@ -76,4 +80,4 @@ set -gx SCREENSHOT_DIR $XDG_PICTURES_DIR/screenshots
 set -gx XDG_VIDEOS_DIR $HOME/vids
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_STATE_HOME $HOME/.local/state
-set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/cli-wordle:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/cli-wordle:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
