@@ -296,6 +296,7 @@ mode "resize" {
 
 bindsym $mod+Plus mode "resize"
 
+exec_always systemctl --user start opentabletdriver
 exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
 #exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
 include /etc/sway/config.d/*

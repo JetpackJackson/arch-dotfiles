@@ -12,8 +12,8 @@ rsync -a --delete .config/fish/ $PROJECTS/git/newdots/.config/fish/
 rsync -a --delete .config/kitty/ $PROJECTS/git/newdots/.config/kitty/
 rsync -a --delete .config/lf/ $PROJECTS/git/newdots/.config/lf/
 rsync -a --delete .config/mpd/ $PROJECTS/git/newdots/.config/mpd/
-rsync -a --delete --exclude={"lrc.lua","lrc.conf"} .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
-#rsync -a --delete .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
+#rsync -a --delete --exclude={"lrc.lua","lrc.conf"} .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
+rsync -a --delete .config/mpv/ $PROJECTS/git/newdots/.config/mpv/
 #rsync -a --delete .config/ncmpcpp/ $PROJECTS/git/newdots/.config/ncmpcpp/
 rsync -a --delete .config/neofetch/ $PROJECTS/git/newdots/.config/neofetch/
 rsync -a --delete .config/newsboat/ $PROJECTS/git/newdots/.config/newsboat/
