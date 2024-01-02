@@ -16,7 +16,9 @@ real2VerboseBackup="-aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-lis
 
 backup() {
     echo "1: Review and backup (verbose)"
+    echo $(<$XDG_DOCUMENTS_DIR/rsync-list.txt)
     echo "2: Review and backup (exclude more stuff)"
+    echo $(<$XDG_DOCUMENTS_DIR/rsync-list2.txt)
     echo "3: View progress of writeback"
     echo "4: test"
     read choice

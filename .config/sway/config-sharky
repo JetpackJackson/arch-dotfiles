@@ -15,17 +15,19 @@ set $term kitty
 set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run' 
 #-icon-theme "Papirus" -show-icons
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
+exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec export XDG_CURRENT_DESKTOP=sway
+exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always export XDG_CURRENT_DESKTOP=sway
 
 output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
-exec_always pkill -f mediaplayer.py
-exec_always killall waybar
-exec_always --no-startup-id dunst
+exec_always pkill -2 -f mediaplayer.py
+exec_always pkill -2 -f waybar
+#exec_always --no-startup-id dunst
+exec_always pkill -2 -f mako
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
@@ -34,19 +36,19 @@ exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/sh
 
 output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
-input 9580:100:HUION_Huion_Tablet_H640P map_to_output LVDS-1
-input 9580:100:HUION_Huion_Tablet_H640P {
-    left_handed enabled
-}
-
-input type:tablet_tool {
-    left_handed enabled
-#    tool_mode "*" relative
-#    calibration_matrix "-1" 0 1 0 "-1" 1
-}
-input type:tablet_pad {
-    left_handed enabled
-}
+#input 9580:100:HUION_Huion_Tablet_H640P map_to_output LVDS-1
+#input 9580:100:HUION_Huion_Tablet_H640P {
+#    left_handed enabled
+#}
+#
+#input type:tablet_tool {
+#    left_handed enabled
+##    tool_mode "*" relative
+##    calibration_matrix "-1" 0 1 0 "-1" 1
+#}
+#input type:tablet_pad {
+#    left_handed enabled
+#}
 set $disp1 LVDS-1
 set $disp2 HDMI-A-1
 workspace 1 output $disp1
@@ -69,12 +71,12 @@ mode "mon" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+KP_Equal mode "mon"
+bindsym $mod+Equal mode "mon"
 
-exec_always killall swayidle; swayidle -w \
-	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"'
+##exec_always killall swayidle; swayidle -w \
+##	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"' \
+##         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+##         before-sleep 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"'
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -112,7 +114,7 @@ bindsym XF86Launch9 exec mpc next
 bindsym XF86Launch7 exec mpc shuffle
 
 bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
-bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
+bindsym $mod+XF86Search exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
 bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
 
 default_border none
@@ -297,27 +299,59 @@ mode "resize" {
 bindsym $mod+Plus mode "resize"
 
 exec_always systemctl --user start opentabletdriver
+exec_always systemctl --user start mako
 exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
-#exec_always waybar -c ~/.config/waybar/himmelblau -s ~/.config/waybar/himmelblau.css
 include /etc/sway/config.d/*
 
+#bar { 
+#        [
+#            {
+#                "version": 1,
+#                "click_events": true,
+#                "cont_signal": 18,
+#                "stop_signal": 19
+#            }
+#        ],
+#        [
+#            {
+#                "full_text": "Thu 30 May 2019 02:09:15",
+#                "short_text": "02:09",
+#                "color": "#ccccccff",
+#                "background": "#111111ff",
+#                "border": "#222222ff",
+#                "border_top": 1,
+#                "border_bottom": 1,
+#                "border_left": 1,
+#                "border_right": 1,
+#                "min_width": 100,
+#                "align": "center",
+#                "name": "clock",
+#                "instance": "edt",
+#                "urgent": false,
+#                "separator": true,
+#                "separator_block_width": 5,
+#                "markup": "none"
+#            }
+#        ],
+#}
+
 #bar {
-#	status_command  i3blocks
-#	position top
-#	font pango:Ärzte Sans Mono Roman 11
-#	separator_symbol "  |  "
-#	mode dock
-#   
+#    #font pango:monospace 11
+#    font pango:Ärzte Sans Mono Roman 11
+#    #status_command while ~/.config/sway/bar.sh; do sleep 1; done
+#    status_command ~/.config/sway/bar.py
+#    position top
+#    separator_symbol "  |  "
+#    mode dock
 #    colors {
 #        statusline   #78da59
 #        background #000000cc
-#	separator #fff32e
-#				#border	#bg	#txt
+#        separator #fff32e
 #        focused_workspace	#332f2e	#332f2e	#ffba08
 #        inactive_workspace	#332f2e	#332f2e	#cde4e6
-#	active_workspace	#777F8B	#777F8B	#cde4e6
-#    	urgent_workspace	#DEDFE3	#DEDFE3	#767E8A   
-#
-#	}
+#        active_workspace	#777F8B	#777F8B	#cde4e6
+#        urgent_workspace	#DEDFE3	#DEDFE3	#767E8A   
+#    }
 #}
+exec_always pkill swaybar
 ##exec_always systemctl --user start sway-session.target
