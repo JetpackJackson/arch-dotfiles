@@ -21,6 +21,7 @@ rsync -a --delete .config/nvim/ $PROJECTS/git/newdots/.config/nvim/
 rsync -a --delete .config/paru/ $PROJECTS/git/newdots/.config/paru/
 rsync -a --delete .config/swappy/ $PROJECTS/git/newdots/.config/swappy/
 rsync -a --delete .config/sway/ $PROJECTS/git/newdots/.config/sway/
+rsync -a --delete .config/yambar/ $PROJECTS/git/newdots/.config/yambar/
 rsync -a --delete .config/waybar/ $PROJECTS/git/newdots/.config/waybar/
 rsync -a --delete .config/zathura/ $PROJECTS/git/newdots/.config/zathura/
 rsync -a --delete /etc/pacman.conf $PROJECTS/git/newdots/etc/pacman.conf
