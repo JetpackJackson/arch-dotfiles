@@ -1,6 +1,8 @@
 nerd: &nerd Symbols Nerd Font:pixelsize=14
 aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
 std_underline: &std_underline {underline: { size: 2, color: ff0000ff}}
+highlight: &highlight a02626ff
+textcolor: &textcolor d0d0d0ff
 
 bar:
   height: 26
@@ -16,36 +18,76 @@ bar:
 
   left:
     - i3:
-        sort: ascending
-        persistent: ["1", "2", "3", "4"]
+        sort: native
         anchors:
-          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
-          - string: &default {<<: *i3_common, text: "{name}"}
-          - focused: &focused
-              deco: {stack: [background: {color: ffa0a04c}]}
-          - invisible: &invisible {foreground: ffffff55}
-          - urgent: &urgent
-              foreground: 000000ff
-              deco: {stack: [background: {color: bc2b3fff}, <<: *std_underline]}
-
-          - map: &i3_mode
-              default:
-                - string:
-                    margin: 5
-                    text: "{mode}"
-                    deco: {background: {color: cc421dff}}
-                - empty: {right-margin: 7}
-              conditions:
-                mode == default: {empty: {}}
-
+          - string: &common {margin: 5}
+          - focused: &focused {deco: {stack: [background: {color: a0262680}]}}
+          - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}}
         content:
           "":
             map:
+              default: [string: {text: "{name}", <<: *common}]
               conditions:
-                state == focused:   {string: {<<: [*default, *focused]}}
-                state == unfocused: {string: {<<: *default}}
-                state == invisible: {string: {<<: [*default, *invisible]}}
-                state == urgent:    {string: {<<: [*default, *urgent]}}
+                state == focused: {string: {text: "{name}", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "{name}", <<: [*urgent, *common]}}
+          main:
+            map:
+              default: [string: {text: "", <<: *common}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          browser:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          auth:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          current:
+            map:
+              default: [string: {text: "[{mode}]"}]
+              conditions:
+                mode == default: [empty: {}]
+                mode == audio: [string: {text: "[]"}]
+                mode == screen: [string: {text: "[]"}]
+                mode == escape: [string: {text: "[$]"}]
+                mode == workspace: [string: {text: "[]"}]
+                  #    - i3:
+                  #        sort: ascending
+                  #        persistent: ["1", "2", "3", "4"]
+                  #        anchors:
+                  #          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
+                  #          - string: &default {<<: *i3_common, text: "{name}"}
+                  #          - focused: &focused
+                  #              deco: {stack: [background: {color: ffa0a04c}]}
+                  #          - invisible: &invisible {foreground: ffffff55}
+                  #          - urgent: &urgent
+                  #              foreground: 000000ff
+                  #              deco: {stack: [background: {color: bc2b3fff}, <<: *std_underline]}
+                  #
+                  #          - map: &i3_mode
+                  #              default:
+                  #                - string:
+                  #                    margin: 5
+                  #                    text: "{mode}"
+                  #                    deco: {background: {color: cc421dff}}
+                  #                - empty: {right-margin: 7}
+                  #              conditions:
+                  #                mode == default: {empty: {}}
+                  #
+                  #        content:
+                  #          "":
+                  #            map:
+                  #              conditions:
+                  #                state == focused:   {string: {<<: [*default, *focused]}}
+                  #                state == unfocused: {string: {<<: *default}}
+                  #                state == invisible: {string: {<<: [*default, *invisible]}}
+                  #                state == urgent:    {string: {<<: [*default, *urgent]}}
 
     - script:
         path: ~/docs/scripts/yams-scratch.sh
