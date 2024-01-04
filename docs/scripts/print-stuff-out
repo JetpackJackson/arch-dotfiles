@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 choice=0
 echo "1: start printing"
 echo "2: stop printing"

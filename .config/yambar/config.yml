@@ -89,15 +89,30 @@ bar:
                   #                state == invisible: {string: {<<: [*default, *invisible]}}
                   #                state == urgent:    {string: {<<: [*default, *urgent]}}
 
+                  ############# borked
+                  #    - script:
+                  #        path: ~/docs/scripts/yams-scratch.sh
+                  #        args: []
+                  #        anchors:
+                  #          - string: &test {deco: {background: {color: 831c1cff}}}
+                  #            #        content:
+                  #            #          string: {text: "{count}"}
+                  #            #        content:
+                  #            #          "":
+                  #            #            map:
+                  #            #              default: [string: {text: "{count}", <<: *test}]
+                  #            #    
+                  #        content:
+                  #          map:
+                  #            conditions:
+                  #              default: [string: {text: "{{count}}", <<: *test}]
+                  #              count == 0:
+                  #                content: {string: {text: "test"}}
+
     - script:
         path: ~/docs/scripts/yams-scratch.sh
         args: []
         content: {string: {text: "{count}"}}
-
-          #    - script:
-          #        path: ~/docs/scripts/yams-scratch-show.sh
-          #        args: []
-          #        content: {string: {text: "{test}"}}
 
   center:
     #    - label:
@@ -217,7 +232,7 @@ bar:
               ~carrier: {empty: {}}
               carrier:
                 map:
-                  default: {string: {text: , font: *nerd, foreground: ffffff66}}
+                  default: {string: {text: "suche nach Signal...", foreground: ffffff66}}
                   conditions:
                     state == up && ipv4 != "": {string: {text: "verbunden", right-margin: 5}}
     - battery:
