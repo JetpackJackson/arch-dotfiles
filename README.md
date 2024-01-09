@@ -1,9 +1,9 @@
 # arch-dotfiles
 My arch dotfiles.
 
-![primary_20240109165608.png]()
+![img1](primary_20240109165608.png)
 
-![primary_20240109165623.png]()
+![img2](primary_20240109165623.png)
 
-![primary_20240109165751.png]()
+![img3](primary_20240109165751.png)
 
