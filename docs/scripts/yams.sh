@@ -5,15 +5,18 @@ killall yambar
 monitors=$(wlr-randr | grep "^[^ ]" | awk '{ print$1 }')
 total=$(wlr-randr | grep "^[^ ]" | awk '{ print$1 }' | wc -l)
 
+if [[ $(cat /etc/hostname) == "sharky" ]]; then
+    sleep 5
+fi
 
 for monitor in ${monitors}; do
-    swaymsg focus output ${monitor}
-    yambar > /dev/null 2>&1&
+    swaymsg focus output ${monitor} &&
+    yambar -c $XDG_CONFIG_HOME/yambar/config-$(cat /etc/hostname).yml > /dev/null 2>&1&
     sleep 0.2
 done
 
 
-
+#grep -oP '^[^"]+(?= ")' <(wlr-randr)
 
 
 ##/usr/bin/env sh

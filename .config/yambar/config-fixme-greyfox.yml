@@ -1,0 +1,361 @@
+nerd: &nerd Symbols Nerd Font:pixelsize=14
+aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
+std_underline: &std_underline {underline: { size: 2, color: ff0000ff}}
+highlight: &highlight a02626ff
+textcolor: &textcolor d0d0d0ff
+  #black: &black 00101399
+black: &black 00101399
+
+bar:
+  height: 26
+  location: top
+    #spacing: 10
+  #right-margin: 7
+  font: Ärzte Sans:size=13
+  foreground: d1cdc2ff
+  background: 00101399
+  border:
+    width: 0
+    color: 999999cc
+
+  left:
+    - i3:
+        sort: native
+        anchors:
+          - string: &common {margin: 5, deco: {stack: [background: {color: *black}]}}
+          - focused: &focused {deco: {stack: [background: {color: a0262680}]}}
+          - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}}
+        content:
+          "":
+            map:
+              default: [string: {text: "{name}", <<: *common}]
+              conditions:
+                state == focused: {string: {text: "{name}", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "{name}", <<: [*urgent, *common]}}
+          main:
+            map:
+              default: [string: {text: "", <<: *common}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          browser:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          auth:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          current:
+            map:
+              default: [string: {text: "[{mode}]"}]
+              conditions:
+                mode == default: [empty: {}]
+                mode == audio: [string: {text: "[]"}]
+                mode == screen: [string: {text: "[]"}]
+                mode == escape: [string: {text: "[$]"}]
+                mode == workspace: [string: {text: "[]"}]
+                  #    - i3:
+                  #        sort: ascending
+                  #        persistent: ["1", "2", "3", "4"]
+                  #        anchors:
+                  #          - string: &i3_common {margin: 5, on-click: "swaymsg --quiet workspace {name}"}
+                  #          - string: &default {<<: *i3_common, text: "{name}"}
+                  #          - focused: &focused
+                  #              deco: {stack: [background: {color: ffa0a04c}]}
+                  #          - invisible: &invisible {foreground: ffffff55}
+                  #          - urgent: &urgent
+                  #              foreground: 000000ff
+                  #              deco: {stack: [background: {color: bc2b3fff}, <<: *std_underline]}
+                  #
+                  #          - map: &i3_mode
+                  #              default:
+                  #                - string:
+                  #                    margin: 5
+                  #                    text: "{mode}"
+                  #                    deco: {background: {color: cc421dff}}
+                  #                - empty: {right-margin: 7}
+                  #              conditions:
+                  #                mode == default: {empty: {}}
+                  #
+                  #        content:
+                  #          "":
+                  #            map:
+                  #              conditions:
+                  #                state == focused:   {string: {<<: [*default, *focused]}}
+                  #                state == unfocused: {string: {<<: *default}}
+                  #                state == invisible: {string: {<<: [*default, *invisible]}}
+                  #                state == urgent:    {string: {<<: [*default, *urgent]}}
+
+                  ############# borked
+                  #    - script:
+                  #        path: ~/docs/scripts/yams-scratch.sh
+                  #        args: []
+                  #        anchors:
+                  #          - string: &test {deco: {background: {color: 831c1cff}}}
+                  #            #        content:
+                  #            #          string: {text: "{count}"}
+                  #            #        content:
+                  #            #          "":
+                  #            #            map:
+                  #            #              default: [string: {text: "{count}", <<: *test}]
+                  #            #    
+                  #        content:
+                  #          map:
+                  #            conditions:
+                  #              default: [string: {text: "{{count}}", <<: *test}]
+                  #              count == 0:
+                  #                content: {string: {text: "test"}}
+    - script:
+        path: ~/docs/scripts/yams-scratch.sh
+        args: []
+        content: 
+          list:
+            items:
+              - string: {text: "{count}"}
+            deco: {stack: [background: {color: *black}]}
+
+    - label:
+        content:
+          list:
+            margin: 0
+            items:
+              - string: {text: "", foreground: *black}
+            deco: {stack: [background: {color: *black}]}
+
+    - label:
+        content:
+          list:
+            margin: 0
+            items:
+              - string: {text: "", foreground: *black}
+                #deco: {stack: [background: {color: *black}]}
+
+  center:
+    #    - label:
+    #        content:
+    #          string:
+    #            text: ""
+    - script:
+        path: ~/docs/scripts/yams-mode.sh
+        args: []
+        content: 
+          list:
+            items:
+              - string: {text: "{mode}"}
+            deco: {stack: [background: {color: *black}]}
+
+    - script:
+        path: ~/docs/scripts/yams-capslock.sh
+        args: []
+        content: 
+          list:
+            items:
+              - string: {text: "{caps}"}
+            deco: {stack: [background: {color: *black}]}
+
+          #
+          #map:
+          #  conditions:
+          #    kbd == En: {empty: {}}
+          #    kbd == De: content: {string: {text: "{kbd}"}}
+            #            on-click: systemctl poweroff
+            #text: 
+            #font: *nerd
+  right:
+    - label:
+        content:
+          list:
+            margin: 0
+            items:
+              - string: {text: "", foreground: *black}
+                #    - label:
+                #        content:
+                #          list:
+                #            margin: 0
+                #            items:
+                #              - string: {text: " 󰝤", foreground: *black}
+                #            deco: {stack: [background: {color: *black}]}
+
+    - mpd:
+        host: /var/run/user/1000/mpd/socket
+        anchors:
+          list: &artist_title
+            #change to artist_album_title to show album
+            spacing: 0
+            items:
+              - map:
+                  conditions:
+                    state == playing: {string: {text: "{artist}", deco: {stack: [background: {color: *black}]}}}
+                    state == paused: {string: {text: "{artist}", foreground: ffffff66, deco: {stack: [background: {color: *black}]}}}
+              - string: {text: " | ", foreground: ffffff66, deco: {stack: [background: {color: *black}]}}
+              - map:
+                  conditions:
+                    state == playing: {string: {text: "{title}", foreground: ffa0a0ff, right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+                    state == paused: {string: {text: "{title}", foreground: ffffff66, right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+        content:
+          map:
+            margin: 10
+            conditions:
+              state == offline: {string: {text: offline, foreground: ff0000ff, deco: {stack: [background: {color: *black}]}}}
+              state == stopped: {string: {text: ""}}
+              state == paused: {list: *artist_title}
+              state == playing: {list: *artist_title}
+
+                #- alsa:
+                #    card: default
+                #    mixer: Master
+                #    content:
+                #      map:
+                #        conditions:
+                #          ~online: {string: {text: "d", font: *aerzte, foreground: ff0000ff}}
+                #          online:
+                #            map:
+                #              on-click: /bin/sh -c "amixer -q sset Speaker unmute && amixer -q sset Headphone unmute && amixer -q sset Master toggle"
+                #              conditions:
+                #                muted: {string: {text: "stumm.", font: *aerzte, foreground: ffffff66}}
+                #                ~muted:
+                #                  ramp:
+                #                    tag: percent
+                #                    items:
+                #                      - string: {text: , font: *nerd}
+                #                      - string: {text: , font: *nerd}
+                #                      - string: {text: , font: *nerd}
+                            #- pulse:
+                            #    content:
+                            #      string: {text: "{sink_percent}%"}
+                            #    - pipewire:
+                            #         anchors:
+                            #           volume: &volume
+                            #             conditions:
+                            #               muted: {string: {text: "stumm.", foreground: ff0000ff, right-margin: 7}}
+                            #               ~muted: {string: {text: "{cubic_volume}%"}}
+                            #         content:
+                            #           list:
+                            #             items:
+                            #               - map:
+                            #                   conditions:
+                            #                     type == "sink":
+                            #                       map:
+                            #                         conditions:
+                            #                           icon == "audio-headset-bluetooth":
+                            #                             string: {text: "🎧"}
+                            #                         default:
+                            #                           - ramp:
+                            #                               tag: cubic_volume
+                            #                               items:
+                            #                                 - string: {text: "🔈  "}
+                            #                                 - string: {text: "🔉  "}
+                            #                                 - string: {text: "🔊  "}
+                            #                     type == "source":
+                            #                       - string: {text: "󰂯", font: *nerd}
+                            #               - map:
+                            #                   <<: *volume
+    - pipewire:
+       content:
+         map:
+           conditions:
+             type == sink:
+               map:
+                 conditions:
+                   muted: {string: {text: "stumm.", foreground: ffffff66, right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+                   ~muted: {string: {text: "VOL {cubic_volume}%", foreground: d1cdc2ff, font: *aerzte, right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+                 default: {string: {text: ""}}
+    - network:
+        name: wlan0
+        content:
+          map:
+            conditions:
+              ~carrier: {empty: {}}
+              carrier:
+                map:
+                  default: {string: {text: "suche nach Signal...", foreground: ffffff66, right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+                  conditions:
+                    state == up && ipv4 != "": {string: {text: "verbunden", right-margin: 20, deco: {stack: [background: {color: *black}]}}}
+    - battery:
+        name: BAT0
+        poll-interval: 30000
+        anchors:
+          discharging: &discharging
+            list:
+              items:
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: {text: , foreground: ff0000ff, font: *nerd}
+                      - string: {text: , foreground: ffa600ff, font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , foreground: 00ff00ff, font: *nerd}
+                - string: {text: " {capacity}% {estimate}", right-margin: 20}
+        content:
+          map:
+            conditions:
+              state == unknown:
+                <<: *discharging
+              state == discharging:
+                <<: *discharging
+              state == charging:
+                - string: {text: , foreground: 00ff00ff, font: *nerd}
+                - string: {text: " {capacity}% {estimate}", right-margin: 20}
+              state == full:
+                - string: {text: , foreground: 00ff00ff, font: *nerd}
+                - string: {text: " {capacity}%", right-margin: 20}
+              state == "not charging":
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: {text:  , foreground: ff0000ff, font: *nerd}
+                      - string: {text:  , foreground: ffa600ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                      - string: {text:  , foreground: 00ff00ff, font: *nerd}
+                - string: {text: " {capacity}%", right-margin: 20}
+            deco: {stack: [background: {color: *black}]}
+
+                  #- sway-xkb:
+                  #    identifiers: [1:1:AT_Translated_Set_2_keyboard]
+                  #    content:
+                  #      - string: {text: "{layout}", right-margin: 5}
+            #    deco:
+            #      background:
+            #        color: 00ff00ff
+            #- string: {text:  , font: *nerd}
+    - script:
+        path: ~/docs/scripts/yams-kbd.sh
+        args: []
+        content:
+          #        content: {string: {text: "{kbd}", right-margin: 20}}
+          list:
+            items:
+              - string: {text: "{kbd}", right-margin: 20}
+            deco: {stack: [background: {color: *black}]}
+
+
+    - clock:
+        time-format: "%H:%M"
+          #        content:
+          #          - string: {text: "{date}", right-margin: 5}
+          #          - string: {text: "{time}", right-margin: 5}
+        content: 
+          list:
+            items:
+              - string: {text: "{date}", right-margin: 5}
+              - string: {text: "{time}", right-margin: 5}
+            deco: {stack: [background: {color: *black}]}
+
+

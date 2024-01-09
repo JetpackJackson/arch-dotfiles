@@ -1,7 +1,8 @@
 nerd: &nerd Symbols Nerd Font:pixelsize=14
 aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
 std_underline: &std_underline {underline: { size: 2, color: ff0000ff}}
-highlight: &highlight a02626ff
+  #highlight: &highlight a02626ff
+highlight: &highlight fabd2fff
 textcolor: &textcolor d0d0d0ff
 
 bar:
@@ -21,8 +22,8 @@ bar:
         sort: native
         anchors:
           - string: &common {margin: 5}
-          - focused: &focused {deco: {stack: [background: {color: a0262680}]}}
-          - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}}
+          - focused: &focused {deco: {stack: [background: {color: 831c1cff}]}} #a0262680}]}}
+          - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}, foreground: 000000ff}
         content:
           "":
             map:
@@ -147,11 +148,6 @@ bar:
                     state == playing: {string: {text: "{artist}"}}
                     state == paused: {string: {text: "{artist}", foreground: ffffff66}}
               - string: {text: " | ", foreground: ffffff66}
-                #- map:
-                #  conditions:
-                #    state == playing: {string: {text: "{album}"}}
-                #    state == paused: {string: {text: "{album}", foreground: ffffff66}}
-                #- string: {text: " | ", foreground: ffffff66}
               - map:
                   conditions:
                     state == playing: {string: {text: "{title}", foreground: ffa0a0ff}}
@@ -160,7 +156,7 @@ bar:
           map:
             margin: 10
             conditions:
-              state == offline: {string: {text: offline, foreground: ff0000ff}}
+              #              state == offline: {string: {text: offline, foreground: ff0000ff}}
               state == stopped: {string: {text: }}
               state == paused: {list: *artist_title}
               state == playing: {list: *artist_title}
@@ -223,9 +219,9 @@ bar:
                  conditions:
                    muted: {string: {text: "stumm.", foreground: ffffff66}}
                    ~muted: {string: {text: "VOL {cubic_volume}%", foreground: d1cdc2ff, font: *aerzte}}
-                 default: {string: {text: "test" }}
+                 default: {string: {text: "test"}}
     - network:
-        name: wlan0
+        name: wlp0s21f0u7i2
         content:
           map:
             conditions:
@@ -235,6 +231,7 @@ bar:
                   default: {string: {text: "suche nach Signal...", foreground: ffffff66}}
                   conditions:
                     state == up && ipv4 != "": {string: {text: "verbunden", right-margin: 5}}
+                    state == up && ipv6 != "": {string: {text: "verbunden", right-margin: 5}}
     - battery:
         name: BAT0
         poll-interval: 30000
@@ -298,7 +295,9 @@ bar:
         content: {string: {text: "{kbd}"}}
     - clock:
         time-format: "%H:%M"
+        date-format: "%d.%m.%Y"
         content:
           - string: {text: "{date}", right-margin: 5}
           - string: {text: "{time}"}
+
 

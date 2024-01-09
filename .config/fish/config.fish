@@ -61,9 +61,11 @@ set -gx NUGET_PACKAGES $XDG_CACHE_HOME/NuGetPackages
 #set -gx WAYLAND_DISPLAY wayland-1
 
 # lang
-set -gx LANG de_DE.utf8
+#set -gx LANG de_DE.utf8
+#set -gx LC_ALL de_DE.utf8
+set -gx LANG en_US.utf8
+set -gx LC_ALL en_US.utf8
 set -gx LC_MESSAGES en_US.utf8
-set -gx LC_ALL de_DE.utf8
 
 # home dir
 set -gx XDG_CACHE_HOME $HOME/.cache
