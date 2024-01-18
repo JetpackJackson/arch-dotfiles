@@ -34,6 +34,7 @@ set -gx PROJECTS "$XDG_DOCUMENTS_DIR/notes/projects"
 set -gx SCRIPTS "$XDG_DOCUMENTS_DIR/scripts"
 
 # fixes
+#set -gx PAGER less
 set -gx W3M_DIR $XDG_STATE_HOME/w3m
 set -gx CARGO_HOME $XDG_DATA_HOME/cargo
 set -gx TEXMFVAR $XDG_CACHE_HOME/texlive/texmf-var

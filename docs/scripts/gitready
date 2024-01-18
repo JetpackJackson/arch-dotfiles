@@ -26,6 +26,8 @@ rsync -a --delete .config/waybar/ $PROJECTS/git/newdots/.config/waybar/
 rsync -a --delete .config/zathura/ $PROJECTS/git/newdots/.config/zathura/
 rsync -a --delete /etc/pacman.conf $PROJECTS/git/newdots/etc/pacman.conf
 rsync -a --delete /etc/xdg/reflector/ $PROJECTS/git/newdots/etc/xdg/reflector
+rsync -a --delete /etc/iwd/main.conf $PROJECTS/git/newdots/etc/iwd/main.conf
+rsync -a --delete /etc/modprobe.d/ath9k.conf $PROJECTS/git/newdots/etc/modprobe.d/ath9k.conf
 rsync -a --delete docs/scripts/ $PROJECTS/git/newdots/docs/scripts/
 rsync -a --delete $XDG_PICTURES_DIR/wallpapers/fox.jpg $PROJECTS/git/newdots/pics/wallpapers/fox.jpg
 cd $PROJECTS/git/newdots

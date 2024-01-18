@@ -1,5 +1,17 @@
-#!/bin/bash
-if [[ $1 -lt 60 ]]; then
+#!/usr/bin/env bash
+# requires brightnessctl
+
+limit=60
+
+if [[ "$1" == "see" ]]; then
+    brightnessctl
+elif [[ "$1" == "help" ]]; then
+    printf "Sample use:\n"
+    printf "screen 80 \t - \t sets brightness to 80%%\n"
+    printf "screen see \t - \t view current brightness\n"
+    printf "screen help \t - \t view this help\n"
+    printf "Edit the \$limit value if you want to go lower than $limit%%. For some reason.\n"
+elif [[ $1 -lt $limit ]]; then
     printf 'no'
 else
     brightnessctl set $1%

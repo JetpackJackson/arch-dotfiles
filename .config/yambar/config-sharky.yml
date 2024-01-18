@@ -116,14 +116,14 @@ bar:
         content: {string: {text: "{count}"}}
 
   center:
-    #    - label:
-    #        content:
-    #          string:
-    #            text: ""
-    - script:
-        path: ~/docs/scripts/yams-mode.sh
-        args: []
-        content: {string: {text: "{mode}"}}
+    ##    - label:
+    ##        content:
+    ##          string:
+    ##            text: ""
+    #- script:
+    #    path: ~/docs/scripts/yams-mode.sh
+    #    args: []
+    #    content: {string: {text: "{mode}"}}
     - script:
         path: ~/docs/scripts/yams-capslock.sh
         args: []

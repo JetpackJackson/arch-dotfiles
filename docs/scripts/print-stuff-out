@@ -7,7 +7,8 @@ read choice
 case "$choice" in
     1) sudo systemctl start avahi-daemon
        sudo systemctl restart cups.service
-       system-config-printer
+       kitty system-config-printer &
+       librewolf "$1"
     ;;
     2) sudo systemctl stop avahi-daemon.socket
        sudo systemctl stop avahi-daemon.service
