@@ -5,13 +5,13 @@ killall yambar
 #total=$(wlr-randr | grep "^[^ ]" | awk '{ print$1 }' | wc -l)
 
 if [[ $(cat /etc/hostname) == "sharky" ]]; then
-    sleep 5
+    sleep 6
     #swaymsg focus output $(wlr-randr | grep "^[^ ]" | awk '{ print$1 }' | head -n1)
     monitors=$(wlr-randr | grep "^[^ ]" | awk '{ print$1 }')
     for monitor in ${monitors}; do
         swaymsg focus output ${monitor}
         yambar -c $XDG_CONFIG_HOME/yambar/config-$(cat /etc/hostname).yml > /dev/null 2>&1&
-        sleep 0.2
+        sleep 1
     done
 else
     monitors=$(wlr-randr | grep "^[^ ]" | awk '{ print$1 }')

@@ -52,3 +52,12 @@ vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
   command = [[ syntax match Directory /^        - \[-\].*$/ ]],
 })
 
+vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+  pattern = { "*.md" },
+  command = [[ syntax match Todo /^> TODO:/ ]],
+})
+
+--vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
+--  pattern = { "*.md" },
+--  command = [[ syntax match Todo /^> TODO.*$/ ]],
+--})
