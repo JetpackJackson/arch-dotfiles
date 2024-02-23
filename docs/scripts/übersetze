@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 langvar=$(trans -identify "$1" | head -n 1 | sed -r 's~\x01?(\x1B\(B)?\x1B\[([0-9;]*)?[JKmsu]\x02?~~g')
 #echo $langvar

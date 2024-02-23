@@ -13,6 +13,7 @@ case "$choice" in
     2) sudo systemctl stop avahi-daemon.socket
        sudo systemctl stop avahi-daemon.service
        sudo systemctl stop cups.service
+       sudo systemctl stop cups.socket
     ;;
     *) echo "Try again."
     ;;

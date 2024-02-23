@@ -26,6 +26,7 @@ set -gx SHELL /usr/bin/fish
 set -gx FZF_PREVIEW_LINES 48
 set -gx FZF_PREVIEW_COLUMNS 88
 set -gx FZF_DEFAULT_COMMAND "ls -r -1"
+set -gx FZF_DEFAULT_OPTS "--color=bg+:#33353f,bg:#2c2e34,border:#7f8490,spinner:#b39df3,hl:#7f8490,fg:#e2e2e3,header:#7f8490,info:#fc5d7c,pointer:#fc5d7c,marker:#fc5d7c,fg+:#e2e2e3,preview-bg:#363944,prompt:#fc5d7c,hl+:#fc5d7c"
 
 # zk and projects
 set -gx ZK_NOTEBOOK_DIR "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten"
@@ -59,7 +60,6 @@ set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle/
 set -gx BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundle
 set -gx BUNDLE_USER_PLUGIN $XDG_DATA_HOME/bundle
 set -gx NUGET_PACKAGES $XDG_CACHE_HOME/NuGetPackages
-#set -gx WAYLAND_DISPLAY wayland-1
 
 # lang
 #set -gx LANG de_DE.utf8
@@ -84,4 +84,4 @@ set -gx SCREENSHOT_DIR $XDG_PICTURES_DIR/screenshots
 set -gx XDG_VIDEOS_DIR $HOME/vids
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_STATE_HOME $HOME/.local/state
-set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/bin/cli-wordle:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+set -gx PATH /home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.local/state/nix/profile/bin:/nix/var/nix/profiles/default/bin:/home/jet/.local/bin/cli-wordle:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl

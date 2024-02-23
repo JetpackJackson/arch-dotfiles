@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-find $ZETTELKASTEN -name '*.tex' | sort -n | fzf --bind 'enter:become(nvim {})'
+find $ZETTELKASTEN -name '*.tex' | sort -n | fzf --preview 'pistol {}' --bind 'enter:become(nvim {})'

@@ -10,25 +10,25 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 --require("lazy").setup("plugins",{{ "sainnhe/sonokai" }})
 require("lazy").setup("plugins",{})
-----    {
-----    "nvim-treesitter/nvim-treesitter",
-----    build = ":TSUpdate",
-----    config = function ()
-----      local configs = require("nvim-treesitter.configs")
-----      configs.setup({
-----        require'nvim-treesitter.configs'.setup {
-----          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
-----          sync_install = false,
-----          auto_install = true,
-----          highlight = {
-----            --enable = true,
-----            disable = { "markdown", "tex" },
-----            additional_vim_regex_highlighting = false,
-----          },
-----        }
-----      })
-----    end
-----    },
+--    {
+--    "nvim-treesitter/nvim-treesitter",
+--    build = ":TSUpdate",
+--    config = function ()
+--      local configs = require("nvim-treesitter.configs")
+--      configs.setup({
+--        require'nvim-treesitter.configs'.setup {
+--          ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "python", "bash" },
+--          sync_install = false,
+--          auto_install = true,
+--          highlight = {
+--            enable = true,
+--            disable = { "markdown", "tex" },
+--            additional_vim_regex_highlighting = false,
+--          },
+--        }
+--      })
+--    end
+--    },
 ----    {
 ----    'Wansmer/langmapper.nvim',
 ----    lazy = false,
@@ -38,9 +38,17 @@ require("lazy").setup("plugins",{})
 ----    end,
 ----    },
 --})
+
 require("config.keymaps")
 require("config.options")
 require("user.functions")
+-- TODO: consolidate this into one call?
+require("plugins.snips.tex")
+require("plugins.snips.tex_math")
+require("plugins.snips.cpp")
+require("plugins.snips.lua")
+require("plugins.snips.cmake")
+require("plugins.snips.python")
 --require("user.snips")
 vim.cmd([[filetype plugin on]])
 vim.opt.list = true
@@ -138,9 +146,10 @@ vim.api.nvim_exec([[
 -- files and compilers
 vim.cmd([[ let g:fzf_vim = {} ]])
 vim.cmd([[ let g:fzf_vim.preview_window = 'right,50%' ]])
+vim.cmd([[ let g:fzf_vim.command_prefix = 'Fzf' ]])
 vim.cmd([[ let g:pipe2eval_map_key = "`" ]])
 
-vim.cmd([[ command! -bang -nargs=? -complete=dir Files
+vim.cmd([[ command! -bang -nargs=? -complete=dir FzfFiles
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0) ]])
 
 vim.cmd([[
@@ -160,3 +169,33 @@ vim.g.vimtex_compiler_latexmk = {
     '-interaction=nonstopmode'
   }
 }
+
+vim.cmd([[
+let g:lf_change_cwd = 0
+]])
+-- 0 is no changing
+
+vim.cmd([[
+let g:fzf_colors =
+\ { 'fg':         ['fg', 'Normal'],
+  \ 'bg':         ['bg', 'Normal'],
+  \ 'preview-bg': ['bg', 'NormalFloat'],
+  \ 'hl':         ['fg', 'Comment'],
+  \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':        ['fg', 'Statement'],
+  \ 'info':       ['fg', 'PreProc'],
+  \ 'border':     ['fg', 'Ignore'],
+  \ 'prompt':     ['fg', 'Conditional'],
+  \ 'pointer':    ['fg', 'Exception'],
+  \ 'marker':     ['fg', 'Keyword'],
+  \ 'spinner':    ['fg', 'Label'],
+  \ 'header':     ['fg', 'Comment'] }
+]])
+
+-- markdown code block highlighting
+vim.cmd([[
+let g:markdown_fenced_languages = ['html', 'python', 'lua', 'vim', 'typescript', 'javascript']
+]])
+
+--vim.cmd([[ let g:vimspector_enable_mappings = 'HUMAN' ]])

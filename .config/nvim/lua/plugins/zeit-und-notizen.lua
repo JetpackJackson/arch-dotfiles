@@ -24,6 +24,8 @@ return {
     dependencies = { 'junegunn/fzf' }
   },
 
+
+-- TODO: figure out how to insert markdown lists on keypress, since that's all I really use this for anymore :(
   {
     'jakewvincent/mkdnflow.nvim',
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -88,20 +90,6 @@ Filename: {{ filename }}
     event = { "BufRead agenda.md" },
     opts = "enabled = true",
   },
---  {
---      "iamcco/markdown-preview.nvim",
---      init = function()
---          vim.g.mkdp_filetypes = { "markdown" }
---      end,
---      ft = { "markdown" },
---      cmd = {
---          "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle"
---      },
---      event = "BufRead",
---      build = function()
---          vim.fn["mkdp#util#install"]()
---      end,
---  },
 
   {
     "mickael-menu/zk-nvim",

@@ -1,43 +1,103 @@
 return {
---    { url = "https://git.sr.ht/~sircmpwn/hare.vim" },
-    {
-      "iurimateus/luasnip-latex-snippets.nvim",
-      dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
-      config = function()
-        require('luasnip-latex-snippets').setup({
-          use_treesitter = false,
-          allow_on_markdown = false,
-        })
-        require("luasnip").config.setup {
-            enable_autosnippets = true,
-        }
-      end,
-    },
 --    {
---        'l3mon4d3/luasnip',
---        version = "2.*",
---        config = function()
---            local ls = require 'luasnip'
---            ls.setup({ enable_autosnippets = true })
---        end
+--      "iurimateus/luasnip-latex-snippets.nvim",
+--      dependencies = { "l3mon4d3/luasnip", "lervag/vimtex" },
+--      config = function()
+--        require('luasnip-latex-snippets').setup({
+--          use_treesitter = false,
+--          allow_on_markdown = false,
+--        })
+--        require("luasnip").config.setup {
+--            enable_autosnippets = true,
+--        }
+--      end,
 --    },
---    {
---        'anakojm/pipe2eval',
---        lazy = true,
---        keys = { "<C-a>", { "<C-x>", mode = "n" } },
---    },
+    { 'lervag/vimtex' },
 
     {
         "Pocco81/auto-save.nvim",
         config = function()
              require("auto-save").setup {
-                    -- your config goes here
-                    -- or just leave it empty :)
              }
         end,
     },
 
---    { 'lervag/vimtex' },
+--    {
+--        "rcarriga/nvim-dap-ui",
+--        dependencies = { "mfussenegger/nvim-dap" },
+--        config = function()
+------            local dap = require("dap")
+------                dap.configurations.python = {
+------                    {
+------                        type = "python",
+------                        request = "launch",
+------                        name = "Launch file",
+------                        program = "${file}",
+------                        pythonPath = function()
+------                            return "/usr/bin/python"
+------                        end,
+------                    },
+------                }
+------                dap.adapters.python = {
+------                    type = "executable",
+------                    --command = "/usr/lib/python3.11/site-packages/debugpy/adapter/",
+------                    command = "python -m debugpy --listen localhost:5678 ${file}",
+------                    --, "debugpy.adapter" },
+------                }
+--            local dap = require('dap')
+--            dap.adapters.python = function(cb, config)
+--              if config.request == 'attach' then
+--                ---@diagnostic disable-next-line: undefined-field
+--                local port = (config.connect or config).port
+--                ---@diagnostic disable-next-line: undefined-field
+--                local host = (config.connect or config).host or '127.0.0.1'
+--                cb({
+--                  type = 'server',
+--                  port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+--                  host = host,
+--                  options = {
+--                    source_filetype = 'python',
+--                  },
+--                })
+--              else
+--                cb({
+--                  type = 'executable',
+--                  command = '/home/jet/.virtualenvs/debugpy/bin/python',
+--                  args = { '-m', 'debugpy.adapter' },
+--                  options = {
+--                    source_filetype = 'python',
+--                  },
+--                })
+--              end
+--            end
+--            --local dap = require('dap')
+--            dap.configurations.python = {
+--              {
+--                -- The first three options are required by nvim-dap
+--                type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+--                request = 'launch';
+--                name = "Launch file";
+--
+--                -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+--
+--                program = "${file}"; -- This configuration will launch the current file if used.
+--                pythonPath = function()
+--                  -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+--                  -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+--                  -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+--                  local cwd = vim.fn.getcwd()
+--                  if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+--                    return cwd .. '/venv/bin/python'
+--                  elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+--                    return cwd .. '/.venv/bin/python'
+--                  else
+--                    return '/usr/bin/python'
+--                  end
+--                end;
+--              },
+--            }
+--        end
+--    },
 
     {
         "neovim/nvim-lspconfig",
@@ -55,7 +115,10 @@ return {
                     on_attach = on_attach,
                 })
             end
-
+--            lsp.rnix-.setup({
+--                capabilities = capabilities,
+--                on_attach = on_attach,
+--            })
             lsp.lua_ls.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
@@ -102,6 +165,7 @@ return {
 --            "rafamadriz/friendly-snippets",
             "saadparwaiz1/cmp_luasnip",
             --"windwp/nvim-autopairs",--autopairs brackets
+            "mstanciu552/cmp-matlab",
         },
         config = function()
             local has_words_before = function()
@@ -133,6 +197,7 @@ return {
                             luasnip = "[LuaSnip]",
                             nvim_lsp = "[LSP]",
                             path = "[Path]",
+                            cmp_matlab = "[MATLAB]",
                         })[entry.source.name]
                         return vim_item
                     end,
@@ -170,7 +235,10 @@ return {
                     { name = "luasnip" },
                     { name = "buffer" },
                     { name = "papis" },
+                    { name = "cmp_matlab" },
                 }),
+--                experimental = { ghost_text = true },
+                experimental = { ghost_text = {hl_group = 'FoldColumn'} },
                 enabled = function()
                     local context = require("cmp.config.context")
                     if vim.api.nvim_get_mode().mode == "c" then

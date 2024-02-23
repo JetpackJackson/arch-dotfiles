@@ -47,8 +47,8 @@ while : ; do
     chosen=$(echo -e "$options" | EXTERNAL_COLUMNS=$COLUMNS \
     fzf \
     --preview='kitten icat --clear --transfer-mode=memory --place=30x30@30x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title% - %file%" current' \
-#    --preview='kitten icat --clear --transfer-mode=memory --place="$COLUMNS"x"$LINES"@(math $EXTERNAL_COLUMNS-$COLUMNS)x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title% - %file%" current' \
     --preview-window "right,50%,border-left")
+#    --preview='kitten icat --clear --transfer-mode=memory --place="$COLUMNS"x"$LINES"@(math $EXTERNAL_COLUMNS-$COLUMNS)x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title% - %file%" current' \
 
 #fzf --preview='kitten icat --clear --transfer-mode=memory --place="$COLUMNS"x"$LINES"@"$(($EXTERNAL_COLUMNS-$COLUMNS))"x0 --align center --stdin=no {} > /dev/tty' \
 #--preview-window "right,50%,border-left")

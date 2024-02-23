@@ -154,6 +154,22 @@ function GetWords()
   return tostring(vim.fn.wordcount().words)
 end
 
+---- testing!
+
+--function Update_tex_root_path(old_line)
+--  local bufnr = vim.api.nvim_get_current_buf().number
+--  local old_str = vim.api.nvim_buf_get_line(bufnr, old_line)
+--  local new_str = vim.api.nvim_get_current_buf().name:gsub(":%.*/", "")
+--
+--  if old_str:find("%! TEX root = .*") then
+--    vim.api.nvim_buf_replace(bufnr, old_line, old_line, old_str:gsub("%! TEX root = .*", "! TEX root = " .. new_str), false)
+--  end
+--end
+
+
+
+
+---- export colors
 function ExportColorsKitty()
     local fn = vim.fn
     local filename = os.getenv("HOME") .. "/.config/kitty/nvim_export.conf"

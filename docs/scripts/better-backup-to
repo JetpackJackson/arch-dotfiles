@@ -6,19 +6,19 @@ choice=0
 review=0
 flag=0
 
-dryVerboseBackup="-aAXHvun --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
+dryVerboseBackup="-aAXHvun --delete --exclude-from=$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
 
-realVerboseBackup="-aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
+realVerboseBackup="-aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
 
-dry2VerboseBackup="-aAXHvun --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list2.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
+dry2VerboseBackup="-aAXHvun --delete --exclude-from=$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list2.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
 
-real2VerboseBackup="-aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/rsync-list2.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
+real2VerboseBackup="-aAXHvu --delete --exclude-from=$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list2.txt /home/jet/"$2"/ /run/media/jet/"$1"/sharky/home/jet/"$2"/"
 
 backup() {
     echo "1: Review and backup (verbose)"
-    echo $(<$XDG_DOCUMENTS_DIR/rsync-list.txt)
+    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list.txt)
     echo "2: Review and backup (exclude more stuff)"
-    echo $(<$XDG_DOCUMENTS_DIR/rsync-list2.txt)
+    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/rsync-list2.txt)
     echo "3: View progress of writeback"
     echo "4: test"
     read choice
