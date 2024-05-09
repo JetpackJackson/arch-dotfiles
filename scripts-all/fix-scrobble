@@ -1,7 +1,0 @@
-#!/bin/bash
-
-systemctl --user stop mpd.service
-systemctl --user stop mpd.socket
-systemctl --user stop mpdas.service
-systemctl --user start mpdas.service
-systemctl --user start mpd.service

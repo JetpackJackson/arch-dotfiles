@@ -1,9 +1,0 @@
-#!/bin/env bash
-a=$XDG_MUSIC_DIR/
-b="$(mpc current -f %file%)"
-c="${a}${b}"
-ffprobe "${c}" > $XDG_CACHE_HOME/mylyrics/lyrics.txt 2>&1
-sed '/lyrics-XXX/,/Duration/!d' $XDG_CACHE_HOME/mylyrics/lyrics.txt > $XDG_CACHE_HOME/mylyrics/lyricsraw.txt
-sed "s/^[ \t]*//" $XDG_CACHE_HOME/mylyrics/lyricsraw.txt
-trans de:en -brief -i $XDG_CACHE_HOME/mylyrics/lyricsraw.txt -o $XDG_CACHE_HOME/mylyrics/lyricstrans.txt
-nvim $XDG_CACHE_HOME/mylyrics/lyricstrans.txt

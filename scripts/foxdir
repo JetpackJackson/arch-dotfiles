@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo du -h "$DIRSTACK" | sort -rh | head -$1
