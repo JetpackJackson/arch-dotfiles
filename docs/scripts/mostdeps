@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-LC_ALL=C pacman -Qqi | grep -E 'Name|Depends On' | sed -zE 's/Name[^:]*: ([^\n]+)\nDepends On[^:]*: ([^\n]+)/\1 \2/g;s/ {2,}/ /g' | while read line; do PKGNAME=$(echo $line | cut -d' ' -f1); DEPCOUNT=$(( $(echo $line | wc -w) - 1 )); echo $DEPCOUNT $PKGNAME;done | sort -h
-

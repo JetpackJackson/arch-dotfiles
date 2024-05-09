@@ -1,0 +1,12 @@
+12/15/2023 16:12:28
+System.InvalidOperationException
+Collection was modified; enumeration operation may not execute.
+System.Private.CoreLib
+   at System.Collections.Generic.List`1.Enumerator.MoveNext()
+   at OpenTabletDriver.Driver.Detect() in /home/jet/.cache/paru/clone/opentabletdriver-git/src/OpenTabletDriver/OpenTabletDriver/Driver.cs:line 78
+   at OpenTabletDriver.Daemon.DriverDaemon.DetectTablets() in /home/jet/.cache/paru/clone/opentabletdriver-git/src/OpenTabletDriver/OpenTabletDriver.Daemon/DriverDaemon.cs:line 202
+   at OpenTabletDriver.Daemon.DriverDaemon.<Initialize>b__14_4() in /home/jet/.cache/paru/clone/opentabletdriver-git/src/OpenTabletDriver/OpenTabletDriver.Daemon/DriverDaemon.cs:line 141
+   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__128_1(Object state)
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+ThrowInvalidOperationException_InvalidOperation_EnumFailedVersion

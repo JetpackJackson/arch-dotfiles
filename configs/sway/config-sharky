@@ -1,0 +1,256 @@
+set $mod Mod4
+set $left n
+set $down r
+set $up s
+set $right g
+set $term kitty
+set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run' 
+
+exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always export XDG_CURRENT_DESKTOP=sway
+
+output * bg /home/jet/pics/wallpapers/fox.jpg fill
+
+exec_always pkill -2 -f mediaplayer.py
+exec_always pkill -2 -f waybar
+exec_always pkill -2 -f yambar
+#exec_always --no-startup-id dunst
+exec_always pkill -2 -f mako
+exec_always killall udiskie
+exec_always killall wl-paste
+exec_always --no-startup-id udiskie &
+exec_always wl-paste -t text --watch clipman store -P
+exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+
+output LVDS-1 pos 1920 0 res 1600x900
+output HDMI-A-1 pos 0 0 res 1920x1080
+#input 9580:100:HUION_Huion_Tablet_H640P map_to_output LVDS-1
+#input 9580:100:HUION_Huion_Tablet_H640P {
+#    left_handed enabled
+#}
+#
+#input type:tablet_tool {
+#    left_handed enabled
+##    tool_mode "*" relative
+##    calibration_matrix "-1" 0 1 0 "-1" 1
+#}
+#input type:tablet_pad {
+#    left_handed enabled
+#}
+set $disp1 LVDS-1
+set $disp2 HDMI-A-1
+workspace 1 output $disp1
+workspace 2 output $disp1
+workspace 3 output $disp1
+workspace 4 output $disp1
+workspace 5 output $disp2
+workspace 6 output $disp2
+workspace 7 output $disp2
+workspace 8 output $disp2
+workspace 9 output $disp2
+workspace 10 output $disp2
+
+mode "mon" {
+    bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
+    bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"
+    bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Equal mode "mon"
+
+##exec_always killall swayidle; swayidle -w \
+##	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"' \
+##         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+##         before-sleep 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"'
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+bindsym Menu exec kitty -e pulsemixer
+
+bindsym XF86AudioPlay exec mpc toggle
+bindsym XF86AudioNext exec mpc next
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86Launch8 exec mpc prev
+bindsym XF86Launch9 exec mpc next
+bindsym XF86Launch7 exec mpc shuffle
+
+bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
+bindsym $mod+XF86Search exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
+bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
+
+default_border none
+default_floating_border none
+#font pango:monospace 0
+font pango:Ärzte Sans 12
+titlebar_padding 1
+titlebar_border_thickness 0
+gaps inner 5
+#gaps outer 0
+
+input * {
+    xkb_layout "us,noted"
+    xkb_variant ",noted"
+    xkb_options "grp:rctrl_toggle"
+}
+
+set $mybindsym bindsym --to-code
+    bindsym $mod+Return exec $term
+    # Kill focused window
+    $mybindsym $mod+Shift+q kill
+    # Start your launcher
+    $mybindsym $mod+Shift+d exec $term -e --class=launcher dashboard.sh
+    $mybindsym $mod+d exec $term -e --class=launcher sway-launcher-desktop
+    for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
+
+$mybindsym $mod+x exec kitty -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
+$mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
+#bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
+bindsym $mod+Home exec 'grim -o LVDS-1 ~/pics/screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
+bindsym $mod+Delete exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/pics/screenshots/focused_$(date +"%Y%m%d%H%M%S").png
+bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
+#, mode "default"
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    $mybindsym $mod+Shift+z reload
+
+    # Exit sway (logs you out of your Wayland session)
+    $mybindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+# Workspaces:
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+# Layout stuff:
+
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    $mybindsym $mod+b splith
+    $mybindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    #$mybindsym $mod+s layout stacking
+    $mybindsym $mod+t layout stacking
+    $mybindsym $mod+w layout tabbed
+    $mybindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    $mybindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+Caps_Lock floating toggle
+    bindsym $mod+Shift+ISO_Level3_Shift floating toggle
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    $mybindsym $mod+a focus parent
+
+# Scratchpad:
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+Tab floating enable, resize set width 1550 height 850, move scratchpad #& exec yams-scratch.sh
+    #move scratchpad
+    #exec swaymsg
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+    bindsym $mod+Tab scratchpad show
+    #exec swaymsg scratchpad show #& exec yams-scratch.sh
+    #scratchpad show
+    # && yams-scratch.sh
+
+# Resizing containers:
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Plus mode "resize"
+
+exec_always systemctl --user start opentabletdriver
+#exec_always systemctl --user start mako
+exec_always --no-startup-id mako
+exec_always yams.sh
+#exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
+include /etc/sway/config.d/*
+##exec_always systemctl --user start sway-session.target

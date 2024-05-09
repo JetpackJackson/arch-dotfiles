@@ -1,0 +1,20 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/jet/docs/notes/projects/git/arch-cfg
+- /home/jet/docs/notes/school/COP3502C/final-project/Group16_Sudoku
+- /home/jet/docs/notes/projects/git/nix-cfg
+- /home/jet/docs/dbglib-test/nixpkgs-add-python-dbglib
+- /home/jet/docs/notes/school/COP3502C/lab9/repo
+- /home/jet/docs/notes/school/COP3502C/lab9/Lab9
+- /home/jet/docs/notes/school/COP3502C/lab9/lab-9-
+- /home/jet/docs/notes/projects/git/neovim-cfg
+startuppopupversion: 5
+lastversion: 0.41.0
+customcommandshistory: []
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always

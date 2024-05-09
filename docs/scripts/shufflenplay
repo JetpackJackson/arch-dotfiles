@@ -1,5 +1,0 @@
-#!/bin/bash
-mpc load $1
-mpc volume 80
-mpc random on
-mpc play

@@ -1,0 +1,9 @@
+[safe]
+	directory = /home/jet/.config/git
+[user]
+	email = baileyannew@tutanota.com
+	name = JetpackJackson
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[url "ssh://git@codeberg.org/"]
+	insteadOf = https://codeberg.org/

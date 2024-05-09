@@ -1,6 +1,0 @@
-#!/bin/bash
-
-grep -o '.\{10\}$' results.txt > times.txt
-cat times.txt | while read -r line; do
-   printf "$(date -d @$line)\n"
-done

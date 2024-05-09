@@ -1,0 +1,126 @@
+directory: ~/music
+library: ~/.config/beets/musiclibrary.db
+import:
+    move: no
+    copy: no
+    incremental: yes
+    autotag: no
+plugins: chroma mbsync smartplaylist #convert #lyrics
+  #convert:
+  #    dest: ~/music-android/external
+smartplaylist:
+    playlist_dir: ~/music/playlists
+    forward_slash: no
+    relative_to: ~/music
+    playlists:
+        - name: everything.m3u
+          query: ''
+
+        - name: deutschemusik.m3u
+          query: ['artist:"All diese Gewalt"',
+                  'artist:"And One"',
+                  'artist:"AnnenMayKantereit"',
+                  'artist:"Badchieff"',
+                  'artist:"Bausa"',
+                  'artist:"Bela B"',
+                  'artist:"Blind Guardian"',
+                  'artist:"Blutengel"',
+                  'artist:"Böhse Onkelz"',
+                  'artist::^CRO$',
+                  'artist:"Cephalgy"',
+                  'artist::^Cro$',
+                  'artist:"Das Ich"',
+                  'artist:"Das Lumpenpack"',
+                  'artist:"Diary of Dreams"',
+                  'artist:"Die Kreatur"',
+                  'artist:"Die Krupps"',
+                  'artist:"Die Lochis"',
+                  'artist:"Die Toten Hosen"',
+                  'artist:"Die Ärzte"',
+                  'artist:"Eisbrecher"',
+                  'artist:"Erdling"',
+                  'artist:"Falco"',
+                  'artist:"Farin Urlaub"',
+                  'artist:"Farin Urlaub Racing Team"',
+                  'artist:"Faun"',
+                  'artist:"Feindflug"',
+                  'artist:"Ferris MC"',
+                  'artist:"Feuerschwanz"',
+                  'artist:"Frank Wildhorn"',
+                  'artist:"Franz Schubert"',
+                  'artist:"Fritz Kreisler"',
+                  'artist:"Funker Vogt"',
+                  'artist:"Hanzel und Gretyl"',
+                  'artist:"Heldmaschine"',
+                  'artist:"Henning May"',
+                  'artist:"Heppner"',
+                  'artist:"Hämatom"',
+                  'artist:"In Strict Confidence"',
+                  'artist:"Jacques Higelin"',
+                  'artist:"Joachim Witt"',
+                  'artist:"Josè Alvarez Brill & Peter Heppner"',
+                  'artist:"Kraftwerk"',
+                  'artist:"Kärbholz"',
+                  'artist:"KMFDM"',
+                  'artist::^LOTTE$',
+                  'artist:"Laibach"',
+                  'artist::^Lotte$',
+                  'artist::^Love A$',
+                  'artist:"Marlene Dietrich"',
+                  'artist:"Marv"',
+                  'artist:"Matthias Reim"',
+                  'artist:"Megaherz"',
+                  'artist:"Mono Inc"',
+                  'artist:"Nachtmahr"',
+                  'artist:"Nena"',
+                  'artist:"Nick & Simon"',
+                  'artist:"OOMPH!"',
+                  'artist:"Oomph!"',
+                  'artist:"Orange Sector"',
+                  'artist:"Ost+Front"',
+                  'artist:"Peter Heppner"',
+                  'artist:"Peter Schilling"',
+                  'artist:"Project Pitchfork"',
+                  'artist:"Philipp Dittberner"',
+                  'artist:"Philipp Dittberner & Marv"',
+                  'artist:"Powerwolf"',
+                  'artist:"Rammstein"',
+                  'artist:"Raphaël"',
+                  'artist:"Robert Schumann"',
+                  'artist:"Rotersand"',
+                  'artist:"Rummelsnuff"',
+                  'artist:"SIRA"',
+                  'artist:"Samsas Traum"',
+                  'artist:"Schattenmann"',
+                  'artist:"Schwarzer Engel"',
+                  'artist:"Sodom"',
+                  'artist:"Solomun"',
+                  'artist:"Spider Murphy Gang"',
+                  'artist:"Stoneman"',
+                  'artist:"Tanzwut"',
+                  'artist:"Terminal Choice"',
+                  'artist:"Theater an der Wien"',
+                  'artist:"Till Lindemann"',
+                  'artist:"Tim Bendzko"',
+                  'artist:"Udo Jürgens"',
+                  'artist:"Unheilig"',
+                  'artist:"Valborg"',
+                  'artist:"Wir sind Helden"',
+                  'artist:"Wolfsheim"',
+                  'artist:"[die!]"',
+                  'artist:"voXXclub"',
+                  'artist:"witt"']
+
+        - name: belafarinrod.m3u
+          query: ['artist:"Bela B"',
+                  'artist:"Die Ärzte"',
+                  'artist:"Farin Urlaub"',
+                  'artist:"Farin Urlaub Racing Team"']
+
+        - name: aufenglisch.m3u # extra music I want on my phone
+          query: ['artist:"Nine Inch Nails"',
+                  'artist:"Jack Stauber"',
+                  'artist:"Various Artists"',
+                  'artist:"Chumbawamba"',
+                  'artist:"Depeche Mode"']
+

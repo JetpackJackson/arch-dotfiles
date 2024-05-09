@@ -1,0 +1,196 @@
+nerd: &nerd Symbols Nerd Font:pixelsize=14
+aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
+  #highlight: &highlight a02626ff
+highlight: &highlight fabd2fff
+textcolor: &textcolor d0d0d0ff
+ #a0262680}]}}
+focus: &focus 831c1cff
+foreground-highlight: &foreground-highlight 000000ff
+grey: &grey ffffff66
+lightred: &lightred ffa0a0ff
+brightred: &brightred ff0000ff
+std_underline: &std_underline {underline: { size: 2, color: *brightred}}
+white: &white d1cdc2ff
+orange: &orange ffa600ff
+brightgreen: &brightgreen 00ff00ff
+
+bar:
+  height: 26
+  location: top
+  spacing: 10
+  right-margin: 7
+  font: Ärzte Sans:size=13
+  foreground: *white
+  background: 00101399
+  border:
+    width: 0
+    color: 999999cc
+
+  left:
+    - i3:
+        sort: native
+        anchors:
+          - string: &common {margin: 5}
+          - focused: &focused {deco: {stack: [background: {color: *focus}]}}
+          - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}, foreground: *foreground-highlight}
+        content:
+          "":
+            map:
+              default: [string: {text: "{name}", <<: *common}]
+              conditions:
+                state == focused: {string: {text: "{name}", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "{name}", <<: [*urgent, *common]}}
+          main:
+            map:
+              default: [string: {text: "", <<: *common}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          browser:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          auth:
+            map:
+              default: [string: {text: ""}]
+              conditions:
+                state == focused: {string: {text: "", <<: [*focused, *common]}}
+                state == urgent:  {string: {text: "", <<: [*urgent, *common]}}
+          current:
+            map:
+              default: [string: {text: "[{mode}]"}]
+              conditions:
+                mode == default: [empty: {}]
+                mode == audio: [string: {text: "[]"}]
+                mode == screen: [string: {text: "[]"}]
+                mode == escape: [string: {text: "[$]"}]
+                mode == workspace: [string: {text: "[]"}]
+    - script:
+        path: ~/docs/scripts/yams-scratch.sh
+        args: []
+        content: {string: {text: "{count}"}}
+
+          #  center:
+    #    - script:
+    #        path: ~/docs/scripts/yams-capslock.sh
+    #        args: []
+    #        content: {string: {text: "{caps}"}}
+  center:
+    - mpd:
+        host: /var/run/user/1000/mpd/socket
+          #host: /var/run/user/1000/mpd/socket
+        anchors:
+          list: &artist_title
+            #change to artist_album_title to show album
+            #spacing: 0
+            items:
+              - map:
+                  conditions:
+                    state == playing: {string: {text: "{artist}", max: 30}}
+                    state == paused: {string: {text: "{artist}", foreground: *grey, max: 30}}
+              - string: {text: " | ", foreground: *grey}
+              - map:
+                  conditions:
+                    state == playing: {string: {text: "{title}", foreground: *lightred, max: 30}}
+                    state == paused: {string: {text: "{title}", foreground: *grey, max: 30}}
+        content:
+          map:
+            margin: 10
+            conditions:
+              state == offline: {string: {text: offline, foreground: *brightred}}
+              state == stopped: {string: {text: }}
+              state == paused: {list: *artist_title}
+              state == playing: {list: *artist_title}
+  right:
+    - pipewire:
+       content:
+         map:
+           conditions:
+             type == sink:
+               map:
+                 conditions:
+                   muted: {string: {text: "stumm.", foreground: *grey}}
+                   ~muted: {string: {text: "VOL {cubic_volume}%", foreground: *white, font: *aerzte}}
+                 default: {string: {text: "test"}}
+    - network: #name: wlan0
+        content:
+          map:
+            default: {empty: {}}
+            conditions:
+              name == wlan0:
+                map:
+                  conditions:
+                    ~carrier: {empty: {}}
+                    carrier:
+                      map:
+                        default: {string: {text: "suche nach Signal...", foreground: *grey}}
+                        conditions:
+                          state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+    - battery:
+        name: BAT0
+        poll-interval: 30000
+        anchors:
+          discharging: &discharging
+            list:
+              items:
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: {text: , foreground: *brightred, font: *nerd}
+                      - string: {text: , foreground: *orange, font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , font: *nerd}
+                      - string: {text: , foreground: *brightgreen, font: *nerd}
+                - string: {text: " {capacity}% {estimate}"} #, right-margin: 5}
+        content:
+          map:
+            conditions:
+              state == unknown:
+                <<: *discharging
+              state == discharging:
+                <<: *discharging
+              state == charging:
+                - string: {text: , foreground: *brightgreen, font: *nerd}
+                - string: {text: " {capacity}% {estimate}"} #, right-margin: 5}
+              state == full:
+                - string: {text: , foreground: *brightgreen, font: *nerd}
+                - string: {text: " {capacity}%"} #, right-margin: 5}
+              state == "not charging":
+                - ramp:
+                    tag: capacity
+                    items:
+                      - string: {text:  , foreground: *brightred, font: *nerd}
+                      - string: {text:  , foreground: *orange, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                      - string: {text:  , foreground: *brightgreen, font: *nerd}
+                - string: {text: " {capacity}%"} #, right-margin: 5}
+    - sway-xkb:
+        identifiers: [1:1:AT_Translated_Set_2_keyboard]
+        content:
+          - string: {text: "{layout}"} #, right-margin: 5, deco: { background: {color: *brightgreen}}}
+
+            #    - script:
+            #        path: ~/docs/scripts/yams-kbd.sh
+            #        args: []
+            #        content: {string: {text: "{kbd}"}}
+    - clock:
+        time-format: "%H:%M"
+        date-format: "%d.%m.%Y"
+        content:
+          - string: {text: "{date}", right-margin: 7}
+          - string: {text: "{time}"}
+
+

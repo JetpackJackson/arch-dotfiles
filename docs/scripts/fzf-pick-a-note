@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-#find ~/docs/notes/notes-daily/ -type f |
-cd $ZETTELKASTEN
-#ls -r -1 | 
-#fzf --ansi +s -x -d '\034' --print-query --preview-window=right:50%:wrap --reverse --header='' --margin='1,2' --color='16,gutter:-1' --preview='head -$LINES {}' --bind 'enter:become(nvim {})'
-fzf --ansi +s -x -d '\034' --print-query --preview-window=right:50%:wrap --reverse --header='' --margin='1,2' --preview='head -$LINES | pistol {}' --bind 'enter:become(nvim {})'

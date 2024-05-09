@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-sudo reflector --sort rate --fastest 3 --number 20 --country US --verbose --age 24 --protocol https --save /etc/pacman.d/mirrorlist
