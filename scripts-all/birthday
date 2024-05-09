@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ls -alct --full-time / | tail -1
+ls -alct --full-time / | tail -1 | tr ':' ' ' | awk '{print $6, $7 ":" $8}'

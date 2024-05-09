@@ -1,0 +1,2 @@
+#!/bin/env bash
+pacman -Qqm | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'

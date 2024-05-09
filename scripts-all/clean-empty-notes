@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+rm -i $(find $ZETTELKASTEN -empty -print)

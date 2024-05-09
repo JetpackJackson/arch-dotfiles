@@ -5,5 +5,5 @@ cd ..
 cd arduino15
 stow -R . -t ~/.arduino15/ -v
 cd ..
-#cd etc
-#sudo stow . -t /etc/ -v
+cd scripts-all
+stow -R . -t ~/docs/scripts/ -v

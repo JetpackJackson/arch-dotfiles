@@ -1,6 +1,0 @@
-#!/bin/bash
-if [[ $1 -lt 60 ]]; then
-    printf 'no'
-else
-    brightnessctl set $1%
-fi

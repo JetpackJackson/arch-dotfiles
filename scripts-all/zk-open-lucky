@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+cd $ZETTELKASTEN
+A=$(zk lucky --no-pager | head -1)
+#B=$(echo "$A" | cut -d ' ' -f 5-)
+#nvim $B
+#A="Some variable has value abc.123"
+
+B=$(echo "$A" | rev | cut -d ' ' -f 1 | rev)
+nvim $B

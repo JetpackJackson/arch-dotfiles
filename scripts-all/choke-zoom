@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cpulimit --pid $1 --limit 25

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+a=$XDG_MUSIC_DIR/
+b="$(mpc current -f %file%)"
+c="${a}${b}"
+ffprobe "${c}" > $XDG_CACHE_HOME/mylyrics/lyrics.txt 2>&1
+exec sed '/lyrics-XXX/,/Duration/!d' $XDG_CACHE_HOME/mylyrics/lyrics.txt | less

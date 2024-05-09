@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+zathura $XDG_DOCUMENTS_DIR/notes/deutsch/noted.pdf > /dev/null 2> /dev/null &
