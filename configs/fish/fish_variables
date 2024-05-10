@@ -1,6 +1,11 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR __fish_initialized:3400
+SETUVAR _fish_abbr_n:\x2d\x2dset\x2dcursor\x20nvim\x20\x25
+SETUVAR _fish_abbr_ncg:\x2d\x2dset\x2dcursor\x20nix\x2dcollect\x2dgarbage\x25
+SETUVAR _fish_abbr_npi:\x2d\x2dset\x2dcursor\x20nix\x20profile\x20install\x20nixpkgs\x23\x25
+SETUVAR _fish_abbr_npl:\x2d\x2dset\x2dcursor\x20nix\x20profile\x20list\x25
+SETUVAR _fish_abbr_nps:\x2d\x2dset\x2dcursor\x20nix\x20search\x20nixpkgs\x20\x25
 SETUVAR fish_color_autosuggestion:5f5f5f
 SETUVAR fish_color_cancel:\x2d\x2dreverse
 SETUVAR fish_color_command:ffffd7

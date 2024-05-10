@@ -1,3 +1,7 @@
+if status is-login
+    fish_add_path /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    #set -gx PATH $PATH ~/docs/scripts/ ~/.local/bin/ ~/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+end
 if status is-interactive
     abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
     abbr -a ncg --set-cursor 'nix-collect-garbage%'
@@ -54,18 +58,29 @@ if status is-interactive
         # alfa@nobby /path/to/dir $
         # with the path shortened and colored
         # and a "#" instead of a "$" when run as root.
-        set -l symbol ' $ '
-        set -l color $fish_color_cwd
         if fish_is_root_user
             set symbol ' # '
             set -q fish_color_cwd_root
             and set color $fish_color_cwd_root
         end
-        echo -n $USER@$hostname
-        set_color $color
-        echo -n (prompt_pwd)
-        set_color normal
-        echo -n $symbol
+        if test -n "$DEV_ENV"
+            set symbol " [$DEV_ENV] \$ "
+            #' [guix]$ '
+            set -l color $fish_color_cwd
+            echo -n $USER@$hostname
+            set_color $color
+            echo -n (prompt_pwd)
+            set_color normal
+            echo -n $symbol
+        else
+            set -l symbol ' $ '
+            set -l color $fish_color_cwd
+            echo -n $USER@$hostname
+            set_color $color
+            echo -n (prompt_pwd)
+            set_color normal
+            echo -n $symbol
+        end
     end
     function fish_user_key_bindings
         fzf_key_bindings
@@ -180,5 +195,5 @@ set -gx SCREENSHOT_DIR $XDG_PICTURES_DIR/screenshots
 set -gx XDG_VIDEOS_DIR $HOME/vids
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_STATE_HOME $HOME/.local/state
-set -gx PATH /usr/local/texlive/2023/bin/x86_64-linux:/home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.nix-profile/bin:/home/jet/.local/state/nix/profile/bin:/nix/var/nix/profiles/default/bin:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+#set -gx PATH /usr/local/texlive/2023/bin/x86_64-linux:/home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.nix-profile/bin:/home/jet/.local/state/nix/profile/bin:/nix/var/nix/profiles/default/bin:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 direnv hook fish | source
