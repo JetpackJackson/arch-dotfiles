@@ -1,32 +1,26 @@
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# home rebinding
 set $left n
 set $down r
 set $up s
 set $right g
-
-#set $left j
-#set $down k
-#set $up l
-#set $right semicolon
-
 set $term kitty
 set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run' 
-#-icon-theme "Papirus" -show-icons
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec hash dbus-update-activation-environment 2>/dev/null && \
+exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+#exec hash dbus-update-activation-environment 2>/dev/null && \
+exec_always hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-exec export XDG_CURRENT_DESKTOP=sway
+exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always export XDG_CURRENT_DESKTOP=sway
 
 output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
-#exec_always export XDG_CURRENT_DESKTOP=sway
-exec_always pkill -f mediaplayer.py
-exec_always killall waybar
-exec_always --no-startup-id dunst
+exec_always pkill -2 -f mediaplayer.py
+exec_always pkill -2 -f waybar
+exec_always pkill -2 -f yambar
+#exec_always --no-startup-id dunst
+exec_always pkill -2 -f mako
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
@@ -149,8 +143,8 @@ gaps inner 5
 #}
 
 input * {
-    xkb_layout "us,de"
-    xkb_variant ",bone"
+    xkb_layout "us,noted"
+    xkb_variant ",noted"
     xkb_options "grp:rctrl_toggle"
 }
 
@@ -311,26 +305,8 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
-exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
+exec_always --no-startup-id mako
+exec_always yams.sh
+#exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
 include /etc/sway/config.d/*
-
-#bar {
-#	status_command  i3blocks
-#	position top
-#	font pango:Ärzte Sans Mono Roman 11
-#	separator_symbol "  |  "
-#	mode dock
-#   
-#    colors {
-#        statusline   #78da59
-#        background #000000cc
-#	separator #fff32e
-#				#border	#bg	#txt
-#        focused_workspace	#332f2e	#332f2e	#ffba08
-#        inactive_workspace	#332f2e	#332f2e	#cde4e6
-#	active_workspace	#777F8B	#777F8B	#cde4e6
-#    	urgent_workspace	#DEDFE3	#DEDFE3	#767E8A   
-#
-#	}
-#}
 ##exec_always systemctl --user start sway-session.target

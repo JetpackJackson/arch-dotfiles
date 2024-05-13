@@ -46,6 +46,12 @@ return {
                 capabilities = capabilities,
 --                --on_attach = on_attach,
             })
+            lsp.guile_ls.setup({
+                capabilities = capabilities,
+                filetypes = { "scheme.guile", "scheme" },
+--export GUILE_LOAD_PATH=...:{$HOME}/.guix-profile/share/guile/site/3.0:$GUILE_LOAD_PATH
+--export GUILE_LOAD_COMPILED_PATH=...:{$HOME}/.guix-profile/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH
+            })
             lsp.nil_ls.setup({
                 capabilities = capabilities,
                 filetypes = { "nix" },
