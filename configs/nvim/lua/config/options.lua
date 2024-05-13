@@ -54,7 +54,7 @@ vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
 
 vim.api.nvim_create_autocmd( { "BufWrite", "BufRead" }, {
   pattern = { "*.md" },
-  command = [[ syntax match Todo /^> TODO:/ ]],
+  command = [[ syntax match Todo /TODO/ ]],
 })
 
 --TODO: figure out how to combine file types

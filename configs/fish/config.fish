@@ -101,6 +101,22 @@ if status is-interactive
     abbr -a nps --set-cursor 'nix search nixpkgs %'
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
+
+    function gs --wraps='git status' --description 'alias git status'
+        git status $argv
+    end
+    function gd --wraps='git diff' --description 'alias git diff'
+        git diff $argv
+    end
+    function gco --wraps='git commit -m' --description 'alias git commit'
+        git commit -m "$argv"
+    end
+
+
+
+
+
+
     # list
     function la --wraps=ls --wraps='ls -Al' --description 'alias la=ls -Al'
         ls -Al $argv
