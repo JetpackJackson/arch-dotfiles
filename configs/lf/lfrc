@@ -122,9 +122,12 @@ cmd extract ${{
         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
         *.tar.gz|*.tgz) tar xzvf $f;;
         *.tar.xz|*.txz) tar xJvf $f;;
-        *.zip) 7z x $f;;
-        *.rar) 7z e $f;;
-        *.7z) 7z x $f;;
+        *.zip) bsdtar -xvf $f;;
+        *.rar) bsdtar -xvf $f;;
+        *.7z) bsdtar -xvf $f;;
+        #*.zip) 7z x $f;;
+        #*.rar) 7z e $f;;
+        #*.7z) 7z x $f;;
     esac
 }}
 
@@ -147,10 +150,29 @@ cmd zip ${{
 }}
 
 # compress current file or selected files with 7z
-cmd pz ${{
+cmd pzip ${{
     set -f
     mkdir $1
     cp -r $fx $1
     7z a $1.7z $1
+    rm -rf $1
+}}
+
+# https://tanguy.ortolo.eu/blog/article96/bsdtar
+# compress current file or selected files with bsdtar
+cmd bsdzip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    bsdtar --format zip -cvf $1.zip $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with bsdtar
+cmd bsd7zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    bsdtar --format 7zip -cvf $1.7z $1
     rm -rf $1
 }}
