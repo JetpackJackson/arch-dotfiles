@@ -159,6 +159,7 @@ cmd pzip ${{
 }}
 
 # https://tanguy.ortolo.eu/blog/article96/bsdtar
+# https://wiki.parabola.nu/FAQ#How_can_I_extract_a_RAR_archive.3F
 # compress current file or selected files with bsdtar
 cmd bsdzip ${{
     set -f
