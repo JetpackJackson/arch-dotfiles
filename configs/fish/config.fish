@@ -108,6 +108,31 @@ if status is-interactive
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
 
+    abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
+    abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
+    abbr -a guix-delete --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
+    abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
+
+    function guix-create-profile
+        if test -n "$argv"
+            set direnv_dir "$argv"
+        else
+            set direnv_dir .guix-direnv
+        end
+        #if test -e locales.scm
+        #guix package -m manifest.scm -f locales.scm --profile=$direnv_dir
+        #else
+        guix package -m manifest.scm --profile=$direnv_dir
+        #end
+    end
+
+    function dira
+        direnv allow
+    end
+    function dirb
+        direnv block
+    end
+
     function gs --wraps='git status' --description 'alias git status'
         git status $argv
     end
@@ -173,6 +198,16 @@ if status is-interactive
             and set color $fish_color_cwd_root
         end
         if test -n "$GUIX_ENVIRONMENT"
+            set symbol " [env][$SHLVL] \$ "
+            #' [guix]$ '
+            set -l color $fish_color_cwd
+            echo -n $USER@$hostname
+            set_color $color
+            echo -n (prompt_pwd)
+            set_color normal
+            echo -n $symbol
+        end
+        if test -n "$GUIX_PROFILE"; and test "$GUIX_PROFILE" != "/home/jet/.guix-profile"
             set symbol " [env][$SHLVL] \$ "
             #' [guix]$ '
             set -l color $fish_color_cwd
