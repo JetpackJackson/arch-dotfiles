@@ -1,8 +1,14 @@
 if status is-login
-    fish_add_path /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
 
-    set -gx GUILE_LOAD_PATH "...:$HOME/.guix-profile/share/guile/site/3.0:$GUILE_LOAD_PATH"
-    set -gx GUILE_LOAD_COMPILED_PATH "...:$HOME/.guix-profile/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH"
+    set -gx GUIX_PROFILE /home/jet/.guix-profile
+    set -gx GUILE_LOAD_PATH /home/jet/.guix-profile/share/guile/site/3.0/
+    #set -gx GUILE_LOAD_COMPILED_PATH home/jet/.guix-profile/lib/guile/3.0/site-ccache
+    set -gx GUILE_LOAD_COMPILED_PATH /home/jet/.guix-profile/lib/guile/3.0/site-ccache:/home/jet/.guix-profile/share/guile/site/3.0
+    set -gx GUIX_LOCPATH /home/jet/.guix-profile/lib/locale
+
+    #    set -gx GUILE_LOAD_PATH "...:$HOME/.guix-profile/share/guile/site/3.0:$GUILE_LOAD_PATH"
+    #    set -gx GUILE_LOAD_COMPILED_PATH "...:$HOME/.guix-profile/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH"
 
 
     #set -gx GUIX_PROFILE /home/jet/.guix-profile/
@@ -166,8 +172,8 @@ if status is-interactive
             set -q fish_color_cwd_root
             and set color $fish_color_cwd_root
         end
-        if test -n "$DEV_ENV"
-            set symbol " [$DEV_ENV] \$ "
+        if test -n "$GUIX_ENVIRONMENT"
+            set symbol " [env][$SHLVL] \$ "
             #' [guix]$ '
             set -l color $fish_color_cwd
             echo -n $USER@$hostname
