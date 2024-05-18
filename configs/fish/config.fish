@@ -112,7 +112,7 @@ if status is-interactive
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
     abbr -a guix-delete --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
-
+    abbr -a guix-listpro 'guix package --list-profiles'
     function guix-create-profile
         if test -n "$argv"
             set direnv_dir "$argv"
@@ -131,6 +131,10 @@ if status is-interactive
     end
     function dirb
         direnv block
+    end
+
+    function fetch
+        fortune deutsch | cowsay -W 30 | fastfetch --file -
     end
 
     function gs --wraps='git status' --description 'alias git status'

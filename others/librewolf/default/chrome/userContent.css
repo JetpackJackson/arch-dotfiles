@@ -1,0 +1,23 @@
+@-moz-document url-prefix(about:home), url-prefix(about:newtab) { .click-target-container *, .top-sites-list * { color: #fff !important ; text-shadow: 2px 2px 2px #000 !important ; }
+
+body { background: url(wallpaper.jpg) !important ; background-size: cover !important ; } 
+/*.search-wrapper .logo-and-wordmark { background-color: #000 !important ; }*/
+.search-wrapper .logo-and-wordmark .logo {
+  display: inline-block;
+  height: 82px;
+  width: 82px;
+  background: image-set(url(librewolf.svg), url(librewolf.svg) 2x) no-repeat center !important;
+  /*background-size: auto;*/
+  background-size: 82px !important;
+} 
+.search-wrapper .logo-and-wordmark .wordmark {
+  background: url("wordmark.svg") no-repeat center center !important;
+  /*  background-size: auto;*/
+  background-size: 134px !important;
+  -moz-context-properties: fill;
+  display: inline-block;
+  fill: var(--newtab-wordmark-color);
+  height: 82px;
+  margin-inline-start: 16px;
+  width: 134px;
+} }
