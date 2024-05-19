@@ -1,3 +1,5 @@
+/*user_pref("security.certerrors.mitm.auto_enable_enterprise_roots", false);*/
+/*user_pref("security.enterprise_roots.enabled", false);*/
 user_pref("identity.fxaccounts.enabled", true);
 user_pref("privacy.clearOnShutdown.history", false);
 user_pref("privacy.clearOnShutdown.downloads", false);
