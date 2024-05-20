@@ -9,5 +9,4 @@ cd scripts
 stow -R . -t ~/docs/scripts/ -v
 cd ..
 cd others
-stow -R icecat -t ~/.mozilla/icecat/ -v
-stow -R librewolf -t ~/.librewolf/ -v
+stow -R librewolf -t ~/.librewolf/ -v --simulate

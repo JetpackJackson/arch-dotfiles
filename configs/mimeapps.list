@@ -1,8 +1,6 @@
 [Added Associations]
 inode/directory=lf.desktop;kitty-open.desktop
 application/octet-stream=nvim.desktop
-application/x-ole-storage=wine-Programs-LTspice-LTspice.desktop;
-text/plain=wine-extension-asc.desktop;
 
 [Default Applications]
 x-scheme-handler/http=librewolf.desktop
@@ -111,6 +109,3 @@ audio/x-mpegurl=
 text/html=librewolf.desktop
 application/xml=
 application/vnd.oasis.opendocument.text=abiword.desktop
-application/x-ole-storage=wine-Programs-LTspice-LTspice.desktop
-x-scheme-handler/gitkraken=GitKraken.desktop
-x-scheme-handler/discord-455712169795780630=discord-455712169795780630.desktop
