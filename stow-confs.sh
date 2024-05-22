@@ -9,4 +9,4 @@ cd scripts
 stow -R . -t ~/docs/scripts/ -v
 cd ..
 cd others
-stow -R librewolf -t ~/.librewolf/ -v --simulate
+#stow -R librewolf -t ~/.librewolf/ -v --simulate
