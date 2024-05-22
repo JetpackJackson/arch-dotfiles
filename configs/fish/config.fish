@@ -14,7 +14,7 @@ if status is-login
     #set -gx GUIX_PROFILE /home/jet/.guix-profile/
 
     # lang
-    set -gx LANG de_DE.utf8
+    set -gx LANG de_DE.UTF-8
     #set -gx LANG en_US.UTF-8
     set -gx LANGUAGE en_US.UTF-8
     #set -gx LC_ALL en_US.utf8
