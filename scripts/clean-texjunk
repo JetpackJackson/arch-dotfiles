@@ -16,11 +16,6 @@ for ext in aux fls fdb_latexmk log gz markdown.out markdown.in markdown.lua xdv 
     find . -name "*.$ext" -exec mv {} $XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/.mytrash/ \;
 done
 
-cd $XDG_DOCUMENTS_DIR/notes/school/COM1000
-for ext in aux fls fdb_latexmk log gz markdown.out markdown.in markdown.lua xdv run.xml blg bbl; do
-    find . -name "*.$ext" -exec mv {} $XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/.mytrash/ \;
-done
-
 cd $XDG_DOCUMENTS_DIR/notes/school/resume
 for ext in aux fls fdb_latexmk log gz markdown.out markdown.in markdown.lua xdv run.xml blg bbl; do
     find . -name "*.$ext" -exec mv {} $XDG_DOCUMENTS_DIR/notes/notes-zettelkasten/.mytrash/ \;
