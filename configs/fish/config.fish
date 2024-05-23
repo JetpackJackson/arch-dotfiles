@@ -1,5 +1,5 @@
 if status is-login
-    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/.config/emacs/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
 
     set -gx GUIX_PROFILE /home/jet/.guix-profile
     set -gx GUILE_LOAD_PATH /home/jet/.guix-profile/share/guile/site/3.0/
@@ -112,7 +112,7 @@ if status is-interactive
     abbr -a guix-delete --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
     abbr -a guix-listpro 'guix package --list-profiles'
-    function guix-create-profile
+    function guix-create-profile --description 'create a Guix profile in the current directory'
         if test -n "$argv"
             set direnv_dir "$argv"
         else
@@ -125,14 +125,14 @@ if status is-interactive
         #end
     end
 
-    function dira
+    function dira --description 'direnv allow'
         direnv allow
     end
-    function dirb
+    function dirb --description 'direnv block'
         direnv block
     end
 
-    function fetch
+    function fetch --description 'fastfetch + cowsay'
         fortune deutsch | cowsay -W 30 | fastfetch --file -
     end
 
@@ -142,7 +142,7 @@ if status is-interactive
     function gd --wraps='git diff' --description 'alias git diff'
         git diff $argv
     end
-    function gco --wraps='git commit -m' --description 'alias git commit'
+    function gco --wraps='git commit -m' --description 'alias git commit -m'
         git commit -m "$argv"
     end
 
@@ -184,10 +184,10 @@ if status is-interactive
     function ard-com --wraps='arduino-cli compile -m $argv' --description 'arduino stuff'
         arduino-cli compile -m $argv
     end
-    function ard-lib1 --wraps='' --description 'arduino stuff'
+    function ard-lib1 --wraps='' --description 'search for most likely library'
         arduino-cli lib search $1 $argv | head -n10
     end
-    function ard-libs --wraps='' --description 'arduino stuff'
+    function ard-libs --wraps='' --description 'show all matching libraries'
         arduino-cli lib search $1 $argv | less
     end
 
