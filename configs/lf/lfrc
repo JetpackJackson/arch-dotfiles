@@ -172,8 +172,8 @@ cmd bsdzip ${{
 # compress current file or selected files with bsdtar
 cmd bsd7zip ${{
     set -f
-    mkdir $1
-    cp -r $fx $1
-    bsdtar --format 7zip -cvf $1.7z $1
-    rm -rf $1
+    #mkdir $1
+    #cp -r $fx $1
+    bsdtar --format 7zip -cvf $1.7z #$1
+    #rm -rf $1
 }}
