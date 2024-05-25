@@ -106,7 +106,7 @@ set $mybindsym bindsym --to-code
     # Kill focused window
     $mybindsym $mod+Shift+q kill
     # Start your launcher
-    $mybindsym $mod+Shift+d exec $term -e --class=launcher dashboard.sh
+    #$mybindsym $mod+Shift+d exec $term -a launcher -e sway-launcher-desktop
     $mybindsym $mod+d exec $term -e --class=launcher sway-launcher-desktop
     for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 

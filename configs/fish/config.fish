@@ -38,7 +38,14 @@ if status is-login
     set -gx XDG_STATE_HOME $HOME/.local/state
     #set -gx PATH /usr/local/texlive/2023/bin/x86_64-linux:/home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.nix-profile/bin:/home/jet/.local/state/nix/profile/bin:/nix/var/nix/profiles/default/bin:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
-        #set -gx PATH $PATH ~/docs/scripts/ ~/.local/bin/ ~/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    #launch-sway
+    # launch sway as part of autologin process
+    set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
+    set -gx SDL_VIDEODRIVER wayland
+    set -gx _JAVA_AWT_WM_NONREPARENTING 1
+    set -gx XDG_CURRENT_DESKTOP sway
+    set -gx XDG_SESSION_DESKTOP sway
+    dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
 end
 
 
