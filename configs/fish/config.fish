@@ -40,12 +40,16 @@ if status is-login
 
     #launch-sway
     # launch sway as part of autologin process
-    set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
-    set -gx SDL_VIDEODRIVER wayland
-    set -gx _JAVA_AWT_WM_NONREPARENTING 1
-    set -gx XDG_CURRENT_DESKTOP sway
-    set -gx XDG_SESSION_DESKTOP sway
-    dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
+    # https://wiki.archlinux.org/title/Fish#Start_X_at_login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
+        set -gx SDL_VIDEODRIVER wayland
+        set -gx _JAVA_AWT_WM_NONREPARENTING 1
+        set -gx XDG_CURRENT_DESKTOP sway
+        set -gx XDG_SESSION_DESKTOP sway
+        dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
+        #exec startx -- -keeptty
+    end
 end
 
 
@@ -107,7 +111,10 @@ if status is-interactive
     set -gx DOTNET_CLI_HOME $XDG_DATA_HOME/dotnet
     set -gx GOPATH $XDG_DATA_HOME/go
 
- 
+    abbr -a scu --set-cursor 'systemctl --user %' 
+    abbr -a sc --set-cursor 'systemctl %' 
+
+
     abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
     abbr -a ncg --set-cursor 'nix-collect-garbage%'
     abbr -a nps --set-cursor 'nix search nixpkgs %'
@@ -157,7 +164,6 @@ if status is-interactive
     function wget
         wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
     end
-
 
 
     # list
