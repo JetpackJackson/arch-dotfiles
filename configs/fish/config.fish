@@ -160,9 +160,8 @@ if status is-interactive
         git commit -m "$argv"
     end
 
-
-    function wget
-        wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+    function wget-h --wraps='wget'
+        wget --hsts-file="$XDG_DATA_HOME/wget-hsts" 
     end
 
 

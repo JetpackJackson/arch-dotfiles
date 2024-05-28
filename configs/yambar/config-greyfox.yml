@@ -15,6 +15,7 @@ orange: &orange ffa600ff
 brightgreen: &brightgreen 00ff00ff
 
 bar:
+  ###monitor: $MONITOR
   height: 26
   location: top
   spacing: 10

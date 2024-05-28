@@ -31,12 +31,29 @@ return {
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
-            for _, server in ipairs({ "clangd", "pyright", "marksman", "lua_ls", "nil_ls" }) do
+            for _, server in ipairs({ "clangd", "marksman", "lua_ls", "nil_ls" }) do
                 lsp[server].setup({
                     capabilities = capabilities,
                     on_attach = on_attach,
                 })
             end
+--            lsp.jedi_language_server.setup{
+--                on_attach = on_attach,
+--                capabilities = capabilities,
+--            }
+            lsp.pylsp.setup{
+                on_attach = on_attach,
+                settings = {
+                    pylsp = {
+                        plugins = {
+                            pycodestyle = {
+                                ignore = {'W391'},
+                                maxLineLength = 100
+                            }
+                        }
+                    }
+                }
+            }
             lsp.efm.setup({
                 init_options = {documentFormatting = true},
                 settings = {
@@ -69,10 +86,14 @@ return {
                     },
                 },
             })
-            lsp.matlab_ls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-            })
+--            lsp.pyright.setup({
+--                capabilities = capabilities,
+--                on_attach = on_attach,
+--            })
+----            lsp.matlab_ls.setup({
+----                capabilities = capabilities,
+----                on_attach = on_attach,
+----            })
             lsp.arduino_language_server.setup({
                 capabilities = capabilities,
                 filetypes = { "arduino" },
