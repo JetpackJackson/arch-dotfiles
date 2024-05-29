@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 # requires xxd and aplay (vim and alsa-utils)
 
-choice=$(grep -m1 -ao '[1-4]' /dev/urandom | sed s/0/10/ | head -n1)
+#choice=$(grep -m1 -ao '[1-4]' /dev/urandom | sed s/0/10/ | head -n1)
+choice=$1
 case "$choice" in
     1) echo "playing 1"
        hexdump -e '/1 "%u\n"' /dev/urandom | awk '{ split("0,2,4,5,7,8,10,12",a,",");for (i = 0; i < 1; i+= 0.0001) printf("%08X\n", 100*sin(1382*2**(a[$1 %8]/12)*i)) }' | xxd -r -p | aplay -c 2 -f S32_LE -r 16000
@@ -14,5 +15,11 @@ case "$choice" in
     ;;
     4) echo "playing cat /dev/urandom"
        cat /dev/urandom | hexdump -v -e '/1 "%u\n"' | awk '{ split("0,2,4,5,7,8,10,12",a,",");for (i = 0; i < 1; i+= 0.0001) printf("%08X\n", 100*sin(1382*exp((a[$1 %8]/12)*log(2))*i)) }' | xxd -r -p | aplay -c 2 -f S32_LE -r 16000
+    ;;
+    5)
+    aplay -c 2 -f S16_LE -r 44100 /dev/random
+    ;;
+    6)
+    aplay /dev/urandom
     ;;
 esac

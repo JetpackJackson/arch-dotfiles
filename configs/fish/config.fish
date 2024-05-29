@@ -55,6 +55,7 @@ end
 
 
 if status is-interactive
+    set -gx UNISON "$XDG_DATA_HOME/unison"
 
     set -gx MINETEST_USER_PATH "$XDG_DATA_HOME/minetest"
 

@@ -30,14 +30,12 @@ exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/sh
 output eDP-1 pos 0 0 res 1920x1080
 output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
-
 set $disp1 eDP-1
 set $disp2 HDMI-A-1
 workspace 1 output $disp1
 workspace 2 output $disp1
 workspace 3 output $disp1
 workspace 4 output $disp1
-
 workspace 5 output $disp2
 workspace 6 output $disp2
 workspace 7 output $disp2
@@ -49,7 +47,6 @@ mode "mon" {
     bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
     bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"
     bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
-
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -62,16 +59,6 @@ exec_always killall swayidle; swayidle -w \
          before-sleep 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"'
 
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "2321:21128:HTIX5288:00_0911:5288_Touchpad" {
@@ -109,13 +96,9 @@ bindsym Menu exec kitty -e pulsemixer
 
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
-#& exec $HOME/.config/music-notif.sh
 bindsym XF86AudioPrev exec mpc prev
-##playerctl previous & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch8 exec mpc prev
-##playerctl previous & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch9 exec mpc next
-##playerctl next & exec $HOME/.config/music-notif.sh
 bindsym XF86Launch7 exec mpc shuffle
 
 bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
@@ -127,20 +110,11 @@ bindsym $mod+Shift+XF86AudioMute exec systemctl poweroff
 default_border none
 default_floating_border none
 #font pango:monospace 0
-
 font pango:Ärzte Sans 12
-
 titlebar_padding 1
 titlebar_border_thickness 0
-
 gaps inner 5
 #gaps outer 0
-
-#input * {
-#    xkb_layout "us,us,de"
-#    xkb_variant ",intl,bone"
-#    xkb_options "grp:rctrl_toggle"
-#}
 
 input * {
     xkb_layout "us,noted"
@@ -149,23 +123,16 @@ input * {
 }
 
 set $mybindsym bindsym --to-code
-
     # Start a terminal
     bindsym $mod+Return exec $term
-
     # Kill focused window
     $mybindsym $mod+Shift+q kill
-
     # Start your launcher
 
     $mybindsym $mod+Shift+d exec $menu
     $mybindsym $mod+d exec kitty -e --class=launcher sway-launcher-desktop
     for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
-#set $menu exec $term -a launcher -e /path/to/repo/sway-launcher-desktop.sh
-#bindsym $mod+d exec $menu
 
-#bindsym $mod+c exec rofi -show combi -modes combi -combi-modes 'window,filebrowser,run'
-#$mybindsym $mod+Shift+x exec clipman pick -t rofi
 $mybindsym $mod+x exec kitty -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
@@ -209,9 +176,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
-#
+
 # Workspaces:
-#
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -236,9 +202,9 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
-#
+
 # Layout stuff:
-#
+
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
@@ -262,11 +228,9 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    #$mybindsym $mod+a focus parent
     $mybindsym $mod+a focus parent
-#
+
 # Scratchpad:
-#
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
@@ -279,9 +243,8 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
     bindsym $mod+Tab scratchpad show
-#
+
 # Resizing containers:
-#
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -291,8 +254,6 @@ mode "resize" {
     $mybindsym $down resize grow height 10px
     $mybindsym $up resize shrink height 10px
     $mybindsym $right resize grow width 10px
-
-    # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
     bindsym Down resize grow height 10px
     bindsym Up resize shrink height 10px

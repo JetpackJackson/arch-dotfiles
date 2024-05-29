@@ -28,19 +28,6 @@ exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/sh
 
 output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
-#input 9580:100:HUION_Huion_Tablet_H640P map_to_output LVDS-1
-#input 9580:100:HUION_Huion_Tablet_H640P {
-#    left_handed enabled
-#}
-#
-#input type:tablet_tool {
-#    left_handed enabled
-##    tool_mode "*" relative
-##    calibration_matrix "-1" 0 1 0 "-1" 1
-#}
-#input type:tablet_pad {
-#    left_handed enabled
-#}
 set $disp1 LVDS-1
 set $disp2 HDMI-A-1
 workspace 1 output $disp1
@@ -58,6 +45,7 @@ mode "mon" {
     bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
     bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"
     bindsym Up exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
+    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -213,17 +201,13 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
-    bindsym $mod+Shift+Tab floating enable, resize set width 1550 height 850, move scratchpad #& exec yams-scratch.sh
+    bindsym $mod+Shift+Tab floating enable, resize set width 1550 height 850, move scratchpad
     #move scratchpad
-    #exec swaymsg
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
     bindsym $mod+Tab scratchpad show
-    #exec swaymsg scratchpad show #& exec yams-scratch.sh
-    #scratchpad show
-    # && yams-scratch.sh
 
 # Resizing containers:
 mode "resize" {
