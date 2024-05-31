@@ -67,7 +67,7 @@ smartplaylist:
                   'artist::^Lotte$',
                   'artist::^Love A$',
                   'artist:"Marlene Dietrich"',
-                  'artist:"Marv"',
+                  'artist:^Marv$',
                   'artist:"Matthias Reim"',
                   'artist:"Megaherz"',
                   'artist:"Mono Inc"',
@@ -120,6 +120,7 @@ smartplaylist:
         - name: aufenglisch.m3u # extra music I want on my phone
           query: ['artist:"Nine Inch Nails"',
                   'artist:"Jack Stauber"',
+                  'artist:"Patient Zero"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
                   'artist:"Depeche Mode"']

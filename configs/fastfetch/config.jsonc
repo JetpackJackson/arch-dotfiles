@@ -8,11 +8,6 @@
     "kernel",
     "uptime",
     "packages",
-    {
-        "type": "command",
-        "text": "guix package --list-installed | wc | awk '{print $1}'",
-        "key": "Packages (GUIX)"
-    },
     "shell",
     "display",
     "de",
