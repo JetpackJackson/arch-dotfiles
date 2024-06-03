@@ -5,9 +5,12 @@ import:
     copy: no
     incremental: yes
     autotag: no
-plugins: chroma mbsync smartplaylist #convert #lyrics
+plugins: chroma mbsync smartplaylist replaygain #convert #lyrics
   #convert:
   #    dest: ~/music-android/external
+replaygain:
+    auto: no
+    backend: ffmpeg
 smartplaylist:
     playlist_dir: ~/music/playlists
     forward_slash: no
@@ -123,5 +126,6 @@ smartplaylist:
                   'artist:"Patient Zero"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
-                  'artist:"Depeche Mode"']
+                  'artist:"Depeche Mode"',
+                  'artist:"Rave.dj"']
 
