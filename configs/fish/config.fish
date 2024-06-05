@@ -128,16 +128,12 @@ if status is-interactive
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
     abbr -a guix-listpro 'guix package --list-profiles'
     function guix-create-profile --description 'create a Guix profile in the current directory'
-        if test -n "$argv"
-            set direnv_dir "$argv"
-        else
-            set direnv_dir .guix-direnv
-        end
-        #if test -e locales.scm
-        #guix package -m manifest.scm -f locales.scm --profile=$direnv_dir
+        #if test -n "$argv"
+        #    set direnv_dir "$argv"
         #else
-        guix package -m manifest.scm --profile=$direnv_dir
+        #    set direnv_dir .guix-direnv
         #end
+        guix package -m manifest.scm -p .guix-direnv $argv
     end
 
     function dira --description 'direnv allow'
