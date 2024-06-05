@@ -124,16 +124,19 @@ if status is-interactive
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
-    abbr -a guix-delete --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
+    abbr -a guix-delgen --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
     abbr -a guix-listpro 'guix package --list-profiles'
     function guix-create-profile --description 'create a Guix profile in the current directory'
-        #if test -n "$argv"
-        #    set direnv_dir "$argv"
-        #else
-        #    set direnv_dir .guix-direnv
-        #end
         guix package -m manifest.scm -p .guix-direnv $argv
+    end
+
+    function guix-rmpro --description 'delete a Guix profile not in the current directory'
+        set dir $(basename $PWD)
+        rm -irv $HOME/.guix-extra/$dir/
+        rm -irv $HOME/.guix-extra-profiles/$dir/
+        direnv revoke
+        #rmdir $HOME/.guix-extra/$dir/
     end
 
     function dira --description 'direnv allow'
