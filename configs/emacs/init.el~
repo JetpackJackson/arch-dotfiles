@@ -1,0 +1,178 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
+
+;; Enable Evil
+;(require 'evil)
+(autoload 'evil "evil" "vim keys" t)
+(evil-mode 1)
+
+(use-package monokai-theme
+    :ensure t
+    :init
+    (load-theme 'monokai t))
+
+;(use-package spaceline
+;  :ensure t
+;  :config
+;  (require 'spaceline-config)
+;    (setq spaceline-buffer-encoding-abbrev-p nil)
+;    (setq spaceline-line-column-p nil)
+;    (setq spaceline-line-p nil)
+;    (setq powerline-default-separator (quote arrow))
+;    (spaceline-spacemacs-theme))
+
+(use-package which-key
+  :ensure t
+  :config
+    (which-key-mode))
+
+(setq electric-pair-pairs '(
+                           (?\{ . ?\})
+                           (?\( . ?\))
+                           (?\[ . ?\])
+                           (?\' . ?\')
+                           ))
+(electric-pair-mode t)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+;; doesnt really work/is slow? check this
+;;(use-package yasnippet
+;;  :ensure t
+;;  :config
+;;    (use-package yasnippet-snippets
+;;      :ensure t)
+;;    (yas-reload-all))
+;;(use-package flycheck
+;;  :ensure t)
+;;(use-package company
+;;  :ensure t
+;;  :config
+;;  (setq company-idle-delay 0)
+;;  (setq company-minimum-prefix-length 3))
+;;
+;;(with-eval-after-load 'company
+;;  (define-key company-active-map (kbd "M-n") nil)
+;;  (define-key company-active-map (kbd "M-p") nil)
+;;  (define-key company-active-map (kbd "C-n") #'company-select-next)
+;;  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+;;  (define-key company-active-map (kbd "SPC") #'company-abort))
+;;(add-hook 'c++-mode-hook 'yas-minor-mode)
+;;(add-hook 'c-mode-hook 'yas-minor-mode)
+;;
+;;(use-package flycheck-clang-analyzer
+;;  :ensure t
+;;  :config
+;;  (with-eval-after-load 'flycheck
+;;    (require 'flycheck-clang-analyzer)
+;;     (flycheck-clang-analyzer-setup)))
+;;
+;;(with-eval-after-load 'company
+;;  (add-hook 'c++-mode-hook 'company-mode)
+;;  (add-hook 'c-mode-hook 'company-mode))
+;;
+;;(use-package company-c-headers
+;;  :ensure t)
+;;
+;;(use-package company-irony
+;;  :ensure t
+;;  :config
+;;  (setq company-backends '((company-c-headers
+;;                            company-dabbrev-code
+;;                            company-irony))))
+;;
+;;(use-package irony
+;;  :ensure t
+;;  :config
+;;  (add-hook 'c++-mode-hook 'irony-mode)
+;;  (add-hook 'c-mode-hook 'irony-mode)
+;;  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+
+
+;; kinda works, but very different from neovim
+(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
+;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for details
+(helm-mode)
+;(require 'helm-xref)
+(autoload 'helm-xref "" "" t)
+(define-key global-map [remap find-file] #'helm-find-files)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
+
+(which-key-mode)
+(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c++-mode-hook 'lsp)
+
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      treemacs-space-between-root-nodes nil
+      company-idle-delay 0.0
+      company-minimum-prefix-length 1
+      lsp-idle-delay 0.1)  ;; clangd is fast
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  ;(require 'dap-cpptools)
+  (autoload 'dap-cpptools "" "" t)
+  (yas-global-mode))
+
+
+
+; https://github.com/daedreth/UncleDavesEmacs
+(defvar my-term-shell "/bin/fish")
+(defadvice kitty (before force-fish)
+  (interactive (list my-term-shell)))
+(ad-activate 'kitty)
+(global-set-key (kbd "<s-return>") 'kitty)
+
+
+
+
+; autosave
+(auto-save-mode 1)
+(auto-save-visited-mode 1)
+;(setq auto-save-visited-interval 30)
+(setq auto-save-interval 20)
+
+;; set type of line numbering (global variable)
+(setq display-line-numbers-type 'relative) 
+;; activate line numbering in all buffers/modes
+(global-display-line-numbers-mode) 
+
+
+; disable startup screen
+(setq inhibit-startup-message t)
+; disable other bars (1 is enable)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+
+; broken! :(
+;(require 'lsp-scheme)
+;(add-hook 'scheme-mode-hook #'lsp-scheme)
+;(setq lsp-scheme-implementation "guile") ;;; also customizable
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(monokai-theme evil lsp-scheme irony-install-server irony-server)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

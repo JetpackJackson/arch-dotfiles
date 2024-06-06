@@ -1,5 +1,5 @@
 if status is-login
-    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/.config/emacs/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
 
     set -gx GUIX_PROFILE /home/jet/.guix-profile
     set -gx GUILE_LOAD_PATH /home/jet/.guix-profile/share/guile/site/3.0/
@@ -121,6 +121,7 @@ if status is-interactive
     abbr -a nps --set-cursor 'nix search nixpkgs %'
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
+    abbr -a e --set-cursor 'emacs -nw -nbi %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
