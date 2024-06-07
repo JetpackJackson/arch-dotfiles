@@ -29,7 +29,13 @@
 ;; identical files. This is super useful if you rely on folders for
 ;; organization and have lots of files with the same name,
 ;; e.g. foo/index.ts and bar/index.ts.
+
+; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
+;(setq use-package-always-defer t)
+
+
 (require 'uniquify)
+;(with-eval-after-load 'uniquify)
 
 ;; The `setq' special form is used for setting variables. Remember
 ;; that you can look up these variables with "C-h v variable-name".
@@ -82,6 +88,8 @@
 (evil-leader/set-key
   "f" 'find-file
   "b" 'switch-to-buffer
+  "ca" 'eglot-code-action-quickfix
+  "mm" 'eglot-find-implementation
   "d" 'kill-buffer)
 
 
