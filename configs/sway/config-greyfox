@@ -4,11 +4,8 @@ set $down r
 set $up s
 set $right g
 set $term kitty
-set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run' 
 
 exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#exec hash dbus-update-activation-environment 2>/dev/null && \
 exec_always hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -16,10 +13,7 @@ exec_always export XDG_CURRENT_DESKTOP=sway
 
 output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
-exec_always pkill -2 -f mediaplayer.py
-exec_always pkill -2 -f waybar
 exec_always pkill -2 -f yambar
-#exec_always --no-startup-id dunst
 exec_always pkill -2 -f mako
 exec_always killall udiskie
 exec_always killall wl-paste
@@ -28,7 +22,6 @@ exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 
 output eDP-1 pos 0 0 res 1920x1080
-output LVDS-1 pos 1920 0 res 1600x900
 output HDMI-A-1 pos 0 0 res 1920x1080
 set $disp1 eDP-1
 set $disp2 HDMI-A-1
@@ -51,7 +44,7 @@ mode "mon" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+KP_Equal mode "mon"
+bindsym $mod+Equal mode "mon"
 
 exec_always killall swayidle; swayidle -w \
 	 timeout 300 'swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i "/home/jet/pics/wallpapers/lock.jpg"' \
@@ -68,30 +61,11 @@ input "2321:21128:HTIX5288:00_0911:5288_Touchpad" {
     middle_emulation enabled
 }
 
-
-### Key bindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# Pipewire-pulse
-##bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-##bindsym --release XF86AudioMute exec pkill -RTMIN+1 i3blocks
-##bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-##bindsym --release XF86AudioLowerVolume exec pkill -RTMIN+1 i3blocks
-##bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-##bindsym --release XF86AudioRaiseVolume exec pkill -RTMIN+1 i3blocks
-
-#bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && exec pkill -RTMIN+1 i3blocks
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && exec pkill -RTMIN+1 i3blocks
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && exec pkill -RTMIN+1 i3blocks
-
-##bindsym XF86AudioPlay exec playerctl play-pause
-##bindsym XF86AudioNext exec playerctl next & exec $HOME/.config/music-notif.sh
-##bindsym XF86AudioPrev exec playerctl previous & exec $HOME/.config/music-notif.sh
-##bindsym XF86Launch8 exec playerctl previous & exec $HOME/.config/music-notif.sh
-##bindsym XF86Launch9 exec playerctl next & exec $HOME/.config/music-notif.sh
 bindsym Menu exec kitty -e pulsemixer
 
 bindsym XF86AudioPlay exec mpc toggle
@@ -129,7 +103,6 @@ set $mybindsym bindsym --to-code
     $mybindsym $mod+Shift+q kill
     # Start your launcher
 
-    $mybindsym $mod+Shift+d exec $menu
     $mybindsym $mod+d exec kitty -e --class=launcher sway-launcher-desktop
     for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 
@@ -222,7 +195,7 @@ bindsym $mod+End exec 'grim ~/pics/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
-    #bindsym $mod+Shift+Caps_Lock floating toggle
+    bindsym $mod+Shift+Caps_Lock floating toggle
     bindsym $mod+Shift+ISO_Level3_Shift floating toggle
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
@@ -268,6 +241,5 @@ $mybindsym $mod+r mode "resize"
 
 exec_always --no-startup-id mako
 exec_always yams.sh
-#exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target

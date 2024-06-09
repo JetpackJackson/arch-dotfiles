@@ -4,10 +4,8 @@ set $down r
 set $up s
 set $right g
 set $term kitty
-set $menu exec rofi -show combi -modes combi -combi-modes 'drun,window,filebrowser,run' 
 
 exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec_always hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -15,10 +13,7 @@ exec_always export XDG_CURRENT_DESKTOP=sway
 
 output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
-exec_always pkill -2 -f mediaplayer.py
-exec_always pkill -2 -f waybar
 exec_always pkill -2 -f yambar
-#exec_always --no-startup-id dunst
 exec_always pkill -2 -f mako
 exec_always killall udiskie
 exec_always killall wl-paste
@@ -90,11 +85,12 @@ input * {
 }
 
 set $mybindsym bindsym --to-code
+    # Start a terminal
     bindsym $mod+Return exec $term
     # Kill focused window
     $mybindsym $mod+Shift+q kill
     # Start your launcher
-    #$mybindsym $mod+Shift+d exec $term -a launcher -e sway-launcher-desktop
+
     $mybindsym $mod+d exec $term -e --class=launcher sway-launcher-desktop
     for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 
@@ -232,9 +228,7 @@ mode "resize" {
 bindsym $mod+Plus mode "resize"
 
 exec_always systemctl --user start opentabletdriver
-#exec_always systemctl --user start mako
 exec_always --no-startup-id mako
 exec_always yams.sh
-#exec_always waybar -c ~/.config/waybar/crow -s ~/.config/waybar/crow.css
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
