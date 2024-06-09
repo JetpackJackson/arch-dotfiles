@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/linuxbox/sharky/.cache
+sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/linuxbox/sharky/.config
+sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/linuxbox/sharky/
