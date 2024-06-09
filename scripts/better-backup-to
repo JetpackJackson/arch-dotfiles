@@ -7,10 +7,10 @@ review=0
 flag=0
 
 dryVerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list -n /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
-realVerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
+realVerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 
 dry2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list2.txt --exclude-caches --list -n /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
-real2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list2.txt --exclude-caches --list /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
+real2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list2.txt --exclude-caches --list --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 
 backup() {
     echo "1: Review and backup (verbose)"
