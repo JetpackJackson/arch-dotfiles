@@ -5,7 +5,15 @@ return {
       lazy = true,
       event = { "BufRead farin*.lua", "BufRead testtrack*.lua" },
     },
-    { "sainnhe/sonokai" },
+    {
+        "sainnhe/sonokai",
+        lazy = false,
+        config = function()
+        -- Optionally configure and load the colorscheme
+        -- directly inside the plugin declaration.
+            vim.g.sonokai_enable_italic = true
+        end
+    },
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
