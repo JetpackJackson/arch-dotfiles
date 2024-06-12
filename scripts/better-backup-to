@@ -9,14 +9,14 @@ flag=0
 dryVerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list -n /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 realVerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 
-dry2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list2.txt --exclude-caches --list -n /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
-real2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list2.txt --exclude-caches --list --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
+dry2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --list -n /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
+real2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --progress --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 
 backup() {
     echo "1: Review and backup (verbose)"
     echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
-    echo "2: Review and backup (exclude more stuff)"
-    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list2.txt)
+    echo "2: Review and backup (progress)"
+    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
     echo "3: View progress of writeback"
     echo "4: test"
     read choice
@@ -59,6 +59,9 @@ backup() {
         *) echo "Exiting."
         ;;
     esac
+    sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/$1/sharky/.cache
+    sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/$1/sharky/.config
+    sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
 
 }
 
