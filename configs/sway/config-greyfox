@@ -15,6 +15,7 @@ output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
 exec_always pkill -2 -f yambar
 exec_always pkill -2 -f mako
+exec_always killall nm-applet
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
@@ -241,5 +242,6 @@ $mybindsym $mod+r mode "resize"
 
 exec_always --no-startup-id mako
 exec_always yams.sh
+exec_always nm-applet &
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
