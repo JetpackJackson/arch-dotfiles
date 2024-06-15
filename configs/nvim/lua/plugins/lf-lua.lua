@@ -2,6 +2,7 @@ return {
     -- Sample configuration is supplied
     {
       "lmburns/lf.nvim",
+      lazy = false,
       dependencies = {
           {
             "akinsho/toggleterm.nvim",
