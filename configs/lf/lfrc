@@ -26,7 +26,7 @@ map gl cd ~/.config/nvim/lua/plugins/
 map gd cd ~/dl
 map gn cd ~/docs/notes/notes-zettelkasten
 map gs cd ~/docs/notes/school
-map gp cd ~/docs/notes/projects/doodles/
+map gp cd ~/docs/notes/projects/git/
 map gt %mv $fx ~/.cache/mytrash
 map w
 map ww %rm -rf ~/.cache/mytrash && mkdir ~/.cache/mytrash
