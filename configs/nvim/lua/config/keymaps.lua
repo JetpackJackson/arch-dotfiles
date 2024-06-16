@@ -26,6 +26,14 @@ vim.api.nvim_set_keymap("n", "<leader>ci", "<Cmd>lua vim.lsp.buf.hover()<CR>", o
 vim.api.nvim_set_keymap("n", "<leader>cn", "<Cmd>lua vim.diagnostic.goto_next()<CR>", sil)
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Lf<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>fm', ':lua MiniFiles.open()<CR>', sil)
+--vim.api.nvim_set_keymap('n', '<leader>fo', ':!kitty & nvim<CR>', sil)
+vim.keymap.set('n', '<leader>fo', function()
+    vim.fn.jobstart('kitty nvim .', {
+        detach = true,
+        cwd = vim.fn.getcwd(),
+    })
+end)
+
 vim.api.nvim_set_keymap('n', '<leader>fz', ':FzfFiles<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>k', ':!kitty &<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', sil)
