@@ -1,5 +1,5 @@
 if status is-login
-    fish_add_path /home/jet/.config/guix/current/ /home/jet/.guix-profile/bin/ /home/jet/.config/emacs/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    fish_add_path /home/jet/.config/guix/current/bin/ /home/jet/.guix-profile/bin/ /home/jet/.config/emacs/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
 
     set -gx GUIX_PROFILE /home/jet/.guix-profile
     set -gx GUILE_LOAD_PATH /home/jet/.guix-profile/share/guile/site/3.0/
