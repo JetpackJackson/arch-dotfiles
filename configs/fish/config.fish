@@ -7,12 +7,6 @@ if status is-login
     set -gx GUILE_LOAD_COMPILED_PATH /home/jet/.guix-profile/lib/guile/3.0/site-ccache:/home/jet/.guix-profile/share/guile/site/3.0
     set -gx GUIX_LOCPATH /home/jet/.guix-profile/lib/locale
 
-    #    set -gx GUILE_LOAD_PATH "...:$HOME/.guix-profile/share/guile/site/3.0:$GUILE_LOAD_PATH"
-    #    set -gx GUILE_LOAD_COMPILED_PATH "...:$HOME/.guix-profile/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH"
-
-
-    #set -gx GUIX_PROFILE /home/jet/.guix-profile/
-
     # lang
     set -gx LANG de_DE.UTF-8
     #set -gx LANG en_US.UTF-8
@@ -28,17 +22,15 @@ if status is-login
     #XDG_TEMPLATES_DIR "$HOME/"
     #XDG_PUBLICSHARE_DIR "$HOME/"
     set -gx XDG_DOCUMENTS_DIR $HOME/docs
-    #set -gx SCRIPTS_DIR $XDG_DOCUMENTS_DIR/scripts
     set -gx XDG_MUSIC_DIR $HOME/music
     set -gx XDG_PICTURES_DIR $HOME/pics
-    set -gx WALLPAPER_DIR $XDG_PICTURES_DIR/wallpapers
-    set -gx SCREENSHOT_DIR $XDG_PICTURES_DIR/screenshots
     set -gx XDG_VIDEOS_DIR $HOME/vids
     set -gx XDG_DATA_HOME $HOME/.local/share
     set -gx XDG_STATE_HOME $HOME/.local/state
-    #set -gx PATH /usr/local/texlive/2023/bin/x86_64-linux:/home/jet/docs/scripts:/home/jet/.local/bin:/home/jet/.local/share/cargo/bin:/home/jet/.nix-profile/bin:/home/jet/.local/state/nix/profile/bin:/nix/var/nix/profiles/default/bin:/home/jet/.local/share/gem/ruby/3.0.0/bin:/usr/lib/jvm/java-21-openjdk/bin/:/usr/local/sbin:/usr/local/bin:/usr/bin:/home/jet/.dotnet/tools:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
-    #launch-sway
+    set -gx WALLPAPER_DIR $XDG_PICTURES_DIR/wallpapers
+    set -gx SCREENSHOT_DIR $XDG_PICTURES_DIR/screenshots
+
     # launch sway as part of autologin process
     # https://wiki.archlinux.org/title/Fish#Start_X_at_login
     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
@@ -48,7 +40,6 @@ if status is-login
         set -gx XDG_CURRENT_DESKTOP sway
         set -gx XDG_SESSION_DESKTOP sway
         dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
-        #exec startx -- -keeptty
     end
 end
 
@@ -81,7 +72,6 @@ if status is-interactive
     set -gx SCRIPTS "$XDG_DOCUMENTS_DIR/scripts"
 
     # fixes
-    #set -gx PAGER less
     set -gx LOCALE_ARCHIVE /usr/lib/locale/locale-archive
     set -gx W3M_DIR $XDG_STATE_HOME/w3m
     set -gx CARGO_HOME $XDG_DATA_HOME/cargo
@@ -90,7 +80,6 @@ if status is-interactive
     #set -gx _JAVA_OPTIONS -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
     set -gx _JAVA_OPTIONS -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java -Djavafx.cachedir=$XDG_CACHE_HOME/openjfx
     set -gx JAVA_HOME /usr/lib/jvm/java-22-openjdk/
-    #set -gx JAVA_HOME /usr/lib/jvm/java-21-openjdk/
     set -gx ANDROID_HOME $XDG_DATA_HOME/android-studio/
     set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
@@ -115,7 +104,6 @@ if status is-interactive
     abbr -a scu --set-cursor 'systemctl --user %' 
     abbr -a sc --set-cursor 'systemctl %' 
 
-
     abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
     abbr -a ncg --set-cursor 'nix-collect-garbage%'
     abbr -a nps --set-cursor 'nix search nixpkgs %'
@@ -128,150 +116,9 @@ if status is-interactive
     abbr -a guix-delgen --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
     abbr -a guix-listpro 'guix package --list-profiles'
-    function guix-create-profile --description 'create a Guix profile in the current directory'
-        guix package -m manifest.scm -p .guix-direnv $argv
-    end
 
-    function guix-rmpro --description 'delete a Guix profile not in the current directory'
-        set dir $(basename $PWD)
-        rm -irv $HOME/.guix-extra/$dir/
-        rm -irv $HOME/.guix-extra-profiles/$dir/
-        direnv revoke
-        #rmdir $HOME/.guix-extra/$dir/
-    end
-
-    function dira --description 'direnv allow'
-        direnv allow
-    end
-    function dirb --description 'direnv block'
-        direnv block
-    end
-
-    function fetch --description 'fastfetch + cowsay'
-        fortune deutsch | cowsay -W 30 > /tmp/cow
-        set cowlength $(cat /tmp/cow | wc -l)
-        #set cowlength $(wc -l /tmp/cow | awk '{print $1}')
-        fastfetch --raw /tmp/cow --logo-width 30 --logo-height $cowlength
-        #fortune deutsch | cowsay -W 30 | fastfetch --file -
-    end
-
-    function gs --wraps='git status' --description 'alias git status'
-        git status $argv
-    end
-    function gd --wraps='git diff' --description 'alias git diff'
-        git diff $argv
-    end
-    function gco --wraps='git commit -m' --description 'alias git commit -m'
-        git commit -m "$argv"
-    end
-
-    function wget-h --wraps='wget'
-        wget --hsts-file="$XDG_DATA_HOME/wget-hsts" 
-    end
-
-
-    # list
-    function la --wraps=ls --wraps='ls -Al' --description 'alias la=ls -Al'
-        ls -Al $argv
-    end
-    # agenda
-    function a --wraps='cd /home/jet/docs/notes/notes-zettelkasten && nvim agenda.md' --description 'alias a=cd /home/jet/docs/notes/notes-zettelkasten && nvim agenda.md'
-        cd /home/jet/docs/notes/notes-zettelkasten && nvim agenda.md $argv
-    end
-    # list home dir stuff
-    function lwc --wraps='ls -A | wc' --description 'alias lwc=ls -A | wc'
-      ls -A | wc $argv
-    end
-    # old vscode stuff that I might need
-    function vsc --wraps='vscodium --extensions-dir /home/jet/.local/share/vscode' --description 'alias vsc=vscodium --extensions-dir /home/jet/.local/share/vscode'
-      vscodium --extensions-dir /home/jet/.local/share/vscode $argv
-    end
-    # music
-    function queued --description 'alias queued=mpc queued'
-      mpc queued $argv
-    end
-    # more music
-    function skipto --wraps='mpc searchplay $1' --description 'alias skipto=mpc searchplay $1'
-      mpc searchplay $1 $argv
-    end
-
-    function ard-up --wraps='arduino-cli compile -m $argv && arduino-cli upload && arduino-cli monitor' --description 'arduino stuff'
-        arduino-cli compile -m $argv && arduino-cli upload && arduino-cli monitor
-    end
-    function ard-com --wraps='arduino-cli compile -m $argv' --description 'arduino stuff'
-        arduino-cli compile -m $argv
-    end
-    function ard-lib1 --wraps='' --description 'search for most likely library'
-        arduino-cli lib search $1 $argv | head -n10
-    end
-    function ard-libs --wraps='' --description 'show all matching libraries'
-        arduino-cli lib search $1 $argv | less
-    end
-
-    # prompt
-    function fish_prompt
-        # This is a simple prompt. It looks like
-        # alfa@nobby /path/to/dir $
-        # with the path shortened and colored
-        # and a "#" instead of a "$" when run as root.
-        if fish_is_root_user
-            set symbol ' # '
-            set -q fish_color_cwd_root
-            and set color $fish_color_cwd_root
-        end
-        if test -n "$GUIX_ENVIRONMENT"
-            set symbol " [env][$SHLVL] \$ "
-            #' [guix]$ '
-            set -l color $fish_color_cwd
-            echo -n $USER@$hostname
-            set_color $color
-            echo -n (prompt_pwd)
-            set_color normal
-            echo -n $symbol
-        end
-        if test -n "$GUIX_PROFILE"; and test "$GUIX_PROFILE" != "/home/jet/.guix-profile"
-            set symbol " [env][$SHLVL] \$ "
-            #' [guix]$ '
-            set -l color $fish_color_cwd
-            echo -n $USER@$hostname
-            set_color $color
-            echo -n (prompt_pwd)
-            set_color normal
-            echo -n $symbol
-        else
-            set -l symbol ' $ '
-            set -l color $fish_color_cwd
-            echo -n $USER@$hostname
-            set_color $color
-            echo -n (prompt_pwd)
-            set_color normal
-            echo -n $symbol
-        end
-    end
-    function fish_user_key_bindings
-        fzf_key_bindings
-    end
-    # Change working dir in shell to last dir in lf on exit (adapted from ranger).
-    function lf
-        set tmp (mktemp)
-        # `command` is needed in case `lfcd` is aliased to `lf`
-        command lf -last-dir-path=$tmp $argv
-        if test -f "$tmp"
-            set dir (cat $tmp)
-            rm -f $tmp
-            if test -d "$dir"
-                if test "$dir" != (pwd)
-                    cd $dir
-                end
-            end
-        end
-    end
-    #    function lf
-    #        # `command` is needed in case `lfcd` is aliased to `lf`
-    #        cd "$(command lf -print-last-dir "$argv")"
-    #    end
-    # Commands to run in interactive sessions can go here
 end
+
 # Emulates vim's cursor shape behavior
 # Set the normal and visual mode cursors to a block
 set fish_cursor_default block
