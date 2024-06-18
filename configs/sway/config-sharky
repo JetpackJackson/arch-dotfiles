@@ -14,7 +14,7 @@ exec_always export XDG_CURRENT_DESKTOP=sway
 output * bg /home/jet/pics/wallpapers/fox.jpg fill
 
 exec_always pkill -2 -f yambar
-exec_always pkill -2 -f mako
+#exec_always pkill -2 -f mako
 exec_always killall udiskie
 exec_always killall wl-paste
 exec_always --no-startup-id udiskie &
@@ -228,7 +228,7 @@ mode "resize" {
 bindsym $mod+Plus mode "resize"
 
 exec_always systemctl --user start opentabletdriver
-exec_always --no-startup-id mako
+#exec_always --no-startup-id mako
 exec_always yams.sh
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
