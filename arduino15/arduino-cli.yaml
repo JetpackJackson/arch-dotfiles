@@ -22,7 +22,7 @@ logging:
     level: info
 metrics:
     addr: :9090
-    enabled: true
+    enabled: false
 output:
     no_color: false
 sketch:
