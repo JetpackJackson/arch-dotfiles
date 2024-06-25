@@ -18,8 +18,7 @@ function fish_prompt
         echo -n (prompt_pwd)
         set_color normal
         echo -n $symbol
-    end
-    if test -n "$GUIX_PROFILE"; and test "$GUIX_PROFILE" != "/home/jet/.guix-profile"
+    else if test -n "$GUIX_PROFILE"; and test "$GUIX_PROFILE" != "/home/jet/.guix-profile"
         set symbol " [env][$SHLVL] \$ "
         #' [guix]$ '
         set -l color $fish_color_cwd
