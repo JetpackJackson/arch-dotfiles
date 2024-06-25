@@ -7,3 +7,8 @@
 	insteadOf = https://github.com/
 [url "ssh://git@codeberg.org/"]
 	insteadOf = https://codeberg.org/
+[sendemail]
+	smtpserver = disroot.org
+	smtpuser = jetpackjackson@disroot.org
+    smtpencryption = tls
+    smtpserverport = 587
