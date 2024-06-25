@@ -7,6 +7,7 @@ commands.add("ZkOrphans", function(options)
 end)
 local opts = { noremap = true, silent = false }
 local sil = { noremap = true, silent = true }
+local dap = require("dap")
 
 -- to sort: sort /\%39v/
 
@@ -21,8 +22,13 @@ vim.api.nvim_set_keymap('n', '<leader>bb', ':Buffers<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bp|bd #<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>bw', ':bw!<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', sil)
+vim.api.nvim_set_keymap('n', '<leader>cb', ":lua require'dap'.toggle_breakpoint()<CR>", sil)
+vim.api.nvim_set_keymap('n', '<leader>cc', ":lua require'dap'.continue()<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader>cs", "<Cmd>nohlsearch<CR>", sil)
-vim.api.nvim_set_keymap("n", "<leader>ci", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ch", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+vim.api.nvim_set_keymap('n', '<leader>si', ":lua require'dap'.step_into()<CR>", sil)
+vim.api.nvim_set_keymap('n', '<leader>so', ":lua require'dap'.step_over()<CR>", sil)
+vim.api.nvim_set_keymap('n', '<leader>cro', ":lua require'dap'.repl.open()<CR>", sil)
 vim.api.nvim_set_keymap("n", "<leader>cn", "<Cmd>lua vim.diagnostic.goto_next()<CR>", sil)
 vim.api.nvim_set_keymap('n', '<leader>ff', ':Lf<CR>', sil)
 vim.api.nvim_set_keymap('n', '<leader>fm', ':lua MiniFiles.open()<CR>', sil)
