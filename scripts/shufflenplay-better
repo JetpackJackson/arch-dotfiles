@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+choice="$(mpc lsplaylists | fzf)"
+mpc clear
+mpc load "$choice"
+mpc volume 60
+mpc shuffle
+mpc play

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+MUSIC_DIR=$(grep -m 1 -E '^\s*playlist_directory\s+' "$XDG_CONFIG_HOME/mpd/mpd.conf" | awk '{printf $2}' | tr -d \" | tr -d \')
+
+choice="$(mpc lsplaylists | fzf)" || { echo "No choice." ; exit 1; }
+MUSIC_DIR="${MUSIC_DIR/#\~/$HOME}"
+
+mpc current -f '%file%' >> "$MUSIC_DIR/$choice.m3u"

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+MUSIC_DIR=$(grep -m 1 -E '^\s*music_directory\s+' "$XDG_CONFIG_HOME/mpd/mpd.conf" | awk '{printf $2}' | tr -d \" | tr -d \')
+MUSIC_DIR="${MUSIC_DIR/#\~/$HOME}"
+
+#part1=/home/jet/music/
+#part2=$(mpc -f %file% | head -n 1)
+#file="$part1$part2"
+#ffmpeg -y -loglevel quiet -i "$file" -an -c:v copy /tmp/file.jpg
+
+#    --preview='kitten icat --clear --transfer-mode=memory --place=30x30@90x5 --stdin=no --hold /tmp/file.jpg > /dev/tty & \
+cd "$MUSIC_DIR"
+CHOICE="$(find . | cut -c 3- | fzf \
+    --preview='echo "playing:" && mpc -f "%artist% - %title%" current && \
+    echo "queued:" && mpc queued' \
+    --preview-window "bottom,50%,border")" || exit 1;
+
+mpc insert "$CHOICE"
+status="$(mpc status)"
+#status="$(mpc --host $(pass mpd)@192.168.0.46 status)"
+# Defines the Play / Pause option content
+if [[ $status == *"[playing]"* ]]; then
+    :
+else
+    mpc play
+fi
+
+
