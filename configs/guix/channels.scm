@@ -1,6 +1,6 @@
 (cons* (channel
        (name 'pita-packs)
-       (url "https://codeberg.org/JetpackJackson/guix-pita-packs.git")
+       (url "https://git@codeberg.org/JetpackJackson/guix-pita-packs.git")
        (branch "main")
        (introduction
         (make-channel-introduction
