@@ -7,6 +7,10 @@ if status is-login
     set -gx GUILE_LOAD_COMPILED_PATH /home/jet/.guix-profile/lib/guile/3.0/site-ccache:/home/jet/.guix-profile/share/guile/site/3.0
     set -gx GUIX_LOCPATH /home/jet/.guix-profile/lib/locale
 
+    set -gx SSL_CERT_DIR $HOME/.guix-profile/etc/ssl/certs
+    set -gx SSL_CERT_FILE $HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt
+    set -gx GIT_SSL_CAINFO $SSL_CERT_FILE
+
     # lang
     #set -gx LANG de_DE.UTF-8
     ##set -gx LANG en_US.UTF-8
