@@ -102,7 +102,7 @@ return {
                 --on_attach = on_attach,
                 cmd = {
                     "arduino-language-server",
-                    "-cli", "/usr/bin/arduino-cli",
+                    "-cli", "arduino-cli",
                     "-clangd", "/usr/bin/clangd",
                 }
             })
