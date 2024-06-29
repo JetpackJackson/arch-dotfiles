@@ -66,8 +66,6 @@ return {
             lsp.guile_ls.setup({
                 capabilities = capabilities,
                 filetypes = { "scheme.guile", "scheme" },
---export GUILE_LOAD_PATH=...:{$HOME}/.guix-profile/share/guile/site/3.0:$GUILE_LOAD_PATH
---export GUILE_LOAD_COMPILED_PATH=...:{$HOME}/.guix-profile/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH
             })
             lsp.nil_ls.setup({
                 capabilities = capabilities,
@@ -86,19 +84,16 @@ return {
                     },
                 },
             })
---            lsp.pyright.setup({
---                capabilities = capabilities,
---                on_attach = on_attach,
---            })
-----            lsp.matlab_ls.setup({
-----                capabilities = capabilities,
-----                on_attach = on_attach,
-----            })
+            lsp.pyright.setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                filetypes = { "python" },
+            })
             lsp.arduino_language_server.setup({
                 capabilities = capabilities,
                 filetypes = { "arduino" },
                 --debug = true,
-                --'-cli-config', '/Users/ubaldot/Library/Arduino15/arduino-cli.yaml'
+                --'-cli-config', ''
                 --on_attach = on_attach,
                 cmd = {
                     "arduino-language-server",
