@@ -18,11 +18,13 @@ function fetch --description 'fastfetch + cowsay'
     while read -la line
         # top bar
         if test "$counter" -eq 1
+            printf " " >> /tmp/cow
             set char -1 #(math $char - 1)
-            while test "$char" -lt "$max"
+            while test "$char" -lt (math "$max" - 1)
                 printf "-" >> /tmp/cow
                 set char (math $char + 1)
             end
+            #printf "." >> /tmp/cow
             printf "\n" >> /tmp/cow
         end
 
@@ -40,12 +42,14 @@ function fetch --description 'fastfetch + cowsay'
 
         # bottom bar
         if test "$counter" -eq (math $filelength + 1)
+            printf " " >> /tmp/cow
             set char -1 #(math $char - 1)
-            while test "$char" -lt "$max"
+            while test "$char" -lt (math "$max" - 1)
                 printf "-" >> /tmp/cow
                 set char (math $char + 1)
             end
             set counter (math $counter + 1)
+            #printf "'" >> /tmp/cow
             printf "\n" >> /tmp/cow
         end
     end </tmp/fold.txt
