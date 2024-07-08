@@ -43,11 +43,11 @@ while : ; do
 #    chosen="$(echo -e "$options" | fzf --preview='./docs/scripts/cat-album-art.sh' --preview-window=up:wrap:noborder)"
 
     #$LESSER=$($COLUMNS-5)
-    
+#    --preview='kitten icat --clear --transfer-mode=memory --place=30x30@30x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title%" current && echo "queued:" && mpc queued' \    
     chosen=$(echo -e "$options" | EXTERNAL_COLUMNS=$COLUMNS \
     fzf \
-    --preview='kitten icat --clear --transfer-mode=memory --place=30x30@30x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title%" current && echo "queued:" && mpc queued' \
-    --preview-window "right,50%,border-left")
+    --preview='mpc -f "%artist% - %title%" current && echo "queued:" && mpc queued' \
+    --preview-window "up,50%,border-left")
 #    --preview='kitten icat --clear --transfer-mode=memory --place="$COLUMNS"x"$LINES"@(math $EXTERNAL_COLUMNS-$COLUMNS)x0 --align center --stdin=no --hold /tmp/file.jpg > /dev/tty & mpc -f "%artist% - %title% - %file%" current' \
 
 #fzf --preview='kitten icat --clear --transfer-mode=memory --place="$COLUMNS"x"$LINES"@"$(($EXTERNAL_COLUMNS-$COLUMNS))"x0 --align center --stdin=no {} > /dev/tty' \
@@ -74,7 +74,7 @@ while : ; do
                     mpc clear && mpc load stream && mpc play
                     ;;
             album)
-                    ./docs/scripts/cat-album-art.sh
+                    cat-album-art.sh
                     ;;
             #delete)
             #        delete-current-song

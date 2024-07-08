@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-beet up -M
+beet up
 beet splupdate
 cp ~/music/playlists/everything.m3u ~/music-android/playlists/everything.m3u
 cp ~/music/playlists/deutschemusik.m3u ~/music-android/playlists/deutschemusik.m3u

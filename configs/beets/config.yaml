@@ -5,9 +5,17 @@ import:
     copy: no
     incremental: yes
     autotag: no
-plugins: chroma mbsync smartplaylist replaygain #convert #lyrics
-  #convert:
-  #    dest: ~/music-android/external
+plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates
+paths:
+    default: external/$albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
+    singleton: external/$albumartist/$album%aunique{}/$track $title
+    comp: external/Various Artists/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
+item_fields:
+    multidisc: 1 if disctotal > 1 else 0
+chroma:
+    auto: yes
+lyrics:
+    auto: yes
 replaygain:
     auto: no
     backend: ffmpeg
