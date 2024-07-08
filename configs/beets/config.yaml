@@ -133,6 +133,7 @@ smartplaylist:
         - name: aufenglisch.m3u # extra music I want on my phone
           query: ['artist:"Nine Inch Nails"',
                   'artist:"Jack Stauber"',
+                  'artist:"Ace of Base"',
                   'artist:"Patient Zero"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
