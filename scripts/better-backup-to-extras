@@ -2,3 +2,5 @@
 sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/$1/sharky/.cache
 sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/$1/sharky/.config
 sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
+#gpg --export-secret-keys --armor --output /tmp/key.asc 
+#sudo mv /tmp/key.asc /run/media/jet/$1/sharky/key.asc
