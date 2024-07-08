@@ -5,6 +5,13 @@ h=$3
 x=$4
 y=$5
 
+
+#if [[ "$( file -Lb --mime-type "$file")" == "image/x-tga" ]]; then
+##    #swayimg -g "${x},${y}" -p "${w},${h}" "$file"
+##    swayimg -g image -p "${w+1100},${h+100}" "$file"
+###    swayimg -g image -p "${x+1000},${y+100}" "$file"
+#    pistol "$file"
+#    exit 1
 if [[ "$( file -Lb --mime-type "$file")" =~ ^image ]]; then
     kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" < /dev/null > /dev/tty
     exit 1
