@@ -28,7 +28,7 @@ function __fish_beet_use_extra
     return 1
 end
 
-set CMDS bad completion config dup duplicates fields fingerprint fish ? help imp im import ls list lyrics mbsync mod modify mv move rm remove replaygain splupdate stats submit upd up update version write
+set CMDS bad completion config convert dup duplicates fields fingerprint fish ? help imp im import ls list lyrics mbsync mod modify mv move rm remove replaygain splupdate stats submit upd up update version write
 
 set FIELDS acoustid_fingerprint: acoustid_id: added: album: album_id: albumartist: albumartist_credit: albumartist_sort: albumartists: albumartists_credit: albumartists_sort: albumdisambig: albumstatus: albumtotal: albumtype: albumtypes: arranger: artist: artist_credit: artist_sort: artists: artists_credit: artists_ids: artists_sort: artpath: asin: barcode: bitdepth: bitrate: bitrate_mode: bpm: catalognum: channels: comments: comp: composer: composer_sort: country: day: disc: discogs_albumid: discogs_artistid: discogs_labelid: disctitle: disctotal: encoder: encoder_info: encoder_settings: filesize: format: genre: grouping: id: initial_key: isrc: label: language: length: lyricist: lyrics: mb_albumartistid: mb_albumartistids: mb_albumid: mb_artistid: mb_artistids: mb_releasegroupid: mb_releasetrackid: mb_trackid: mb_workid: media: month: mtime: multidisc: original_day: original_month: original_year: path: r128_album_gain: r128_track_gain: release_group_title: releasegroupdisambig: remixer: rg_album_gain: rg_album_peak: rg_track_gain: rg_track_peak: samplerate: script: singleton: style: title: track: trackdisambig: tracktotal: work: work_disambig: year:
 
@@ -56,6 +56,10 @@ complete -c beet -n '__fish_beet_using_command completion' -a '$FIELDS' -f -d 'f
 # ------ fieldsetups for  config -------
 complete -c beet -n '__fish_beet_needs_command' -a config -f -d 'show or edit the user configuration'
 complete -c beet -n '__fish_beet_using_command config' -a '$FIELDS' -f -d 'fieldname'
+
+# ------ fieldsetups for  convert -------
+complete -c beet -n '__fish_beet_needs_command' -a convert -f -d 'convert to external location'
+complete -c beet -n '__fish_beet_using_command convert' -a '$FIELDS' -f -d 'fieldname'
 
 # ------ fieldsetups for  dup -------
 complete -c beet -n '__fish_beet_needs_command' -a dup -f -d 'List duplicate tracks or albums.'
@@ -190,6 +194,20 @@ complete -c beet -n '__fish_beet_using_command config' -s e -l edit -f -d 'edit 
 complete -c beet -n '__fish_beet_using_command config' -s d -l defaults -f -d 'include the default configuration'
 complete -c beet -n '__fish_beet_using_command config' -s c -l clear -f -d 'do not redact sensitive fields'
 complete -c beet -n '__fish_beet_using_command config' -s h -l help -f -d 'print help'
+
+
+# ====== completions for  convert =====
+complete -c beet -n '__fish_beet_using_command convert' -s p -l pretend -f -d 'show actions but do nothing'
+complete -c beet -n '__fish_beet_using_command convert' -r -s t -l threads -f -d 'change the number of threads, defaults to maximum available processors'
+complete -c beet -n '__fish_beet_using_command convert' -s k -l keep-new -f -d 'keep only the converted and move the old files'
+complete -c beet -n '__fish_beet_using_command convert' -r -s d -l dest -f -d 'set the destination directory'
+complete -c beet -n '__fish_beet_using_command convert' -r -s f -l format -f -d 'set the target format of the tracks'
+complete -c beet -n '__fish_beet_using_command convert' -s y -l yes -f -d 'do not ask for confirmation'
+complete -c beet -n '__fish_beet_using_command convert' -s l -l link -f -d 'symlink files that do not need transcoding.'
+complete -c beet -n '__fish_beet_using_command convert' -s H -l hardlink -f -d 'hardlink files that do not need transcoding. Overrides --link.'
+complete -c beet -n '__fish_beet_using_command convert' -r -s m -l playlist -f -d 'create an m3u8 playlist file containing the converted files. The playlist file will be saved below the destination directory, thus PLAYLIST could be a file name or a relative path. To ensure a working playlist when transferred to a different computer, or opened from an external drive, relative paths pointing to media files will be used.'
+complete -c beet -n '__fish_beet_using_command convert' -s a -l album -f -d 'match albums instead of tracks'
+complete -c beet -n '__fish_beet_using_command convert' -s h -l help -f -d 'print help'
 
 
 # ====== completions for  dup =====

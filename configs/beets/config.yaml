@@ -1,17 +1,19 @@
 directory: ~/music
 library: ~/.config/beets/musiclibrary.db
 import:
-    move: no
+    move: yes
     copy: no
     incremental: yes
-    autotag: no
-plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates
+    autotag: yes
+plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert
 paths:
     default: external/$albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
     singleton: external/$albumartist/$album%aunique{}/$track $title
     comp: external/Various Artists/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
 item_fields:
     multidisc: 1 if disctotal > 1 else 0
+convert:
+    dest: ~/music-android
 chroma:
     auto: yes
 lyrics:
