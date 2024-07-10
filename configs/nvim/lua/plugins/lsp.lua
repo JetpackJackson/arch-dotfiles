@@ -85,6 +85,7 @@ return {
                 },
             })
             lsp.pyright.setup({
+            --lsp.basedpyright.setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
                 filetypes = { "python" },
