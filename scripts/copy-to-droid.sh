@@ -7,10 +7,19 @@ cp ~/music/playlists/deutschemusik.m3u ~/music-android/playlists/deutschemusik.m
 sed -i -e 's/^/\/storage\/emulated\/0\/Music\//' ~/music-android/playlists/deutschemusik.m3u
 sed -i -e 's/^/\/storage\/emulated\/0\/Music\//' ~/music-android/playlists/everything.m3u
 
-rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/deutschemusik.m3u /home/jet/music/./ ~/music-android/
-#find ~/music/ -name "*.lrc" -printf '%P\n' > /tmp/lrc.txt
-#rsync -aAXHvu $1 --delete --relative --files-from=/tmp/lrc.txt /home/jet/music/./ ~/music-android/
+#rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/deutschemusik.m3u /home/jet/music/./ ~/music-android/
+awk -F '/' '{ print $2 }' < ~/music/playlists/deutschemusik.m3u | sort | uniq > /tmp/deutsch.txt
+while read -r artist; do
+    beet convert -y "artist:$artist"
+done < /tmp/deutsch.txt
+#rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/aufenglisch.m3u /home/jet/music/./ ~/music-android/
+awk -F '/' '{ print $2 }' < ~/music/playlists/aufenglisch.m3u | sort | uniq > /tmp/auf.txt
+while read -r artist; do
+    beet convert -y "artist:$artist"
+done < /tmp/auf.txt
 
+
+# lrc files
 find ~/music/ -name "*.lrc" -printf '%P\n' > /tmp/lrc-all.txt
 true > /tmp/lrc.txt
 while read -r file; do
@@ -20,6 +29,6 @@ while read -r file; do
         echo $newfile >> /tmp/lrc.txt
     fi
 done < ~/music/playlists/deutschemusik.m3u
-#done < /tmp/lrc-all.txt
 rsync -aAXHvu $1 --delete --relative --files-from=/tmp/lrc.txt /home/jet/music/./ ~/music-android/
-rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/aufenglisch.m3u /home/jet/music/./ ~/music-android/
+
+
