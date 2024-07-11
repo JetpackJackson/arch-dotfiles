@@ -62,8 +62,13 @@ backup() {
     sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/$1/sharky/.cache
     sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/$1/sharky/.config
     sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
-    #gpg --export-secret-keys --armor --output /tmp/key.asc 
-    #sudo mv /tmp/key.asc /run/media/jet/$1/sharky/key.asc
+    sudo rsync -aAXHvu --delete /home/jet/.gnupg /run/media/jet/$1/sharky/
+    gpg --export --armor --output /tmp/key.asc JetpackJackson
+    gpg --export-secret-keys --armor --output /tmp/seckey.asc JetpackJackson
+    gpg --export-secret-subkeys --armor --output /tmp/secsubkey.asc JetpackJackson
+    sudo mv /tmp/key.asc /run/media/jet/$1/sharky/key.asc
+    sudo mv /tmp/seckey.asc /run/media/jet/$1/sharky/seckey.asc
+    sudo mv /tmp/secsubkey.asc /run/media/jet/$1/sharky/secsubkey.asc
 
 }
 

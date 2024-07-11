@@ -98,7 +98,7 @@ if status is-interactive
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
     set -gx XINITRC $XDG_CONFIG_HOME/X11/xinitrc
     set -gx XAUTHORITY $XDG_RUNTIME_DIR/Xauthority
-    set -gx GNUPGHOME $XDG_DATA_HOME/gnupg
+    set -gx GNUPGHOME $HOME/.gnupg
     set -gx ANKI_BASE $XDG_DATA_HOME/AnkiData
     set -gx GEM_HOME $XDG_DATA_HOME/gem/ruby
     set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle/

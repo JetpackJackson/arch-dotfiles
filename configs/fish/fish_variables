@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export GNUPGHOME:/home/jet/\x2egnupg/
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/gnupg/d\x2ewbesdss6yxjfx194kq65orbx/S\x2egpg\x2dagent\x2essh
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_n:\x2d\x2dset\x2dcursor\x20nvim\x20\x25
