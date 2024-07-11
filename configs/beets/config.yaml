@@ -3,7 +3,7 @@ library: ~/.config/beets/musiclibrary.db
 import:
     move: yes
     copy: no
-    incremental: yes
+    incremental: no
     autotag: yes
 plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert
 paths:
