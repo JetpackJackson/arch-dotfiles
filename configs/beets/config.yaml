@@ -5,7 +5,7 @@ import:
     copy: no
     incremental: no
     autotag: yes
-plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert
+plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert edit
 paths:
     default: external/$albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
     singleton: external/$albumartist/$album%aunique{}/$track $title
