@@ -4,8 +4,8 @@
     email = baileyannew@tutanota.com
     name = JetpackJackson
     signingkey = 3B7FDB3EE2B69E38B92FE6341E3B936F5D634C6C
-[url "ssh://git@github.com/"]
-   insteadOf = https://github.com/
+#[url "ssh://git@github.com/"]
+#   insteadOf = https://github.com/
 [url "ssh://git@codeberg.org/"]
     insteadOf = https://codeberg.org/
 [sendemail]
