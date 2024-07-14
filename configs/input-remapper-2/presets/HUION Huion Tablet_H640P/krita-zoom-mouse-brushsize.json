@@ -1,0 +1,99 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            },
+            {
+                "type": 1,
+                "code": 56,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            },
+            {
+                "type": 1,
+                "code": 44,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_LEFTCTRL+KEY_MINUS",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            },
+            {
+                "type": 1,
+                "code": 74,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_LEFTCTRL+KEY_LEFTSHIFT+KEY_EQUAL",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            },
+            {
+                "type": 1,
+                "code": 78,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_RIGHT",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 26,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_RIGHT",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 27,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_RIGHTBRACE",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 29,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            },
+            {
+                "type": 1,
+                "code": 31,
+                "origin_hash": "a84ee8ce4e446a879e8037f036404aef"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_LEFTBRACE",
+        "mapping_type": "key_macro"
+    }
+]

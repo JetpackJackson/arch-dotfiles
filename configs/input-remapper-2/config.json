@@ -1,0 +1,6 @@
+{
+    "version": "2.0.1",
+    "autoload": {
+        "HUION Huion Tablet_H640P": "krita-zoom-mouse-brushsize"
+    }
+}
