@@ -84,12 +84,10 @@ return {
                     },
                 },
             })
-            lsp.pyright.setup({
-            --lsp.basedpyright.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                filetypes = { "python" },
-            })
+            --lsp.pyright.setup({
+            --    capabilities = capabilities,
+            --    filetypes = { "python" },
+            --})
             lsp.arduino_language_server.setup({
                 capabilities = capabilities,
                 filetypes = { "arduino" },
