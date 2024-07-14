@@ -49,9 +49,9 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="0.0235294122248888" r="0.596078455448151" space="sRGB-elle-V2-srgbtrc.icc" g="0.858823537826538"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB r="0.596078455448151" space="sRGB-elle-V2-srgbtrc.icc" b="0.0235294122248888" g="0.858823537826538"/>\n</LastBackGroundColor>\n
 LastEraser_0=a) Eraser Circle
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0" r="0" space="sRGB-elle-V2-srgbtrc.icc" g="0"/>\n</LastForeGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB r="0" space="sRGB-elle-V2-srgbtrc.icc" b="0" g="0"/>\n</LastForeGroundColor>\n
 LastPreset=c2) Mechanical Pencil Detail - deevad 23.01
 LastPreset_-1=c2) Mechanical Pencil Detail - deevad 23.01
 LineSmoothingDelayDistance=50
