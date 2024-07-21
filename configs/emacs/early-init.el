@@ -1,5 +1,26 @@
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
-(setq initial-scratch-message "GNU")
+(setq initial-scratch-message "
+; .`                             `.
+; `--..```..`           `..```..--`
+;   .-:///-:::.       `-:::///:-.
+;      ````.:::`     `:::.````
+;           -//:`    -::-
+;            ://:   -::-
+;            `///- .:::`
+;             -+++-:::.
+;              :+/:::-
+;              `-....`
+;
+;        Welcome to GNU Emacs!
+;
+; This buffer is for text that is not
+;   saved, and for Lisp evaluation.
+;   To create a file, visit it with
+; SPC f and enter text in its buffer.
+
+
+")
+
 (setq inhibit-splash-screen t ;; no thanks
         use-file-dialog nil ;; don't use system file dialog
         tab-bar-new-button-show nil ;; don't show new tab button
@@ -24,9 +45,30 @@
 (setq auto-save-interval 20)
 
 ;; set type of line numbering (global variable)
-(setq display-line-numbers-type 'relative) 
+(setq display-line-numbers-type 'relative)
 ;; activate line numbering in all buffers/modes
-(global-display-line-numbers-mode) 
+(global-display-line-numbers-mode)
+
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(defun consult-info-emacs ()
+  "Search through Emacs info pages."
+  (interactive)
+  (consult-info "emacs" "efaq" "elisp" "cl" "compat"))
+
+(defun consult-info-org ()
+  "Search through the Org info page."
+  (interactive)
+  (consult-info "org"))
+
+(defun consult-info-completion ()
+  "Search through completion info pages."
+  (interactive)
+  (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
+                "corfu" "cape" "tempel"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; https://github.com/daedreth/UncleDavesEmacs
@@ -42,7 +84,7 @@
   (compile (concat "g++ "  (file-name-nondirectory (buffer-file-name)) " -o " (file-name-sans-extension   (file-name-nondirectory (buffer-file-name))) " && ./" (file-name-sans-extension  (file-name-nondirectory (buffer-file-name)))) t )
   ;(compile (concat "g++ " (file-name-nondirectory (buffer-file-name)) " && ./a.out") t )
 (other-window 1)
-(end-of-buffer)) 
+(end-of-buffer))
 ;(add-hook 'c++-mode-hook (lambda () (local-set-key (kbd "<M-r>") #'compileandrun)))
 
 

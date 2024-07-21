@@ -137,5 +137,6 @@
 (load "~/.config/emacs/sonokai-theme.el")
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
+(load-file "~/.config/emacs/consult.el")
 ;(load-file "~/.config/emacs/test.el")
 
