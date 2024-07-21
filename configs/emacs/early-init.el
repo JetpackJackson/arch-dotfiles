@@ -43,13 +43,37 @@
 (auto-save-visited-mode 1)
 ;(setq auto-save-visited-interval 20)
 (setq auto-save-interval 5)
+(setq auto-save-timeout 3)
 
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 (setq org-agenda-start-on-weekday 0)
-(org-agenda-files
+(setq org-agenda-files
    '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
+
+(c-add-style "1tbs"
+         '("java"
+           (c-hanging-braces-alist
+             (defun-open after)
+             (class-open after)
+             (inline-open after)
+             (block-close . c-snug-do-while)
+             (statement-cont)
+             (substatement-open after)
+             (brace-list-open)
+             (brace-entry-open)
+             (extern-lang-open after)
+             (namespace-open after)
+             (module-open after)
+             (composition-open after)
+             (inexpr-class-open after)
+             (inexpr-class-close before)
+             (arglist-cont-nonempty))
+           (c-offsets-alist
+             (access-label . -))))
+(setq c-default-style "1tbs")
+
 
 ;; set type of line numbering (global variable)
 (setq display-line-numbers-type 'relative)

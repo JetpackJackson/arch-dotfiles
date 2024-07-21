@@ -71,10 +71,6 @@
 ;;   :custom      ; Set these variables
 ;;   :config      ; Run this code after my-package is loaded
 
-(use-package jabber :ensure t)
-(push 'jabber package-selected-packages)
-
-
 (use-package which-key :ensure t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (push 'which-key package-selected-packages)
@@ -88,7 +84,7 @@
   "v" 'list-buffers
   "b" 'switch-to-buffer
   "ca" 'eglot-code-action-quickfix
-  "mm" 'eglot-find-implementation
+  "n" 'flymake-goto-next-error
   "d" 'kill-buffer
   "g" 'magit-status
   "r" 'compileandrun))
@@ -102,7 +98,7 @@
           (evil-terminal-cursor-changer-activate))
 (push 'evil package-selected-packages)
 (push 'evil-collection package-selected-packages)
-(push 'evil-terminal-cursor-changer)
+(push 'evil-terminal-cursor-changer package-selected-packages)
 
 ;; An extremely feature-rich git client. Activate it with "C-c g".
 (use-package magit
