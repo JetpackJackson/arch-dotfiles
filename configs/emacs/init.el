@@ -136,5 +136,5 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
-(load-file "~/.config/emacs/vertico.el")
-(load-file "~/.config/emacs/jabber.el")
+;(load-file "~/.config/emacs/jabber.el")
+
