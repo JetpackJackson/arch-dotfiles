@@ -76,14 +76,9 @@
 
 
 (use-package which-key :ensure t :config (which-key-mode))
-;(use-package gruvbox-theme :ensure t :config (load-theme 'gruvbox t))
-;(use-package monokai-theme :ensure t);:config (load-theme 'monokai t))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (push 'which-key package-selected-packages)
-;(push 'monokai-theme package-selected-packages)
-;(push 'gruvbox-theme package-selected-packages)
 (push 'rainbow-delimiters package-selected-packages)
-
 
 (setq evil-want-keybinding nil)
 
@@ -99,12 +94,15 @@
   "r" 'compileandrun))
 (push 'evil-leader package-selected-packages)
 
-
 (use-package evil :ensure t :init (setq evil-want-integration t) :config (evil-mode 1))
 (use-package evil-collection :after evil :ensure t :config (evil-collection-init))
+(use-package evil-terminal-cursor-changer :ensure t)
+  (unless (display-graphic-p)
+          (require 'evil-terminal-cursor-changer)
+          (evil-terminal-cursor-changer-activate))
 (push 'evil package-selected-packages)
 (push 'evil-collection package-selected-packages)
-
+(push 'evil-terminal-cursor-changer)
 
 ;; An extremely feature-rich git client. Activate it with "C-c g".
 (use-package magit
@@ -143,4 +141,4 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/vertico.el")
-
+(load-file "~/.config/emacs/jabber.el")

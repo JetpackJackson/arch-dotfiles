@@ -20,7 +20,7 @@
   (completion-styles '(basic)))
 
 ;(use-package company :ensure t :config (global-company-mode))
-(global-set-key (kbd "<tab>") #'company-indent-or-complete-common)
+;(global-set-key (kbd "<tab>") #'company-indent-or-complete-common)
 (use-package company-c-headers)
 (add-to-list 'company-backends 'company-c-headers)
 (add-to-list 'company-c-headers-path-system "/usr/include/c++/14.1.1/")
@@ -37,7 +37,8 @@
   (define-key company-active-map (kbd "M-n") nil)
   (define-key company-active-map (kbd "M-p") nil)
   (define-key company-active-map (kbd "n") #'company-select-next)
-  (define-key company-active-map (kbd "p") #'company-select-previous))
+  (define-key company-active-map (kbd "p") #'company-select-previous)
+  (define-key company-active-map (kbd "<tab>") #'company-indent-or-complete-common))
 ;  (define-key company-active-map (kbd "SPC") #'company-abort))
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)

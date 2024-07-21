@@ -41,8 +41,15 @@
 ; autosave
 (auto-save-mode 1)
 (auto-save-visited-mode 1)
-;(setq auto-save-visited-interval 30)
-(setq auto-save-interval 20)
+;(setq auto-save-visited-interval 20)
+(setq auto-save-interval 5)
+
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+(setq org-agenda-start-on-weekday 0)
+(org-agenda-files
+   '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
 
 ;; set type of line numbering (global variable)
 (setq display-line-numbers-type 'relative)
