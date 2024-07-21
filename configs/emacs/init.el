@@ -71,6 +71,10 @@
 ;;   :custom      ; Set these variables
 ;;   :config      ; Run this code after my-package is loaded
 
+(use-package jabber :ensure t)
+(push 'jabber package-selected-packages)
+
+
 (use-package which-key :ensure t :config (which-key-mode))
 ;(use-package gruvbox-theme :ensure t :config (load-theme 'gruvbox t))
 ;(use-package monokai-theme :ensure t);:config (load-theme 'monokai t))
@@ -138,5 +142,5 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
-;(load-file "~/.config/emacs/test.el")
+(load-file "~/.config/emacs/vertico.el")
 
