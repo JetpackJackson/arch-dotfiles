@@ -92,7 +92,7 @@ if status is-interactive
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
     set -gx QT_QPA_PLATFORM "wayland;xcb"
     set -gx TERMINAL_COMMAND kitty
-    set -gx EDITOR emacs -nw -nbi
+    set -gx EDITOR emacsclient -nw
     set -gx DIFFPROG nvim pacdiff
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
