@@ -1,3 +1,4 @@
+;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq initial-scratch-message "
 ; .`                             `.
@@ -28,14 +29,23 @@
         tab-line-close-button-show nil) ;; don't show tab close button
 ;; Remove extra UI clutter by hiding the scrollbar, menubar, and toolbar.
 (menu-bar-mode -1)
-;(tool-bar-mode -1)
-;(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; No sound
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)
+
+; clean up elpa stuff
+(setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
+(setcar native-comp-eln-load-path
+        (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
+(require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
 
 (electric-pair-mode t) ;; Automatically insert closing parens
 (show-paren-mode 1) ;; Visualize matching parens
-;(save-place-mode t) ;;; Automatically save your place in files
-;(savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
-;(recentf-mode t) ;;; Keep track of open files
+(save-place-mode t) ;;; Automatically save your place in files
+(savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
 (global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
 
 ; autosave
@@ -45,6 +55,7 @@
 (setq auto-save-interval 5)
 (setq auto-save-timeout 3)
 
+; org-mode stuff
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
@@ -52,6 +63,7 @@
 (setq org-agenda-files
    '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
 
+; code indents
 (c-add-style "1tbs"
          '("java"
            (c-hanging-braces-alist
@@ -74,17 +86,18 @@
              (access-label . -))))
 (setq c-default-style "1tbs")
 
-
-;; set type of line numbering (global variable)
+;; set type of line numbering 
 (setq display-line-numbers-type 'relative)
 ;; activate line numbering in all buffers/modes
 (global-display-line-numbers-mode)
 
+; recent files
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
+; consult stuff
 (defun consult-info-emacs ()
   "Search through Emacs info pages."
   (interactive)
@@ -101,6 +114,7 @@
   (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
                 "corfu" "cape" "tempel"))
 
+; TODO: remove this? or refactor into smth with eshell/flymake-compile
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; https://github.com/daedreth/UncleDavesEmacs
 (defvar my-term-shell "/bin/fish")
@@ -117,5 +131,3 @@
 (other-window 1)
 (end-of-buffer))
 ;(add-hook 'c++-mode-hook (lambda () (local-set-key (kbd "<M-r>") #'compileandrun)))
-
-

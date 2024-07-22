@@ -25,15 +25,13 @@
 ;(setq gc-cons-threshold 100000000) ; 100 mb
 ;(setq read-process-output-max (* 1024 1024)) ; 1mb
 
+; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
+(setq use-package-always-defer t)
+
 ;; Add unique buffer names in the minibuffer where there are many
 ;; identical files. This is super useful if you rely on folders for
 ;; organization and have lots of files with the same name,
 ;; e.g. foo/index.ts and bar/index.ts.
-
-; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
-;(setq use-package-always-defer t)
-
-
 (require 'uniquify)
 ;(with-eval-after-load 'uniquify)
 
@@ -45,7 +43,7 @@
       load-prefer-newer t
       backup-by-copying t
       ;; Backups are placed into your Emacs directory, e.g. ~/.config/emacs/backups
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
       ;; I'll add an extra note here since user customizations are important.
       ;; Emacs actually offers a UI-based customization menu, "M-x customize".
       ;; You can use this menu to change variable values across Emacs. By default,
@@ -53,7 +51,7 @@
       ;; your hand-written Emacs Lisp with automatically-generated Lisp from the
       ;; customize menu. The following setting instead writes customizations to a
       ;; separate file, custom.el, to keep your init.el clean.
-      ;custom-file (expand-file-name "custom.el" user-emacs-directory))
+      custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -77,8 +75,7 @@
 (push 'rainbow-delimiters package-selected-packages)
 
 (setq evil-want-keybinding nil)
-
-(use-package evil-leader :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
+(use-package evil-leader :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
   "f" 'find-file
   "v" 'list-buffers
@@ -88,14 +85,13 @@
   "d" 'kill-buffer
   "g" 'magit-status
   "r" 'compileandrun))
-(push 'evil-leader package-selected-packages)
-
-(use-package evil :ensure t :init (setq evil-want-integration t) :config (evil-mode 1))
-(use-package evil-collection :after evil :ensure t :config (evil-collection-init))
-(use-package evil-terminal-cursor-changer :ensure t)
+(use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1))
+(use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
+(use-package evil-terminal-cursor-changer :ensure t :demand t)
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
+(push 'evil-leader package-selected-packages)
 (push 'evil package-selected-packages)
 (push 'evil-collection package-selected-packages)
 (push 'evil-terminal-cursor-changer package-selected-packages)
@@ -105,27 +101,6 @@
     :ensure t
     :bind (("C-c g" . magit-status)))
 (push 'magit package-selected-packages)
-
-;; As you've probably noticed, Lisp has a lot of parentheses.
-;; Maintaining the syntactical correctness of these parentheses
-;; can be a pain when you're first getting started with Lisp,
-;; especially when you're fighting the urge to break up groups
-;; of closing parens into separate lines. Luckily we have
-;; Paredit, a package that maintains the structure of your
-;; parentheses for you. At first, Paredit might feel a little
-;; odd; you'll probably need to look at a tutorial (linked
-;; below) or read the docs before you can use it effectively.
-;; But once you pass that initial barrier you'll write Lisp
-;; code like it's second nature.
-;; http://danmidwood.com/content/2014/11/21/animated-paredit.html
-;; https://stackoverflow.com/a/5243421/3606440
-;(use-package paredit
-;  :ensure t
-;  :hook ((emacs-lisp-mode . enable-paredit-mode)
-;         (lisp-mode . enable-paredit-mode)
-;         (ielm-mode . enable-paredit-mode)
-;         (lisp-interaction-mode . enable-paredit-mode)
-;         (scheme-mode . enable-paredit-mode)))
 
 
 (package-install-selected-packages)
@@ -137,4 +112,3 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 ;(load-file "~/.config/emacs/jabber.el")
-

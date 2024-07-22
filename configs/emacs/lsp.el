@@ -18,6 +18,14 @@
   (savehist-mode))
 (use-package emacs
   :custom
+  ;; TAB cycle if there are only few candidates
+  (completion-cycle-threshold 3)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (tab-always-indent 'complete)
+
+  ;:custom
   ;; Support opening new minibuffers from inside existing minibuffers.
   (enable-recursive-minibuffers t)
   ;; Emacs 28 and newer: Hide commands in M-x which do not work in the current
@@ -50,7 +58,6 @@
   ;; You may want to play with delay/prefix/styles to suit your preferences.
   (corfu-auto-delay 0)
   :bind (("<TAB>" . completion-at-point)))
-
   ;(corfu-auto-prefix 0)
   ;(completion-styles '(basic)))
 
@@ -61,14 +68,15 @@
           (lambda ()
             (setq-local corfu-auto nil)
             (corfu-mode)))
-(use-package emacs
-  :custom
-  ;; TAB cycle if there are only few candidates
-  (completion-cycle-threshold 3)
-
-  ;; Enable indentation+completion using the TAB key.
-  ;; `completion-at-point' is often bound to M-TAB.
-  (tab-always-indent 'complete))
+; moved to other section
+;(use-package emacs
+;  :custom
+;  ;; TAB cycle if there are only few candidates
+;  (completion-cycle-threshold 3)
+;
+;  ;; Enable indentation+completion using the TAB key.
+;  ;; `completion-at-point' is often bound to M-TAB.
+;  (tab-always-indent 'complete))
 (setq global-corfu-minibuffer
       (lambda ()
         (not (or (bound-and-true-p mct--active)
@@ -78,10 +86,6 @@
 ;(use-package company-c-headers)
 ;(add-to-list 'company-backends 'company-c-headers)
 ;(add-to-list 'company-c-headers-path-system "/usr/include/c++/14.1.1/")
-
-(use-package yasnippet :ensure t ;:init (yas-global-mode)
-  :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
-(use-package flycheck :ensure t)
 
 ;(use-package company :ensure t :config (global-company-mode)
 ;  ;(setq company-idle-delay nil) (setq company-minimum-prefix-length 3))
@@ -93,9 +97,12 @@
 ;  (define-key company-active-map (kbd "n") #'company-select-next)
 ;  (define-key company-active-map (kbd "p") #'company-select-previous)
 ;  (define-key company-active-map (kbd "<tab>") #'company-indent-or-complete-common))
+
+(use-package yasnippet :ensure t ;:init (yas-global-mode)
+  :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
+(use-package flycheck :ensure t)
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)
-
 (add-hook 'c++-mode-hook 'eglot-ensure)
 (add-hook 'c-mode-hook 'eglot-ensure)
 
