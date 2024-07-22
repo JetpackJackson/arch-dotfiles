@@ -55,19 +55,27 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-;(unless package-archive-contents
-;  (package-refresh-contents))
-;
-;; A quick primer on the `use-package' function (refer to
-;; "C-h f use-package" for the full details).
-;;
-;; (use-package my-package-name
-;;   :ensure t    ; Ensure my-package is installed
-;;   :after foo   ; Load my-package after foo is loaded (seldom used)
-;;   :init        ; Run this code before my-package is loaded
-;;   :bind        ; Bind these keys to these functions
-;;   :custom      ; Set these variables
-;;   :config      ; Run this code after my-package is loaded
+
+;(use-package telephone-line :ensure t :demand t)
+;(setq telephone-line-lhs
+;      '((evil   . (telephone-line-evil-tag-segment))
+;        (accent . (telephone-line-vc-segment
+;                   telephone-line-erc-modified-channels-segment
+;                   telephone-line-process-segment))
+;        (nil    . (telephone-line-minor-mode-segment
+;                   telephone-line-buffer-segment))))
+;(setq telephone-line-rhs
+;      '((nil    . (telephone-line-misc-info-segment))
+;        (accent . (telephone-line-major-mode-segment))
+;        (evil   . (telephone-line-airline-position-segment))))
+;(telephone-line-mode 1)
+;(push 'telephone-line package-selected-packages)
+
+(use-package doom-modeline :ensure t :demand t :init (doom-modeline-mode 1))
+(setq doom-modeline-buffer-file-name-style 'relative-from-project)
+(setq doom-modeline-icon nil)
+(setq doom-modeline-buffer-state-icon 1)
+(push 'doom-modeline package-selected-packages)
 
 (use-package which-key :ensure t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -83,7 +91,7 @@
   "ca" 'eglot-code-action-quickfix
   "cn" 'flymake-goto-next-error
   "d" 'kill-buffer
-  "g" 'magit-status
+  "g" 'bookmark-jump
   "r" 'recompile))
 ;(global-set-key (kbd "C-c r") 'recompile)
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1))
@@ -97,12 +105,10 @@
 (push 'evil-collection package-selected-packages)
 (push 'evil-terminal-cursor-changer package-selected-packages)
 
-;; An extremely feature-rich git client. Activate it with "C-c g".
 (use-package magit
     :ensure t
     :bind (("C-c g" . magit-status)))
 (push 'magit package-selected-packages)
-
 
 (package-install-selected-packages)
 
