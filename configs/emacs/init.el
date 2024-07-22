@@ -81,10 +81,11 @@
   "v" 'list-buffers
   "b" 'switch-to-buffer
   "ca" 'eglot-code-action-quickfix
-  "n" 'flymake-goto-next-error
+  "cn" 'flymake-goto-next-error
   "d" 'kill-buffer
   "g" 'magit-status
-  "r" 'compileandrun))
+  "r" 'recompile))
+;(global-set-key (kbd "C-c r") 'recompile)
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
