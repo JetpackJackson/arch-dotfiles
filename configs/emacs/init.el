@@ -77,7 +77,7 @@
 (setq doom-modeline-buffer-state-icon 1)
 (push 'doom-modeline package-selected-packages)
 
-(use-package which-key :ensure t :config (which-key-mode))
+(use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (push 'which-key package-selected-packages)
 (push 'rainbow-delimiters package-selected-packages)
