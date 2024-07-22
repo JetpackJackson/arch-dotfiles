@@ -6,6 +6,7 @@
 ;         ("<space>-c a" . eglot-code-action-quickfix)))
          ;("<SPC>-c-a" . eglot-code-action-quickfix)))
 ;(keymap-global-set "<SPC> a" . eglot-code-action-quickfix)
+(setq eglot-autoshutdown t)
 
 (use-package vertico
   :custom
