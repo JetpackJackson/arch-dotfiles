@@ -2,5 +2,7 @@
 .stfolder/
 plugged/
 autoload/
-99-unsorted.sh
-aconfmgr
+configs/emacs/bookmarks
+configs/emacs/history
+configs/emacs/places
+configs/emacs/recentf
