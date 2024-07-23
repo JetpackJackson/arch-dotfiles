@@ -89,6 +89,9 @@
 (use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
 
+;; project.el
+(use-package project :ensure t)
+
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
 (load "~/.config/emacs/sonokai-theme.el")
