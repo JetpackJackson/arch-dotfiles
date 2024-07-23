@@ -10,7 +10,11 @@
            ("C-c c r" . eglot-rename)
            ("C-c c f" . eglot-format)))
 (setq eglot-autoshutdown t)
+(add-hook 'c++-mode-hook 'eglot-ensure)
+(add-hook 'c-mode-hook 'eglot-ensure)
 
+
+;; vertico
 (use-package vertico
   :custom
   (vertico-count 20) ;; Show more candidates
@@ -69,7 +73,8 @@
 ;
 ;  :init
 ;  (global-corfu-mode))
-;
+
+;; corfu
 (use-package corfu :ensure t :init (global-corfu-mode)
   :custom (corfu-auto t) (corfu-preselect 'prompt)
   :bind (("<TAB>" . completion-at-point)))
@@ -77,33 +82,34 @@
 (setq corfu-auto t
       corfu-quit-no-match 'separator) ;; or t
 
-
+;; corfu in the eshell
 (add-hook 'eshell-mode-hook
           (lambda ()
             (setq-local corfu-auto nil)
             (corfu-mode)))
+;; make corfu not mess with other stuff
 (setq global-corfu-minibuffer
       (lambda ()
         (not (or (bound-and-true-p mct--active)
                  (bound-and-true-p vertico--input)
                  (eq (current-local-map) read-passwd-map)))))
 
-(use-package yasnippet :ensure t
-  :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
-(use-package flycheck :ensure t)
+;; snippets
+(use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)
-(add-hook 'c++-mode-hook 'eglot-ensure)
-(add-hook 'c-mode-hook 'eglot-ensure)
 
-(push 'vertico package-selected-packages)
-(push 'savehist package-selected-packages)
-(push 'emacs package-selected-packages)
+;; flycheck
+(use-package flycheck :ensure t)
+
 (push 'corfu package-selected-packages)
 (push 'corfu-terminal package-selected-packages)
-(push 'orderless package-selected-packages)
 (push 'eglot package-selected-packages)
+(push 'emacs package-selected-packages)
 (push 'flycheck package-selected-packages)
+(push 'orderless package-selected-packages)
+(push 'savehist package-selected-packages)
+(push 'vertico package-selected-packages)
 (push 'yasnippet package-selected-packages)
 (push 'yasnippet-snippets package-selected-packages)
 

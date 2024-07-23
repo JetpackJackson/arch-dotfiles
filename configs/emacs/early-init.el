@@ -36,7 +36,7 @@
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
 
-; clean up elpa stuff
+;; clean up elpa stuff
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
 (setcar native-comp-eln-load-path
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
@@ -48,14 +48,14 @@
 (savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
 (global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
 
-; autosave
+;; autosave stuff
 (auto-save-mode 1)
 (auto-save-visited-mode 1)
 ;(setq auto-save-visited-interval 20)
 (setq auto-save-interval 5)
 (setq auto-save-timeout 3)
 
-; org-mode stuff
+;; org-mode stuff
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
@@ -63,43 +63,44 @@
 (setq org-agenda-files
    '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
 
-; code indents
+;; code indents
 (setq c-default-style "k&r"
   c-basic-offset 4)
-;(c-add-style "1tbs"
-;         '("java"
-;           (c-hanging-braces-alist
-;             (defun-open after)
-;             (class-open after)
-;             (inline-open after)
-;             (block-close . c-snug-do-while)
-;             (statement-cont)
-;             (substatement-open after)
-;             (brace-list-open)
-;             (brace-entry-open)
-;             (extern-lang-open after)
-;             (namespace-open after)
-;             (module-open after)
-;             (composition-open after)
-;             (inexpr-class-open after)
-;             (inexpr-class-close before)
-;             (arglist-cont-nonempty))
-;           (c-offsets-alist
-;             (access-label . -))))
-;(setq c-default-style "1tbs")
+;; testing
+(c-add-style "1tbs"
+         '("java"
+           (c-hanging-braces-alist
+             (defun-open after)
+             (class-open after)
+             (inline-open after)
+             (block-close . c-snug-do-while)
+             (statement-cont)
+             (substatement-open after)
+             (brace-list-open)
+             (brace-entry-open)
+             (extern-lang-open after)
+             (namespace-open after)
+             (module-open after)
+             (composition-open after)
+             (inexpr-class-open after)
+             (inexpr-class-close before)
+             (arglist-cont-nonempty))
+           (c-offsets-alist
+             (access-label . -))))
+(setq c-default-style "1tbs")
 
 ;; set type of line numbering 
 (setq display-line-numbers-type 'relative)
 ;; activate line numbering in all buffers/modes
 (global-display-line-numbers-mode)
 
-; recent files
+;; recent files
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-; consult stuff
+;; consult stuff ("manual, relay instructions")
 (defun consult-info-emacs ()
   "Search through Emacs info pages."
   (interactive)

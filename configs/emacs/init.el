@@ -25,16 +25,14 @@
 ;(setq gc-cons-threshold 100000000) ; 100 mb
 ;(setq read-process-output-max (* 1024 1024)) ; 1mb
 
-; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
+;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
 (setq use-package-always-defer t)
 
 ;; Add unique buffer names in the minibuffer where there are many
 ;; identical files. This is super useful if you rely on folders for
 ;; organization and have lots of files with the same name,
 ;; e.g. foo/index.ts and bar/index.ts.
-(require 'uniquify)
-;(with-eval-after-load 'uniquify)
-
+(require 'uniquify) ;(with-eval-after-load 'uniquify)
 ;; The `setq' special form is used for setting variables. Remember
 ;; that you can look up these variables with "C-h v variable-name".
 (setq uniquify-buffer-name-style 'forward
@@ -56,32 +54,22 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-;(use-package telephone-line :ensure t :demand t)
-;(setq telephone-line-lhs
-;      '((evil   . (telephone-line-evil-tag-segment))
-;        (accent . (telephone-line-vc-segment
-;                   telephone-line-erc-modified-channels-segment
-;                   telephone-line-process-segment))
-;        (nil    . (telephone-line-minor-mode-segment
-;                   telephone-line-buffer-segment))))
-;(setq telephone-line-rhs
-;      '((nil    . (telephone-line-misc-info-segment))
-;        (accent . (telephone-line-major-mode-segment))
-;        (evil   . (telephone-line-airline-position-segment))))
-;(telephone-line-mode 1)
-;(push 'telephone-line package-selected-packages)
-
+;; modeline
 (use-package doom-modeline :ensure t :demand t :init (doom-modeline-mode 1))
 (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 (setq doom-modeline-icon nil)
 (setq doom-modeline-buffer-state-icon 1)
 (push 'doom-modeline package-selected-packages)
 
+;; what key does what
 (use-package which-key :ensure t :demand t :config (which-key-mode))
-(use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (push 'which-key package-selected-packages)
+
+;; colorful parentheses
+(use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (push 'rainbow-delimiters package-selected-packages)
 
+;; vim keys
 (setq evil-want-keybinding nil)
 (use-package evil-leader :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
@@ -93,7 +81,6 @@
   "d" 'kill-buffer
   "g" 'bookmark-jump
   "r" 'recompile))
-;(global-set-key (kbd "C-c r") 'recompile)
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
@@ -105,15 +92,16 @@
 (push 'evil-collection package-selected-packages)
 (push 'evil-terminal-cursor-changer package-selected-packages)
 
-(use-package magit
-    :ensure t
+;; a killer git interface
+(use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
 (push 'magit package-selected-packages)
 
+;; now install the stuff in the list
 (package-install-selected-packages)
 
-; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
-; https://nice.github.io/themeforge/
+;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
+;; https://nice.github.io/themeforge/
 (load "~/.config/emacs/sonokai-theme.el")
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
