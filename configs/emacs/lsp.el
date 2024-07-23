@@ -2,26 +2,30 @@
 ;; server installed on your machine to use it with Eglot. e.g.
 ;; rust-analyzer to use Eglot with `rust-mode'.
 (use-package eglot :ensure t
-    ;:hook (prog-mode . eglot-ensure)
     :bind (:map
            eglot-mode-map
            ("C-c c a" . eglot-code-actions)
            ("C-c c o" . eglot-code-actions-organize-imports)
            ("C-c c r" . eglot-rename)
            ("C-c c f" . eglot-format)))
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(scheme-mode . ("guile-lsp-server"))))
+(add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
+(add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
+(add-hook 'c-mode-hook 'eglot-ensure) ;; clangd
+(add-hook 'python-mode-hook 'eglot-ensure) ;; pylsp
 (setq eglot-autoshutdown t)
-(add-hook 'c++-mode-hook 'eglot-ensure)
-(add-hook 'c-mode-hook 'eglot-ensure)
 
 
 ;; vertico
-(use-package vertico
+(use-package vertico :ensure t
   :custom
   (vertico-count 20) ;; Show more candidates
   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init (vertico-mode))
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist :init (savehist-mode))
+(use-package savehist :ensure t :init (savehist-mode))
 
 ;; corfu
 (use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
@@ -98,19 +102,8 @@
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)
+(add-hook 'python-mode-hook 'yas-minor-mode)
+;(add-hook 'scheme-mode-hook 'yas-minor-mode)
 
 ;; flycheck
 (use-package flycheck :ensure t)
-
-(push 'corfu package-selected-packages)
-(push 'corfu-terminal package-selected-packages)
-(push 'eglot package-selected-packages)
-(push 'emacs package-selected-packages)
-(push 'flycheck package-selected-packages)
-(push 'orderless package-selected-packages)
-(push 'savehist package-selected-packages)
-(push 'vertico package-selected-packages)
-(push 'yasnippet package-selected-packages)
-(push 'yasnippet-snippets package-selected-packages)
-
-(package-install-selected-packages)

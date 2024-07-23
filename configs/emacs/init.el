@@ -59,19 +59,16 @@
 (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 (setq doom-modeline-icon nil)
 (setq doom-modeline-buffer-state-icon 1)
-(push 'doom-modeline package-selected-packages)
 
 ;; what key does what
 (use-package which-key :ensure t :demand t :config (which-key-mode))
-(push 'which-key package-selected-packages)
 
 ;; colorful parentheses
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-(push 'rainbow-delimiters package-selected-packages)
 
 ;; vim keys
 (setq evil-want-keybinding nil)
-(use-package evil-leader :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
+(use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
   "f" 'find-file
   "v" 'list-buffers
@@ -87,18 +84,10 @@
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
-(push 'evil-leader package-selected-packages)
-(push 'evil package-selected-packages)
-(push 'evil-collection package-selected-packages)
-(push 'evil-terminal-cursor-changer package-selected-packages)
 
 ;; a killer git interface
 (use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
-(push 'magit package-selected-packages)
-
-;; now install the stuff in the list
-(package-install-selected-packages)
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
