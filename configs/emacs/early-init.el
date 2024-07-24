@@ -62,6 +62,18 @@
 (setq org-agenda-start-on-weekday 0)
 (setq org-agenda-files
    '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
+;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
+(defun org-insert-sub-task ()
+  (interactive)
+  (let ((parent-deadline (org-get-deadline-time nil)))
+    (org-goto-sibling)
+    (org-insert-todo-subheading t)
+    (when parent-deadline
+      (org-deadline nil parent-deadline))))
+;(define-key org-mode-map (kbd "C-c s") 'org-insert-sub-task)
+(global-set-key (kbd "C-c s") 'org-insert-sub-task)
+(setq org-enforce-todo-dependencies t)
+(setq org-agenda-dim-blocked-tasks 'invisible)
 
 ;; code indents
 (setq c-default-style "k&r"

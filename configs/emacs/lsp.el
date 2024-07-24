@@ -10,9 +10,10 @@
            ("C-c c f" . eglot-format)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(scheme-mode . ("guile-lsp-server"))
-	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd"))
-	       ))
+               '(scheme-mode . ("guile-lsp-server")))
+  (add-to-list 'eglot-server-programs
+	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd")))
+  )
 (add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
 (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
 (add-hook 'c-mode-hook 'eglot-ensure) ;; clangd
@@ -24,6 +25,22 @@
 (use-package guix :ensure t)
 (use-package envrc :ensure t
   :hook (after-init . envrc-global-mode))
+;; Returns the parent directory containing a .project.el file, if any,
+;; to override the standard project.el detection logic when needed.
+;(defun my-project-override (dir)
+;  (let ((override (locate-dominating-file dir "manifest.scm")))
+;  ;(let ((override (locate-dominating-file dir ".project.el")))
+;    (if override
+;      (cons 'vc override)
+;      nil)))
+
+;; project.el
+(use-package project)
+  ;; Cannot use :hook because 'project-find-functions does not end in -hook
+  ;; Cannot use :init (must use :config) because otherwise
+  ;; project-find-functions is not yet initialized.
+;  :config
+;  (add-hook 'project-find-functions #'my-project-override))
 
 ;; vertico
 (use-package vertico :ensure t
@@ -35,75 +52,53 @@
 (use-package savehist :ensure t :init (savehist-mode))
 
 ;; corfu
-(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
-
-;;;; Auto completion example
-;;(use-package corfu
-;;  :custom
-;;  (corfu-auto t)          ;; Enable auto completion
-;;  ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
-;;  :bind
-;;  ;; Another key binding can be used, such as S-SPC.
-;;  (:map corfu-map ("S-SPC" . corfu-insert-separator))
-;;  :init
-;;  (global-corfu-mode))
-;;(use-package orderless
-;;  :custom
-;;  ;; Configure a custom style dispatcher (see the Consult wiki)
-;;  ;; (orderless-style-dispatchers '(+orderless-dispatch))
-;;  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
-;;  (completion-styles '(orderless basic))
-;;  (completion-category-defaults nil)
-;;  (completion-category-overrides '((file (styles partial-completion)))))
-
-
-
-;;; Manual completion example
-;(use-package corfu
-;  :custom
-;  (corfu-separator ?_) ;; Set to orderless separator, if not using space
-;  :bind
-;  ;; Configure SPC for separator insertion
-;  (:map corfu-map ("SPC" . corfu-insert-separator))
-;  :init
-;  (global-corfu-mode))
-
-;(use-package corfu
-;  ;; TAB-and-Go customizations
-;  :custom
-;  (corfu-cycle t)           ;; Enable cycling for `corfu-next/previous'
-;  (corfu-preselect 'prompt) ;; Always preselect the prompt
-;
-;  ;; Use TAB for cycling, default is `corfu-complete'.
-;  :bind
-;  (:map corfu-map
-;        ("TAB" . corfu-next)
-;        ([tab] . corfu-next)
-;        ("S-TAB" . corfu-previous)
-;        ([backtab] . corfu-previous))
-;
-;  :init
-;  (global-corfu-mode))
 
 ;; corfu
-(use-package corfu :ensure t :init (global-corfu-mode)
-  :custom (corfu-auto t) (corfu-preselect 'prompt)
-  :bind (("<TAB>" . completion-at-point)))
-;; Enable auto completion and configure quitting
-(setq corfu-auto t
-      corfu-quit-no-match 'separator) ;; or t
+;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
+;;(use-package corfu :ensure t :init (global-corfu-mode)
+;;  :custom (corfu-auto t) (corfu-preselect 'prompt)
+;;  :bind (("<TAB>" . completion-at-point)))
+;;;; Enable auto completion and configure quitting
+;;(setq corfu-auto t
+;;      corfu-quit-no-match 'separator) ;; or t
+;;
+;;;; corfu in the eshell
+;;(add-hook 'eshell-mode-hook
+;;          (lambda ()
+;;            (setq-local corfu-auto nil)
+;;            (corfu-mode)))
+;;;; make corfu not mess with other stuff
+;;(setq global-corfu-minibuffer
+;;      (lambda ()
+;;        (not (or (bound-and-true-p mct--active)
+;;                 (bound-and-true-p vertico--input)
+;;                 (eq (current-local-map) read-passwd-map)))))
 
-;; corfu in the eshell
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (setq-local corfu-auto nil)
-            (corfu-mode)))
-;; make corfu not mess with other stuff
-(setq global-corfu-minibuffer
-      (lambda ()
-        (not (or (bound-and-true-p mct--active)
-                 (bound-and-true-p vertico--input)
-                 (eq (current-local-map) read-passwd-map)))))
+
+(use-package company-c-headers)
+;(add-to-list 'company-backends 'company-c-headers)
+;(add-to-list 'company-c-headers-path-system "/usr/include/c++/14.1.1/")
+(use-package company :ensure t :config (global-company-mode)
+;(use-package company :ensure t :config
+  ;(setq company-idle-delay nil) (setq company-minimum-prefix-length 3))
+  ;:config
+  (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
+;(with-eval-after-load 'company
+;  (define-key company-active-map (kbd "M-n") nil)
+;  (define-key company-active-map (kbd "M-p") nil)
+;  (define-key company-active-map (kbd "n") #'company-select-next)
+;  (define-key company-active-map (kbd "p") #'company-select-previous)
+;  (define-key company-active-map (kbd "<tab>") #'company-indent-or-complete-common))
+(with-eval-after-load 'company
+  (define-key company-active-map
+              (kbd "TAB")
+              #'company-complete-common-or-cycle)
+  (define-key company-active-map
+              (kbd "<backtab>")
+              (lambda ()
+                (interactive)
+                (company-complete-common-or-cycle -1))))
+
 
 ;; snippets
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
