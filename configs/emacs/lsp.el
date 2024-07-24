@@ -1,5 +1,5 @@
 ;; arduino mode
-(define-derived-mode arduino-mode c++-mode "Arduino")
+;;(define-derived-mode arduino-mode c++-mode "Arduino")
 
 (use-package eglot :ensure t
     :bind (:map
