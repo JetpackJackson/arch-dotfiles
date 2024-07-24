@@ -1,6 +1,6 @@
-;; Adds LSP support. Note that you must have the respective LSP
-;; server installed on your machine to use it with Eglot. e.g.
-;; rust-analyzer to use Eglot with `rust-mode'.
+;; arduino mode
+(define-derived-mode arduino-mode c++-mode "Arduino")
+
 (use-package eglot :ensure t
     :bind (:map
            eglot-mode-map
@@ -10,13 +10,20 @@
            ("C-c c f" . eglot-format)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(scheme-mode . ("guile-lsp-server"))))
+               '(scheme-mode . ("guile-lsp-server"))
+	       (arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd"))
+	       ))
 (add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
 (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
 (add-hook 'c-mode-hook 'eglot-ensure) ;; clangd
 (add-hook 'python-mode-hook 'eglot-ensure) ;; pylsp
+(add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 
+(use-package guix :ensure t)
+(use-package envrc :ensure t
+  :hook (after-init . envrc-global-mode))
 
 ;; vertico
 (use-package vertico :ensure t
@@ -104,6 +111,7 @@
 (add-hook 'c-mode-hook 'yas-minor-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode)
+(add-hook 'latex-mode-hook 'yas-minor-mode)
 
 ;; flycheck
 (use-package flycheck :ensure t)
