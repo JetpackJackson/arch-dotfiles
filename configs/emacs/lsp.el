@@ -1,5 +1,5 @@
 ;; arduino mode
-;;(define-derived-mode arduino-mode c++-mode "Arduino")
+(define-derived-mode arduino-mode c++-mode "Arduino")
 
 (use-package eglot :ensure t
     :bind (:map
@@ -11,7 +11,7 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server"))
-	       (arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd"))
+	       ;(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd"))
 	       ))
 (add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
 (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
