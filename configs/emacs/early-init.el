@@ -59,7 +59,7 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(setq org-agenda-span 10
+(setq org-agenda-span 14
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-3d")
 ;(setq org-agenda-start-on-weekday 0)
