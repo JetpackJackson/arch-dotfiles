@@ -59,7 +59,10 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(setq org-agenda-start-on-weekday 0)
+(setq org-agenda-span 10
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-3d")
+;(setq org-agenda-start-on-weekday 0)
 (setq org-agenda-files
    '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
