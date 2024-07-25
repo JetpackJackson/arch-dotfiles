@@ -89,6 +89,10 @@
 (use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
 
+(use-package indent-bars
+  :load-path "~/.cache/emacs/indent-bars"
+  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
+
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
 (load "~/.config/emacs/sonokai-theme.el")

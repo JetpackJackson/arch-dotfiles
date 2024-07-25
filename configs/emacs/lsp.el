@@ -25,6 +25,7 @@
 (use-package guix :ensure t)
 (use-package envrc :ensure t
   :hook (after-init . envrc-global-mode))
+
 ;; Returns the parent directory containing a .project.el file, if any,
 ;; to override the standard project.el detection logic when needed.
 ;(defun my-project-override (dir)
@@ -52,8 +53,6 @@
 (use-package savehist :ensure t :init (savehist-mode))
 
 ;; corfu
-
-;; corfu
 ;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
 ;;(use-package corfu :ensure t :init (global-corfu-mode)
 ;;  :custom (corfu-auto t) (corfu-preselect 'prompt)
@@ -79,16 +78,7 @@
 ;(add-to-list 'company-backends 'company-c-headers)
 ;(add-to-list 'company-c-headers-path-system "/usr/include/c++/14.1.1/")
 (use-package company :ensure t :config (global-company-mode)
-;(use-package company :ensure t :config
-  ;(setq company-idle-delay nil) (setq company-minimum-prefix-length 3))
-  ;:config
   (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
-;(with-eval-after-load 'company
-;  (define-key company-active-map (kbd "M-n") nil)
-;  (define-key company-active-map (kbd "M-p") nil)
-;  (define-key company-active-map (kbd "n") #'company-select-next)
-;  (define-key company-active-map (kbd "p") #'company-select-previous)
-;  (define-key company-active-map (kbd "<tab>") #'company-indent-or-complete-common))
 (with-eval-after-load 'company
   (define-key company-active-map
               (kbd "TAB")
@@ -98,7 +88,6 @@
               (lambda ()
                 (interactive)
                 (company-complete-common-or-cycle -1))))
-
 
 ;; snippets
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))

@@ -55,6 +55,9 @@
 (setq auto-save-interval 5)
 (setq auto-save-timeout 3)
 
+;; add file header
+(global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
+
 ;; org-mode stuff
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
