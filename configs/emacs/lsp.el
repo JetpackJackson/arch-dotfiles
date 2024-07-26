@@ -22,36 +22,6 @@
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 
-(use-package guix :ensure t)
-(use-package envrc :ensure t
-  :hook (after-init . envrc-global-mode))
-
-;; Returns the parent directory containing a .project.el file, if any,
-;; to override the standard project.el detection logic when needed.
-;(defun my-project-override (dir)
-;  (let ((override (locate-dominating-file dir "manifest.scm")))
-;  ;(let ((override (locate-dominating-file dir ".project.el")))
-;    (if override
-;      (cons 'vc override)
-;      nil)))
-
-;; project.el
-(use-package project)
-  ;; Cannot use :hook because 'project-find-functions does not end in -hook
-  ;; Cannot use :init (must use :config) because otherwise
-  ;; project-find-functions is not yet initialized.
-;  :config
-;  (add-hook 'project-find-functions #'my-project-override))
-
-;; vertico
-(use-package vertico :ensure t
-  :custom
-  (vertico-count 20) ;; Show more candidates
-  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-  :init (vertico-mode))
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist :ensure t :init (savehist-mode))
-
 ;; corfu
 ;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
 ;;(use-package corfu :ensure t :init (global-corfu-mode)
@@ -72,7 +42,6 @@
 ;;        (not (or (bound-and-true-p mct--active)
 ;;                 (bound-and-true-p vertico--input)
 ;;                 (eq (current-local-map) read-passwd-map)))))
-
 
 (use-package company-c-headers)
 ;(add-to-list 'company-backends 'company-c-headers)

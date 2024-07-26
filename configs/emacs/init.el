@@ -93,6 +93,44 @@
   :load-path "~/.cache/emacs/indent-bars"
   :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
 
+(use-package guix :ensure t)
+(use-package envrc :ensure t
+  :hook (after-init . envrc-global-mode))
+
+;; project.el
+
+;; Returns the parent directory containing a .project.el file, if any,
+;; to override the standard project.el detection logic when needed.
+;(defun my-project-override (dir)
+;  (let ((override (locate-dominating-file dir "manifest.scm")))
+;  ;(let ((override (locate-dominating-file dir ".project.el")))
+;    (if override
+;      (cons 'vc override)
+;      nil)))
+(use-package project)
+  ;; Cannot use :hook because 'project-find-functions does not end in -hook
+  ;; Cannot use :init (must use :config) because otherwise
+  ;; project-find-functions is not yet initialized.
+;  :config
+;  (add-hook 'project-find-functions #'my-project-override))
+(use-package project-butler :ensure t :demand t)
+(customize-set-variable 'project-butler-projects-list
+                        '(("~/docs/notes/school/COP3503C/project3-p2/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
+;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
+(keymap-set project-prefix-map "k" #'project-butler-cleanup)
+
+
+
+;; vertico
+(use-package vertico :ensure t
+  :custom
+  (vertico-count 20) ;; Show more candidates
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init (vertico-mode)
+  :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
+
+
+
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
 (load "~/.config/emacs/sonokai-theme.el")
