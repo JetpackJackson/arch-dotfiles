@@ -4,10 +4,10 @@
 (use-package eglot :ensure t
     :bind (:map
            eglot-mode-map
-           ("C-c c a" . eglot-code-actions)
-           ("C-c c o" . eglot-code-actions-organize-imports)
-           ("C-c c r" . eglot-rename)
-           ("C-c c f" . eglot-format)))
+           ("C-c e a" . eglot-code-actions)
+           ("C-c e o" . eglot-code-actions-organize-imports)
+           ("C-c e r" . eglot-rename)
+           ("C-c e f" . eglot-format)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))

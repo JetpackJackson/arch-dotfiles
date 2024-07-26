@@ -62,12 +62,51 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(setq org-agenda-span 14
+(global-set-key (kbd "C-c <TAB>") #'org-shiftmetaright)
+;(define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
+(global-set-key (kbd "C-c <DEL>") #'org-shiftmetaleft)
+;(define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
+(setq org-agenda-span 20
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-3d")
-;(setq org-agenda-start-on-weekday 0)
-(setq org-agenda-files
-   '("/home/jet/docs/notes/notes-zettelkasten/agenda.org"))
+(setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
+;; Associate all org files with org mode
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+;; Make the indentation look nicer
+(add-hook 'org-mode-hook 'org-indent-mode)
+;; Follow the links
+;(setq org-return-follows-link t)
+(setq org-capture-templates
+      '(    
+        ("g" "General To-Do"
+         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
+         "* TODO [#B] %?\n:Created: %T\n "
+         :empty-lines 0)
+      ))
+(setq org-capture-templates
+      '(    
+        ("c" "Code To-Do"
+         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
+         "* TODO [#B] %?\n:Created: %T\n%i\n%a\nProposed Solution: "
+         :empty-lines 0)
+        ))
+;; TODO states
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
+        ))
+;; TODO colors
+(setq org-todo-keyword-faces
+      '(
+        ("TODO" . (:foreground "GoldenRod" :weight bold))
+        ("PLANNING" . (:foreground "DeepPink" :weight bold))
+        ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
+        ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
+        ("BLOCKED" . (:foreground "Red" :weight bold))
+        ("DONE" . (:foreground "LimeGreen" :weight bold))
+        ("OBE" . (:foreground "LimeGreen" :weight bold))
+        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
+        ))
+
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
 (defun org-insert-sub-task ()
   (interactive)
@@ -76,7 +115,7 @@
     (org-insert-todo-subheading t)
     (when parent-deadline
       (org-deadline nil parent-deadline))))
-;(define-key org-mode-map (kbd "C-c s") 'org-insert-sub-task)
+;(define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task)
 (global-set-key (kbd "C-c s") 'org-insert-sub-task)
 (setq org-enforce-todo-dependencies t)
 (setq org-agenda-dim-blocked-tasks 'invisible)
@@ -134,3 +173,20 @@
   (interactive)
   (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
                 "corfu" "cape" "tempel"))
+
+;; credit: yorickvP on Github
+(setq wl-copy-process nil)
+(defun wl-copy (text)
+  (setq wl-copy-process (make-process :name "wl-copy"
+                                      :buffer nil
+                                      :command '("wl-copy" "-f" "-n")
+                                      :connection-type 'pipe))
+                                      ;:noquery t))
+  (process-send-string wl-copy-process text)
+  (process-send-eof wl-copy-process))
+(defun wl-paste ()
+  (if (and wl-copy-process (process-live-p wl-copy-process))
+      nil ; should return nil if we're the current paste owner
+      (shell-command-to-string "wl-paste -n"))); | tr -d \r")))
+(setq interprogram-cut-function 'wl-copy)
+(setq interprogram-paste-function 'wl-paste)
