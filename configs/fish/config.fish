@@ -92,7 +92,7 @@ if status is-interactive
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
     set -gx QT_QPA_PLATFORM "wayland;xcb"
     set -gx TERMINAL_COMMAND kitty
-    set -gx EDITOR "emacsclient -nw -a 'emacs -nw '"
+    set -gx EDITOR "emacsclient -nw"
     set -gx DIFFPROG nvim pacdiff
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
@@ -116,7 +116,7 @@ if status is-interactive
     abbr -a nps --set-cursor 'nix search nixpkgs %'
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
-    abbr -a e --set-cursor 'emacs -nw %'
+    abbr -a e --set-cursor 'emacsclient -nw %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
