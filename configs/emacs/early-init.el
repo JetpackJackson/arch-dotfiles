@@ -55,6 +55,9 @@
 (setq auto-save-interval 5)
 (setq auto-save-timeout 3)
 
+;; ediff
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; add file header
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 

@@ -66,6 +66,9 @@
 ;; colorful parentheses
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+;; vdiff
+(use-package vdiff :ensure t)
+
 ;; vim keys
 (setq evil-want-keybinding nil)
 (use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
