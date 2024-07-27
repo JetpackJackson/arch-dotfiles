@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-#beet up
-#beet splupdate
+beet up
+beet splupdate
 cp ~/music/playlists/everything.m3u ~/music-android/playlists/everything.m3u
 cp ~/music/playlists/deutschemusik.m3u ~/music-android/playlists/deutschemusik.m3u
 sed -i -e 's/^/\/storage\/emulated\/0\/Music\//' ~/music-android/playlists/deutschemusik.m3u
