@@ -1,3 +1,4 @@
+# -*- indent-tabs-mode: nil; -*-
 directory: ~/music
 library: ~/.config/beets/musiclibrary.db
 import:
@@ -138,7 +139,7 @@ smartplaylist:
                   'artist:"Ace of Base"',
                   'artist:"Patient Zero"',
                   'artist:"Gary Numan"',
-		  'artist:"Angelspit"',
+                  'artist:"Angelspit"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
                   'artist:"Depeche Mode"']
