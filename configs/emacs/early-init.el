@@ -87,7 +87,7 @@
       '(    
         ("c" "Code To-Do"
          entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
-         "* TODO [#B] %?\n:Created: %T\n%i\n%a\nProposed Solution: "
+         "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
          :empty-lines 0)
         ))
 ;; TODO states
