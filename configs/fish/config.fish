@@ -11,8 +11,9 @@ if status is-login
     set -gx SSL_CERT_FILE $HOME/.guix-profile/etc/ssl/certs/ca-certificates.crt
     set -gx GIT_SSL_CAINFO $SSL_CERT_FILE
 
-    set -gx SSH_AGENT_PID ""
-    set -gx SSH_AUTH_SOCK $(gpgconf --list-dirs agent-ssh-socket)
+    #set -gx SSH_AGENT_PID ""
+    #set -gx SSH_AUTH_SOCK $(gpgconf --list-dirs agent-ssh-socket)
+    set -gx SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 
     # lang
     #set -gx LANG de_DE.UTF-8
