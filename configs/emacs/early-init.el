@@ -57,6 +57,7 @@
 
 ;; ediff
 (setq ediff-split-window-function 'split-window-horizontally)
+(setq truncate-partial-width-windows t)
 
 ;; add file header
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
