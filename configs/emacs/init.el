@@ -118,7 +118,7 @@
 ;  (add-hook 'project-find-functions #'my-project-override))
 (use-package project-butler :ensure t :demand t)
 (customize-set-variable 'project-butler-projects-list
-                        '(("~/docs/notes/school/COP3503C/project3-p2/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
+                        '(("~/docs/notes/school/COP3503C/project3-p3/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
 ;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
 (keymap-set project-prefix-map "k" #'project-butler-cleanup)
 
