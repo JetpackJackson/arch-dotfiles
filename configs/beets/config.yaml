@@ -43,6 +43,7 @@ smartplaylist:
                   'artist::^CRO$',
                   'artist:"Cephalgy"',
                   'artist::^Cro$',
+                  'artist:"Covenant"',
                   'artist:"Das Ich"',
                   'artist:"Das Lumpenpack"',
                   'artist:"Diary of Dreams"',
@@ -141,6 +142,10 @@ smartplaylist:
                   'artist:"Patient Zero"',
                   'artist:"Gary Numan"',
                   'artist:"Angelspit"',
+                  'artist:"Rob Zombie"',
+                  'artist:"White Zombie"',
+                  'artist:"Siouxsie & The Banshees"',
+                  'artist:"Siouxsie and the Banshees"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
                   'artist:"Depeche Mode"']

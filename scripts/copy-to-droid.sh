@@ -22,6 +22,7 @@ sed -i '/Marv/d' /tmp/deutsch.txt
 while read -r artist; do
     echo "converting $artist"
     beet convert -y "artist:$artist"
+    beet convert -y "albumartist:$artist"
 done < /tmp/deutsch.txt
 #rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/aufenglisch.m3u /home/jet/music/./ ~/music-android/
 awk -F '/' '{ print $2 }' < ~/music/playlists/aufenglisch.m3u | sort | uniq > /tmp/auf.txt
