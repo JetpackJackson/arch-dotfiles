@@ -46,8 +46,7 @@
 (use-package company-c-headers)
 ;(add-to-list 'company-backends 'company-c-headers)
 ;(add-to-list 'company-c-headers-path-system "/usr/include/c++/14.1.1/")
-(use-package company :ensure t :config (global-company-mode)
-  (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
+(use-package company :ensure t :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
 (with-eval-after-load 'company
   (define-key company-active-map
               (kbd "TAB")

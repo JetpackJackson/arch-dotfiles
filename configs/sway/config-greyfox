@@ -240,6 +240,7 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
+exec_always systemctl --user start emacs
 exec_always --no-startup-id mako
 exec_always yams.sh
 exec_always nm-applet &
