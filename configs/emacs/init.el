@@ -87,6 +87,7 @@
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
+(setq evil-undo-system 'undo-redo)
 
 ;; a killer git interface
 (use-package magit :ensure t

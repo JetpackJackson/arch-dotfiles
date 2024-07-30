@@ -110,10 +110,11 @@
         ("OBE" . (:foreground "LimeGreen" :weight bold))
         ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
         ))
-(custom-set-faces
- '(org-level-3 ((t (:extend nil :foreground "white"))))
- )
-; '(org-special-keyword ((t (:foreground "lightslategray")))))
+
+(with-eval-after-load 'org-faces
+  (set-face-attribute 'org-level-3 nil :foreground "white")
+  ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
+  )
 
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
 (defun org-insert-sub-task ()
