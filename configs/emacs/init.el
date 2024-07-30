@@ -81,13 +81,12 @@
   "d" 'kill-buffer
   "g" 'bookmark-jump
   "r" 'recompile))
-(use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1))
+(use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1) :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
-(setq evil-undo-system 'undo-redo)
 
 ;; a killer git interface
 (use-package magit :ensure t
