@@ -1,7 +1,7 @@
 [safe]
     directory = /home/jet/.config/git
 [user]
-    email = baileyannew@tutanota.com
+    email = jetpackjackson@katzenmue.de
     name = JetpackJackson
     signingkey = 3B7FDB3EE2B69E38B92FE6341E3B936F5D634C6C
 #[url "ssh://git@github.com/"]
@@ -9,10 +9,15 @@
 [url "ssh://git@codeberg.org/"]
     insteadOf = https://codeberg.org/
 [sendemail]
-    smtpserver = disroot.org
-    smtpuser = jetpackjackson@disroot.org
+    smtpserver = migadu.com
+    smtpuser = jetpackjackson@katzenmue.de
     smtpencryption = tls
-    smtpserverport = 587
+    smtpserverport = 465
+#[sendemail]
+#    smtpserver = disroot.org
+#    smtpuser = jetpackjackson@disroot.org
+#    smtpencryption = tls
+#    smtpserverport = 587
 [commit]
     gpgSign = true
 
