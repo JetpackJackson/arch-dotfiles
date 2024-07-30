@@ -12,6 +12,8 @@ beet convert -y "artist::^Lotte$"
 beet convert -y 'artist::^LOTTE$'
 beet convert -y 'artist::^Love A$'
 beet convert -y 'artist:^Marv$'
+beet convert -y 'artist:Phil Collins' 'fremde'
+beet convert -y 'artist:David Bowie' 'helden'
 
 #rsync -aAXHvu $1 --delete --relative --files-from=/home/jet/music/playlists/deutschemusik.m3u /home/jet/music/./ ~/music-android/
 awk -F '/' '{ print $2 }' < ~/music/playlists/deutschemusik.m3u | sort | uniq > /tmp/deutsch.txt
@@ -19,6 +21,8 @@ sed -i '/LOTTE/d' /tmp/deutsch.txt
 sed -i '/Cro/d' /tmp/deutsch.txt
 sed -i '/Love A/d' /tmp/deutsch.txt
 sed -i '/Marv/d' /tmp/deutsch.txt
+sed -i '/Phil Collins/d' /tmp/deutsch.txt
+sed -i '/David Bowie/d' /tmp/deutsch.txt
 while read -r artist; do
     echo "converting $artist"
     beet convert -y "artist:$artist"

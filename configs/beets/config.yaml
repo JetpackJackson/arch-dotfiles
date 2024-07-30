@@ -2,6 +2,7 @@
 directory: ~/music
 library: ~/.config/beets/musiclibrary.db
 import:
+    write: yes
     move: yes
     copy: no
     incremental: no
@@ -46,6 +47,7 @@ smartplaylist:
                   'artist:"Covenant"',
                   'artist:"Das Ich"',
                   'artist:"Das Lumpenpack"',
+                  '"artist:David Bowie" "helden"',
                   'artist:"Diary of Dreams"',
                   'artist:"Die Kreatur"',
                   'artist:"Die Krupps"',
@@ -98,6 +100,7 @@ smartplaylist:
                   'artist:"Peter Heppner"',
                   'artist:"Peter Schilling"',
                   'artist:"Project Pitchfork"',
+                  '"artist:Phil Collins" "fremde"',
                   'artist:"Philipp Dittberner"',
                   'artist:"Philipp Dittberner & Marv"',
                   'artist:"Powerwolf"',
@@ -148,5 +151,6 @@ smartplaylist:
                   'artist:"Siouxsie and the Banshees"',
                   'artist:"Various Artists"',
                   'artist:"Chumbawamba"',
+                  'artist:"MDFMK"',
                   'artist:"Depeche Mode"']
 
