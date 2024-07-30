@@ -66,10 +66,8 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-(global-set-key (kbd "C-c <TAB>") #'org-shiftmetaright)
-;(define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
-(global-set-key (kbd "C-c <DEL>") #'org-shiftmetaleft)
-;(define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
+;(global-set-key (kbd "C-c <TAB>") #'org-shiftmetaright)
+;(global-set-key (kbd "C-c <DEL>") #'org-shiftmetaleft)
 (setq org-agenda-span 20
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-3d")
@@ -78,6 +76,10 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Make the indentation look nicer
 (add-hook 'org-mode-hook 'org-indent-mode)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
+  (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft))
+
 ;; Follow the links
 ;(setq org-return-follows-link t)
 (setq org-capture-templates
@@ -112,9 +114,8 @@
         ))
 
 (with-eval-after-load 'org-faces
-  (set-face-attribute 'org-level-3 nil :foreground "white")
+  (set-face-attribute 'org-level-3 nil :foreground "white"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
-  )
 
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
 (defun org-insert-sub-task ()
