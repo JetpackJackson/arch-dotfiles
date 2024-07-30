@@ -125,8 +125,10 @@
       (org-deadline nil parent-deadline))))
 ;(define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task)
 (global-set-key (kbd "C-c s") 'org-insert-sub-task)
-(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks 'invisible)
+(setq org-enforce-todo-dependencies nil)
+;(setq org-enforce-todo-dependencies t)
+(setq org-agenda-dim-blocked-tasks t)
+;(setq org-agenda-dim-blocked-tasks 'invisible)
 
 ;; code indents
 (setq c-default-style "k&r"
