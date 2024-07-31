@@ -75,7 +75,7 @@
 ;; Associate all org files with org mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Make the indentation look nicer
-(add-hook 'org-mode-hook 'org-indent-mode)
+;(add-hook 'org-mode-hook 'org-indent-mode) ; make this play nice with foot cursor blink
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft))
