@@ -70,6 +70,8 @@
 (use-package vdiff :ensure t)
 
 ;; vim keys
+(defun my-org-insert-link () "bind org insert" (interactive)
+   (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
 (setq evil-want-keybinding nil)
 (use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
@@ -80,7 +82,8 @@
   "cn" 'flymake-goto-next-error
   "d" 'kill-buffer
   "g" 'bookmark-jump
-  "r" 'recompile))
+  "r" 'recompile
+  "l" 'my-org-insert-link))
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1) :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
