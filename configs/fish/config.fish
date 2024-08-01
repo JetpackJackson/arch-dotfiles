@@ -108,6 +108,7 @@ if status is-interactive
     set -gx NUGET_PACKAGES $XDG_CACHE_HOME/NuGetPackages
     set -gx DOTNET_CLI_HOME $XDG_DATA_HOME/dotnet
     set -gx GOPATH $XDG_DATA_HOME/go
+    set -gx PLATFORMIO_CORE_DIR $XDG_DATA_HOME/platformio
 
     abbr -a scu --set-cursor 'systemctl --user %' 
     abbr -a sc --set-cursor 'systemctl %' 
