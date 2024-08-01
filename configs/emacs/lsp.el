@@ -13,12 +13,17 @@
                '(scheme-mode . ("guile-lsp-server")))
   (add-to-list 'eglot-server-programs
 	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd")))
-  )
+  (add-to-list 'eglot-server-programs
+	       '(sh-mode . ("bash-language-server" "start")))
+  (add-to-list 'eglot-server-programs
+	       '(bash-ts-mode . ("bash-language-server" "start"))))
 (add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
 (add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
 (add-hook 'c-mode-hook 'eglot-ensure) ;; clangd
 (add-hook 'python-mode-hook 'eglot-ensure) ;; pylsp
 (add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
+(add-hook 'sh-mode-hook 'eglot-ensure) ;; bash-language-server
+(add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 
