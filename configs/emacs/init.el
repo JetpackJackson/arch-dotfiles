@@ -133,7 +133,6 @@
   :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
 
 
-(add-to-list 'term-file-aliases '("foot" . "xterm"))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/

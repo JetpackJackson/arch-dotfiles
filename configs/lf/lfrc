@@ -1,10 +1,8 @@
 # interpreter for shell commands
 set shell sh
 
-set previewer ~/.config/lf/lf_sixel_preview
-set sixel true
-#set previewer ~/.config/lf/lf_kitty_preview
-#set cleaner ~/.config/lf/lf_kitty_clean
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
 
 cmd paste-overwrite %{{
     mode=$(head -1 ~/.local/share/lf/files)
