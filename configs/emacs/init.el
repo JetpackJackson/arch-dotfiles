@@ -83,13 +83,19 @@
   "d" 'kill-buffer
   "g" 'bookmark-jump
   "r" 'recompile
-  "l" 'my-org-insert-link))
+  "l" 'my-org-insert-link
+  "of" 'org-open-at-point
+  "oe" 'org-export-dispatch
+  "e" 'eshell))
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1) :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
+
+(setq browse-url-firefox-program "librewolf")
+(setq browse-url-firefox-new-window-is-tab t)
 
 ;; a killer git interface
 (use-package magit :ensure t
