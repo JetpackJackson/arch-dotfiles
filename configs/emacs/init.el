@@ -97,6 +97,10 @@
 (setq browse-url-firefox-program "librewolf")
 (setq browse-url-firefox-new-window-is-tab t)
 
+;; pinentry
+(use-package epg :ensure t :demand t)
+(setq epg-pinentry-mode 'loopback)
+
 ;; a killer git interface
 (use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
@@ -130,8 +134,6 @@
                         '(("~/docs/notes/school/COP3503C/project3-p3/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
 ;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
 (keymap-set project-prefix-map "k" #'project-butler-cleanup)
-
-
 
 ;; vertico
 (use-package vertico :ensure t

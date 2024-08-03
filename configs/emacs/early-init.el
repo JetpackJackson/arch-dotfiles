@@ -132,10 +132,6 @@
 (setq org-agenda-dim-blocked-tasks t)
 ;(setq org-agenda-dim-blocked-tasks 'invisible)
 
-
-;; pinentry
-(setq epg-pinentry-mode 'loopback)
-
 ;; code indents
 (setq c-default-style "k&r"
   c-basic-offset 4)
