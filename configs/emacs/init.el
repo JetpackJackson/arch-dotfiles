@@ -143,7 +143,7 @@
   :init (vertico-mode)
   :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
 
-
+(setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
@@ -151,4 +151,3 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
-;(load-file "~/.config/emacs/jabber.el")
