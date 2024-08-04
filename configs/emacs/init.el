@@ -58,8 +58,13 @@
   "oe" 'org-export-dispatch
   "." 'comment-region
   "," 'uncomment-region
-  "e" 'eshell))
-(use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1) :custom (evil-undo-system 'undo-redo))
+  "e" 'ansi-term))
+(use-package evil :ensure t :demand t
+  :init (setq evil-want-integration t)
+  :config
+  (evil-mode 1)
+  (evil-set-initial-state 'dired-mode 'emacs)
+  :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
 (use-package evil-terminal-cursor-changer :ensure t :demand t)
   (unless (display-graphic-p)
