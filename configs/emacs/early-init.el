@@ -22,151 +22,51 @@
 
 ")
 
-(setq inhibit-splash-screen t ;; no thanks
-        use-file-dialog nil ;; don't use system file dialog
-        tab-bar-new-button-show nil ;; don't show new tab button
-        tab-bar-close-button-show nil ;; don't show tab close button
-        tab-line-close-button-show nil) ;; don't show tab close button
-;; Remove extra UI clutter by hiding the scrollbar, menubar, and toolbar.
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(use-package emacs :ensure t :demand t :init
+ (electric-pair-mode t) ;; Automatically insert closing parens
+ (show-paren-mode 1) ;; Visualize matching parens
+ (save-place-mode t) ;;; Automatically save your place in files
+ (savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
+ (global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
+ 
+ ;; autosave stuff
+ (auto-save-mode 1)
+ (auto-save-visited-mode 1)
+ (setq auto-save-interval 5)
+ (setq auto-save-timeout 3)
+ 
+ (setq display-line-numbers-type 'relative)
+ (global-display-line-numbers-mode)
+ 
+ ;; recent files
+ (recentf-mode 1)
+ (setq recentf-max-menu-items 10)
+ (setq recentf-max-saved-items 10)
+ 
+ ;; ediff
+ (setq ediff-split-window-function 'split-window-horizontally)
+ (setq truncate-partial-width-windows t)
 
-;; No sound
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
+ (setq inhibit-splash-screen t ;; no thanks
+       use-file-dialog nil ;; don't use system file dialog
+       tab-bar-new-button-show nil ;; don't show new tab button
+       tab-bar-close-button-show nil ;; don't show tab close button
+       tab-line-close-button-show nil) ;; don't show tab close button
+ ;; Remove extra UI clutter by hiding the scrollbar, menubar, and toolbar.
+ (menu-bar-mode -1)
+ (tool-bar-mode -1)
+ (scroll-bar-mode -1)
+ 
+ ;; No sound
+ (setq visible-bell t)
+ (setq ring-bell-function 'ignore)
+)
 
 ;; clean up elpa stuff
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
 (setcar native-comp-eln-load-path
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
 (require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
-
-(electric-pair-mode t) ;; Automatically insert closing parens
-(show-paren-mode 1) ;; Visualize matching parens
-(save-place-mode t) ;;; Automatically save your place in files
-(savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
-(global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
-
-;; autosave stuff
-(auto-save-mode 1)
-(auto-save-visited-mode 1)
-;(setq auto-save-visited-interval 20)
-(setq auto-save-interval 5)
-(setq auto-save-timeout 3)
-
-;; ediff
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq truncate-partial-width-windows t)
-
-;; add file header
-(global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
-
-;; org-mode stuff
-(global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
-(setq org-agenda-span 20
-      org-agenda-start-on-weekday nil
-      org-agenda-start-day "-3d")
-(setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
-(setq org-enforce-todo-dependencies nil)
-(setq org-agenda-dim-blocked-tasks t)
-;(setq org-enforce-todo-dependencies t)
-;(setq org-agenda-dim-blocked-tasks 'invisible)
-
-;; Associate all org files with org mode
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-;; Make the indentation look nicer
-(add-hook 'org-mode-hook 'org-indent-mode)
-
-;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
-(defun org-insert-sub-task ()
-  (interactive)
-  (let ((parent-deadline (org-get-deadline-time nil)))
-    (org-goto-sibling)
-    (org-insert-todo-subheading t)
-    (when parent-deadline
-      (org-deadline nil parent-deadline))))
-;(global-set-key (kbd "C-c s") 'org-insert-sub-task)
-(with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
-  (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
-  (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
-
-;; Follow the links
-;(setq org-return-follows-link t)
-(setq org-capture-templates
-      '(    
-        ("g" "General To-Do"
-         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
-         "* TODO [#B] %?\n:Created: %T\n "
-         :empty-lines 0)
-      ))
-(setq org-capture-templates
-      '(    
-        ("c" "Code To-Do"
-         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
-         "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
-         :empty-lines 0)
-        ))
-;; TODO states
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
-        ))
-;; TODO colors
-(setq org-todo-keyword-faces
-      '(
-        ("TODO" . (:foreground "GoldenRod" :weight bold))
-        ("PLANNING" . (:foreground "DeepPink" :weight bold))
-        ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
-        ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
-        ("BLOCKED" . (:foreground "Red" :weight bold))
-        ("DONE" . (:foreground "LimeGreen" :weight bold))
-        ("OBE" . (:foreground "LimeGreen" :weight bold))
-        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
-        ))
-
-(with-eval-after-load 'org-faces
-  (set-face-attribute 'org-level-3 nil :foreground "white"))
-  ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
-
-;; code indents
-(setq c-default-style "k&r"
-  c-basic-offset 4)
-;; testing
-(c-add-style "1tbs"
-         '("java"
-           (c-hanging-braces-alist
-             (defun-open after)
-             (class-open after)
-             (inline-open after)
-             (block-close . c-snug-do-while)
-             (statement-cont)
-             (substatement-open after)
-             (brace-list-open)
-             (brace-entry-open)
-             (extern-lang-open after)
-             (namespace-open after)
-             (module-open after)
-             (composition-open after)
-             (inexpr-class-open after)
-             (inexpr-class-close before)
-             (arglist-cont-nonempty))
-           (c-offsets-alist
-             (access-label . -))))
-(setq c-default-style "1tbs")
-
-;; set type of line numbering 
-(setq display-line-numbers-type 'relative)
-;; activate line numbering in all buffers/modes
-(global-display-line-numbers-mode)
-
-;; recent files
-(recentf-mode 1)
-(setq recentf-max-menu-items 10)
-(setq recentf-max-saved-items 10)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;; consult stuff ("manual, relay instructions")
 (defun consult-info-emacs ()

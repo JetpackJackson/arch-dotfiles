@@ -1,3 +1,12 @@
+(use-package guix :ensure t)
+(use-package envrc :ensure t :hook (after-init . envrc-global-mode))
+(use-package vdiff :ensure t)
+
+;; nice markers for indents
+(use-package indent-bars
+  :load-path "~/.cache/emacs/indent-bars"
+  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
+
 ;; arduino mode
 (define-derived-mode arduino-mode c++-mode "Arduino")
 
@@ -72,3 +81,30 @@
 
 ;; flycheck
 (use-package flycheck :ensure t)
+
+;; code indents
+(setq c-default-style "k&r"
+  c-basic-offset 4)
+;; testing
+(c-add-style "1tbs"
+         '("java"
+           (c-hanging-braces-alist
+             (defun-open after)
+             (class-open after)
+             (inline-open after)
+             (block-close . c-snug-do-while)
+             (statement-cont)
+             (substatement-open after)
+             (brace-list-open)
+             (brace-entry-open)
+             (extern-lang-open after)
+             (namespace-open after)
+             (module-open after)
+             (composition-open after)
+             (inexpr-class-open after)
+             (inexpr-class-close before)
+             (arglist-cont-nonempty))
+           (c-offsets-alist
+             (access-label . -))))
+(setq c-default-style "1tbs")
+

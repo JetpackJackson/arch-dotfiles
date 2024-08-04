@@ -66,9 +66,6 @@
 ;; colorful parentheses
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-;; vdiff
-(use-package vdiff :ensure t)
-
 ;; vim keys
 (defun my-org-insert-link () "bind org insert" (interactive)
    (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
@@ -98,21 +95,10 @@
 (setq browse-url-firefox-new-window-is-tab t)
 
 ;; pinentry
-(use-package epg :ensure t :demand t)
-(setq epg-pinentry-mode 'loopback)
+(use-package epg :ensure t :demand t :config (setq epg-pinentry-mode 'loopback))
 
 ;; a killer git interface
-(use-package magit :ensure t
-    :bind (("C-c g" . magit-status)))
-
-;; nice markers for indents
-(use-package indent-bars
-  :load-path "~/.cache/emacs/indent-bars"
-  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
-
-(use-package guix :ensure t)
-(use-package envrc :ensure t
-  :hook (after-init . envrc-global-mode))
+(use-package magit :ensure t :bind (("C-c g" . magit-status)))
 
 ;; project.el
 ;; Returns the parent directory containing a .project.el file, if any,
@@ -142,6 +128,78 @@
   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init (vertico-mode)
   :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
+
+;; org-mode stuff
+(setq org-agenda-span 20
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-3d")
+(setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
+(setq org-enforce-todo-dependencies nil)
+(setq org-agenda-dim-blocked-tasks t)
+;(setq org-enforce-todo-dependencies t)
+;(setq org-agenda-dim-blocked-tasks 'invisible)
+
+;; Associate all org files with org mode
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+;; Make the indentation look nicer
+(add-hook 'org-mode-hook 'org-indent-mode)
+
+;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
+(defun org-insert-sub-task ()
+  (interactive)
+  (let ((parent-deadline (org-get-deadline-time nil)))
+    (org-goto-sibling)
+    (org-insert-todo-subheading t)
+    (when parent-deadline
+      (org-deadline nil parent-deadline))))
+;(global-set-key (kbd "C-c s") 'org-insert-sub-task)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
+  (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
+
+;; Follow the links
+;(setq org-return-follows-link t)
+(setq org-capture-templates
+      '(    
+        ("g" "General To-Do"
+         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
+         "* TODO [#B] %?\n:Created: %T\n "
+         :empty-lines 0)
+      ))
+(setq org-capture-templates
+      '(    
+        ("c" "Code To-Do"
+         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
+         "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
+         :empty-lines 0)
+        ))
+;; TODO states
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
+        ))
+;; TODO colors
+(setq org-todo-keyword-faces
+      '(
+        ("TODO" . (:foreground "GoldenRod" :weight bold))
+        ("PLANNING" . (:foreground "DeepPink" :weight bold))
+        ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
+        ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
+        ("BLOCKED" . (:foreground "Red" :weight bold))
+        ("DONE" . (:foreground "LimeGreen" :weight bold))
+        ("OBE" . (:foreground "LimeGreen" :weight bold))
+        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
+        ))
+
+(with-eval-after-load 'org-faces
+  (set-face-attribute 'org-level-3 nil :foreground "white"))
+  ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
+
+(global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
 
 (setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
 ;(defun my-setup-initial-window-setup ()
