@@ -14,57 +14,31 @@
 
 ;; "C-<chr>  means hold the CONTROL key while typing the character <chr>.
 ;; Thus, C-f would be: hold the CONTROL key and type f." (Emacs tutorial)
-;;
 ;; - C-h t: Start the Emacs tutorial
 ;; - C-h o some-symbol: Describe symbol
 ;; - C-h C-q: Pull up the quick-help cheatsheet
 
 ;;; Code:
 
-;; Performance tweaks for modern machines
-;(setq gc-cons-threshold 100000000) ; 100 mb
-;(setq read-process-output-max (* 1024 1024)) ; 1mb
-
-;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
-(setq use-package-always-defer t)
-
 ;; Add unique buffer names in the minibuffer where there are many
 ;; identical files. This is super useful if you rely on folders for
 ;; organization and have lots of files with the same name,
 ;; e.g. foo/index.ts and bar/index.ts.
-(require 'uniquify) ;(with-eval-after-load 'uniquify)
-;; The `setq' special form is used for setting variables. Remember
-;; that you can look up these variables with "C-h v variable-name".
-(setq uniquify-buffer-name-style 'forward
-      window-resize-pixelwise t
-      frame-resize-pixelwise t
-      load-prefer-newer t
-      backup-by-copying t
-      ;; Backups are placed into your Emacs directory, e.g. ~/.config/emacs/backups
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
-      ;; I'll add an extra note here since user customizations are important.
-      ;; Emacs actually offers a UI-based customization menu, "M-x customize".
-      ;; You can use this menu to change variable values across Emacs. By default,
-      ;; changing a variable will write to your init.el automatically, mixing
-      ;; your hand-written Emacs Lisp with automatically-generated Lisp from the
-      ;; customize menu. The following setting instead writes customizations to a
-      ;; separate file, custom.el, to keep your init.el clean.
-      custom-file (expand-file-name "custom.el" user-emacs-directory))
+(require 'uniquify)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-;; modeline
-(use-package doom-modeline :ensure t :demand t :init (doom-modeline-mode 1))
-(setq doom-modeline-buffer-file-name-style 'relative-from-project)
-(setq doom-modeline-icon nil)
-(setq doom-modeline-buffer-state-icon 1)
+(use-package doom-modeline :ensure t :demand t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+  (setq doom-modeline-icon nil)
+  (setq doom-modeline-buffer-state-icon 1))
 
-;; what key does what
 (use-package which-key :ensure t :demand t :config (which-key-mode))
-
-;; colorful parentheses
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(use-package magit :ensure t :bind (("C-c g" . magit-status)))
 
 ;; vim keys
 (setq evil-want-keybinding nil)
@@ -89,21 +63,6 @@
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
 
-;; pinentry
-;(use-package epg :ensure t :demand t :config (setq epg-pinentry-mode 'loopback))
-
-;; a killer git interface
-(use-package magit :ensure t :bind (("C-c g" . magit-status)))
-
-;; project.el
-;; Returns the parent directory containing a .project.el file, if any,
-;; to override the standard project.el detection logic when needed.
-;(defun my-project-override (dir)
-;  (let ((override (locate-dominating-file dir "manifest.scm")))
-;  ;(let ((override (locate-dominating-file dir ".project.el")))
-;    (if override
-;      (cons 'vc override)
-;      nil)))
 (use-package project)
   ;; Cannot use :hook because 'project-find-functions does not end in -hook
   ;; Cannot use :init (must use :config) because otherwise
@@ -124,24 +83,23 @@
   :init (vertico-mode)
   :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
 
-;; org-mode stuff
-(setq org-agenda-span 20
-      org-agenda-start-on-weekday nil
-      org-agenda-start-day "-3d")
-(setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
-(setq org-enforce-todo-dependencies nil)
-(setq org-agenda-dim-blocked-tasks t)
-;(setq org-enforce-todo-dependencies t)
-;(setq org-agenda-dim-blocked-tasks 'invisible)
-
-;; Associate all org files with org mode
+(use-package org :config
+  (setq org-agenda-span 20
+	org-agenda-start-on-weekday nil
+	org-agenda-start-day "-3d")
+  (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
+  (setq org-enforce-todo-dependencies nil)
+  (setq org-agenda-dim-blocked-tasks t))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-;; Make the indentation look nicer
-(add-hook 'org-mode-hook 'org-indent-mode)
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
   (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
+(with-eval-after-load 'org-faces
+  (set-face-attribute 'org-level-3 nil :foreground "white"))
+  ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
+(add-hook 'org-mode-hook 'org-indent-mode)
+
 ;; Follow the links
 ;(setq org-return-follows-link t)
 
@@ -175,9 +133,6 @@
         ("OBE" . (:foreground "LimeGreen" :weight bold))
         ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
         ))
-(with-eval-after-load 'org-faces
-  (set-face-attribute 'org-level-3 nil :foreground "white"))
-  ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
 
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
