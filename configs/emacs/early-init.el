@@ -73,7 +73,9 @@
  
  ;; No sound
  (setq visible-bell t)
- (setq ring-bell-function 'ignore))
+ (setq ring-bell-function 'ignore)
+
+ (setq dired-listing-switches "-alh"))
 
  ;; fixme
  ;(setq browse-url-firefox-program "librewolf")
