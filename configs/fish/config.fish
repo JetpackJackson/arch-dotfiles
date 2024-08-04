@@ -119,6 +119,7 @@ if status is-interactive
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
     abbr -a e --set-cursor 'emacsclient -nw %'
+    abbr -a icat --set-cursor 'kitty +kitten icat %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
