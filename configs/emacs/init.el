@@ -45,12 +45,13 @@
 (use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
   "f" 'find-file
+  "s" 'consult-find
   "v" 'list-buffers
-  "b" 'switch-to-buffer
+  "b" 'consult-buffer ;'switch-to-buffer
   "ca" 'eglot-code-action-quickfix
-  "cn" 'flymake-goto-next-error
-  "d" 'kill-buffer
-  "g" 'bookmark-jump
+  "cn" 'consult-flymake ;'flymake-goto-next-error
+  "k" 'kill-buffer
+  "g" 'consult-bookmark ;'bookmark-jump
   "r" 'recompile
   "l" 'my-org-insert-link
   "of" 'org-open-at-point
