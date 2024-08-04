@@ -56,6 +56,8 @@
   "l" 'my-org-insert-link
   "of" 'org-open-at-point
   "oe" 'org-export-dispatch
+  "." 'comment-region
+  "," 'uncomment-region
   "e" 'eshell))
 (use-package evil :ensure t :demand t :init (setq evil-want-integration t) :config (evil-mode 1) :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
