@@ -105,6 +105,7 @@
 (use-package magit :ensure t
     :bind (("C-c g" . magit-status)))
 
+;; nice markers for indents
 (use-package indent-bars
   :load-path "~/.cache/emacs/indent-bars"
   :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
@@ -114,7 +115,6 @@
   :hook (after-init . envrc-global-mode))
 
 ;; project.el
-
 ;; Returns the parent directory containing a .project.el file, if any,
 ;; to override the standard project.el detection logic when needed.
 ;(defun my-project-override (dir)
@@ -144,6 +144,15 @@
   :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
 
 (setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
+;(defun my-setup-initial-window-setup ()
+;  "start 2 buffers"
+;  (interactive)
+;  (switch-to-buffer (get-buffer (recentf-open-files)))
+;  (split-window-horizontally)
+;  (other-window 1)
+;  (switch-to-buffer (get-buffer-create (scratch-buffer)))
+;  (other-window 1))
+;(add-hook 'emacs-startup-hook #'my-setup-initial-window-setup)
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/

@@ -66,19 +66,33 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-;(global-set-key (kbd "C-c <TAB>") #'org-shiftmetaright)
-;(global-set-key (kbd "C-c <DEL>") #'org-shiftmetaleft)
 (setq org-agenda-span 20
       org-agenda-start-on-weekday nil
       org-agenda-start-day "-3d")
 (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
+(setq org-enforce-todo-dependencies nil)
+(setq org-agenda-dim-blocked-tasks t)
+;(setq org-enforce-todo-dependencies t)
+;(setq org-agenda-dim-blocked-tasks 'invisible)
+
 ;; Associate all org files with org mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Make the indentation look nicer
 (add-hook 'org-mode-hook 'org-indent-mode)
+
+;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
+(defun org-insert-sub-task ()
+  (interactive)
+  (let ((parent-deadline (org-get-deadline-time nil)))
+    (org-goto-sibling)
+    (org-insert-todo-subheading t)
+    (when parent-deadline
+      (org-deadline nil parent-deadline))))
+;(global-set-key (kbd "C-c s") 'org-insert-sub-task)
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
-  (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft))
+  (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
 
 ;; Follow the links
 ;(setq org-return-follows-link t)
@@ -117,21 +131,6 @@
   (set-face-attribute 'org-level-3 nil :foreground "white"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
 
-;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
-(defun org-insert-sub-task ()
-  (interactive)
-  (let ((parent-deadline (org-get-deadline-time nil)))
-    (org-goto-sibling)
-    (org-insert-todo-subheading t)
-    (when parent-deadline
-      (org-deadline nil parent-deadline))))
-;(define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task)
-(global-set-key (kbd "C-c s") 'org-insert-sub-task)
-(setq org-enforce-todo-dependencies nil)
-;(setq org-enforce-todo-dependencies t)
-(setq org-agenda-dim-blocked-tasks t)
-;(setq org-agenda-dim-blocked-tasks 'invisible)
-
 ;; code indents
 (setq c-default-style "k&r"
   c-basic-offset 4)
@@ -165,8 +164,8 @@
 
 ;; recent files
 (recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
+(setq recentf-max-menu-items 10)
+(setq recentf-max-saved-items 10)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;; consult stuff ("manual, relay instructions")
