@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (use-package guix :ensure t)
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
 (use-package vdiff :ensure t)

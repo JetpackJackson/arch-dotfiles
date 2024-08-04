@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq initial-scratch-message "
