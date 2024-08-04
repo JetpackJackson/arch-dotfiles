@@ -67,8 +67,6 @@
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;; vim keys
-(defun my-org-insert-link () "bind org insert" (interactive)
-   (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
 (setq evil-want-keybinding nil)
 (use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
 (evil-leader/set-key
@@ -91,11 +89,8 @@
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
 
-(setq browse-url-firefox-program "librewolf")
-(setq browse-url-firefox-new-window-is-tab t)
-
 ;; pinentry
-(use-package epg :ensure t :demand t :config (setq epg-pinentry-mode 'loopback))
+;(use-package epg :ensure t :demand t :config (setq epg-pinentry-mode 'loopback))
 
 ;; a killer git interface
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
@@ -143,23 +138,13 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 ;; Make the indentation look nicer
 (add-hook 'org-mode-hook 'org-indent-mode)
-
-;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
-(defun org-insert-sub-task ()
-  (interactive)
-  (let ((parent-deadline (org-get-deadline-time nil)))
-    (org-goto-sibling)
-    (org-insert-todo-subheading t)
-    (when parent-deadline
-      (org-deadline nil parent-deadline))))
-;(global-set-key (kbd "C-c s") 'org-insert-sub-task)
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
   (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
-
 ;; Follow the links
 ;(setq org-return-follows-link t)
+
 (setq org-capture-templates
       '(    
         ("g" "General To-Do"
@@ -190,7 +175,6 @@
         ("OBE" . (:foreground "LimeGreen" :weight bold))
         ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
         ))
-
 (with-eval-after-load 'org-faces
   (set-face-attribute 'org-level-3 nil :foreground "white"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")

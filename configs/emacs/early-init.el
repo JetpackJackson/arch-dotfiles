@@ -60,6 +60,10 @@
  ;; No sound
  (setq visible-bell t)
  (setq ring-bell-function 'ignore)
+
+ ;; fixme
+ ;(setq browse-url-firefox-program "librewolf")
+ ;(setq browse-url-firefox-new-window-is-tab t)
 )
 
 ;; clean up elpa stuff
@@ -101,3 +105,15 @@
       (shell-command-to-string "wl-paste -n"))); | tr -d \r")))
 (setq interprogram-cut-function 'wl-copy)
 (setq interprogram-paste-function 'wl-paste)
+
+;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
+(defun org-insert-sub-task ()
+  (interactive)
+  (let ((parent-deadline (org-get-deadline-time nil)))
+    (org-goto-sibling)
+    (org-insert-todo-subheading t)
+    (when parent-deadline
+      (org-deadline nil parent-deadline))))
+
+(defun my-org-insert-link () "bind org insert" (interactive)
+   (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
