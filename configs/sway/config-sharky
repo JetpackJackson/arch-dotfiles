@@ -1,8 +1,8 @@
 set $mod Mod4
-set $left n
-set $down r
-set $up s
-set $right g
+set $left t
+set $down n
+set $up r
+set $right h
 set $term kitty
 
 exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
