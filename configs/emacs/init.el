@@ -71,6 +71,27 @@
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
 
+;(use-package general :ensure t :demand t
+;  :config
+;  (general-define-key
+;   :prefix "<SPC>"
+;   "" nil
+;   "f" #'find-file
+;   "s" #'consult-find
+;   "v" #'list-buffers
+;   "b" #'consult-buffer ;'switch-to-buffer
+;   "ca" #'eglot-code-action-quickfix
+;   "cn" #'consult-flymake ;'flymake-goto-next-error
+;   "k" #'kill-buffer
+;   "g" #'consult-bookmark ;'bookmark-jump
+;   "r" #'recompile
+;   "l" #'my-org-insert-link
+;   "of" #'org-open-at-point
+;   "oe" #'org-export-dispatch
+;   "." #'comment-region
+;   "," #'uncomment-region
+;   "e" #'ansi-term))
+
 (use-package project)
   ;; Cannot use :hook because 'project-find-functions does not end in -hook
   ;; Cannot use :init (must use :config) because otherwise
