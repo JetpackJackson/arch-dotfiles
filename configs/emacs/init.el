@@ -50,7 +50,7 @@
   "b" 'consult-buffer ;'switch-to-buffer
   "ca" 'eglot-code-action-quickfix
   "cn" 'consult-flymake ;'flymake-goto-next-error
-  "k" 'kill-buffer
+  "d" 'kill-buffer
   "g" 'consult-bookmark ;'bookmark-jump
   "r" 'recompile
   "l" 'my-org-insert-link
@@ -58,7 +58,8 @@
   "oe" 'org-export-dispatch
   "." 'comment-region
   "," 'uncomment-region
-  "e" 'ansi-term))
+  "e" 'eshell
+  "t" 'ansi-term))
 (use-package evil :ensure t :demand t
   :init (setq evil-want-integration t)
   :config
