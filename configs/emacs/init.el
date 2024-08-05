@@ -39,6 +39,7 @@
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
+(use-package eat :ensure t)
 
 ;; vim keys
 (setq evil-want-keybinding nil)

@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 (use-package guix :ensure t)
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
-(use-package vdiff :ensure t)
+(use-package flycheck :ensure t)
 
 ;; nice markers for indents
 (use-package indent-bars
@@ -77,9 +77,6 @@
 (add-hook 'python-mode-hook 'yas-minor-mode)
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode)
 (add-hook 'latex-mode-hook 'yas-minor-mode)
-
-;; flycheck
-(use-package flycheck :ensure t)
 
 ;; code indents
 (setq c-default-style "k&r"
