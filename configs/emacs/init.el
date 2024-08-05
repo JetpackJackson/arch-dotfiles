@@ -60,7 +60,7 @@
   "." 'comment-region
   "," 'uncomment-region
   "e" 'eshell
-  "t" 'ansi-term))
+  "t" 'eat-other-window))
 (use-package evil :ensure t :demand t
   :init (setq evil-want-integration t)
   :config
