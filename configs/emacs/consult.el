@@ -79,14 +79,17 @@
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
   :config
-  ;; Use `consult-completion-in-region' if Vertico is enabled.
-  ;; Otherwise use the default `completion--in-region' function.
-  (setq completion-in-region-function
-	(lambda (&rest args)
-          (apply (if vertico-mode
-                     #'consult-completion-in-region
-                   #'completion--in-region)
-		 args)))
+  ;; https://code.whatever.social/exchange/emacs/questions/75072/use-vertico-completion-also-in-evils-ex-prompt
+  (setq completion-in-region-function 'consult-completion-in-region)
+  
+  ;;;; Use `consult-completion-in-region' if Vertico is enabled.
+  ;;;; Otherwise use the default `completion--in-region' function.
+  ;;(setq completion-in-region-function
+  ;;	(lambda (&rest args)
+  ;;        (apply (if vertico-mode
+  ;;                   #'consult-completion-in-region
+  ;;                 #'completion--in-region)
+  ;;		 args)))
     
   ;; Optionally configure preview. The default value
   ;; is 'any, such that any key triggers the preview.
