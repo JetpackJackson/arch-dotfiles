@@ -1,0 +1,9 @@
+#!/bin/sh
+dwl -s '
+swaybg -i ~/pics/wallpapers/fox.jpg &
+yambar -c ~/.config/yambar/config-$(cat /etc/hostname).yml
+'
+#aplay ~/.local/share/sounds/startup.wav &
+#mako &
+#yams.sh &
+
