@@ -10,6 +10,11 @@
 
 ;; arduino mode
 (define-derived-mode arduino-mode c++-mode "Arduino")
+(use-package platformio-mode :ensure t)
+(defun turn-on-pio () (platformio-mode 1))
+(with-eval-after-load 'platformio-mode
+  (define-key platformio-mode-map (kbd "C-c r") #'platformio-build)
+  (define-key platformio-mode-map (kbd "C-c u") #'platformio-upload))
 
 (use-package eglot :ensure t
     :bind (:map
@@ -34,6 +39,7 @@
 (add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
 (add-hook 'sh-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
+(add-hook 'arduino-mode-hook 'turn-on-pio)
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 
