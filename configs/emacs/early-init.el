@@ -60,6 +60,8 @@
  
  (setq ediff-split-window-function 'split-window-horizontally
        truncate-partial-width-windows t)
+ (setq eldoc-echo-area-use-multiline-p nil) ;; make eldoc quieter
+ (global-eldoc-mode -1) ;; disable eldoc instead
 
  (setq inhibit-splash-screen t ;; no thanks
        use-file-dialog nil ;; don't use system file dialog
@@ -140,3 +142,16 @@
     (if override
       (cons 'vc override)
       nil)))
+
+;; activate platformio-mode when we have an arduino file
+(defun turn-on-pio () (platformio-mode 1))
+(define-derived-mode arduino-mode c++-mode "Arduino")
+
+(defun my-mode-recompile () "Recompile a project based on its type" (interactive)
+  (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
+	((eq major-mode 'c++-mode) (recompile)) ;; if c++ major mode
+	(t (message "recompile command not defined for this mode"))))
+
+(defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)
+  (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
+	(t (message "upload command not defined for this mode"))))

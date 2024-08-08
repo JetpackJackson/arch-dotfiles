@@ -9,17 +9,16 @@
   :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
 
 ;; arduino mode
-(define-derived-mode arduino-mode c++-mode "Arduino")
 (use-package platformio-mode :ensure t)
-(defun turn-on-pio () (platformio-mode 1))
-(with-eval-after-load 'platformio-mode
-  (define-key platformio-mode-map (kbd "C-c r") #'platformio-build)
-  (define-key platformio-mode-map (kbd "C-c u") #'platformio-upload))
+;(with-eval-after-load 'platformio-mode
+;  (define-key platformio-mode-map (kbd "C-c r") #'platformio-build)
+;  (define-key platformio-mode-map (kbd "C-c u") #'platformio-upload))
 
 (use-package eglot :ensure t
     :bind (:map
            eglot-mode-map
            ("C-c e a" . eglot-code-actions)
+           ("C-c e q" . eglot-code-action-quickfix)
            ("C-c e o" . eglot-code-actions-organize-imports)
            ("C-c e r" . eglot-rename)
            ("C-c e f" . eglot-format)))
@@ -27,7 +26,7 @@
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))
   (add-to-list 'eglot-server-programs
-	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "/usr/bin/clangd")))
+	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "clangd")))
   (add-to-list 'eglot-server-programs
 	       '(sh-mode . ("bash-language-server" "start")))
   (add-to-list 'eglot-server-programs
@@ -39,6 +38,7 @@
 (add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
 (add-hook 'sh-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
+(add-hook 'arduino-mode-hook 'eglot-ensure)
 (add-hook 'arduino-mode-hook 'turn-on-pio)
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
@@ -81,7 +81,7 @@
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
-;(add-hook 'scheme-mode-hook 'yas-minor-mode)
+;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets
 (add-hook 'latex-mode-hook 'yas-minor-mode)
 
 ;; code indents

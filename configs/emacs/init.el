@@ -49,11 +49,13 @@
   "s" 'consult-find
   "v" 'list-buffers
   "b" 'consult-buffer ;'switch-to-buffer
-  "ca" 'eglot-code-action-quickfix
+  "ca" 'eglot-code-actions
+  "cq" 'eglot-code-action-quickfix
   "cn" 'consult-flymake ;'flymake-goto-next-error
   "d" 'kill-buffer
   "g" 'consult-bookmark ;'bookmark-jump
-  "r" 'recompile
+  "r" 'my-mode-recompile ;'recompile
+  "u" 'my-mode-upload-run
   "l" 'my-org-insert-link
   "of" 'org-open-at-point
   "oe" 'org-export-dispatch
