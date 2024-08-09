@@ -41,13 +41,17 @@ if status is-login
 
     # launch sway as part of autologin process
     # https://wiki.archlinux.org/title/Fish#Start_X_at_login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
-        set -gx SDL_VIDEODRIVER wayland
-        set -gx _JAVA_AWT_WM_NONREPARENTING 1
-        set -gx XDG_CURRENT_DESKTOP sway
-        set -gx XDG_SESSION_DESKTOP sway
-        dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
+    if test "$HOSTNAME" = "greyfox" -o "$HOSTNAME" = "sharky"
+        if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+    	    set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
+            set -gx SDL_VIDEODRIVER wayland
+            set -gx _JAVA_AWT_WM_NONREPARENTING 1
+       	    set -gx XDG_CURRENT_DESKTOP sway
+            set -gx XDG_SESSION_DESKTOP sway
+            dbus-run-session sway -c $XDG_CONFIG_HOME/sway/config-$(cat /etc/hostname)
+	end
+    else
+	/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
     end
 end
 
