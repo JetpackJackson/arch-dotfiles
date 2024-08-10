@@ -75,7 +75,10 @@
  
  ;; No sound
  (setq visible-bell t)
- (setq ring-bell-function 'ignore))
+ (setq ring-bell-function 'ignore)
+
+ ;; foot
+ (add-to-list 'term-file-aliases '("foot" . "xterm")))
 
  ;; fixme
  ;(setq browse-url-firefox-program "librewolf")
