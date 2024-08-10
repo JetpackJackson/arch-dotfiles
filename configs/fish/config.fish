@@ -41,7 +41,7 @@ if status is-login
 
     # launch sway as part of autologin process
     # https://wiki.archlinux.org/title/Fish#Start_X_at_login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1 -a "$HOSTNAME" = "sharky"
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1 -a "$hostname" = "sharky"
         set -gx HIST_FILE $XDG_DOCUMENTS_DIR/sway-launcher-desktop-history.txt
         set -gx SDL_VIDEODRIVER wayland
         set -gx _JAVA_AWT_WM_NONREPARENTING 1
