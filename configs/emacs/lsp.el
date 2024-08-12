@@ -14,6 +14,11 @@
 ;  (define-key platformio-mode-map (kbd "C-c r") #'platformio-build)
 ;  (define-key platformio-mode-map (kbd "C-c u") #'platformio-upload))
 
+(use-package sly :ensure t
+  :config
+  (setq inferior-lisp-program "/usr/bin/sbcl"))
+(add-hook 'lisp-mode-hook 'sly)
+
 (use-package eglot :ensure t
     :bind (:map
            eglot-mode-map
