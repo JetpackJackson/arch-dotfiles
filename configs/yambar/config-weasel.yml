@@ -1,5 +1,5 @@
-nerd: &nerd Symbols Nerd Font:pixelsize=14
-aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
+nerd: &nerd Symbols Nerd Font:pixelsize=21
+aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=21
   #highlight: &highlight a02626ff
 highlight: &highlight fabd2fff
 textcolor: &textcolor d0d0d0ff
@@ -16,7 +16,7 @@ brightgreen: &brightgreen 00ff00ff
 
 bar:
   ###monitor: $MONITOR
-  height: 29
+  height: 39
   location: top
   spacing: 10
   right-margin: 10

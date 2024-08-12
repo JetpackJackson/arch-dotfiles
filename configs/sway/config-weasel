@@ -22,7 +22,10 @@ exec_always --no-startup-id udiskie &
 exec_always wl-paste -t text --watch clipman store -P
 exec_always wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
 
-output eDP-1 pos 0 0 res 1920x1080
+output eDP-1 pos 0 0 res 2560x1600
+# HiDPI
+output eDP-1 scale 1.5
+
 output HDMI-A-1 pos 0 0 res 1920x1080
 set $disp1 eDP-1
 set $disp2 HDMI-A-1
@@ -62,6 +65,13 @@ input "1739:52856:SYNA2BA6:00_06CB:CE78_Touchpad" {
     middle_emulation enabled
 }
 
+bindswitch tablet:on exec 'squeekboard &', \
+    exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Finger map_to_output eDP-1', \
+    exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Pen map_to_output eDP-1'
+bindswitch tablet:off exec 'killall squeekboard &', \
+    exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Finger map_to_output eDP-1', \
+    exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Pen map_to_output eDP-1'
+    
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -246,3 +256,5 @@ exec_always yams.sh
 exec_always nm-applet &
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
+
+exec rot8 --hooks 'killall lisgd; lisgd &'
