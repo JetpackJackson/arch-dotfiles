@@ -4,6 +4,7 @@ set $down r
 set $up s
 set $right g
 set $term kitty
+set $foot foot
 
 exec_always systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec_always hash dbus-update-activation-environment 2>/dev/null && \
@@ -40,6 +41,7 @@ workspace 8 output $disp2
 workspace 9 output $disp2
 workspace 10 output $disp2
 
+# FIXME
 mode "mon" {
     bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
     bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"
@@ -113,15 +115,17 @@ input * {
 
 set $mybindsym bindsym --to-code
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $foot
+    bindsym $mod+Shift+Return exec $term
     # Kill focused window
     $mybindsym $mod+Shift+q kill
     # Start your launcher
-
-    $mybindsym $mod+d exec kitty -e --class=launcher sway-launcher-desktop
+    $mybindsym $mod+d exec $foot --app-id launcher sway-launcher-desktop
+    $mybindsym $mod+Shift+d exec $term -e --class=launcher sway-launcher-desktop
     for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 60 ppt 60 ppt, border pixel 0
 
-$mybindsym $mod+x exec kitty -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
+$mybindsym $mod+x exec $foot --app-id launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
+$mybindsym $mod+Shift+x exec $term -e --class=launcher clipman pick --print0 --tool=CUSTOM --tool-args="fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0"
 $mybindsym $mod+c exec grim -g "$(slurp)" - | swappy -f -
 #bindsym $mod+End exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 bindsym $mod+Home exec 'grim -o $disp1 ~/pics/screenshots/primary_$(date +"%Y%m%d%H%M%S").png'
