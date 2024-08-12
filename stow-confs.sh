@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-cd configs
+cd configs || exit
 stow -R . -t ~/.config/ -v
 cd ..
-cd arduino15
+cd arduino15 || exit
 stow -R . -t ~/.arduino15/ -v
 cd ..
-cd scripts
+cd scripts || exit
 stow -R . -t ~/docs/scripts/ -v
 cd ..
-cd others
+cd others || exit
 stow -R . -t ~/.local/share/ -v 
+cd ..
+cd configs/lisgd-0.4.0 || exit
+make
+cp lisgd ~/.local/bin/lisgd

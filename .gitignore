@@ -7,3 +7,10 @@ configs/emacs/history
 configs/emacs/places
 configs/emacs/recentf
 configs/emacs/projects
+configs/lisgd-0.4.0/LICENSE
+configs/lisgd-0.4.0/lisgd.1
+configs/lisgd-0.4.0/lisgd.c
+configs/lisgd-0.4.0/Makefile
+configs/lisgd-0.4.0/README.md
+configs/lisgd-0.4.0/lisgd
+configs/lisgd-0.4.0/lisgd
