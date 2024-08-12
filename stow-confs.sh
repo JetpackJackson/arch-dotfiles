@@ -13,4 +13,6 @@ stow -R . -t ~/.local/share/ -v
 cd ..
 cd configs/lisgd-0.4.0 || exit
 make
+killall lisgd
 cp lisgd ~/.local/bin/lisgd
+lisgd &
