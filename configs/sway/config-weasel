@@ -66,9 +66,13 @@ input "1739:52856:SYNA2BA6:00_06CB:CE78_Touchpad" {
 }
 
 bindswitch tablet:on exec 'squeekboard &', \
+    exec 'killall yambar', \
+    exec 'nwg-panel &', \
     exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Finger map_to_output eDP-1', \
     exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Pen map_to_output eDP-1'
 bindswitch tablet:off exec 'killall squeekboard &', \
+    exec 'killall nwg-panel', \
+    exec 'yams.sh', \
     exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Finger map_to_output eDP-1', \
     exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Pen map_to_output eDP-1'
     
@@ -253,8 +257,9 @@ $mybindsym $mod+r mode "resize"
 exec_always systemctl --user start emacs
 exec_always --no-startup-id mako
 exec_always yams.sh
+#exec_always nwg-panel &
 exec_always nm-applet &
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
 
-exec rot8 --hooks 'killall lisgd; lisgd &'
+exec_always rot8 --hooks 'killall lisgd; lisgd &' &

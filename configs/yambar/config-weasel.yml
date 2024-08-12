@@ -1,6 +1,6 @@
-nerd: &nerd Symbols Nerd Font:pixelsize=21
-aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=21
-  #highlight: &highlight a02626ff
+nerd: &nerd Symbols Nerd Font:pixelsize=30
+aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=30
+#highlight: &highlight a02626ff
 highlight: &highlight fabd2fff
 textcolor: &textcolor d0d0d0ff
  #a0262680}]}}
@@ -16,11 +16,11 @@ brightgreen: &brightgreen 00ff00ff
 
 bar:
   ###monitor: $MONITOR
-  height: 39
+  height: 50
   location: top
-  spacing: 10
-  right-margin: 10
-  font: Ärzte Sans:size=16
+  spacing: 20
+  right-margin: 15
+  font: Ärzte Sans:size=25
   foreground: *white
   background: 00101399
   border:
@@ -31,7 +31,7 @@ bar:
     - i3:
         sort: native
         anchors:
-          - string: &common {margin: 5}
+          - string: &common {margin: 10}
           - focused: &focused {deco: {stack: [background: {color: *focus}]}}
           - urgent: &urgent {deco: {stack: [background: {color: *highlight}]}, foreground: *foreground-highlight}
         content:
