@@ -93,7 +93,7 @@ if status is-interactive
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
     set -gx QT_QPA_PLATFORM "wayland;xcb"
     set -gx TERMINAL_COMMAND kitty
-    set -gx EDITOR "emacsclient -nw"
+    set -gx EDITOR "emacs -nw"
     set -gx DIFFPROG nvim pacdiff
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
@@ -120,7 +120,8 @@ if status is-interactive
     abbr -a n --set-cursor 'nvim %'
     # workaround for emacs showing blue background on emacsclient startup
     #abbr -a e --set-cursor 'set TERM foot-direct; emacsclient -nw %; set TERM foot'
-    abbr -a e --set-cursor 'emacsclient -nw %'
+    abbr -a e --set-cursor 'emacs -nw %'
+    abbr -a ec --set-cursor 'emacsclient -nw %'
     abbr -a icat --set-cursor 'kitty +kitten icat %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
