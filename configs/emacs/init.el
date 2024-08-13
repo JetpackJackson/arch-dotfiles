@@ -242,7 +242,18 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
-(setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
+;; FIXME https://emacs.stackexchange.com/questions/15081/programming-of-initial-buffer-choice
+;(setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
+;(defun filefocus ()
+;       (unless (cl-remove-if-not #'buffer-file-name (buffer-list))
+;    (get-buffer (recentf-open-files))
+;    (delete-other-windows)))
+;(add-hook 'emacs-startup-hook #'filefocus t)
+
+;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
+(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
+
+
 ;(defun my-setup-initial-window-setup ()
 ;  "start 2 buffers"
 ;  (interactive)
