@@ -8,16 +8,18 @@
   :load-path "~/.cache/emacs/indent-bars"
   :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
 
-;; arduino mode
+;; assorted modes
 (use-package platformio-mode :ensure t)
-;(with-eval-after-load 'platformio-mode
-;  (define-key platformio-mode-map (kbd "C-c r") #'platformio-build)
-;  (define-key platformio-mode-map (kbd "C-c u") #'platformio-upload))
+(use-package fish-mode :ensure t)
+(use-package lua-mode :ensure t)
 
+;; lisp goodies
 (use-package sly :ensure t
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl"))
-(add-hook 'lisp-mode-hook 'sly)
+  (setq inferior-lisp-program "/usr/bin/sbcl")
+  :bind (:map
+	 sly-mode-map
+	 ("C-c e f" . sly-eval-defun)))
 
 (use-package eglot :ensure t
     :bind (:map
@@ -88,6 +90,14 @@
 (add-hook 'python-mode-hook 'yas-minor-mode)
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets
 (add-hook 'latex-mode-hook 'yas-minor-mode)
+(add-hook 'lua-mode-hook 'yas-minor-mode)
+(add-hook 'lisp-mode-hook 'yas-minor-mode)
+(add-hook 'sh-mode-hook 'yas-minor-mode)
+(add-hook 'conf-unix-mode-hook 'yas-minor-mode)
+(add-hook 'conf-desktop-mode-hook 'yas-minor-mode)
+(add-hook 'fish-mode-hook 'yas-minor-mode)
+(add-hook 'yaml-mode-hook 'yas-minor-mode)
+(add-hook 'm4-mode-hook 'yas-minor-mode)
 
 ;; code indents
 (setq c-default-style "k&r"
