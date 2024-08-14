@@ -25,14 +25,35 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(use-package doom-modeline :ensure t :demand t
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-  (setq doom-modeline-icon nil)
-  (setq doom-modeline-buffer-state-icon 1))
-;(setq mode-line-format '("%e" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info))
-;(setq mode-line-position (list "(%l,%c)"))
+;(use-package doom-modeline :ensure t :demand t
+;  :init (doom-modeline-mode 1)
+;  :config
+;  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+;  (setq doom-modeline-icon nil)
+;  (setq doom-modeline-buffer-state-icon 1))
+
+;(setq mode-line-format (list "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info mode-line-end-spaces))
+(setq mode-line-position (list "(%l,%c)"))
+(setq mode-line-front-space nil)
+(setq mode-line-end-spaces nil)
+ ;; change mode-line color by evil state
+   (let ((default-color (cons (face-background 'mode-line)
+                                      (face-foreground 'mode-line))))
+     (add-hook 'post-command-hook
+       (lambda ()
+         (let ((color (cond ((minibufferp) default-color)
+                            ((evil-insert-state-p) '("#009933" . "#ffffff"))
+                            ;((evil-insert-state-p) '("#e80000" . "#ffffff"))
+                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+			    ((evil-visual-state-p) '("#006fa0" . "#ffffff"))
+			    ((evil-normal-state-p) '("#4d4d4d" . "#ffffff"))
+			    ((evil-operator-state-p) '("#4d4d4d" . "#ffffff"))
+			    ((evil-replace-state-p) '("#cc7a00" . "#ffffff"))
+			    ((evil-motion-state-p) '("#4d4d4d" . "#ffffff"))
+                            (t default-color))))
+           (set-face-background 'mode-line (car color))
+           (set-face-foreground 'mode-line (cdr color))))))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
