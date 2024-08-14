@@ -86,7 +86,7 @@ input '9580:100:HUION_Huion_Tablet_H640P' {
 input * {
     xkb_layout "us,noted"
     xkb_variant ",noted"
-    xkb_options "grp:rctrl_toggle"
+    xkb_options "grp:rctrl_toggle,caps:swapescape"
 }
 
 set $mybindsym bindsym --to-code

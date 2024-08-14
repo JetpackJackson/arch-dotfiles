@@ -54,7 +54,9 @@
 		mode-line-front-space
 		"  "
 		mode-line-buffer-identification
-		"  "
+		" "
+		mode-line-modified;"%*%+"
+		"   "
 		mode-line-position
                 "  "
 		"   "
@@ -125,27 +127,6 @@
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
-
-;(use-package general :ensure t :demand t
-;  :config
-;  (general-define-key
-;   :prefix "<SPC>"
-;   "" nil
-;   "f" #'find-file
-;   "s" #'consult-find
-;   "v" #'list-buffers
-;   "b" #'consult-buffer ;'switch-to-buffer
-;   "ca" #'eglot-code-action-quickfix
-;   "cn" #'consult-flymake ;'flymake-goto-next-error
-;   "k" #'kill-buffer
-;   "g" #'consult-bookmark ;'bookmark-jump
-;   "r" #'recompile
-;   "l" #'my-org-insert-link
-;   "of" #'org-open-at-point
-;   "oe" #'org-export-dispatch
-;   "." #'comment-region
-;   "," #'uncomment-region
-;   "e" #'ansi-term))
 
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
   :custom
@@ -321,5 +302,6 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
+;(load-file "~/.config/emacs/xahflykeys.el")
 ;; fix this
 (package--save-selected-packages nil)
