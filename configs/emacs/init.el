@@ -32,28 +32,59 @@
 ;  (setq doom-modeline-icon nil)
 ;  (setq doom-modeline-buffer-state-icon 1))
 
-;(setq mode-line-format (list "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info mode-line-end-spaces))
+;; change tag color
+(setq evil-normal-state-tag   (propertize " COMMAND " 'face '((:background "gray35" :foreground "white")))
+      evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
+      evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
+      evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
+      evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
+      evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
+
 (setq mode-line-position (list "(%l,%c)"))
-(setq mode-line-front-space nil)
-(setq mode-line-end-spaces nil)
- ;; change mode-line color by evil state
-   (let ((default-color (cons (face-background 'mode-line)
-                                      (face-foreground 'mode-line))))
-     (add-hook 'post-command-hook
-       (lambda ()
-         (let ((color (cond ((minibufferp) default-color)
-                            ((evil-insert-state-p) '("#009933" . "#ffffff"))
-                            ;((evil-insert-state-p) '("#e80000" . "#ffffff"))
-                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-			    ((evil-visual-state-p) '("#006fa0" . "#ffffff"))
-			    ((evil-normal-state-p) '("#4d4d4d" . "#ffffff"))
-			    ((evil-operator-state-p) '("#4d4d4d" . "#ffffff"))
-			    ((evil-replace-state-p) '("#cc7a00" . "#ffffff"))
-			    ((evil-motion-state-p) '("#4d4d4d" . "#ffffff"))
-                            (t default-color))))
-           (set-face-background 'mode-line (car color))
-           (set-face-foreground 'mode-line (cdr color))))))
+(setq mode-line-front-space "")
+(setq mode-line-end-spaces "")
+(setq mode-line-frame-identification "")
+(setq evil-mode-line-format '(before . mode-line-front-space))
+
+(setq mode-line-format nil)
+(setq-default mode-line-format
+              '("%e"
+		;; evil-mode-line-format displays here
+		mode-line-front-space
+		"  "
+		mode-line-buffer-identification
+		"  "
+		mode-line-position
+                "  "
+		"   "
+		mode-name
+		" "
+		"  "
+		"  "
+		mode-line-format-right-align
+		minor-mode-alist
+		"  "
+		"  "
+                ))
+
+; change whole mode line color
+;   (let ((default-color (cons (face-background 'mode-line) (face-foreground 'mode-line))))
+;     (add-hook 'post-command-hook
+;       (lambda ()
+;         (let ((color (cond ((minibufferp) default-color)
+;                            ((evil-insert-state-p) '("#009933" . "#ffffff"))
+;                            ;((evil-insert-state-p) '("#e80000" . "#ffffff"))
+;                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
+;                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
+;			    ((evil-visual-state-p) '("#006fa0" . "#ffffff"))
+;			    ((evil-normal-state-p) '("#4d4d4d" . "#ffffff"))
+;			    ((evil-operator-state-p) '("#4d4d4d" . "#ffffff"))
+;			    ((evil-replace-state-p) '("#cc7a00" . "#ffffff"))
+;			    ((evil-motion-state-p) '("#4d4d4d" . "#ffffff"))
+;                            (t default-color))))
+;           (set-face-background 'mode-line (car color))
+;           (set-face-foreground 'mode-line (cdr color))))))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
