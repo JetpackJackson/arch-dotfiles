@@ -20,13 +20,9 @@
 
 ;;; Code:
 
-;; Add unique buffer names in the minibuffer where there are many
-;; identical files. This is super useful if you rely on folders for
-;; organization and have lots of files with the same name,
-;; e.g. foo/index.ts and bar/index.ts.
-(require 'uniquify)
-
-(require 'package)
+;(require 'package)
+(require 'use-package)
+(setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (use-package doom-modeline :ensure t :demand t
@@ -35,11 +31,14 @@
   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
   (setq doom-modeline-icon nil)
   (setq doom-modeline-buffer-state-icon 1))
+;(setq mode-line-format '("%e" mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-position (vc-mode vc-mode) mode-line-modes mode-line-misc-info))
+;(setq mode-line-position (list "(%l,%c)"))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
 (use-package eat :ensure t)
+(use-package uniquify)
 
 ;; vim keys
 (setq evil-want-keybinding nil)
@@ -270,3 +269,5 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
+;; fix this
+(package--save-selected-packages nil)
