@@ -33,7 +33,7 @@
 ;  (setq doom-modeline-buffer-state-icon 1))
 
 ;; change tag color
-(setq evil-normal-state-tag   (propertize " COMMAND " 'face '((:background "gray35" :foreground "white")))
+(setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
       evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
       evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
       evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
@@ -42,91 +42,32 @@
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
 
 (setq mode-line-position (list "(%l,%c)"))
-(setq mode-line-front-space "")
-(setq mode-line-end-spaces "")
-(setq mode-line-frame-identification "")
+(setq mode-line-front-space nil)
 (setq evil-mode-line-format '(before . mode-line-front-space))
-
-(setq mode-line-format nil)
+(defvar my-ml-separator "    ")
+(defun my-modified-buffer-indicator () "Show buffer status in the mode line."
+       (if (buffer-modified-p) "(modified)"
+	 "----------"))
+;(setq mode-line-format nil)
 (setq-default mode-line-format
               '("%e"
-		;; evil-mode-line-format displays here
-		mode-line-front-space
-		"  "
+		mode-line-front-space ;; evil-mode-line-format displays here
+		my-ml-separator
 		mode-line-buffer-identification
-		" "
-		mode-line-modified;"%*%+"
-		"   "
+		my-ml-separator
+		(:eval (my-modified-buffer-indicator))
+		my-ml-separator
 		mode-line-position
-                "  "
-		"   "
+		my-ml-separator
 		mode-name
-		" "
-		"  "
-		"  "
-		mode-line-format-right-align
-		minor-mode-alist
-		"  "
-		"  "
-                ))
-
-; change whole mode line color
-;   (let ((default-color (cons (face-background 'mode-line) (face-foreground 'mode-line))))
-;     (add-hook 'post-command-hook
-;       (lambda ()
-;         (let ((color (cond ((minibufferp) default-color)
-;                            ((evil-insert-state-p) '("#009933" . "#ffffff"))
-;                            ;((evil-insert-state-p) '("#e80000" . "#ffffff"))
-;                            ((evil-emacs-state-p)  '("#444488" . "#ffffff"))
-;                            ((buffer-modified-p)   '("#006fa0" . "#ffffff"))
-;			    ((evil-visual-state-p) '("#006fa0" . "#ffffff"))
-;			    ((evil-normal-state-p) '("#4d4d4d" . "#ffffff"))
-;			    ((evil-operator-state-p) '("#4d4d4d" . "#ffffff"))
-;			    ((evil-replace-state-p) '("#cc7a00" . "#ffffff"))
-;			    ((evil-motion-state-p) '("#4d4d4d" . "#ffffff"))
-;                            (t default-color))))
-;           (set-face-background 'mode-line (car color))
-;           (set-face-foreground 'mode-line (cdr color))))))
+		my-ml-separator
+		minor-mode-alist))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
 (use-package eat :ensure t)
 (use-package uniquify)
-
-;; vim keys
-(setq evil-want-keybinding nil)
-(use-package evil-leader :ensure t :demand t :config (evil-leader/set-leader "<SPC>") (global-evil-leader-mode)
-(evil-leader/set-key
-  "f" 'find-file
-  "s" 'consult-find
-  "v" 'list-buffers
-  "b" 'consult-buffer ;'switch-to-buffer
-  "ca" 'eglot-code-actions
-  "cq" 'eglot-code-action-quickfix
-  "cn" 'consult-flymake ;'flymake-goto-next-error
-  "d" 'kill-buffer
-  "g" 'consult-bookmark ;'bookmark-jump
-  "r" 'my-mode-recompile ;'recompile
-  "u" 'my-mode-upload-run
-  "l" 'my-org-insert-link
-  "of" 'org-open-at-point
-  "oe" 'org-export-dispatch
-  "." 'comment-region
-  "," 'uncomment-region
-  "e" 'eshell
-  "t" 'eat-other-window))
-(use-package evil :ensure t :demand t
-  :init (setq evil-want-integration t)
-  :config
-  (evil-mode 1)
-  (evil-set-initial-state 'dired-mode 'emacs)
-  :custom (evil-undo-system 'undo-redo))
-(use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
-(use-package evil-terminal-cursor-changer :ensure t :demand t)
-  (unless (display-graphic-p)
-          (require 'evil-terminal-cursor-changer)
-          (evil-terminal-cursor-changer-activate))
 
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
   :custom
@@ -153,8 +94,6 @@
 	  "zathura" "%f")
 	 (("ods" "odt" "ppt" "pptx" "doc" "docx" "xlsx" "csv")
 	  "libreoffice" "%f")))
-          ;"kitty" "+kitten" "icat" "%f")))
-
   (setq dirvish-hide-details nil)
   (setq dirvish-mode-line-format
         '(:left (sort symlink) :right (omit yank index)))
@@ -216,6 +155,31 @@
   ;; Tidy shadowed file names
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
+;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
+;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
+(use-package select
+  :demand t
+  :custom
+  (save-interprogram-paste-before-kill t)
+  (select-enable-clipboard             t)
+  (selection-coding-system             'utf-8)
+  :init
+  (setq-default wl-copy-process nil)
+  (when (string-prefix-p "wayland" (getenv "WAYLAND_DISPLAY"))
+    (defun wl-copy-handler (text)
+      (setq wl-copy-process (make-process :name "wl-copy"
+                                          :buffer nil
+                                          :command '("wl-copy" "-f" "-n")
+                                          :connection-type 'pipe))
+      (process-send-string wl-copy-process text)
+      (process-send-eof wl-copy-process))
+    (defun wl-paste-handler ()
+      (if (and wl-copy-process (process-live-p wl-copy-process))
+          nil ; should return nil if we're the current paste owner
+        (shell-command-to-string "wl-paste -n | tr -d \r")))
+    (setq interprogram-cut-function 'wl-copy-handler
+          interprogram-paste-function 'wl-paste-handler)))
+
 ;; org
 (use-package org :config
   (setq org-agenda-span 20
@@ -273,28 +237,18 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-
-;; FIXME https://emacs.stackexchange.com/questions/15081/programming-of-initial-buffer-choice
-;(setq initial-buffer-choice (lambda () (get-buffer (recentf-open-files))))
-;(defun filefocus ()
-;       (unless (cl-remove-if-not #'buffer-file-name (buffer-list))
-;    (get-buffer (recentf-open-files))
-;    (delete-other-windows)))
-;(add-hook 'emacs-startup-hook #'filefocus t)
+;(global-set-key (kbd "C-c c") #'kill-ring-save)
+;(global-set-key (kbd "C-c x") #'kill-region)
+;(global-set-key (kbd "C-c p") #'yank)
+;;(use-package devil :ensure t :demand t
+;;  :init (global-devil-mode))
+;;;(devil-set-key (kbd "<SPC>"))
+;;;(dolist (key '("%k SPC" "%k RET" "%k <return>"))
+;;;  (assoc-delete-all key devil-special-keys))
+;;(setq devil-lighter " \U0001F608")
 
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
 (setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
-
-
-;(defun my-setup-initial-window-setup ()
-;  "start 2 buffers"
-;  (interactive)
-;  (switch-to-buffer (get-buffer (recentf-open-files)))
-;  (split-window-horizontally)
-;  (other-window 1)
-;  (switch-to-buffer (get-buffer-create (scratch-buffer)))
-;  (other-window 1))
-;(add-hook 'emacs-startup-hook #'my-setup-initial-window-setup)
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
@@ -302,6 +256,8 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
+(load-file "~/.config/emacs/evil.el")
+;(load-file "~/.config/emacs/boon.el")
+;(load-file "~/.config/emacs/meow.el")
+;(load-file "~/.config/emacs/general.el")
 ;(load-file "~/.config/emacs/xahflykeys.el")
-;; fix this
-(package--save-selected-packages nil)

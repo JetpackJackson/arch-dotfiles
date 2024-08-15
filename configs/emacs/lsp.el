@@ -28,6 +28,7 @@
            ("C-c e q" . eglot-code-action-quickfix)
            ("C-c e o" . eglot-code-actions-organize-imports)
            ("C-c e r" . eglot-rename)
+	   ("C-c e e" . consult-flymake) ;; FIXME
            ("C-c e f" . eglot-format)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs

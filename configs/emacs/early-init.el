@@ -77,6 +77,8 @@
  (setq visible-bell t)
  (setq ring-bell-function 'ignore)
 
+ (windmove-default-keybindings 'meta)
+
  ;; foot
  (add-to-list 'term-file-aliases '("foot" . "xterm")))
 
