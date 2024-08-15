@@ -1,0 +1,38 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 57,
+                "origin_hash": "99614f2eb2dff6628bd5eff9210e538f"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "if_tap(key(KEY_SPACE), hold_keys(KEY_LEFTCTRL))",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 58,
+                "origin_hash": "99614f2eb2dff6628bd5eff9210e538f"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_ESC",
+        "mapping_type": "key_macro"
+    },
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 1,
+                "origin_hash": "99614f2eb2dff6628bd5eff9210e538f"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "KEY_CAPSLOCK",
+        "mapping_type": "key_macro"
+    }
+]
