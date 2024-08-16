@@ -109,6 +109,7 @@ if status is-interactive
     set -gx DOTNET_CLI_HOME $XDG_DATA_HOME/dotnet
     set -gx GOPATH $XDG_DATA_HOME/go
     set -gx PLATFORMIO_CORE_DIR $XDG_DATA_HOME/platformio
+    set -gx MBSYNCRC $XDG_CONFIG_HOME/isync/mbsyncrc
 
     abbr -a scu --set-cursor 'systemctl --user %' 
     abbr -a sc --set-cursor 'systemctl %' 
