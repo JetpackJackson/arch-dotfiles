@@ -79,7 +79,11 @@
 
  (windmove-default-keybindings 'meta)
 
- ;; foot
+ ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
+ ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
+ ;; still shows wrong color in some spots
+ ;(set-face-background 'default "undefined")
+ ;; does not work, need to set TERM outside of emacs
  (add-to-list 'term-file-aliases '("foot" . "xterm")))
 
  ;; fixme
