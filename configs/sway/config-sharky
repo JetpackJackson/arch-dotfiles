@@ -236,7 +236,7 @@ mode "resize" {
 bindsym $mod+Plus mode "resize"
 
 #exec_always systemctl --user start opentabletdriver
-exec_always systemctl --user start emacs
+#exec_always systemctl --user start emacs
 #exec_always --no-startup-id mako
 exec_always yams.sh
 include /etc/sway/config.d/*

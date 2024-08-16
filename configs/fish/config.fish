@@ -119,11 +119,11 @@ if status is-interactive
     abbr -a nps --set-cursor 'nix search nixpkgs %'
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
-    # workaround for emacs showing blue background on emacsclient startup
-    #abbr -a e --set-cursor 'set TERM foot-direct; emacsclient -nw %; set TERM foot'
+    # workaround for emacs showing blue background on emacsclient startup with foot (emacs -nw w/TERM=foot is fine tho)
+    abbr -a ec --set-cursor 'set TERM foot-direct; emacsclient -nw %; set TERM foot'
     abbr -a e --set-cursor 'emacs -nw %'
-    abbr -a ec --set-cursor 'emacsclient -nw %'
-    abbr -a icat --set-cursor 'kitty +kitten icat %'
+    #abbr -a ec --set-cursor 'emacsclient -nw %'
+    #abbr -a icat --set-cursor 'kitty +kitten icat %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
