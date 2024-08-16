@@ -48,6 +48,7 @@
 (add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-hook 'arduino-mode-hook 'eglot-ensure)
 (add-hook 'arduino-mode-hook 'turn-on-pio)
+(add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 

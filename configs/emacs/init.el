@@ -25,44 +25,6 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-;(use-package doom-modeline :ensure t :demand t
-;  :init (doom-modeline-mode 1)
-;  :config
-;  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-;  (setq doom-modeline-icon nil)
-;  (setq doom-modeline-buffer-state-icon 1))
-
-;; change tag color
-(setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
-      evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
-      evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
-      evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
-      evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
-      evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
-
-(setq mode-line-position (list "(%l,%c)"))
-(setq mode-line-front-space nil)
-(setq evil-mode-line-format '(before . mode-line-front-space))
-(defvar my-ml-separator "    ")
-(defun my-modified-buffer-indicator () "Show buffer status in the mode line."
-       (if (buffer-modified-p) "(modified)"
-	 "----------"))
-;(setq mode-line-format nil)
-(setq-default mode-line-format
-              '("%e"
-		mode-line-front-space ;; evil-mode-line-format displays here
-		my-ml-separator
-		mode-line-buffer-identification
-		my-ml-separator
-		(:eval (my-modified-buffer-indicator))
-		my-ml-separator
-		mode-line-position
-		my-ml-separator
-		mode-name
-		my-ml-separator
-		minor-mode-alist))
-
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
@@ -201,6 +163,7 @@
 ;; Follow the links
 ;(setq org-return-follows-link t)
 
+;; FIXME
 (setq org-capture-templates
       '(    
         ("g" "General To-Do"
@@ -237,15 +200,6 @@
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
-;(global-set-key (kbd "C-c c") #'kill-ring-save)
-;(global-set-key (kbd "C-c x") #'kill-region)
-;(global-set-key (kbd "C-c p") #'yank)
-;;(use-package devil :ensure t :demand t
-;;  :init (global-devil-mode))
-;;;(devil-set-key (kbd "<SPC>"))
-;;;(dolist (key '("%k SPC" "%k RET" "%k <return>"))
-;;;  (assoc-delete-all key devil-special-keys))
-;;(setq devil-lighter " \U0001F608")
 
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
 (setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))

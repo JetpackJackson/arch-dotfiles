@@ -86,7 +86,7 @@
  ;; does not work, need to set TERM outside of emacs
  (add-to-list 'term-file-aliases '("foot" . "xterm")))
 
- ;; fixme
+ ;; FIXME
  ;(setq browse-url-firefox-program "librewolf")
  ;(setq browse-url-firefox-new-window-is-tab t)
 
@@ -95,6 +95,38 @@
 (setcar native-comp-eln-load-path
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
 (require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
+
+;; MODELINE
+;; change tag color
+(setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
+      evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
+      evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
+      evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
+      evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
+      evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
+
+(setq mode-line-position (list "(%l,%c)"))
+(setq mode-line-front-space nil)
+(setq evil-mode-line-format '(before . mode-line-front-space))
+(defvar my-ml-separator "    ")
+(defun my-modified-buffer-indicator () "Show buffer status in the mode line."
+       (if (buffer-modified-p) "(modified)"
+	 "----------"))
+;(setq mode-line-format nil)
+(setq-default mode-line-format
+              '("%e"
+		mode-line-front-space ;; evil-mode-line-format displays here
+		my-ml-separator
+		mode-line-buffer-identification
+		my-ml-separator
+		(:eval (my-modified-buffer-indicator))
+		my-ml-separator
+		mode-line-position
+		my-ml-separator
+		mode-name
+		my-ml-separator
+		minor-mode-alist))
 
 ;;; FUNCTIONS
 ;; consult stuff ("manual, relay instructions")
@@ -174,3 +206,10 @@
   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
 	(t (message "upload command not defined for this mode"))))
+
+(defun eos/add-watchwords ()
+  "Highlight FIXME and TODO in code"
+  (font-lock-add-keywords
+   nil '(("\\<\\(TODO\\(?:(.*)\\)?:?\\)\\>"  1 'warning prepend)
+         ("\\<\\(FIXME\\(?:(.*)\\)?:?\\)\\>" 1 'error prepend)
+	 ("\\<\\(WIP\\(?:(.*)\\)?:?\\)\\>" 1 'info-title-2 prepend))))
