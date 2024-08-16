@@ -69,8 +69,6 @@ input "1739:52856:SYNA2BA6:00_06CB:CE78_Touchpad" {
     middle_emulation enabled
 }
 
-#bindgesture swipe:right workspace prev
-#bindgesture swipe:left workspace next
 
 bindswitch tablet:on exec 'squeekboard &', \
     exec 'swaymsg input 1386:21196:Wacom_HID_52CC_Finger map_to_output eDP-1', \
@@ -108,7 +106,7 @@ bindsym $mod+Shift+XF86AudioMute exec systemctl poweroff
 default_border none
 default_floating_border none
 #font pango:monospace 0
-font pango:Ärzte Sans 15
+font pango:Ärzte Sans 12
 titlebar_padding 1
 titlebar_border_thickness 0
 gaps inner 5
