@@ -48,7 +48,18 @@
 (add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-hook 'arduino-mode-hook 'eglot-ensure)
 (add-hook 'arduino-mode-hook 'turn-on-pio)
+
+(add-hook 'scheme-mode-hook 'comment-auto-fill)
+(add-hook 'c++-mode-hook 'comment-auto-fill)
+(add-hook 'c-mode-hook 'comment-auto-fill)
+(add-hook 'python-mode-hook 'comment-auto-fill)
+(add-hook 'latex-mode-hook 'comment-auto-fill)
+(add-hook 'sh-mode-hook 'comment-auto-fill)
+(add-hook 'bash-ts-mode-hook 'comment-auto-fill)
+(add-hook 'arduino-mode-hook 'comment-auto-fill)
+
 (add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
+
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (setq eglot-autoshutdown t)
 
@@ -90,7 +101,7 @@
 (add-hook 'c++-mode-hook 'yas-minor-mode)
 (add-hook 'c-mode-hook 'yas-minor-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
-;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets
+;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets elsewhere
 (add-hook 'latex-mode-hook 'yas-minor-mode)
 (add-hook 'lua-mode-hook 'yas-minor-mode)
 (add-hook 'lisp-mode-hook 'yas-minor-mode)

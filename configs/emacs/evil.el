@@ -16,7 +16,7 @@
   "l" 'my-org-insert-link
   "of" 'org-open-at-point
   "oe" 'org-export-dispatch
-  "." 'comment-region
+  "." 'comment-line ;comment-region
   "," 'uncomment-region
   "e" 'eshell
   "t" 'eat-other-window))
