@@ -36,7 +36,9 @@
   (setq line-number-mode t)
   (setq doom-modeline-modal-icon nil)
   (setq doom-modeline-modal-modern-icon nil)
-  (setq doom-modeline-buffer-state-icon 1))
+  (setq doom-modeline-buffer-state-icon nil)
+  ;(setq doom-modeline-buffer-state-icon 1)
+  (setq doom-modeline-major-mode-icon nil))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
