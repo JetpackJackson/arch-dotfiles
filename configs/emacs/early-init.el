@@ -115,20 +115,39 @@
 (defun my-modified-buffer-indicator () "Show buffer status in the mode line."
        (if (buffer-modified-p) "(modified)"
 	 "----------"))
+
+(defface mode-line-modified-buffer-id
+  '((t (:slant italic :foreground "#ffe066" :inherit (mode-line-buffer-id))))
+  "Face used for buffer id part of the mode line when the buffer is modified."
+  :group 'mode-line-faces)
+
+(defface mode-line-readonly-buffer-id
+  '((t (:foreground "#ff6699" :inherit (mode-line-buffer-id))))
+  "Face used for buffer id part of the mode line when the buffer is read-only."
+  :group 'mode-line-faces)
+
+;; TODO
+(defun my-modified-buffer-indicator-colorized () "Show buffer status in the mode line."
+       (cond ((buffer-modified-p) (propertize "%14b " 'face 'mode-line-modified-buffer-id))
+	     ;((buffer-modified-p nil) (propertize "%14b " 'face 'mode-line-buffer-id))
+	     (t (propertize "%14b " 'face 'mode-line-buffer-id))))
+	     ;(t (propertize "" 'face 'mode-line-buffer-id))))
+
 ;(setq mode-line-format nil)
 (setq-default mode-line-format
               '("%e"
 		mode-line-front-space ;; evil-mode-line-format displays here
 		my-ml-separator
-		mode-line-buffer-identification
-		my-ml-separator
-		(:eval (my-modified-buffer-indicator))
+		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
+		(:eval (my-modified-buffer-indicator-colorized))
+		;(:propertize (buffer-read-only ">" "") face mode-line-readonly-buffer-id)
 		my-ml-separator
 		mode-line-position
 		my-ml-separator
 		mode-name
 		my-ml-separator
 		minor-mode-alist))
+
 
 ;;; FUNCTIONS
 ;; consult stuff ("manual, relay instructions")
