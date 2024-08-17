@@ -25,6 +25,19 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+(use-package doom-modeline :ensure t :demand t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+  ;(setq doom-modeline-icon nil)
+  (setq inhibit-compacting-font-caches t)
+  ;(setq doom-modeline-position-format '("%l:%c"))
+  (setq column-number-mode t)
+  (setq line-number-mode t)
+  (setq doom-modeline-modal-icon nil)
+  (setq doom-modeline-modal-modern-icon nil)
+  (setq doom-modeline-buffer-state-icon 1))
+
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
