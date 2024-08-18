@@ -233,6 +233,11 @@
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
 	(t (message "upload command not defined for this mode"))))
 
+(defun my-eval-defun () "Eval functions" (interactive)
+  (cond ((eq major-mode 'emacs-lisp-mode) (eval-defun)) 
+	((bound-and-true-p sly-mode) (sly-eval-defun))
+	(t (message "eval function not defined for this mode"))))
+
 (defun eos/add-watchwords ()
   "Highlight FIXME and TODO in code"
   (font-lock-add-keywords

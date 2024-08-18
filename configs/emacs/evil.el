@@ -18,7 +18,7 @@
   "oe" 'org-export-dispatch
   "." 'comment-line ;comment-region
   "," 'uncomment-region
-  "e" 'eshell
+  "e" 'my-eval-defun
   "t" 'eat-other-window))
 (use-package evil :ensure t :demand t
   :init (setq evil-want-integration t)
