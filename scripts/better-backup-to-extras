@@ -3,6 +3,7 @@ sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/$1/sharky/.cach
 sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/$1/sharky/.config
 sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
 sudo rsync -aAXHvu --delete /home/jet/.gnupg /run/media/jet/$1/sharky/
+sudo rsync -aAXHvu --delete /var/lib/prosody /run/media/jet/$1/sharky/prosody/
 gpg --export --armor --output /tmp/key.asc JetpackJackson
 gpg --export-secret-keys --armor --output /tmp/seckey.asc JetpackJackson
 gpg --export-secret-subkeys --armor --output /tmp/secsubkey.asc JetpackJackson
