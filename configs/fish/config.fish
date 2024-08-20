@@ -93,7 +93,16 @@ if status is-interactive
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
     set -gx QT_QPA_PLATFORM "wayland;xcb"
     set -gx TERMINAL_COMMAND kitty
-    set -gx EDITOR "emacs -nw"
+    # problem: does not show up in fastfetch
+    #set -gx EDITOR "TERM=foot-direct emacsclient -nw"
+
+    # This works. We use a fish script here to make sure that all env
+    # vars are set up properly. A fish function doesn't get seen in
+    # time so the function never gets called, so instead we use a
+    # shebang and a normal script in my scripts folder which gets
+    # added to $PATH.
+    set -gx EDITOR "emacstest.sh"
+    # FIXME
     set -gx DIFFPROG nvim pacdiff
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
@@ -120,9 +129,12 @@ if status is-interactive
     abbr -a npl --set-cursor 'nix profile list%'
     abbr -a n --set-cursor 'nvim %'
     # workaround for emacs showing blue background on emacsclient startup with foot (emacs -nw w/TERM=foot is fine tho)
-    abbr -a ec --set-cursor 'set TERM foot-direct; emacsclient -nw %; set TERM foot'
-    abbr -a e --set-cursor 'emacs -nw %'
-    #abbr -a ec --set-cursor 'emacsclient -nw %'
+    # temp workaround, since it requires foot to be installed
+    #abbr -a e --set-cursor 'TERM=foot-direct emacsclient -nw %'
+    # no cmdline completion for cmdline args other than files but the
+    # other option doesn't do that either
+    abbr -a e --set-cursor 'emacstest.sh %'
+    abbr -a en --set-cursor 'emacs -nw %'
     #abbr -a icat --set-cursor 'kitty +kitten icat %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
