@@ -119,7 +119,7 @@ bar:
           map:
             default: {empty: {}}
             conditions:
-              name == wlp0s21f0u7i2:
+              name == wlan0:
                 map:
                   conditions:
                     ~carrier: {empty: {}}

@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
-sudo reflector --sort rate --fastest 3 --number 20 --country US --verbose --age 24 --protocol https --save /etc/pacman.d/mirrorlist
+distro=$(awk '{ print $1 }' <(cat /etc/os-release | sed 's/.*=//') | head -n3 | tail -n1)
+if [[ $distro = "arch" ]]; then
+    sudo reflector --sort rate --fastest 3 --number 20 --country US --verbose --age 24 --protocol https --save /etc/pacman.d/mirrorlist
+elif [[ $distro = "artix" ]]; then
+    sudo reflector --sort rate --fastest 3 --number 20 --country US --verbose --age 24 --protocol https --save /etc/pacman.d/mirrorlist.arch
+    #rankmirrors -v -n 5 /etc/pacman.d/mirrorlist
+    rankmirrors -v -n 5 /etc/pacman.d/mirrorlist | tail -n 5 | sudo cat - /etc/pacman.d/mirrorlist > temp && sudo mv temp /etc/pacman.d/mirrorlist
+fi

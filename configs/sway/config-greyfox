@@ -240,9 +240,12 @@ mode "resize" {
 
 $mybindsym $mod+r mode "resize"
 
-exec_always systemctl --user start emacs
+#exec_always systemctl --user start emacs
 exec_always --no-startup-id mako
 exec_always yams.sh
 exec_always nm-applet &
 include /etc/sway/config.d/*
 ##exec_always systemctl --user start sway-session.target
+exec_always emacs --fg-daemon &
+exec_always /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/wireplumber &
+exec_always guix-daemon --build-users-group=guixbuild --discover=yes --gc-keep-derivations=yes --gc-keep-outputs=yes &
