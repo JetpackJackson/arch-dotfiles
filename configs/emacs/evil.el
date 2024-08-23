@@ -32,3 +32,7 @@
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
+;; TODO
+(use-package evil-surround :ensure t :demand t
+  :config
+  (global-evil-surround-mode 1))

@@ -3,6 +3,9 @@
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
 (use-package flycheck :ensure t)
 
+;; TODO learn how to use
+(use-package realgud :ensure t)
+
 ;; nice markers for indents
 (use-package indent-bars
   :load-path "~/.cache/emacs/indent-bars"
