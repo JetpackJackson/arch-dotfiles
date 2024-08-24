@@ -1,6 +1,10 @@
 ;; -*- lexical-binding: t -*-
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
+(setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
+;(setq default-frame-alist '((font . "Ärzte Sans-12")))
+;(add-to-list 'default-frame-alist '(font . "Ärzte Sans Mono Roman-12"))
+
 (setq initial-scratch-message "
 ; .`                             `.
 ; `--..```..`           `..```..--`
@@ -226,6 +230,7 @@
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
 	((eq major-mode 'c++-mode) (recompile)) ;; if c++ major mode
 	((bound-and-true-p sly-mode) (sly-compile-file))
+	;((eq major-mode 'latex-mode) (shell-command (concat "tectonic " (buffer-file-name))))
 	(t (message "recompile command not defined for this mode"))))
 
 (defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)

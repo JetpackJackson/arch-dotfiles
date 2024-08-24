@@ -153,7 +153,7 @@
     (defun wl-paste-handler ()
       (if (and wl-copy-process (process-live-p wl-copy-process))
           nil ; should return nil if we're the current paste owner
-        (shell-command-to-string "wl-paste -n | tr -d \r")))
+        (shell-command-to-string "wl-paste -n | tr -d '\r'")))
     (setq interprogram-cut-function 'wl-copy-handler
           interprogram-paste-function 'wl-paste-handler)))
 
@@ -167,7 +167,8 @@
 	org-agenda-start-day "-3d")
   (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
   (setq org-enforce-todo-dependencies nil)
-  (setq org-agenda-dim-blocked-tasks t))
+  (setq org-agenda-dim-blocked-tasks t)
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
@@ -177,6 +178,11 @@
   (set-face-attribute 'org-level-3 nil :foreground "white"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
 (add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+
+(use-package org-timeblock :ensure t)
+(use-package org-fragtog :ensure t)
 
 (use-package org-roam
   :ensure t
