@@ -4,6 +4,7 @@
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
 ;(setq default-frame-alist '((font . "Ärzte Sans-12")))
 ;(add-to-list 'default-frame-alist '(font . "Ärzte Sans Mono Roman-12"))
+;(set-face-background 'default "undefined")
 
 (setq initial-scratch-message "
 ; .`                             `.
@@ -64,6 +65,7 @@
  
  (setq ediff-split-window-function 'split-window-horizontally
        truncate-partial-width-windows t)
+ (setq split-width-threshold 100)
  (setq eldoc-echo-area-use-multiline-p nil) ;; make eldoc quieter
  (global-eldoc-mode -1) ;; disable eldoc instead
 

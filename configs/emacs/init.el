@@ -38,7 +38,8 @@
   (setq doom-modeline-modal-modern-icon nil)
   (setq doom-modeline-buffer-state-icon nil)
   ;(setq doom-modeline-buffer-state-icon 1)
-  (setq doom-modeline-major-mode-icon nil))
+  (setq doom-modeline-major-mode-icon nil)
+  (setq doom-modeline-window-width-limit 85))
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -131,6 +132,23 @@
               ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(unless (package-installed-p 'jabber)
+  (require 'package-vc)
+  (package-vc-install '(jabber
+                        :url "https://codeberg.org/emacs-jabber/emacs-jabber"
+                        :branch "production"
+                        :lisp-dir "lisp"
+                        :doc "README.org")))
+(setq jabber-vcard-avatars-retrieve t)
+(custom-set-faces
+ '(jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
+ '(jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
+ '(jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
+ '(jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
+ '(jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
+ '(jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
+(add-hook 'jabber-chat-mode-hook 'visual-line-mode)
 
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
 ;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
