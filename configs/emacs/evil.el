@@ -4,7 +4,7 @@
 (evil-leader/set-key
   "f" 'find-file
   "s" 'consult-find
-  "v" 'list-buffers
+  "v" 'ibuffer-other-window ;'list-buffers
   "b" 'consult-buffer ;'switch-to-buffer
   "ca" 'eglot-code-actions
   "cq" 'eglot-code-action-quickfix
