@@ -25,21 +25,23 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(use-package doom-modeline :ensure t :demand t
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-  ;(setq doom-modeline-icon nil)
-  (setq inhibit-compacting-font-caches t)
-  ;(setq doom-modeline-position-format '("%l:%c"))
-  (setq column-number-mode t)
-  (setq line-number-mode t)
-  (setq doom-modeline-modal-icon nil)
-  (setq doom-modeline-modal-modern-icon nil)
-  (setq doom-modeline-buffer-state-icon nil)
-  ;(setq doom-modeline-buffer-state-icon 1)
-  (setq doom-modeline-major-mode-icon nil)
-  (setq doom-modeline-window-width-limit 85))
+;; (use-package doom-modeline :ensure t :demand t
+;;   :init (doom-modeline-mode 1)
+;;   :config
+;;   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+;;   ;(setq doom-modeline-icon nil)
+;;   (setq inhibit-compacting-font-caches t)
+;;   ;(setq doom-modeline-position-format '("%l:%c"))
+;;   (setq column-number-mode t)
+;;   (setq line-number-mode t)
+;;   (setq doom-modeline-modal-icon nil)
+;;   (setq doom-modeline-modal-modern-icon nil)
+;;   (setq doom-modeline-buffer-state-icon nil)
+;;   ;(setq doom-modeline-buffer-state-icon 1)
+;;   (setq doom-modeline-major-mode-icon nil))
+;;   ;(setq doom-modeline-window-width-limit 85))
+
+(use-package shrink-path :ensure t :demand t)
 
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -141,13 +143,17 @@
                         :lisp-dir "lisp"
                         :doc "README.org")))
 (setq jabber-vcard-avatars-retrieve t)
-(custom-set-faces
- '(jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
- '(jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
- '(jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
- '(jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
- '(jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
- '(jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
+(setq jabber-chat-buffer-format "*jc-%n*")
+(setq jabber-browse-buffer-format "*jb-%n*")
+(setq jabber-groupchat-buffer-format "*j-g-%n*")
+(setq jabber-muc-private-buffer-format "*j-privmuc-%g-%n*")
+(with-eval-after-load 'jabber-faces
+ (set-face-attribute 'jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
+ (set-face-attribute 'jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
+ (set-face-attribute 'jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
+ (set-face-attribute 'jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
+ (set-face-attribute 'jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
+ (set-face-attribute 'jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
 (add-hook 'jabber-chat-mode-hook 'visual-line-mode)
 
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
@@ -183,9 +189,10 @@
   (setq org-agenda-span 20
 	org-agenda-start-on-weekday nil
 	org-agenda-start-day "-3d")
-  (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/"))
+  (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/agenda/"))
   (setq org-enforce-todo-dependencies nil)
   (setq org-agenda-dim-blocked-tasks t)
+  (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (with-eval-after-load 'org

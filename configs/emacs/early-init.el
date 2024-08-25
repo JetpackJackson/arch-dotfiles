@@ -87,6 +87,12 @@
 
  (setq fill-column 80)
 
+ (setq browse-url-firefox-new-window-is-tab t)
+ (setq browse-url-firefox-program "librewolf")
+ (setq browse-url-generic-program "badwolf")
+ (setq org-roam-ui-browser-function 'browse-url-generic)
+
+
  ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
  ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
  ;; still shows wrong color in some spots
@@ -114,26 +120,28 @@
       evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
 
-;; (setq mode-line-position (list "%7 (%l,%c)"))
-;; (setq mode-line-front-space nil)
-;; (setq evil-mode-line-format '(before . mode-line-front-space))
-;; (defvar my-ml-separator "    ")
-;; (defun my-modified-buffer-indicator () "Show buffer status in the mode line."
-;;        (if (buffer-modified-p) "(modified)"
-;; 	 "----------"))
+(setq mode-line-position (list "%7 (%l,%c)"))
+(setq mode-line-front-space nil)
+(setq evil-mode-line-format '(before . mode-line-front-space))
+(defvar my-ml-separator "    ")
+(defun my-modified-buffer-indicator () "Show buffer status in the mode line."
+       (if (buffer-modified-p) "(modified)"
+	 "----------"))
 
-;; (defface mode-line-modified-buffer-id
-;;   '((t (:slant italic :foreground "#ffe066" :inherit (mode-line-buffer-id))))
-;;   "Face used for buffer id part of the mode line when the buffer is modified."
-;;   :group 'mode-line-faces)
+(defface mode-line-modified-buffer-id
+  ;'((t (:slant italic :foreground "#ffe066" :inherit (mode-line-buffer-id))))
+  '((t (:foreground "#ffe066" :inherit (mode-line-buffer-id))))
+  "Face used for buffer id part of the mode line when the buffer is modified."
+  :group 'mode-line-faces)
 
-;; (defface mode-line-readonly-buffer-id
-;;   '((t (:foreground "#ff6699" :inherit (mode-line-buffer-id))))
-;;   "Face used for buffer id part of the mode line when the buffer is read-only."
-;;   :group 'mode-line-faces)
+(defface mode-line-readonly-buffer-id
+  '((t (:foreground "#ff6699" :inherit (mode-line-buffer-id))))
+  "Face used for buffer id part of the mode line when the buffer is read-only."
+  :group 'mode-line-faces)
 
 ;; ;; TODO
 ;; (defun my-modified-buffer-indicator-colorized () "Show buffer status in the mode line."
+;;        ;(cond ((buffer-modified-p) (propertize mode-line-buffer-identification 'face 'mode-line-modified-buffer-id))
 ;;        (cond ((buffer-modified-p) (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-modified-buffer-id))
 ;; ;;           "%14b " 'face 'mode-line-modified-buffer-id))
 ;; 	     ;((buffer-modified-p nil) (propertize "%14b " 'face 'mode-line-buffer-id))
@@ -141,24 +149,56 @@
 ;; 	     (t (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-buffer-id))))
 ;; 	     ;(t (propertize "" 'face 'mode-line-buffer-id))))
 
-;; ;(setq mode-line-format nil)
-;; (setq-default mode-line-format
-;;               '("%e"
-;; 		mode-line-front-space ;; evil-mode-line-format displays here
-;; 		my-ml-separator
-;; 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-;; 		(:eval (my-modified-buffer-indicator-colorized))
-;; 		;(:propertize (buffer-read-only ">" "") face mode-line-readonly-buffer-id)
-;; 		my-ml-separator
-;; 		;(:eval (list -10 "%f"))
-;; 		mode-line-position
-;; 		my-ml-separator
-;; 		mode-name
-;; 		;(:eval (abbreviate-file-name (buffer-file-name)))
-;; 		;(format "`%14s'." mode-name)
-;; 		my-ml-separator
-;; 		minor-mode-alist))
 
+(defvar trunc-name)
+(defun my-modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
+       (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
+	     (t (propertize trunc-name 'face 'mode-line-buffer-id))))
+(defun my-dir-indicator-colorized (trunc-name) "Show directory in the mode line with thin font."
+       (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
+	     (t (propertize trunc-name 'face 'mode-line-front-space))))
+
+;(with-eval-after-load 'subr-x
+  (setq mode-line-buffer-identification
+                '(:eval (format-mode-line
+			 (propertized-buffer-identification
+			  (or (when-let* ((buffer-file-truename buffer-file-truename)
+                                          (prj (cdr-safe (project-current)))
+                                          (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
+                                (concat (file-relative-name (file-name-directory buffer-file-truename) prj-parent) (file-name-nondirectory buffer-file-truename)))
+                              "%b")))));)
+
+(defun pretty-buffername ()
+  (if buffer-file-truename
+      (let* ((cur-dir (file-name-directory buffer-file-truename))
+             (two-up-dir (-as-> cur-dir it (or (f-parent it) "") (or (f-parent it) "")))
+             (shrunk (shrink-path-file-mixed two-up-dir cur-dir buffer-file-truename)))
+        (concat (car shrunk)
+                (mapconcat #'identity (butlast (cdr shrunk)) "/")
+                (car (last shrunk))))
+    (buffer-name)))
+
+;(setq mode-line-format nil)
+(setq-default mode-line-format
+              '("%e"
+		mode-line-front-space ;; evil-mode-line-format displays here
+		my-ml-separator
+		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
+		;(:eval (my-modified-buffer-indicator-colorized (pretty-buffername)))
+		(:eval (my-dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
+		(:eval (my-modified-buffer-indicator-colorized (buffer-name)))
+		;(:eval (shrink-path-dirs (file-name-directory buffer-file-truename)))
+		;(:eval (buffer-name))
+		my-ml-separator
+		;mode-line-buffer-identification
+		mode-line-position
+		my-ml-separator
+		my-ml-separator
+		my-ml-separator
+		mode-name
+		my-ml-separator
+		;minor-mode-alist
+		))
 
 ;;; FUNCTIONS
 ;; consult stuff ("manual, relay instructions")
