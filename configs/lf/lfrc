@@ -8,6 +8,9 @@ if [ $TERM = "xterm-kitty" ]; then
 elif [ $TERM = "foot-direct" ]; then
    set previewer ~/.config/lf/lf_sixel_preview
    set sixel true
+elif [ $TERM = "foot" ]; then
+   set previewer ~/.config/lf/lf_sixel_preview
+   set sixel true
 fi
 
 
