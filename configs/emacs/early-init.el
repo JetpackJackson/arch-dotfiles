@@ -92,6 +92,8 @@
  (setq browse-url-generic-program "badwolf")
  (setq org-roam-ui-browser-function 'browse-url-generic)
 
+ (setenv "LANG" "en_US.UTF-8")
+ (setenv "LC_ALL" "en_US.UTF-8")
 
  ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
  ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
@@ -150,23 +152,26 @@
 ;; 	     ;(t (propertize "" 'face 'mode-line-buffer-id))))
 
 
+;; FIXME errors with special buffers not having a file dir
 (defvar trunc-name)
 (defun my-modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
+       ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face 'mode-line-buffer-id))))
 (defun my-dir-indicator-colorized (trunc-name) "Show directory in the mode line with thin font."
+       ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
-	     (t (propertize trunc-name 'face 'mode-line-front-space))))
+	     (t (propertize trunc-name 'face '(:foreground "#ffffff"))))) ;:background "#4a4b4f" :inherit normal))))) ;:inherit (mode-line-buffer-id))))))
 
-;(with-eval-after-load 'subr-x
-  (setq mode-line-buffer-identification
-                '(:eval (format-mode-line
-			 (propertized-buffer-identification
-			  (or (when-let* ((buffer-file-truename buffer-file-truename)
-                                          (prj (cdr-safe (project-current)))
-                                          (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
-                                (concat (file-relative-name (file-name-directory buffer-file-truename) prj-parent) (file-name-nondirectory buffer-file-truename)))
-                              "%b")))));)
+;; ;(with-eval-after-load 'subr-x
+;;   (setq mode-line-buffer-identification
+;;                 '(:eval (format-mode-line
+;; 			 (propertized-buffer-identification
+;; 			  (or (when-let* ((buffer-file-truename buffer-file-truename)
+;;                                           (prj (cdr-safe (project-current)))
+;;                                           (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
+;;                                 (concat (file-relative-name (file-name-directory buffer-file-truename) prj-parent) (file-name-nondirectory buffer-file-truename)))
+;;                               "%b")))));)
 
 (defun pretty-buffername ()
   (if buffer-file-truename

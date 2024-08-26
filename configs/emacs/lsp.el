@@ -15,6 +15,8 @@
 (use-package platformio-mode :ensure t)
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
+(use-package eglot-java :ensure t
+  :config (eglot-java-run-main-jvm-args '("--enable-preview")))
 
 ;; lisp goodies
 (use-package sly :ensure t
@@ -49,6 +51,7 @@
 (add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
 (add-hook 'sh-mode-hook 'eglot-ensure) ;; bash-language-server
 (add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
+(add-hook 'java-mode-hook 'eglot-java-mode)
 (add-hook 'arduino-mode-hook 'eglot-ensure)
 (add-hook 'arduino-mode-hook 'turn-on-pio)
 
@@ -64,6 +67,7 @@
 (add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
 
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
+(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (setq eglot-autoshutdown t)
 
 ;; corfu
