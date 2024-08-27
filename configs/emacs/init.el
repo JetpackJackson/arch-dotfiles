@@ -192,6 +192,7 @@
   (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/agenda/"))
   (setq org-enforce-todo-dependencies nil)
   (setq org-agenda-dim-blocked-tasks t)
+  (setq org-agenda-todo-ignore-with-date t) ;; clean up todo list
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
