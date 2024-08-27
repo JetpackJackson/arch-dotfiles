@@ -203,7 +203,10 @@
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
   (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
 (with-eval-after-load 'org-faces
-  (set-face-attribute 'org-level-3 nil :foreground "white"))
+  (set-face-attribute 'org-level-3 nil :foreground "white")
+  (set-face-attribute 'org-agenda-done nil :foreground "gray")
+  (set-face-attribute 'org-scheduled nil :foreground "green yellow")
+  (set-face-attribute 'org-scheduled-today nil :foreground "green yellow"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
