@@ -133,7 +133,7 @@ if status is-interactive
     #abbr -a e --set-cursor 'TERM=foot-direct emacsclient -nw %'
     # no cmdline completion for cmdline args other than files but the
     # other option doesn't do that either
-    abbr -a e --set-cursor 'emacstest.sh %'
+    abbr -a e --set-cursor 'emacsclient -c % &; disown'
     abbr -a en --set-cursor 'emacs -nw %'
     #abbr -a icat --set-cursor 'kitty +kitten icat %'
 
