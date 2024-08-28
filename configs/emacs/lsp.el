@@ -16,7 +16,7 @@
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
 (use-package eglot-java :ensure t
-  :config (eglot-java-run-main-jvm-args '("--enable-preview")))
+  :config (setq eglot-java-run-main-jvm-args '("--enable-preview")))
 
 ;; lisp goodies
 (use-package sly :ensure t

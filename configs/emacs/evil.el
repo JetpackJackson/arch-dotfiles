@@ -25,6 +25,7 @@
   :config
   (evil-mode 1)
   (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-set-initial-state 'ibuffer-mode 'emacs)
   (setq evil-echo-state nil)
   :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))

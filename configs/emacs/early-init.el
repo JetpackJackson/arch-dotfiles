@@ -277,12 +277,13 @@
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
 	((eq major-mode 'c++-mode) (recompile)) ;; if c++ major mode
 	((bound-and-true-p sly-mode) (sly-compile-file))
-	;((eq major-mode 'latex-mode) (shell-command (concat "tectonic " (buffer-file-name))))
+	((eq major-mode 'eglot-java-mode) (eglot-java-run-main))
 	(t (message "recompile command not defined for this mode"))))
 
 (defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
+	((eq major-mode 'eglot-java-mode) (eglot-java-run-main))
 	(t (message "upload command not defined for this mode"))))
 
 (defun my-eval-defun () "Eval functions" (interactive)
