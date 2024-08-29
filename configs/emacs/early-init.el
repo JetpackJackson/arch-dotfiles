@@ -200,8 +200,11 @@
 		my-ml-separator
 		my-ml-separator
 		my-ml-separator
-		mode-name
+		;mode-name
+		;my-ml-separator
+		mode-line-modes ;; FIXME eat doesn't show mode when using mode-name
 		my-ml-separator
+		mode-line-misc-info
 		;minor-mode-alist
 		))
 
