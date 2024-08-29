@@ -7,9 +7,16 @@
 (use-package realgud :ensure t)
 
 ;; nice markers for indents
-(use-package indent-bars
-  :load-path "~/.cache/emacs/indent-bars"
-  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
+;(use-package indent-bars
+;  :load-path "~/.cache/emacs/indent-bars"
+;  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
+
+;; https://code.whatever.social/exchange/emacs/questions/71302/reducing-straight-el-bloat
+(setopt package-vc-selected-packages
+	'((indent-bars :url "https://github.com/jdtsmith/indent-bars")))
+(add-hook 'c++-mode-hook 'indent-bars-mode)
+(add-hook 'c-mode-hook 'indent-bars-mode)
+(add-hook 'python-mode-hook 'indent-bars-mode)
 
 ;; assorted modes
 (use-package platformio-mode :ensure t)

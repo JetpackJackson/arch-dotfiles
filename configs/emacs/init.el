@@ -214,6 +214,8 @@
 (add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
+(use-package valign :ensure t)
+(add-hook 'org-mode-hook 'valign-mode)
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
