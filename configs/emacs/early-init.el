@@ -122,7 +122,8 @@
       evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
 
-(setq mode-line-position (list "%7 (%l,%c)"))
+(setq mode-line-position (list "(%l,%c)"))
+;(setq mode-line-position (list "%7 (%l,%c)"))
 (setq mode-line-front-space nil)
 (setq evil-mode-line-format '(before . mode-line-front-space))
 (defvar my-ml-separator "    ")
@@ -198,8 +199,8 @@
 		;mode-line-buffer-identification
 		mode-line-position
 		my-ml-separator
-		my-ml-separator
-		my-ml-separator
+		;my-ml-separator
+		;my-ml-separator
 		;mode-name
 		;my-ml-separator
 		mode-line-modes ;; FIXME eat doesn't show mode when using mode-name
@@ -207,6 +208,39 @@
 		mode-line-misc-info
 		;minor-mode-alist
 		))
+
+;; ;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3927
+;; (define-minor-mode minor-mode-blackout-mode
+;;   "Hides minor modes from the mode line."
+;;   t)
+
+;; (catch 'done
+;;   (mapc (lambda (x)
+;;           (when (and (consp x)
+;;                      (equal (cadr x) '("" minor-mode-alist)))
+;;             (let ((original (copy-sequence x)))
+;;               (setcar x 'minor-mode-blackout-mode)
+;;               (setcdr x (list "" original)))
+;;             (throw 'done t)))
+;;         mode-line-modes))
+;; (global-set-key (kbd "C-c m") 'minor-mode-blackout-mode)
+
+;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3928
+(defvar hidden-minor-modes ; example, write your own list of hidden minor modes
+  '(abbrev-mode            
+    auto-fill-function
+    flycheck-mode
+    flyspell-mode
+    company-mode
+    evil-collection-unimpaired-mode
+    which-key-mode))
+(defun purge-minor-modes ()
+  (interactive)
+  (dolist (x hidden-minor-modes nil)
+    (let ((trg (cdr (assoc x minor-mode-alist))))
+      (when trg
+        (setcar trg "")))))
+(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
 
 ;;; FUNCTIONS
 ;; consult stuff ("manual, relay instructions")
@@ -280,18 +314,19 @@
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
 	((eq major-mode 'c++-mode) (recompile)) ;; if c++ major mode
 	((bound-and-true-p sly-mode) (sly-compile-file))
-	((eq major-mode 'eglot-java-mode) (eglot-java-run-main))
+	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "recompile command not defined for this mode"))))
 
 (defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
-	((eq major-mode 'eglot-java-mode) (eglot-java-run-main))
+	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "upload command not defined for this mode"))))
 
 (defun my-eval-defun () "Eval functions" (interactive)
   (cond ((eq major-mode 'emacs-lisp-mode) (eval-defun)) 
 	((bound-and-true-p sly-mode) (sly-eval-defun))
+	((eq major-mode 'org-mode) (org-babel-execute-src-block))
 	(t (message "eval function not defined for this mode"))))
 
 (defun eos/add-watchwords ()
@@ -304,3 +339,4 @@
 (defun comment-auto-fill ()
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1))
+

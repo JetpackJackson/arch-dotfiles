@@ -25,6 +25,22 @@
 (use-package eglot-java :ensure t
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview")))
 
+;; https://github.com/emacs-languagetool/eglot-ltex
+(use-package eglot-ltex 
+  ;:hook (text-mode . (lambda () (require 'eglot-ltex) (eglot-ensure)))
+  :load-path "~/.cache/emacs/eglot-ltex"
+  :init (setq eglot-ltex-server-path "/usr/bin/ltex-ls")
+        (setq eglot-ltex-communication-channel 'tcp))         ; 'stdio or 'tcp
+
+;(use-package lsp-ltex :ensure t
+;  :hook (text-mode . (lambda () (require 'lsp-ltex) (lsp)))  ; or lsp-deferred
+;  :init (setq lsp-ltex-version "15.2.0"))  ; make sure you have set this, see below
+
+(use-package gdb-mi
+  :load-path "~/.cache/emacs/emacs-gdb/"
+  :init (fmakunbound 'gdb) (fmakunbound 'gdb-enable-debug))
+
+
 ;; lisp goodies
 (use-package sly :ensure t
   :config
