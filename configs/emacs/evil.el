@@ -7,6 +7,7 @@
   "v" 'ibuffer-other-window ;'list-buffers
   "b" 'consult-buffer ;'switch-to-buffer
   "ca" 'eglot-code-actions
+  "cm" 'my-grep-for-tasks
   "cq" 'eglot-code-action-quickfix
   "cn" 'consult-flymake ;'flymake-goto-next-error
   "d" 'kill-buffer

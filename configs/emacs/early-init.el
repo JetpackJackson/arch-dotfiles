@@ -340,3 +340,5 @@
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1))
 
+(defun my-grep-for-tasks () "grep for tasks" (interactive)
+  (consult-ripgrep (consult--project-root) "\\(TODO\\|FIXME\\|WIP\\)"))
