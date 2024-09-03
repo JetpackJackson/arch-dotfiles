@@ -241,7 +241,7 @@
 ;; Follow the links
 ;(setq org-return-follows-link t)
 
-;; FIXME
+;; FIXME overwrites existing val
 (setq org-capture-templates
       '(    
         ("g" "General To-Do"
@@ -256,12 +256,13 @@
          "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
          :empty-lines 0)
         ))
-;; TODO states
+;; todo/task states
 (setq org-todo-keywords
       ;'((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
+      ;; TODO tweak keywords to fit usage (like what is OBE?)
       '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
         ))
-;; TODO colors
+;; todo/task colors
 (setq org-todo-keyword-faces
       '(
         ("TODO" . (:foreground "GoldenRod" :weight bold))

@@ -34,7 +34,7 @@
   (unless (display-graphic-p)
           (require 'evil-terminal-cursor-changer)
           (evil-terminal-cursor-changer-activate))
-;; TODO
+;; TODO remove? learn how to use better?
 (use-package evil-surround :ensure t :demand t
   :config
   (global-evil-surround-mode 1))

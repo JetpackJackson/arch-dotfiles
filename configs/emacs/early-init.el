@@ -102,8 +102,7 @@
  ;; does not work, need to set TERM outside of emacs
  (add-to-list 'term-file-aliases '("foot" . "xterm")))
 
- ;; FIXME
- ;(setq browse-url-firefox-program "librewolf")
+ ;; FIXME kinda fixed? needs testing
  ;(setq browse-url-firefox-new-window-is-tab t)
 
 ;; clean up elpa stuff
@@ -142,7 +141,6 @@
   "Face used for buffer id part of the mode line when the buffer is read-only."
   :group 'mode-line-faces)
 
-;; ;; TODO
 ;; (defun my-modified-buffer-indicator-colorized () "Show buffer status in the mode line."
 ;;        ;(cond ((buffer-modified-p) (propertize mode-line-buffer-identification 'face 'mode-line-modified-buffer-id))
 ;;        (cond ((buffer-modified-p) (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-modified-buffer-id))
@@ -203,7 +201,7 @@
 		;my-ml-separator
 		;mode-name
 		;my-ml-separator
-		mode-line-modes ;; FIXME eat doesn't show mode when using mode-name
+		mode-line-modes ;; eat doesn't show mode when using mode-name
 		my-ml-separator
 		mode-line-misc-info
 		;minor-mode-alist

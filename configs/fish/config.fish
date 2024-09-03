@@ -102,7 +102,7 @@ if status is-interactive
     # shebang and a normal script in my scripts folder which gets
     # added to $PATH.
     set -gx EDITOR "emacstest.sh"
-    # FIXME
+    # FIXME figure out emacs diffprog?
     set -gx DIFFPROG nvim pacdiff
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
