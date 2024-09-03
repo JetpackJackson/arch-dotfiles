@@ -125,10 +125,27 @@ bar:
                     ~carrier: {empty: {}}
                     carrier:
                       map:
-                        default: {string: {text: "suche nach Signal...", foreground: *grey}}
+                        #default: {string: {text: "suche nach Signal...", foreground: *grey}}
                         conditions:
-                          state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
-                          state == up && ipv6 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+                          #state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+                          #state == up && ipv6 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+                          state == down: {string: {text: "suche nach Signal...", foreground: *grey}}
+                          #state == down: {string: {text: , font: *nerd, foreground: *grey}}
+                          state == up:
+                            map:
+                              default:
+                                - string: {text: , font: *nerd}
+                                - string: {text: " {ssid}"} #{dl-speed:mb}/{ul-speed:mb} Mb/s"}
+                                  
+                              conditions:
+                                ipv4 == "":
+                                  - string: {text: , font: *nerd, foreground: *grey}
+                                  - string: {text: " {ssid}", foreground: *grey}
+                                ipv6 == "":
+                                  - string: {text: , font: *nerd, foreground: *white}
+                                  - string: {text: " {ssid}", foreground: *white}
+
+
     - battery:
         name: BAT0
         poll-interval: 30000
