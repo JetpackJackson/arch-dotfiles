@@ -125,7 +125,7 @@ bar:
                     ~carrier: {empty: {}}
                     carrier:
                       map:
-                        #default: {string: {text: "suche nach Signal...", foreground: *grey}}
+                        default: {string: {text: , font: *nerd, foreground: *grey}} #"suche nach Signal...", foreground: *grey}}
                         conditions:
                           #state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
                           #state == up && ipv6 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
