@@ -196,11 +196,12 @@
   (setq org-image-actual-width 600) ;; shrink images
   (setq org-M-RET-may-split-line '(default . nil))
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
+  (setq org-babel-lisp-eval-fn #'sly-eval)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((R . t) (emacs-lisp . t) (java . t) (C . t)))
+ '((R . t) (emacs-lisp . t) (java . t) (C . t) (lisp . t)))
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
