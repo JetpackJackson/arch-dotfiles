@@ -83,6 +83,10 @@ bindswitch tablet:off exec 'killall squeekboard &', \
 #    exec 'killall nwg-panel', \
 #    exec 'yams.sh', \
     
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -99,9 +103,9 @@ bindsym XF86Launch7 exec mpc shuffle
 
 bindsym XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg
 bindsym $mod+XF86Calculator exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
-bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
-bindsym $mod+XF86AudioMute exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
-bindsym $mod+Shift+XF86AudioMute exec systemctl poweroff
+#bindsym $mod+Shift+XF86Calculator exec systemctl poweroff
+#bindsym $mod+XF86AudioMute exec swaylock -f --clock --datestr '%d.%m.%Y' --indicator -ef -i /home/jet/pics/wallpapers/lock.jpg & systemctl suspend
+#bindsym $mod+Shift+XF86AudioMute exec systemctl poweroff
 
 default_border none
 default_floating_border none

@@ -197,6 +197,7 @@
   (setq org-M-RET-may-split-line '(default . nil))
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
   (setq org-babel-lisp-eval-fn #'sly-eval)
+  (setq org-priority-lowest ?E)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (org-babel-do-load-languages
