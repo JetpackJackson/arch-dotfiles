@@ -117,6 +117,14 @@
 ;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
 (keymap-set project-prefix-map "k" #'project-butler-cleanup)
 
+;; path
+(use-package exec-path-from-shell :demand t
+  :init (when (daemonp)
+	  (require 'exec-path-from-shell)
+	  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "GUILE_LOAD_PATH" "GUILE_LOAD_COMPILED_PATH"))
+	    (add-to-list 'exec-path-from-shell-variables var))
+	  (exec-path-from-shell-initialize)))
+
 ;; vertico
 (use-package vertico :ensure t
   :custom
