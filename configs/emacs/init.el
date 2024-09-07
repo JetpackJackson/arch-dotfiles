@@ -118,7 +118,7 @@
 (keymap-set project-prefix-map "k" #'project-butler-cleanup)
 
 ;; path
-(use-package exec-path-from-shell :demand t
+(use-package exec-path-from-shell :ensure t :demand t
   :init (when (daemonp)
 	  (require 'exec-path-from-shell)
 	  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "GUILE_LOAD_PATH" "GUILE_LOAD_COMPILED_PATH"))
