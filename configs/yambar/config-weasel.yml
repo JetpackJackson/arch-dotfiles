@@ -146,6 +146,10 @@ bar:
                                   - string: {text: " {ssid}", foreground: *white}
 
 
+    - backlight:
+        name: intel_backlight
+        content: [ string: {text: , font: *nerd}, string: {text: " {percent}%"}]
+
     - battery:
         name: BAT0
         poll-interval: 30000

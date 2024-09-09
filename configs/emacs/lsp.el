@@ -17,6 +17,12 @@
 (add-hook 'c++-mode-hook 'indent-bars-mode)
 (add-hook 'c-mode-hook 'indent-bars-mode)
 (add-hook 'python-mode-hook 'indent-bars-mode)
+;; https://wiki.gentoo.org/wiki/User:Schievel/emacs-as-an-ebuild-IDE#ebuild-mode
+;; emerge -a app-emacs/ebuild-mode
+;; emerge -a app-emacs/ebuild-run-mode
+;; emerge -a app-emacs/company-ebuild
+;; emerge -a app-emacs/emacs-ebuild-snippets
+;; emerge -a app-emacs/nxml-gentoo-schemas
 
 ;; assorted modes
 (use-package platformio-mode :ensure t)
