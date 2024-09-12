@@ -49,6 +49,14 @@
 (use-package eat :ensure t)
 (use-package uniquify)
 
+;(use-package dashboard :ensure t
+;  :config
+;  (setq dashboard-center-content t)
+;  (setq dashboard-items '((recents . 10) (bookmarks . 5) (agenda . 5)))
+;  (setq dashboard-startup-banner 'ascii)
+;  ;(setq dashboard-startupify-list '(dashboard-insert-banner dashboard-insert-newline dashboard-insert-banner-title dashboard-insert-newline dashboard-insert-init-info dashboard-insert-items dashboard-insert-newline)))
+;  (setq dashboard-startupify-list '(dashboard-insert-newline dashboard-insert-banner-title dashboard-insert-newline dashboard-insert-init-info dashboard-insert-items dashboard-insert-newline)))
+
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
   :custom
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work

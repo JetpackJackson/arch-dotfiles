@@ -93,6 +93,9 @@
 (add-hook 'bash-ts-mode-hook 'comment-auto-fill)
 (add-hook 'arduino-mode-hook 'comment-auto-fill)
 
+(add-hook 'compilation-mode-hook 'visual-line-mode)
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
 
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))

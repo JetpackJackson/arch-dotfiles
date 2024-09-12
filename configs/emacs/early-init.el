@@ -340,3 +340,15 @@
 
 (defun my-grep-for-tasks () "grep for tasks" (interactive)
   (consult-ripgrep (consult--project-root) "\\(TODO\\|FIXME\\|WIP\\)"))
+
+(defun colorize-compilation-buffer ()
+  (require 'ansi-color)
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+
+;; https://code.whatever.social/exchange/emacs/questions/20954/compile-from-parent-directory-in-emacs#20964
+(defun my-compile-project ()
+  (interactive)
+  (let* ((mk-dir (locate-dominating-file (buffer-file-name) "Makefile"))
+         (compile-command (concat "make -k -C " (shell-quote-argument mk-dir)))
+         (compilation-read-command nil))
+    (call-interactively 'compile)))
