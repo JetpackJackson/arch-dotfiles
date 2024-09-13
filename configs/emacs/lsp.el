@@ -94,6 +94,10 @@
 (add-hook 'arduino-mode-hook 'comment-auto-fill)
 
 (add-hook 'compilation-mode-hook 'visual-line-mode)
+;;(add-hook 'compilation-mode-hook 'display-line-numbers-mode 0) ;; FIXME find a cleaner way to disable
+(dolist (mode '(compilation-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 (add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords

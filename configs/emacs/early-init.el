@@ -308,9 +308,17 @@
 (defun turn-on-pio () (platformio-mode 1))
 (define-derived-mode arduino-mode c++-mode "Arduino")
 
+;; https://code.whatever.social/exchange/emacs/questions/20954/compile-from-parent-directory-in-emacs#20964
+(defun my-compile-project ()
+  (interactive)
+  (let* ((mk-dir (locate-dominating-file (buffer-file-name) "Makefile"))
+         (compile-command (concat "make -k -C " (shell-quote-argument mk-dir)))
+         (compilation-read-command nil))
+    (call-interactively 'compile)))
+
 (defun my-mode-recompile () "Recompile a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (recompile)) ;; if c++ major mode
+	((eq major-mode 'c++-mode) (my-compile-project)) ;; if c++ major mode
 	((bound-and-true-p sly-mode) (sly-compile-file))
 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "recompile command not defined for this mode"))))
@@ -345,10 +353,3 @@
   (require 'ansi-color)
   (ansi-color-apply-on-region compilation-filter-start (point)))
 
-;; https://code.whatever.social/exchange/emacs/questions/20954/compile-from-parent-directory-in-emacs#20964
-(defun my-compile-project ()
-  (interactive)
-  (let* ((mk-dir (locate-dominating-file (buffer-file-name) "Makefile"))
-         (compile-command (concat "make -k -C " (shell-quote-argument mk-dir)))
-         (compilation-read-command nil))
-    (call-interactively 'compile)))
