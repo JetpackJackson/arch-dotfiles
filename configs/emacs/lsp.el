@@ -96,7 +96,8 @@
 (add-hook 'compilation-mode-hook 'visual-line-mode)
 ;;(add-hook 'compilation-mode-hook 'display-line-numbers-mode 0) ;; FIXME find a cleaner way to disable
 (dolist (mode '(compilation-mode-hook
-		eat-mode-hook))
+		eat-mode-hook
+		comint-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
