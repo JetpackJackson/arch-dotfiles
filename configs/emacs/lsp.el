@@ -17,6 +17,7 @@
 (add-hook 'c++-mode-hook 'indent-bars-mode)
 (add-hook 'c-mode-hook 'indent-bars-mode)
 (add-hook 'python-mode-hook 'indent-bars-mode)
+
 ;; https://wiki.gentoo.org/wiki/User:Schievel/emacs-as-an-ebuild-IDE#ebuild-mode
 ;; emerge -a app-emacs/ebuild-mode
 ;; emerge -a app-emacs/ebuild-run-mode
@@ -94,13 +95,13 @@
 (add-hook 'arduino-mode-hook 'comment-auto-fill)
 
 (add-hook 'compilation-mode-hook 'visual-line-mode)
-;;(add-hook 'compilation-mode-hook 'display-line-numbers-mode 0) ;; FIXME find a cleaner way to disable
+(add-hook 'comint-mode-hook 'visual-line-mode)
 (dolist (mode '(compilation-mode-hook
 		eat-mode-hook
 		comint-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer) ;; ansi sequences
 
 (add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
 

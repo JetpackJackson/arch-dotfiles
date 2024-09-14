@@ -59,10 +59,6 @@
  (setq display-line-numbers-type 'relative)
  (global-display-line-numbers-mode)
  
- (recentf-mode 1)
- (setq recentf-max-menu-items 10)
- (setq recentf-max-saved-items 10)
- 
  (setq ediff-split-window-function 'split-window-horizontally
        truncate-partial-width-windows t)
  (setq split-width-threshold 100)
@@ -316,15 +312,38 @@
          (compilation-read-command nil))
     (call-interactively 'compile)))
 
+;; TODO figure out better way + comint or no?
+(defun my-project-compile-build () "Run `make' in the project root."
+  (interactive)
+  (declare (interactive-only compile))
+  (let ((default-directory (project-root (project-current t)))
+	;(compile-command (concat "make build"))
+        (compilation-buffer-name-function
+         (or project-compilation-buffer-name-function
+             compilation-buffer-name-function)))
+    (compile "make")))
+
+(defun my-project-compile-tests () "Run tests in the project root."
+  (interactive)
+  (declare (interactive-only compile))
+  (let ((default-directory (project-root (project-current t)))
+	;(compile-command (concat "make build"))
+        (compilation-buffer-name-function
+         (or project-compilation-buffer-name-function
+             compilation-buffer-name-function)))
+    (compile "make test")))
+
+
 (defun my-mode-recompile () "Recompile a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (my-compile-project)) ;; if c++ major mode
+	((eq major-mode 'c++-mode) (my-project-compile-build));(my-compile-project))
 	((bound-and-true-p sly-mode) (sly-compile-file))
 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "recompile command not defined for this mode"))))
 
 (defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
+	((eq major-mode 'c++-mode) (my-project-compile-tests));(my-compile-project))
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "upload command not defined for this mode"))))

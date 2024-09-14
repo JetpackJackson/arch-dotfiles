@@ -52,9 +52,9 @@
 ;(use-package dashboard :ensure t
 ;  :config
 ;  (setq dashboard-center-content t)
-;  (setq dashboard-items '((recents . 10) (bookmarks . 5) (agenda . 5)))
+;  (setq dashboard-items '((recents . 10) (bookmarks . 5) (projects . 5)))
 ;  (setq dashboard-startup-banner 'ascii)
-;  ;(setq dashboard-startupify-list '(dashboard-insert-banner dashboard-insert-newline dashboard-insert-banner-title dashboard-insert-newline dashboard-insert-init-info dashboard-insert-items dashboard-insert-newline)))
+;  (setq dashboard-path-style 'truncate-beginning)
 ;  (setq dashboard-startupify-list '(dashboard-insert-newline dashboard-insert-banner-title dashboard-insert-newline dashboard-insert-init-info dashboard-insert-items dashboard-insert-newline)))
 
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
@@ -132,6 +132,17 @@
 	  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "GUILE_LOAD_PATH" "GUILE_LOAD_COMPILED_PATH"))
 	    (add-to-list 'exec-path-from-shell-variables var))
 	  (exec-path-from-shell-initialize)))
+
+(use-package recentf :demand t
+  :config
+  (setq recentf-max-menu-items 10)
+  (setq recentf-max-saved-items 10)
+  (setq recentf-exclude '("emacs/bookmarks" "agenda.org" "custom.el"))
+  ;(setq recentf-filename-handlers '(shrink-path-file))
+  (setq recentf-filename-handlers '(abbreviate-file-name))
+  ;(setq recentf-menu-action '(shrink-path-file-expand))
+  (setq recentf-filter-changer-current '(recentf-arrange-by-dir))
+  (recentf-mode 1))
 
 ;; vertico
 (use-package vertico :ensure t
@@ -300,8 +311,19 @@
 (global-set-key (kbd "C-c c") #'org-capture)
 (global-set-key (kbd "C-c m") 'minor-mode-blackout-mode)
 
+
+(defun my-dashboard ()
+  (interactive)
+  (delete-other-windows)
+  (get-buffer (scratch-buffer))
+  (other-window 1)
+  (split-window-horizontally)
+  (get-buffer (recentf-open-files))
+  (other-window 1))
+
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
 (setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
+;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (my-dashboard))))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
