@@ -162,26 +162,27 @@
   ;; Tidy shadowed file names
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-(unless (package-installed-p 'jabber)
-  (require 'package-vc)
-  (package-vc-install '(jabber
-                        :url "https://codeberg.org/emacs-jabber/emacs-jabber"
-                        :branch "production"
-                        :lisp-dir "lisp"
-                        :doc "README.org")))
-(setq jabber-vcard-avatars-retrieve t)
-(setq jabber-chat-buffer-format "*jc-%n*")
-(setq jabber-browse-buffer-format "*jb-%n*")
-(setq jabber-groupchat-buffer-format "*j-g-%n*")
-(setq jabber-muc-private-buffer-format "*j-privmuc-%g-%n*")
-(with-eval-after-load 'jabber-faces
- (set-face-attribute 'jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
- (set-face-attribute 'jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
- (set-face-attribute 'jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
- (set-face-attribute 'jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
- (set-face-attribute 'jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
- (set-face-attribute 'jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
-(add-hook 'jabber-chat-mode-hook 'visual-line-mode)
+; FIXME cleanup and (unless) doesnt work right sometimes
+;(unless (package-installed-p 'jabber)
+;  (require 'package-vc)
+;  (package-vc-install '(jabber
+;                        :url "https://codeberg.org/emacs-jabber/emacs-jabber"
+;                        :branch "production"
+;                        :lisp-dir "lisp"
+;                        :doc "README.org")))
+;(setq jabber-vcard-avatars-retrieve t)
+;(setq jabber-chat-buffer-format "*jc-%n*")
+;(setq jabber-browse-buffer-format "*jb-%n*")
+;(setq jabber-groupchat-buffer-format "*j-g-%n*")
+;(setq jabber-muc-private-buffer-format "*j-privmuc-%g-%n*")
+;(with-eval-after-load 'jabber-faces
+; (set-face-attribute 'jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
+; (set-face-attribute 'jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
+; (set-face-attribute 'jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
+; (set-face-attribute 'jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
+; (set-face-attribute 'jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
+; (set-face-attribute 'jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
+;(add-hook 'jabber-chat-mode-hook 'visual-line-mode)
 
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
 ;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
@@ -209,22 +210,20 @@
           interprogram-paste-function 'wl-paste-handler)))
 
 ;; org
-(use-package org :ensure org-roam-ui
-  ;:ensure org-contrib
-  ;:config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
+(use-package org ;:ensure org-roam-ui
   :config
   (setq org-agenda-span 20
 	org-agenda-start-on-weekday nil
-	org-agenda-start-day "-3d")
-  (setq org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/agenda/"))
-  (setq org-enforce-todo-dependencies nil)
-  (setq org-agenda-dim-blocked-tasks t)
+	org-agenda-start-day "-3d"
+	org-agenda-files '("/home/jet/docs/notes/notes-zettelkasten/agenda/")
+	org-enforce-todo-dependencies nil
+	org-agenda-dim-blocked-tasks t
+	org-M-RET-may-split-line '(default . nil)
+	org-babel-lisp-eval-fn #'sly-eval
+	org-priority-lowest ?H)
   (setq org-agenda-todo-ignore-with-date t) ;; clean up todo list
   (setq org-image-actual-width 600) ;; shrink images
-  (setq org-M-RET-may-split-line '(default . nil))
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
-  (setq org-babel-lisp-eval-fn #'sly-eval)
-  (setq org-priority-lowest ?H)
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (org-babel-do-load-languages
@@ -249,48 +248,49 @@
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
-(use-package org-roam
-  :ensure t
-  :custom
-  (org-roam-directory (file-truename "~/docs/notes/notes-zettelkasten/"))
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n c" . org-roam-capture)
-         ;; Dailies
-         ("C-c n j" . org-roam-dailies-capture-today))
-  :config
-  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-  (org-roam-db-autosync-mode)
-  ;; If using org-roam-protocol
-  (require 'org-roam-protocol))
+;(use-package org-roam
+;  :ensure t
+;  :custom
+;  (org-roam-directory (file-truename "~/docs/notes/notes-zettelkasten/"))
+;  :bind (("C-c n l" . org-roam-buffer-toggle)
+;         ("C-c n f" . org-roam-node-find)
+;         ("C-c n g" . org-roam-graph)
+;         ("C-c n i" . org-roam-node-insert)
+;         ("C-c n c" . org-roam-capture)
+;         ;; Dailies
+;         ("C-c n j" . org-roam-dailies-capture-today))
+;  :config
+;  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+;  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+;  (org-roam-db-autosync-mode)
+;  ;; If using org-roam-protocol
+;  (require 'org-roam-protocol))
+;
+;;; Follow the links
+;;(setq org-return-follows-link t)
 
-;; Follow the links
-;(setq org-return-follows-link t)
-
-;; FIXME overwrites existing val
 (setq org-capture-templates
-      '(    
-        ("g" "General To-Do"
+      '(
+	("g" "General To-Do"
          entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
          "* TODO [#B] %?\n:Created: %T\n "
          :empty-lines 0)
-      ))
-(setq org-capture-templates
-      '(    
-        ("c" "Code To-Do"
-         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
-         "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
-         :empty-lines 0)
-        ))
+	("c" "Code To-Do"
+	 entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
+	 "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
+	 :empty-lines 0)))
+
 ;; todo/task states
 (setq org-todo-keywords
-      ;'((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
-      ;; TODO tweak keywords to fit usage (like what is OBE?)
-      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" )
-        ))
+      ;; TODO tweak keywords to fit usage
+      ;; ! means add timestamp, @ adds note w/time
+
+      ;; manual:
+      ;; "With X and Y being either "@" or "!", "X/Y" means
+      ;; use X when entering the state, and use Y when leaving the
+      ;; state if and only if the *target* state does not define X."
+      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "WONT-DO(w@/!)" )))
+
 ;; todo/task colors
 (setq org-todo-keyword-faces
       '(
@@ -300,9 +300,8 @@
         ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
         ("BLOCKED" . (:foreground "Red" :weight bold))
         ("DONE" . (:foreground "LimeGreen" :weight bold))
-        ("OBE" . (:foreground "LimeGreen" :weight bold))
-        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))
-        ))
+        ;("OBE" . (:foreground "LimeGreen" :weight bold))
+        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))))
 
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
@@ -311,19 +310,12 @@
 (global-set-key (kbd "C-c c") #'org-capture)
 (global-set-key (kbd "C-c m") 'minor-mode-blackout-mode)
 
-
-(defun my-dashboard ()
-  (interactive)
-  (delete-other-windows)
-  (get-buffer (scratch-buffer))
-  (other-window 1)
-  (split-window-horizontally)
-  (get-buffer (recentf-open-files))
-  (other-window 1))
+;;;; startup
 
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
-(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
-;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (my-dashboard))))
+;;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
+(jet/dashboard)
+(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (recentf-open-files))))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/

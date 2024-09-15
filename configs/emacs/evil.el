@@ -7,19 +7,19 @@
   "v" 'ibuffer-other-window ;'list-buffers
   "b" 'consult-buffer ;'switch-to-buffer
   "ca" 'eglot-code-actions
-  "cm" 'my-grep-for-tasks
+  "cm" 'jet/grep-for-tasks
   "cq" 'eglot-code-action-quickfix
   "cn" 'consult-flymake ;'flymake-goto-next-error
   "d" 'kill-buffer
   "g" 'consult-bookmark ;'bookmark-jump
-  "r" 'my-mode-recompile ;'recompile
-  "u" 'my-mode-upload-run
-  "l" 'my-org-insert-link
+  "r" 'jet/mode-recompile ;'recompile
+  "u" 'jet/mode-upload-run
+  "l" 'jet/org-insert-link
   "of" 'org-open-at-point
   "oe" 'org-export-dispatch
   "." 'comment-line ;comment-region
   "," 'uncomment-region
-  "e" 'my-eval-defun
+  "e" 'jet/eval-defun
   "t" 'eat-other-window))
 (use-package evil :ensure t :demand t
   :init (setq evil-want-integration t)

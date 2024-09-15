@@ -121,8 +121,8 @@
 ;(setq mode-line-position (list "%7 (%l,%c)"))
 (setq mode-line-front-space nil)
 (setq evil-mode-line-format '(before . mode-line-front-space))
-(defvar my-ml-separator "    ")
-(defun my-modified-buffer-indicator () "Show buffer status in the mode line."
+(defvar jet/ml-separator "    ")
+(defun jet/modified-buffer-indicator () "Show buffer status in the mode line."
        (if (buffer-modified-p) "(modified)"
 	 "----------"))
 
@@ -137,7 +137,7 @@
   "Face used for buffer id part of the mode line when the buffer is read-only."
   :group 'mode-line-faces)
 
-;; (defun my-modified-buffer-indicator-colorized () "Show buffer status in the mode line."
+;; (defun jet/modified-buffer-indicator-colorized () "Show buffer status in the mode line."
 ;;        ;(cond ((buffer-modified-p) (propertize mode-line-buffer-identification 'face 'mode-line-modified-buffer-id))
 ;;        (cond ((buffer-modified-p) (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-modified-buffer-id))
 ;; ;;           "%14b " 'face 'mode-line-modified-buffer-id))
@@ -149,11 +149,11 @@
 
 ;; FIXME errors with special buffers not having a file dir
 (defvar trunc-name)
-(defun my-modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
+(defun jet/modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
        ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face 'mode-line-buffer-id))))
-(defun my-dir-indicator-colorized (trunc-name) "Show directory in the mode line with thin font."
+(defun jet/dir-indicator-colorized (trunc-name) "Show directory in the mode line with thin font."
        ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face '(:foreground "#ffffff"))))) ;:background "#4a4b4f" :inherit normal))))) ;:inherit (mode-line-buffer-id))))))
@@ -182,23 +182,23 @@
 (setq-default mode-line-format
               '("%e"
 		mode-line-front-space ;; evil-mode-line-format displays here
-		my-ml-separator
+		jet/ml-separator
 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		;(:eval (my-modified-buffer-indicator-colorized (pretty-buffername)))
-		(:eval (my-dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
-		(:eval (my-modified-buffer-indicator-colorized (buffer-name)))
+		;(:eval (jet/modified-buffer-indicator-colorized (pretty-buffername)))
+		(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
+		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
 		;(:eval (shrink-path-dirs (file-name-directory buffer-file-truename)))
 		;(:eval (buffer-name))
-		my-ml-separator
+		jet/ml-separator
 		;mode-line-buffer-identification
 		mode-line-position
-		my-ml-separator
-		;my-ml-separator
-		;my-ml-separator
+		jet/ml-separator
+		;jet/ml-separator
+		;jet/ml-separator
 		;mode-name
-		;my-ml-separator
+		;jet/ml-separator
 		mode-line-modes ;; eat doesn't show mode when using mode-name
-		my-ml-separator
+		jet/ml-separator
 		mode-line-misc-info
 		;minor-mode-alist
 		))
@@ -288,7 +288,7 @@
     (when parent-deadline
       (org-deadline nil parent-deadline))))
 
-(defun my-org-insert-link () "bind org insert" (interactive)
+(defun jet/org-insert-link () "bind org insert" (interactive)
    (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
 
 ;; Returns the parent directory containing a .project.el file, if any,
@@ -313,7 +313,7 @@
     (call-interactively 'compile)))
 
 ;; TODO figure out better way + comint or no?
-(defun my-project-compile-build () "Run `make' in the project root."
+(defun jet/project-compile-build () "Run `make' in the project root."
   (interactive)
   (declare (interactive-only compile))
   (let ((default-directory (project-root (project-current t)))
@@ -323,7 +323,7 @@
              compilation-buffer-name-function)))
     (compile "make")))
 
-(defun my-project-compile-tests () "Run tests in the project root."
+(defun jet/project-compile-tests () "Run tests in the project root."
   (interactive)
   (declare (interactive-only compile))
   (let ((default-directory (project-root (project-current t)))
@@ -334,28 +334,28 @@
     (compile "make test")))
 
 
-(defun my-mode-recompile () "Recompile a project based on its type" (interactive)
+(defun jet/mode-recompile () "Recompile a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (my-project-compile-build));(my-compile-project))
+	((eq major-mode 'c++-mode) (jet/project-compile-build));(my-compile-project))
 	((bound-and-true-p sly-mode) (sly-compile-file))
 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "recompile command not defined for this mode"))))
 
-(defun my-mode-upload-run () "Upload/run a project based on its type" (interactive)
+(defun jet/mode-upload-run () "Upload/run a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (my-project-compile-tests));(my-compile-project))
+	((eq major-mode 'c++-mode) (jet/project-compile-tests));(my-compile-project))
 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
 	(t (message "upload command not defined for this mode"))))
 
-(defun my-eval-defun () "Eval functions" (interactive)
+(defun jet/eval-defun () "Eval functions" (interactive)
   (cond ((eq major-mode 'emacs-lisp-mode) (eval-defun)) 
 	((bound-and-true-p sly-mode) (sly-eval-defun))
 	((eq major-mode 'org-mode) (org-babel-execute-src-block))
 	(t (message "eval function not defined for this mode"))))
 
 (defun eos/add-watchwords ()
-  "Highlight FIXME and TODO in code"
+  "Highlight `FIXME' and `TODO' in code"
   (font-lock-add-keywords
    nil '(("\\<\\(TODO\\(?:(.*)\\)?:?\\)\\>"  1 'warning prepend)
          ("\\<\\(FIXME\\(?:(.*)\\)?:?\\)\\>" 1 'error prepend)
@@ -365,10 +365,17 @@
   (setq-local comment-auto-fill-only-comments t)
   (auto-fill-mode 1))
 
-(defun my-grep-for-tasks () "grep for tasks" (interactive)
+(defun jet/grep-for-tasks () "grep for tasks" (interactive)
   (consult-ripgrep (consult--project-root) "\\(TODO\\|FIXME\\|WIP\\)"))
 
 (defun colorize-compilation-buffer ()
   (require 'ansi-color)
   (ansi-color-apply-on-region compilation-filter-start (point)))
 
+(defun jet/dashboard ()
+  (interactive)
+  (delete-other-windows)
+  (get-buffer (scratch-buffer))
+  (other-window 1)
+  (split-window-horizontally)
+  (get-buffer (recentf-open-files)))
