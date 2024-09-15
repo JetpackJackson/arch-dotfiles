@@ -43,7 +43,7 @@ workspace 8 output $disp2
 workspace 9 output $disp2
 workspace 10 output $disp2
 
-# FIXME
+# FIXME remove LVDS-1 and HDMI
 mode "mon" {
     bindsym Left exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --off"
     bindsym Right exec "wlr-randr --output HDMI-A-1 --pos 0,0 --on & wlr-randr --output LVDS-1 --pos 1920,0 --on"

@@ -4,7 +4,7 @@ return {
     dependencies = { 'junegunn/fzf' }
   },
 
--- TODO: figure out how to insert markdown lists on keypress, since that's all I really use this for anymore :(
+-- figure out how to insert markdown lists on keypress, since that's all I really use this for anymore :(
   {
     'jakewvincent/mkdnflow.nvim',
     dependencies = { "nvim-lua/plenary.nvim" },
