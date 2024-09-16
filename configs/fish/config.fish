@@ -103,7 +103,7 @@ if status is-interactive
     # added to $PATH.
     set -gx EDITOR "emacstest.sh"
     # FIXME figure out emacs diffprog?
-    set -gx DIFFPROG nvim pacdiff
+    set -gx DIFFPROG nvim -d
     set -gx HISTFILE $XDG_STATE_HOME/bash/history
     set -gx XCOMPOSEFILE $XDG_CONFIG_HOME/X11/xcompose
     set -gx XINITRC $XDG_CONFIG_HOME/X11/xinitrc

@@ -210,8 +210,8 @@
           interprogram-paste-function 'wl-paste-handler)))
 
 ;; org
-(use-package org ;:ensure org-roam-ui
-  :config
+(use-package org :ensure org-contrib :demand t
+  :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
   (setq org-agenda-span 20
 	org-agenda-start-on-weekday nil
 	org-agenda-start-day "-3d"
@@ -248,7 +248,7 @@
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
-;(use-package org-roam
+;(use-package org-roam :ensure org-roam-ui
 ;  :ensure t
 ;  :custom
 ;  (org-roam-directory (file-truename "~/docs/notes/notes-zettelkasten/"))
