@@ -74,6 +74,14 @@
  (menu-bar-mode -1)
  (tool-bar-mode -1)
  (scroll-bar-mode -1)
+
+ ;; EMACS 30
+ (global-font-lock-mode)
+ (font-lock-ensure)
+ (font-lock-update)
+ (if (bound-and-true-p 'display-line-numbers-mode)
+     (message "foo")
+   (display-line-numbers--turn-on))
  
  ;; No sound
  (setq visible-bell t)

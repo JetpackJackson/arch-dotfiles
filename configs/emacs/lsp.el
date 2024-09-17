@@ -7,23 +7,8 @@
 (use-package realgud :ensure t)
 
 ;; nice markers for indents
-;(use-package indent-bars
-;  :load-path "~/.cache/emacs/indent-bars"
-;  :hook ((python-mode c++-mode c-mode) . indent-bars-mode))
-
-;; https://code.whatever.social/exchange/emacs/questions/71302/reducing-straight-el-bloat
-(setopt package-vc-selected-packages
-	'((indent-bars :url "https://github.com/jdtsmith/indent-bars")))
-(add-hook 'c++-mode-hook 'indent-bars-mode)
-(add-hook 'c-mode-hook 'indent-bars-mode)
-(add-hook 'python-mode-hook 'indent-bars-mode)
-
-;; https://wiki.gentoo.org/wiki/User:Schievel/emacs-as-an-ebuild-IDE#ebuild-mode
-;; emerge -a app-emacs/ebuild-mode
-;; emerge -a app-emacs/ebuild-run-mode
-;; emerge -a app-emacs/company-ebuild
-;; emerge -a app-emacs/emacs-ebuild-snippets
-;; emerge -a app-emacs/nxml-gentoo-schemas
+;(use-package indent-bars :ensure t :demand t
+;  :hook ((c++-mode c-mode python-mode) . indent-bars-mode)) 
 
 ;; assorted modes
 (use-package platformio-mode :ensure t)
@@ -43,9 +28,9 @@
 ;  :hook (text-mode . (lambda () (require 'lsp-ltex) (lsp)))  ; or lsp-deferred
 ;  :init (setq lsp-ltex-version "15.2.0"))  ; make sure you have set this, see below
 
-(use-package gdb-mi
-  :load-path "~/.cache/emacs/emacs-gdb/"
-  :init (fmakunbound 'gdb) (fmakunbound 'gdb-enable-debug))
+;(use-package gdb-mi
+;  :load-path "~/.cache/emacs/emacs-gdb/"
+;  :init (fmakunbound 'gdb) (fmakunbound 'gdb-enable-debug))
 
 
 ;; lisp goodies
@@ -109,54 +94,51 @@
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (setq eglot-autoshutdown t)
 
-;; corfu
-;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
-;;(use-package corfu :ensure t :init (global-corfu-mode)
-;;  :custom (corfu-auto t) (corfu-preselect 'prompt)
-;;  :bind (("<TAB>" . completion-at-point)))
-;;;; Enable auto completion and configure quitting
-;;(setq corfu-auto t
-;;      corfu-quit-no-match 'separator) ;; or t
-;;
-;;;; corfu in the eshell
-;;(add-hook 'eshell-mode-hook
-;;          (lambda ()
-;;            (setq-local corfu-auto nil)
-;;            (corfu-mode)))
-;;;; make corfu not mess with other stuff
-;;(setq global-corfu-minibuffer
-;;      (lambda ()
-;;        (not (or (bound-and-true-p mct--active)
-;;                 (bound-and-true-p vertico--input)
-;;                 (eq (current-local-map) read-passwd-map)))))
 
-(use-package company-c-headers)
-(use-package company :ensure t :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
-(with-eval-after-load 'company
-  (define-key company-active-map
-              (kbd "TAB")
-              #'company-complete-common-or-cycle)
-  (define-key company-active-map
-              (kbd "<backtab>")
-              (lambda ()
-                (interactive)
-                (company-complete-common-or-cycle -1))))
+(defun jet/use-corfu ()
+  ;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
+  (use-package corfu :ensure t :init (global-corfu-mode)
+    :custom (corfu-auto t) (corfu-preselect 'prompt)
+    :bind (("<TAB>" . completion-at-point)))
+  ;; Enable auto completion and configure quitting
+  (setq corfu-auto t
+	corfu-quit-no-match 'separator) ;; or t
+  
+  ;; corfu in the eshell
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (setq-local corfu-auto nil)
+              (corfu-mode)))
+  ;; make corfu not mess with other stuff
+  (setq global-corfu-minibuffer
+	(lambda ()
+          (not (or (bound-and-true-p mct--active)
+                   (bound-and-true-p vertico--input)
+                   (eq (current-local-map) read-passwd-map))))))
+(defun jet/use-company ()
+  (use-package company-c-headers)
+  (use-package company :ensure t :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
+  (with-eval-after-load 'company
+    (define-key company-active-map
+		(kbd "TAB")
+		#'company-complete-common-or-cycle)
+    (define-key company-active-map
+		(kbd "<backtab>")
+		(lambda ()
+                  (interactive)
+                  (company-complete-common-or-cycle -1)))))
+
+
+;; corfu
+(if (version= emacs-version "30.0.60")
+    (jet/use-corfu)
+  (jet/use-company))
+
 
 ;; snippets
-(use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all))
-(add-hook 'c++-mode-hook 'yas-minor-mode)
-(add-hook 'c-mode-hook 'yas-minor-mode)
-(add-hook 'python-mode-hook 'yas-minor-mode)
+(use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all)
+  :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode) . yas-minor-mode))
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets elsewhere
-(add-hook 'latex-mode-hook 'yas-minor-mode)
-(add-hook 'lua-mode-hook 'yas-minor-mode)
-(add-hook 'lisp-mode-hook 'yas-minor-mode)
-(add-hook 'sh-mode-hook 'yas-minor-mode)
-(add-hook 'conf-unix-mode-hook 'yas-minor-mode)
-(add-hook 'conf-desktop-mode-hook 'yas-minor-mode)
-(add-hook 'fish-mode-hook 'yas-minor-mode)
-(add-hook 'yaml-mode-hook 'yas-minor-mode)
-(add-hook 'm4-mode-hook 'yas-minor-mode)
 
 ;; code indents
 (setq c-default-style "k&r"

@@ -137,7 +137,7 @@
   :config
   (setq recentf-max-menu-items 10)
   (setq recentf-max-saved-items 10)
-  (setq recentf-exclude '("emacs/bookmarks" "agenda.org" "custom.el"))
+  (setq recentf-exclude '("emacs/bookmarks" "agenda.org" "custom.el" "Makefile" ".gitignore"))
   ;(setq recentf-filename-handlers '(shrink-path-file))
   (setq recentf-filename-handlers '(abbreviate-file-name))
   ;(setq recentf-menu-action '(shrink-path-file-expand))
@@ -248,7 +248,7 @@
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
 (use-package valign :ensure t)
-(add-hook 'org-mode-hook 'valign-mode)
+;(add-hook 'org-mode-hook 'valign-mode)
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
