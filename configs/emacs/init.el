@@ -212,6 +212,10 @@
 ;; org
 (use-package org :ensure org-contrib :demand t
   :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
+  (setq org-latex-listings 'minted
+	org-latex-packages-alist '(("" "minted"))
+	org-latex-pdf-process
+	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
   (setq org-agenda-span 20
 	org-agenda-start-on-weekday nil
 	org-agenda-start-day "-3d"
