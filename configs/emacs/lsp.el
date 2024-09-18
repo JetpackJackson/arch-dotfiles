@@ -15,7 +15,8 @@
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
 (use-package eglot-java :ensure t
-  :config (setq eglot-java-run-main-jvm-args '("--enable-preview")))
+  :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
+  :hook (((java-mode) . 'eglot-java-mode)))
 
 ;; https://github.com/emacs-languagetool/eglot-ltex
 (use-package eglot-ltex 
@@ -40,7 +41,8 @@
            ("C-c e o" . eglot-code-actions-organize-imports)
            ("C-c e r" . eglot-rename)
 	   ("C-c e e" . consult-flymake) ;; FIXME, dupe keybind
-           ("C-c e f" . eglot-format)))
+           ("C-c e f" . eglot-format))
+    :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode-hook) . 'eglot-ensure)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))
@@ -50,36 +52,17 @@
 	       '(sh-mode . ("bash-language-server" "start")))
   (add-to-list 'eglot-server-programs
 	       '(bash-ts-mode . ("bash-language-server" "start"))))
-(add-hook 'scheme-mode-hook 'eglot-ensure) ;; guile-lsp-server
-(add-hook 'c++-mode-hook 'eglot-ensure) ;; clangd
-(add-hook 'c-mode-hook 'eglot-ensure) ;; clangd
-(add-hook 'python-mode-hook 'eglot-ensure) ;; pylsp
-(add-hook 'latex-mode-hook 'eglot-ensure) ;; texlab
-(add-hook 'sh-mode-hook 'eglot-ensure) ;; bash-language-server
-(add-hook 'bash-ts-mode-hook 'eglot-ensure) ;; bash-language-server
-(add-hook 'java-mode-hook 'eglot-java-mode)
-(add-hook 'arduino-mode-hook 'eglot-ensure)
+
 (add-hook 'arduino-mode-hook 'turn-on-pio)
-
-(add-hook 'scheme-mode-hook 'comment-auto-fill)
-(add-hook 'c++-mode-hook 'comment-auto-fill)
-(add-hook 'c-mode-hook 'comment-auto-fill)
-(add-hook 'python-mode-hook 'comment-auto-fill)
-(add-hook 'latex-mode-hook 'comment-auto-fill)
-(add-hook 'sh-mode-hook 'comment-auto-fill)
-(add-hook 'bash-ts-mode-hook 'comment-auto-fill)
-(add-hook 'arduino-mode-hook 'comment-auto-fill)
-
-(add-hook 'compilation-mode-hook 'visual-line-mode)
-(add-hook 'comint-mode-hook 'visual-line-mode)
+(add-hook 'prog-mode-hook #'comment-auto-fill)
+(add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer) ;; ansi sequences
 (dolist (mode '(compilation-mode-hook
 		eat-mode-hook
 		comint-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer) ;; ansi sequences
-
-(add-hook 'prog-mode-hook #'eos/add-watchwords) ;; highlight custom keywords
+  (add-hook mode (lambda ()
+		   (display-line-numbers-mode 0)
+		   (visual-line-mode))))
 
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))

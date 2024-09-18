@@ -136,7 +136,6 @@
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
 
 (setq mode-line-position (list "(%l,%c)"))
-;(setq mode-line-position (list "%7 (%l,%c)"))
 (setq mode-line-front-space nil)
 (setq evil-mode-line-format '(before . mode-line-front-space))
 (defvar jet/ml-separator "    ")
@@ -145,7 +144,6 @@
 	 "----------"))
 
 (defface mode-line-modified-buffer-id
-  ;'((t (:slant italic :foreground "#ffe066" :inherit (mode-line-buffer-id))))
   '((t (:foreground "#ffe066" :inherit (mode-line-buffer-id))))
   "Face used for buffer id part of the mode line when the buffer is modified."
   :group 'mode-line-faces)
@@ -182,19 +180,11 @@
 		mode-line-front-space ;; evil-mode-line-format displays here
 		jet/ml-separator
 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		;(:eval (jet/modified-buffer-indicator-colorized (pretty-buffername)))
 		(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
 		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
-		;(:eval (shrink-path-dirs (file-name-directory buffer-file-truename)))
-		;(:eval (buffer-name))
 		jet/ml-separator
-		;mode-line-buffer-identification
 		mode-line-position
 		jet/ml-separator
-		;jet/ml-separator
-		;jet/ml-separator
-		;mode-name
-		;jet/ml-separator
 		mode-line-modes ;; eat doesn't show mode when using mode-name
 		jet/ml-separator
 		mode--line-format-right-align
@@ -236,31 +226,6 @@
   (interactive)
   (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
                 "corfu" "cape" "tempel"))
-
-;; credit: yorickvP on Github
-;(setq wl-copy-process nil)
-;(defun wl-copy (text)
-;  (setq wl-copy-process (make-process :name "wl-copy"
-;                                      :buffer nil
-;                                      :command '("wl-copy" "-f" "-n")
-;                                      :connection-type 'pipe))
-;                                      ;:noquery t))
-;  (process-send-string wl-copy-process text)
-;  (process-send-eof wl-copy-process))
-;(defun wl-paste ()
-;  (if (and wl-copy-process (process-live-p wl-copy-process))
-;      nil ; should return nil if we're the current paste owner
-;      (shell-command-to-string "wl-paste -n"))); | tr -d \r")))
-;(setq interprogram-cut-function 'wl-copy)
-;(setq interprogram-paste-function 'wl-paste)
-
-;(defun wl-copy (text)
-;  (let ((p (make-process :name "wl-copy"
-;                         :command '("wl-copy")
-;                         :connection-type 'pipe)))
-;    (process-send-string p text)
-;    (process-send-eof p)))
-;(setq interprogram-cut-function 'wl-copy)
 
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
 (defun org-insert-sub-task ()
