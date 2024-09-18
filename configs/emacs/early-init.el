@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t -*-
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
+(setq package-enable-at-startup nil)
+
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
 ;(setq default-frame-alist '((font . "Ärzte Sans-12")))
@@ -28,7 +30,7 @@
 
 ")
 
-(use-package emacs :ensure t :demand t :init
+;(use-package emacs :ensure t :demand t :init
 ;; Performance tweaks for modern machines
 ;(setq gc-cons-threshold 100000000) ; 100 mb
 ;(setq read-process-output-max (* 1024 1024)) ; 1mb
@@ -76,12 +78,19 @@
  (scroll-bar-mode -1)
 
  ;; EMACS 30
- (global-font-lock-mode)
- (font-lock-ensure)
- (font-lock-update)
- (if (bound-and-true-p 'display-line-numbers-mode)
-     (message "foo")
-   (display-line-numbers--turn-on))
+ ;(global-font-lock-mode)
+ ;(font-lock-ensure)
+(setq-default indent-tabs-mode nil)
+(setq tab-always-indent 'complete)
+
+(if (version<= "30.0.60" emacs-version)
+    (font-lock-update)
+  (message "foo"))
+
+ ;(display-line-numbers--turn-on)
+ ;(if (bound-and-true-p 'display-line-numbers-mode)
+ ;    (message "foo")
+ ;  (display-line-numbers--turn-on))
  
  ;; No sound
  (setq visible-bell t)
@@ -104,10 +113,8 @@
  ;; still shows wrong color in some spots
  ;(set-face-background 'default "undefined")
  ;; does not work, need to set TERM outside of emacs
- (add-to-list 'term-file-aliases '("foot" . "xterm")))
-
- ;; FIXME kinda fixed? needs testing
- ;(setq browse-url-firefox-new-window-is-tab t)
+(add-to-list 'term-file-aliases '("foot" . "xterm"))
+;)
 
 ;; clean up elpa stuff
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
@@ -145,16 +152,6 @@
   "Face used for buffer id part of the mode line when the buffer is read-only."
   :group 'mode-line-faces)
 
-;; (defun jet/modified-buffer-indicator-colorized () "Show buffer status in the mode line."
-;;        ;(cond ((buffer-modified-p) (propertize mode-line-buffer-identification 'face 'mode-line-modified-buffer-id))
-;;        (cond ((buffer-modified-p) (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-modified-buffer-id))
-;; ;;           "%14b " 'face 'mode-line-modified-buffer-id))
-;; 	     ;((buffer-modified-p nil) (propertize "%14b " 'face 'mode-line-buffer-id))
-;; ;;	     (t (propertize "%14b " 'face 'mode-line-buffer-id))))
-;; 	     (t (propertize (abbreviate-file-name (buffer-file-name)) 'face 'mode-line-buffer-id))))
-;; 	     ;(t (propertize "" 'face 'mode-line-buffer-id))))
-
-
 ;; FIXME errors with special buffers not having a file dir
 (defvar trunc-name)
 (defun jet/modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
@@ -165,16 +162,6 @@
        ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face '(:foreground "#ffffff"))))) ;:background "#4a4b4f" :inherit normal))))) ;:inherit (mode-line-buffer-id))))))
-
-;; ;(with-eval-after-load 'subr-x
-;;   (setq mode-line-buffer-identification
-;;                 '(:eval (format-mode-line
-;; 			 (propertized-buffer-identification
-;; 			  (or (when-let* ((buffer-file-truename buffer-file-truename)
-;;                                           (prj (cdr-safe (project-current)))
-;;                                           (prj-parent (file-name-directory (directory-file-name (expand-file-name prj)))))
-;;                                 (concat (file-relative-name (file-name-directory buffer-file-truename) prj-parent) (file-name-nondirectory buffer-file-truename)))
-;;                               "%b")))));)
 
 (defun pretty-buffername ()
   (if buffer-file-truename
@@ -207,25 +194,10 @@
 		;jet/ml-separator
 		mode-line-modes ;; eat doesn't show mode when using mode-name
 		jet/ml-separator
-		mode-line-misc-info
-		;minor-mode-alist
-		))
-
-;; ;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3927
-;; (define-minor-mode minor-mode-blackout-mode
-;;   "Hides minor modes from the mode line."
-;;   t)
-
-;; (catch 'done
-;;   (mapc (lambda (x)
-;;           (when (and (consp x)
-;;                      (equal (cadr x) '("" minor-mode-alist)))
-;;             (let ((original (copy-sequence x)))
-;;               (setcar x 'minor-mode-blackout-mode)
-;;               (setcdr x (list "" original)))
-;;             (throw 'done t)))
-;;         mode-line-modes))
-;; (global-set-key (kbd "C-c m") 'minor-mode-blackout-mode)
+		mode--line-format-right-align
+                project-mode-line
+		project-mode-line-format
+		mode-line-misc-info))
 
 ;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3928
 (defvar hidden-minor-modes ; example, write your own list of hidden minor modes

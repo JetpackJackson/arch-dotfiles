@@ -26,7 +26,7 @@
   :config
   (evil-mode 1)
   (evil-set-initial-state 'dired-mode 'emacs)
-  (evil-set-initial-state 'ibuffer-mode 'emacs)
+  ;(evil-set-initial-state 'ibuffer-mode 'emacs) ;; FIXME
   (setq evil-echo-state nil)
   :custom (evil-undo-system 'undo-redo))
 (use-package evil-collection :after evil :ensure t :demand t :config (evil-collection-init))
@@ -36,5 +36,4 @@
           (evil-terminal-cursor-changer-activate))
 ;; TODO remove? learn how to use better?
 (use-package evil-surround :ensure t :demand t
-  :config
-  (global-evil-surround-mode 1))
+  :config (global-evil-surround-mode 1))

@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 (use-package guix :ensure t)
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
-(use-package flycheck :ensure t)
+;(use-package flycheck :ensure t)
 
 ;; TODO learn how to use
 (use-package realgud :ensure t)
@@ -23,15 +23,6 @@
   :load-path "~/.cache/emacs/eglot-ltex"
   :init (setq eglot-ltex-server-path "/usr/bin/ltex-ls")
         (setq eglot-ltex-communication-channel 'tcp))         ; 'stdio or 'tcp
-
-;(use-package lsp-ltex :ensure t
-;  :hook (text-mode . (lambda () (require 'lsp-ltex) (lsp)))  ; or lsp-deferred
-;  :init (setq lsp-ltex-version "15.2.0"))  ; make sure you have set this, see below
-
-;(use-package gdb-mi
-;  :load-path "~/.cache/emacs/emacs-gdb/"
-;  :init (fmakunbound 'gdb) (fmakunbound 'gdb-enable-debug))
-
 
 ;; lisp goodies
 (use-package sly :ensure t
@@ -115,6 +106,7 @@
           (not (or (bound-and-true-p mct--active)
                    (bound-and-true-p vertico--input)
                    (eq (current-local-map) read-passwd-map))))))
+
 (defun jet/use-company ()
   (use-package company-c-headers)
   (use-package company :ensure t :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
