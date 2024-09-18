@@ -1,6 +1,24 @@
 ;; -*- lexical-binding: t -*-
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
-(setq package-enable-at-startup nil)
+
+;; EMACS 30
+ ;(global-font-lock-mode)
+ ;(font-lock-ensure)
+(setq indent-tabs-mode nil)
+;(setq tab-always-indent 'complete)
+(setq tab-always-indent t)
+
+(if (version<= "30.0.60" emacs-version)
+    (font-lock-update)
+  (message "foo"))
+
+ ;(display-line-numbers--turn-on)
+ ;(if (bound-and-true-p 'display-line-numbers-mode)
+ ;    (message "foo")
+ ;  (display-line-numbers--turn-on))
+
+;; uncomment for elpaca
+;(setq package-enable-at-startup nil)
 
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
@@ -77,21 +95,6 @@
  (tool-bar-mode -1)
  (scroll-bar-mode -1)
 
- ;; EMACS 30
- ;(global-font-lock-mode)
- ;(font-lock-ensure)
-(setq-default indent-tabs-mode nil)
-(setq tab-always-indent 'complete)
-
-(if (version<= "30.0.60" emacs-version)
-    (font-lock-update)
-  (message "foo"))
-
- ;(display-line-numbers--turn-on)
- ;(if (bound-and-true-p 'display-line-numbers-mode)
- ;    (message "foo")
- ;  (display-line-numbers--turn-on))
- 
  ;; No sound
  (setq visible-bell t)
  (setq ring-bell-function 'ignore)
