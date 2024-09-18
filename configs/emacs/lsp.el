@@ -7,8 +7,8 @@
 (use-package realgud :ensure t)
 
 ;; nice markers for indents
-;(use-package indent-bars :ensure t :demand t
-;  :hook ((c++-mode c-mode python-mode) . indent-bars-mode)) 
+(use-package indent-bars :ensure t :demand t
+  :hook ((c++-mode c-mode python-mode) . indent-bars-mode))
 
 ;; assorted modes
 (use-package platformio-mode :ensure t)
