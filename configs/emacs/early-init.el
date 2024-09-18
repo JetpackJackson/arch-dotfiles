@@ -286,7 +286,7 @@
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
 	((eq major-mode 'c++-mode) (jet/project-compile-build));(my-compile-project))
 	((bound-and-true-p sly-mode) (sly-compile-file))
-	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
+	((bound-and-true-p eglot-java-mode) (project-compile)) ;(eglot-java-run-main)) ; FIXME
 	(t (message "recompile command not defined for this mode"))))
 
 (defun jet/mode-upload-run () "Upload/run a project based on its type" (interactive)
