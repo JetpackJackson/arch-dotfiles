@@ -349,7 +349,7 @@
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
 ;;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
-(jet/dashboard)
+(unless (cadr command-line-args) (jet/dashboard))
 (setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (recentf-open-files))))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
