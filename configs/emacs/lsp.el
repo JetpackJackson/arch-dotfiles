@@ -1,10 +1,6 @@
 ;; -*- lexical-binding: t -*-
 (use-package guix :ensure t)
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
-;(use-package flycheck :ensure t)
-
-;; TODO learn how to use
-(use-package realgud :ensure t)
 
 ;; nice markers for indents
 (use-package indent-bars :ensure t :demand t
@@ -28,7 +24,8 @@
 ;; lisp goodies
 (use-package sly :ensure t
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (setq sly-lisp-host "127.0.0.1")
+  (setq inferior-lisp-program "sbcl")
   :bind (:map
 	 sly-mode-map
 	 ("C-c e f" . sly-eval-defun)))

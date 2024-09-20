@@ -159,10 +159,21 @@
        ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face 'mode-line-buffer-id))))
-(defun jet/dir-indicator-colorized (trunc-name) "Show directory in the mode line with thin font."
-       ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
-       (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
-	     (t (propertize trunc-name 'face '(:foreground "#ffffff"))))) ;:background "#4a4b4f" :inherit normal))))) ;:inherit (mode-line-buffer-id))))))
+
+;(defun jet/dir-indicator-colorized () "Show directory in the mode line with thin font."
+;       (cond ((string-equal-ignore-case (buffer-name) "*scratch*") (let ((trunc-name ""))))
+;	     (t (let ((trunc-name (shrink-path-dirs (file-name-directory buffer-file-truename)))))))
+;       (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
+;	     (t (propertize trunc-name 'face '(:foreground "#ffffff"))))) ;:background "#4a4b4f" :inherit normal))))) ;:inherit (mode-line-buffer-id))))))
+
+(defun jet/dir-indicator-colorized () "Show directory in the mode line with thin font."
+  (let ((trunc-name ""))
+    (if (string-equal-ignore-case (buffer-name) "*scratch*")
+        (setq trunc-name "")
+      (when buffer-file-name
+        (setq trunc-name (shrink-path-dirs (file-name-directory buffer-file-truename)))))
+    (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
+          (t (propertize trunc-name 'face '(:foreground "#ffffff"))))))
 
 (defun pretty-buffername ()
   (if buffer-file-truename
@@ -174,13 +185,18 @@
                 (car (last shrunk))))
     (buffer-name)))
 
+(defun jet/buffer ()
+  (cond ((string-equal-ignore-case (buffer-name) "*scratch*") "")
+	(t (shrink-path-dirs (file-name-directory buffer-file-truename)))))
+
 ;(setq mode-line-format nil)
 (setq-default mode-line-format
               '("%e"
 		mode-line-front-space ;; evil-mode-line-format displays here
 		jet/ml-separator
 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
+		;(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
+		(:eval (jet/dir-indicator-colorized))
 		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
 		jet/ml-separator
 		mode-line-position
