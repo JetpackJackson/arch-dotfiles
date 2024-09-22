@@ -1,5 +1,5 @@
 if status is-login
-    fish_add_path /home/jet/.config/guix/current/bin/ /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /home/jet/.local/state/nix/profile/bin/ /nix/var/nix/profiles/default/bin/ /usr/lib/jvm/java-22-openjdk/bin/
+    fish_add_path /home/jet/.config/guix/current/bin/ /home/jet/.guix-profile/bin/ /home/jet/docs/scripts/ /home/jet/.local/bin/ /home/jet/.local/share/cargo/bin/ /usr/lib/jvm/java-22-openjdk/bin/
 
     set -gx GUIX_PROFILE /home/jet/.guix-profile
     set -gx GUILE_LOAD_PATH /home/jet/.guix-profile/share/guile/site/3.0/
@@ -64,9 +64,6 @@ if status is-interactive
     #librewolf on wayland (0 is off)
     set -gx MOZ_ENABLE_WAYLAND 1
 
-    #neofetch shows fish shell
-    set -gx SHELL /usr/bin/fish
-
     #fzf preview
     set -gx FZF_PREVIEW_LINES 48
     set -gx FZF_PREVIEW_COLUMNS 88
@@ -92,7 +89,7 @@ if status is-interactive
     set -gx GRADLE_USER_HOME $XDG_DATA_HOME/gradle
     set -gx WINEPREFIX $XDG_DATA_HOME/wine
     set -gx QT_QPA_PLATFORM "wayland;xcb"
-    set -gx TERMINAL_COMMAND kitty
+    set -gx TERMINAL_COMMAND foot
     # problem: does not show up in fastfetch
     #set -gx EDITOR "TERM=foot-direct emacsclient -nw"
 
@@ -123,11 +120,11 @@ if status is-interactive
     abbr -a scu --set-cursor 'systemctl --user %' 
     abbr -a sc --set-cursor 'systemctl %' 
 
-    abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
-    abbr -a ncg --set-cursor 'nix-collect-garbage%'
-    abbr -a nps --set-cursor 'nix search nixpkgs %'
-    abbr -a npl --set-cursor 'nix profile list%'
-    abbr -a n --set-cursor 'nvim %'
+    #abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
+    #abbr -a ncg --set-cursor 'nix-collect-garbage%'
+    #abbr -a nps --set-cursor 'nix search nixpkgs %'
+    #abbr -a npl --set-cursor 'nix profile list%'
+    #abbr -a n --set-cursor 'nvim %'
     # workaround for emacs showing blue background on emacsclient startup with foot (emacs -nw w/TERM=foot is fine tho)
     # temp workaround, since it requires foot to be installed
     #abbr -a e --set-cursor 'TERM=foot-direct emacsclient -nw %'
