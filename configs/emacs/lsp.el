@@ -40,7 +40,7 @@
            ("C-c e r" . eglot-rename)
 	   ("C-c e e" . consult-flymake) ;; FIXME, dupe keybind
            ("C-c e f" . eglot-format))
-    :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode-hook) . 'eglot-ensure)))
+    :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode scheme-mode) . 'eglot-ensure)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))
