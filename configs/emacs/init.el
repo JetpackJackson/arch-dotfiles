@@ -262,6 +262,14 @@
   (setq org-image-actual-width nil) ;; shrink images
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
+(add-to-list 'org-latex-classes
+             '("book"
+               "\\documentclass{book}"
+               ("\\part{%s}" . "\\part*{%s}")
+               ("\\chapter{%s}" . "\\chapter*{%s}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (org-babel-do-load-languages
  'org-babel-load-languages

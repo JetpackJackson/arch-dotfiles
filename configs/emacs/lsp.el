@@ -10,6 +10,7 @@
 (use-package platformio-mode :ensure t)
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
+(use-package geiser-guile :ensure t)
 (use-package eglot-java :ensure t
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
   :hook (((java-mode) . 'eglot-java-mode)))

@@ -13,14 +13,14 @@ elif [ $TERM = "foot" ]; then
    set sixel true
 fi
 
-cmd quit-and-cd &{{
-    pwd > "$LF_CD_FILE"
-    lf -remote "send $id quit"
-}}
-
-map q
-map q quit-and-cd
-map Q quit
+#cmd quit-and-cd &{{
+#    pwd > "$LF_CD_FILE"
+#    lf -remote "send $id quit"
+#}}
+#
+#map q
+#map q quit-and-cd
+#map Q quit
 
 cmd paste-overwrite %{{
     mode=$(head -1 ~/.local/share/lf/files)
