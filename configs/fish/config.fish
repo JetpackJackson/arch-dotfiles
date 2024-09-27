@@ -139,6 +139,8 @@ if status is-interactive
     abbr -a guix-delgen --set-cursor 'guix package --delete-generations=% -p "$GUIX_PROFILE"'
     abbr -a guix-size 'guix size $(readlink -f $GUIX_PROFILE)'
     abbr -a guix-listpro 'guix package --list-profiles'
+    #abbr -a ft-clear 'printf "\033]11;[80]#2c2e34"'
+    #abbr -a ft-solid 'printf "\033]11;[100]#2c2e34"'
 
 end
 
