@@ -43,12 +43,13 @@ static const char *const autostart[] = {
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
-        /* app_id             title       tags mask     isfloating  isterm  noswallow  monitor */
+    /* app_id             title       tags mask     isfloating  isterm  noswallow  monitor */
 	/* examples: */
-	{ "launcher",         NULL,       0,            1,          1,      1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "launcher",         NULL,       0,            1,          1,      0,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "LibreWolf",        NULL,       1 << 1,       0,          0,      0,           -1 }, /* Start on ONLY tag "9" */
 	{ "foot",             NULL,       0,            0,          1,      1,           -1 }, /* make foot swallow clients that are not foot */
-	{ "emacsclient",      NULL,       0,            0,          1,      0,           -1 },
+	{ "emacsclient",      NULL,       0,            0,          0,      0,           -1 },
+	{ "swappy",           NULL,       0,            0,          0,      0,           -1 },
 };
 
 /* layout(s) */
@@ -144,6 +145,11 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* commands */
 static const char *termcmd[] = { "foot", NULL };
 static const char *menucmd[] = {"foot", "-a", "launcher", "-e", "sway-launcher-desktop", NULL};
+static const char *screenshot[] = {"grim", "-o", "eDP-1", NULL};
+//static const char *screenshot[] = {"grim", "-o", "eDP-1", "/home/jet/pics/screenshots/primary_$(date +\'%Y%m%d%H%M%S\').png", NULL};
+static const char *selectshot[] = {"grim", "-g", "$(slurp)", "-", "|", "swappy", "-f", "-", NULL};
+static const char *clipboard[] = {"foot", "-a", "launcher", "-e", "clipman", "pick", "-t", "CUSTOM", "-T", "fzf", NULL};
+//static const char *clipboard[] = {"foot", "-a", "launcher", "-e", "clipman", "pick", "--print0", "--tool=CUSTOM", "--tool-args=\"fzf --prompt 'pick > ' --bind 'tab:up' --cycle --read0\"", NULL};
 
 static const Key keys[] = {
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
@@ -159,11 +165,14 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Up,          focusstack,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_i,          incnmaster,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
+        { MODKEY,                    XKB_KEY_p,          spawn,     {.v = screenshot} },
+        { MODKEY,                    XKB_KEY_x,          spawn,     {.v = clipboard} },
+        { MODKEY,                    XKB_KEY_c,          spawn,     {.v = selectshot} },
 	{ MODKEY,                    XKB_KEY_Left,          setmfact,       {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_Right,      setmfact,       {.f = +0.05f} },
 	{ MODKEY|WLR_MODIFIER_SHIFT,                    XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
-	{ MODKEY,                    XKB_KEY_p,          togglegaps,     {0} },
+	//{ MODKEY,                    XKB_KEY_p,          togglegaps,     {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          killclient,     {0} },
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                    XKB_KEY_g,          setlayout,      {.v = &layouts[1]} },
