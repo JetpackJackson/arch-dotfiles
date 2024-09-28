@@ -1,11 +1,9 @@
 #!/usr/bin/env fish
-#dwl -s '
-rot8 --hooks "killall lisgd; lisgd &" &
-mako &
-swaybg -i ~/pics/wallpapers/temple-of-ah.jpg &
-yambar -c ~/config-dwl-weasel.yml &
-emacs --fg-daemon &
-#' > /home/jet/dwl_info
-
-
-
+dwl > /home/jet/.cache/dwl_info
+##dwl -s '
+#rot8 --hooks "killall lisgd; lisgd &" &
+#mako &
+#swaybg -i ~/pics/wallpapers/temple-of-ah.jpg &
+#yambar -c ~/config-dwl-weasel.yml &
+#emacs --fg-daemon &
+##' > /home/jet/dwl_info

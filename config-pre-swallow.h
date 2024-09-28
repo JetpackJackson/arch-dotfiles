@@ -43,12 +43,10 @@ static const char *const autostart[] = {
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
-        /* app_id             title       tags mask     isfloating  isterm  noswallow  monitor */
 	/* examples: */
-	{ "launcher",         NULL,       0,            1,          1,      1,           -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "LibreWolf",        NULL,       1 << 1,       0,          0,      0,           -1 }, /* Start on ONLY tag "9" */
-	{ "foot",             NULL,       0,            0,          1,      1,           -1 }, /* make foot swallow clients that are not foot */
-	{ "emacsclient",      NULL,       0,            0,          1,      0,           -1 },
+	//{ "sway-launcher-desktop",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "launcher",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
+	{ "LibreWolf",  NULL,       1 << 1,       0,           -1 }, /* Start on ONLY tag "9" */
 };
 
 /* layout(s) */
@@ -146,6 +144,7 @@ static const char *termcmd[] = { "foot", NULL };
 static const char *menucmd[] = {"foot", "-a", "launcher", "-e", "sway-launcher-desktop", NULL};
 
 static const Key keys[] = {
+    //{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_R,          spawn,          {.v = testcmd}},
     /* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
     /* modifier                  key                 function        argument */
     {0, XF86XK_AudioMute, spawn, {.v = mute_vol}},
