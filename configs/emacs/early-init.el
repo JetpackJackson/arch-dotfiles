@@ -27,6 +27,10 @@
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
 
+;; transparent background
+(set-frame-parameter nil 'alpha-background 80)
+(add-to-list 'default-frame-alist '(alpha-background . 80))
+
 ;(setq default-frame-alist '((font . "Ärzte Sans-12")))
 ;(add-to-list 'default-frame-alist '(font . "Ärzte Sans Mono Roman-12"))
 ;(set-face-background 'default "undefined")
