@@ -348,6 +348,33 @@
         ;("OBE" . (:foreground "LimeGreen" :weight bold))
         ("WONT-DO" . (:foreground "LimeGreen" :weight bold))))
 
+
+(use-package fira-code-mode :ensure t
+  :custom (fira-code-mode-disabled-ligatures '("[]" "x" ":" "::" ":::"))  ; ligatures you don't want
+  :hook prog-mode)                                         ; mode to enable fira-code-mode in
+;(use-package ligature
+;  :config
+;  ;; Enable the "www" ligature in every possible major mode
+;  (ligature-set-ligatures 't '("www"))
+;  ;; Enable traditional ligature support in eww-mode, if the
+;  ;; `variable-pitch' face supports it
+;  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+;  ;; Enable all Cascadia Code ligatures in programming modes
+;  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+;                                       "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+;                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+;                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+;                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+;                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+;                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+;                                       "[|" "]#" "$>" "==" "=>" "!=" "!!" 
+;                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|"
+;                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+;                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" 
+;                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "~~" "(*" "*)"
+;                                       "\\\\")))
+
+
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 (global-set-key (kbd "C-c l") #'org-store-link)

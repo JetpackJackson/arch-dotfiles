@@ -20,8 +20,13 @@
 ;; uncomment for elpaca
 ;(setq package-enable-at-startup nil)
 
+;(set-face-attribute 'default nil :font "Aerzte Sans Ligaturized" :height 120)
+;(setq default-frame-alist '((font . "Liga Hack-12:style=Regular")))
+;(setq default-frame-alist '((font . "Aerzte Sans Ligaturized-12")))
+
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
+
 ;(setq default-frame-alist '((font . "Ärzte Sans-12")))
 ;(add-to-list 'default-frame-alist '(font . "Ärzte Sans Mono Roman-12"))
 ;(set-face-background 'default "undefined")
