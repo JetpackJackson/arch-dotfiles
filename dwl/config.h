@@ -48,7 +48,7 @@ static const Rule rules[] = {
         /* app_id             title       tags mask     isfloating  isterm  noswallow  monitor */
 	/* examples: */
 	{ "launcher",         NULL,       0,            1,          1,      1,           -1 }, /* Start on currently visible tags floating, not tiled */
-	{ "LibreWolf",        NULL,       1 << 1,       0,          0,      0,           -1 }, /* Start on ONLY tag "9" */
+	{ "firefox",          NULL,       1 << 1,       0,          0,      0,           -1 }, /* Start on ONLY tag "9" */
 	{ "foot",             NULL,       0,            0,          1,      1,           -1 }, /* make foot swallow clients that are not foot */
 	{ "emacs",            NULL,       0,            0,          0,      0,           -1 },
 	{ "swappy",           NULL,       0,            1,          0,      0,           -1 },
