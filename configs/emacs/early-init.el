@@ -352,3 +352,12 @@
   (other-window 1)
   (split-window-horizontally)
   (get-buffer (recentf-open-files)))
+
+;; based on http://xahlee.info/emacs/emacs/elisp_toggle_command.html
+(defun jet/toggle-transparency ()
+  (interactive)
+  (if (get 'my-toggle 'state)
+      (progn (set-frame-parameter nil 'alpha-background 100)
+	     (put 'my-toggle 'state nil))
+    (progn (set-frame-parameter nil 'alpha-background 80)
+	   (put 'my-toggle 'state t))))
