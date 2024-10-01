@@ -80,6 +80,7 @@ if status is-interactive
     set -gx LOCALE_ARCHIVE /usr/lib/locale/locale-archive
     set -gx W3M_DIR $XDG_STATE_HOME/w3m
     set -gx CARGO_HOME $XDG_DATA_HOME/cargo
+    set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
     set -gx TEXMFVAR $XDG_CACHE_HOME/texlive/texmf-var
     #set -gx _JAVA_OPTIONS $XDG_CONFIG_HOME/java
     #set -gx _JAVA_OPTIONS -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java

@@ -10,6 +10,7 @@
 (use-package platformio-mode :ensure t)
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
+(use-package rust-mode :ensure t)
 (use-package geiser-guile :ensure t)
 (use-package eglot-java :ensure t
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
@@ -40,7 +41,7 @@
            ("C-c e r" . eglot-rename)
 	   ("C-c e e" . consult-flymake) ;; FIXME, dupe keybind
            ("C-c e f" . eglot-format))
-    :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode scheme-mode) . 'eglot-ensure)))
+    :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode scheme-mode rust-mode) . 'eglot-ensure)))
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))
