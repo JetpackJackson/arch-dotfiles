@@ -67,22 +67,6 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-;; (use-package doom-modeline :ensure t :demand t
-;;   :init (doom-modeline-mode 1)
-;;   :config
-;;   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-;;   ;(setq doom-modeline-icon nil)
-;;   (setq inhibit-compacting-font-caches t)
-;;   ;(setq doom-modeline-position-format '("%l:%c"))
-;;   (setq column-number-mode t)
-;;   (setq line-number-mode t)
-;;   (setq doom-modeline-modal-icon nil)
-;;   (setq doom-modeline-modal-modern-icon nil)
-;;   (setq doom-modeline-buffer-state-icon nil)
-;;   ;(setq doom-modeline-buffer-state-icon 1)
-;;   (setq doom-modeline-major-mode-icon nil))
-;;   ;(setq doom-modeline-window-width-limit 85))
-
 (use-package shrink-path :ensure t :demand t)
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -195,28 +179,6 @@
   ;; Tidy shadowed file names
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
-; FIXME cleanup and (unless) doesnt work right sometimes
-;(unless (package-installed-p 'jabber)
-;  (require 'package-vc)
-;  (package-vc-install '(jabber
-;                        :url "https://codeberg.org/emacs-jabber/emacs-jabber"
-;                        :branch "production"
-;                        :lisp-dir "lisp"
-;                        :doc "README.org")))
-;(setq jabber-vcard-avatars-retrieve t)
-;(setq jabber-chat-buffer-format "*jc-%n*")
-;(setq jabber-browse-buffer-format "*jb-%n*")
-;(setq jabber-groupchat-buffer-format "*j-g-%n*")
-;(setq jabber-muc-private-buffer-format "*j-privmuc-%g-%n*")
-;(with-eval-after-load 'jabber-faces
-; (set-face-attribute 'jabber-activity-face ((t (:foreground "aquamarine" :weight bold))))
-; (set-face-attribute 'jabber-activity-personal-face ((t (:foreground "pale green" :weight bold))))
-; (set-face-attribute 'jabber-chat-prompt-foreign ((t (:foreground "light green" :weight bold))))
-; (set-face-attribute 'jabber-chat-prompt-local ((t (:foreground "violet" :weight bold))))
-; (set-face-attribute 'jabber-chat-prompt-system ((t (:foreground "khaki" :weight bold))))
-; (set-face-attribute 'jabber-rare-time-face ((t (:foreground "yellow" :underline t)))))
-;(add-hook 'jabber-chat-mode-hook 'visual-line-mode)
-
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
 ;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
 (use-package select
@@ -293,27 +255,6 @@
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
-;(use-package org-roam :ensure org-roam-ui
-;  :ensure t
-;  :custom
-;  (org-roam-directory (file-truename "~/docs/notes/notes-zettelkasten/"))
-;  :bind (("C-c n l" . org-roam-buffer-toggle)
-;         ("C-c n f" . org-roam-node-find)
-;         ("C-c n g" . org-roam-graph)
-;         ("C-c n i" . org-roam-node-insert)
-;         ("C-c n c" . org-roam-capture)
-;         ;; Dailies
-;         ("C-c n j" . org-roam-dailies-capture-today))
-;  :config
-;  ;; If you're using a vertical completion framework, you might want a more informative completion interface
-;  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-;  (org-roam-db-autosync-mode)
-;  ;; If using org-roam-protocol
-;  (require 'org-roam-protocol))
-;
-;;; Follow the links
-;;(setq org-return-follows-link t)
-
 (setq org-capture-templates
       '(
 	("g" "General To-Do"
@@ -352,28 +293,6 @@
 (use-package fira-code-mode :ensure t
   :custom (fira-code-mode-disabled-ligatures '("[]" "x" ":" "::" ":::"))  ; ligatures you don't want
   :hook prog-mode)                                         ; mode to enable fira-code-mode in
-;(use-package ligature
-;  :config
-;  ;; Enable the "www" ligature in every possible major mode
-;  (ligature-set-ligatures 't '("www"))
-;  ;; Enable traditional ligature support in eww-mode, if the
-;  ;; `variable-pitch' face supports it
-;  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-;  ;; Enable all Cascadia Code ligatures in programming modes
-;  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-;                                       "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-;                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-;                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-;                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-;                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-;                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-;                                       "[|" "]#" "$>" "==" "=>" "!=" "!!" 
-;                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|"
-;                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-;                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" 
-;                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "~~" "(*" "*)"
-;                                       "\\\\")))
-
 
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)

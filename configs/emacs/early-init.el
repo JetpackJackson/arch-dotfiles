@@ -12,17 +12,8 @@
     (font-lock-update)
   (message "foo"))
 
- ;(display-line-numbers--turn-on)
- ;(if (bound-and-true-p 'display-line-numbers-mode)
- ;    (message "foo")
- ;  (display-line-numbers--turn-on))
-
 ;; uncomment for elpaca
 ;(setq package-enable-at-startup nil)
-
-;(set-face-attribute 'default nil :font "Aerzte Sans Ligaturized" :height 120)
-;(setq default-frame-alist '((font . "Liga Hack-12:style=Regular")))
-;(setq default-frame-alist '((font . "Aerzte Sans Ligaturized-12")))
 
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
@@ -30,10 +21,6 @@
 ;; transparent background
 (set-frame-parameter nil 'alpha-background 80)
 (add-to-list 'default-frame-alist '(alpha-background . 80))
-
-;(setq default-frame-alist '((font . "Ärzte Sans-12")))
-;(add-to-list 'default-frame-alist '(font . "Ärzte Sans Mono Roman-12"))
-;(set-face-background 'default "undefined")
 
 (setq initial-scratch-message "
 ; .`                             `.
@@ -113,7 +100,7 @@
  (setq fill-column 80)
 
  (setq browse-url-firefox-new-window-is-tab t)
- (setq browse-url-firefox-program "librewolf")
+ (setq browse-url-firefox-program "firefox")
  (setq browse-url-generic-program "badwolf")
  (setq org-roam-ui-browser-function 'browse-url-generic)
 
@@ -122,11 +109,7 @@
 
  ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
  ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
- ;; still shows wrong color in some spots
- ;(set-face-background 'default "undefined")
- ;; does not work, need to set TERM outside of emacs
 (add-to-list 'term-file-aliases '("foot" . "xterm"))
-;)
 
 ;; clean up elpa stuff
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
