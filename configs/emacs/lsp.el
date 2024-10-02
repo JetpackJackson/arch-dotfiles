@@ -11,6 +11,8 @@
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
 (use-package rust-mode :ensure t)
+(use-package cargo-mode :ensure t
+  :hook ((rust-mode) . cargo-minor-mode))
 (use-package geiser-guile :ensure t)
 (use-package eglot-java :ensure t
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
@@ -111,7 +113,7 @@
 
 ;; snippets
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all)
-  :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode) . yas-minor-mode))
+  :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode rust-mode) . yas-minor-mode))
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets elsewhere
 
 ;; code indents
