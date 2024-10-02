@@ -1,0 +1,36 @@
+@-moz-document url-prefix(about:home), url-prefix(about:newtab) { .click-target-container *, .top-sites-list * { color: #fff !important ; text-shadow: 2px 2px 2px #000 !important ; }
+
+body { background: url(wallpaper.jpg) !important ; background-size: cover !important ; } 
+/*.search-wrapper .logo-and-wordmark { background-color: #000 !important ; }*/
+
+.search-wrapper .logo-and-wordmark .logo {
+  display: inline-block;
+  height: 82px;
+  width: 82px;
+  background: image-set(url(logo2004.svg), url(logo2004.svg) 2x) no-repeat center !important;
+  background-size: auto !important;
+/*  background-size: 82px !important;*/
+}
+
+/*
+@-moz-document url-prefix("moz-extension://9dc25ea0-e836-4367-a742-ba7df05ad229/sidebar/") {
+  :root{ background-color: #ffffff !important;
+  background: image-set(url("https://katzenmue.de/assets/images/pipes.png")) !important }
+}
+*/
+
+
+
+/*
+.search-wrapper .logo-and-wordmark .wordmark {
+  background: url("wordmark.svg") no-repeat center center !important;
+  /*  background-size: auto;
+  background-size: 134px !important;
+  -moz-context-properties: fill;
+  display: inline-block;
+  fill: var(--newtab-wordmark-color);
+  height: 82px;
+  margin-inline-start: 16px;
+  width: 134px;
+} }
+*/
