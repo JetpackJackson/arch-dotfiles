@@ -11,6 +11,8 @@
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
 (use-package rust-mode :ensure t)
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
 (use-package cargo-mode :ensure t
   :hook ((rust-mode) . cargo-minor-mode))
 (use-package geiser-guile :ensure t)
