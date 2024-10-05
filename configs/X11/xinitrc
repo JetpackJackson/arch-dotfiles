@@ -50,9 +50,11 @@ fi
 #autocutsel -selection PRIMARY -fork &
 
 #greenclip daemon &
-udiskie &
+#udiskie &
 #i3
 #xclock -geometry 50x50-1+1 &
 #kitty -geometry 80x50+494+51 &
 #kitty -geometry 80x20+494-0 &
 #exec kitty -geometry 80x66+0+0 -name login
+#exec leftwm
+exec dwm
