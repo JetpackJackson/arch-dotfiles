@@ -99,7 +99,7 @@ bar:
           map:
             margin: 10
             conditions:
-              #              state == offline: {string: {text: offline, foreground: *brightred}}
+              #state == offline: {string: {text: offline, foreground: *brightred}}
               state == stopped: {string: {text: }}
               state == paused: {list: *artist_title}
               state == playing: {list: *artist_title}

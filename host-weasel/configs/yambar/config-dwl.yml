@@ -69,7 +69,7 @@ bar:
           map:
             margin: 10
             conditions:
-              #              state == offline: {string: {text: offline, foreground: *brightred}}
+              #state == offline: {string: {text: offline, foreground: *brightred}}
               state == stopped: {string: {text: }}
               state == paused: {list: *artist_title}
               state == playing: {list: *artist_title}
@@ -169,7 +169,8 @@ bar:
                       - string: {text:  , foreground: *brightgreen, font: *nerd}
                       - string: {text:  , foreground: *brightgreen, font: *nerd}
                 - string: {text: " {capacity}%"} #, right-margin: 5}
-             #    - script:
+
+            #    - script:
             #        path: ~/docs/scripts/yams-kbd.sh
             #        args: []
             #        content: {string: {text: "{kbd}"}}

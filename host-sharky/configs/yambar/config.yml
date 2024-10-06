@@ -1,6 +1,6 @@
 nerd: &nerd Symbols Nerd Font:pixelsize=14
 aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=14
-  #highlight: &highlight a02626ff
+#highlight: &highlight a02626ff
 highlight: &highlight fabd2fff
 textcolor: &textcolor d0d0d0ff
  #a0262680}]}}
@@ -81,7 +81,6 @@ bar:
   center:
     - mpd:
         host: /var/run/user/1000/mpd/socket
-          #host: /var/run/user/1000/mpd/socket
         anchors:
           list: &artist_title
             #change to artist_album_title to show album
@@ -115,7 +114,7 @@ bar:
                    muted: {string: {text: "stumm.", foreground: *grey}}
                    ~muted: {string: {text: "VOL {cubic_volume}%", foreground: *white, font: *aerzte}}
                  default: {string: {text: "test"}}
-    - network: #name: wlan0
+    - network:
         content:
           map:
             default: {empty: {}}
@@ -193,5 +192,3 @@ bar:
         content:
           - string: {text: "{date}", right-margin: 7}
           - string: {text: "{time}"}
-
-
