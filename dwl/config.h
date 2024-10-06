@@ -36,8 +36,7 @@ static const char *const autostart[] = {
     "wl-paste", "-t", "text", "--watch", "clipman", "store", "-P", NULL,
     "wl-paste", "-p", "-t", "text", "--watch", "clipman", "store", "-P", "--histpath=/home/jet/.local/share/clipman-primary.json", NULL,
     "rot8", "--hooks", "'killall lisgd; lisgd &'", NULL,
-    "yambar", "-c", "/home/jet/config-dwl-weasel.yml", NULL,
-    "emacs", "--fg-daemon", NULL,
+    "yambar", "-c", "/home/jet/.config/yambar/config-dwl-weasel.yml", NULL,
         NULL /* terminate */
 };
 
@@ -80,11 +79,13 @@ static const MonitorRule monrules[] = {
 
 /* keyboard */
 static const struct xkb_rule_names xkb_rules = {
-	/* can specify fields: rules, model, layout, variant, options */
-	/* example:
-	.options = "ctrl:nocaps",
-	*/
-	.options = NULL,
+       /* can specify fields: rules, model, layout, variant, options */
+       /* example:
+       .options = "ctrl:nocaps",
+       */
+       .layout = "us,noted",
+       .options = "grp:rctrl_toggle",
+       //.options = NULL,
 };
 
 static const int repeat_rate = 25;

@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+dwl > /home/jet/.cache/dwl_info
+#dwl -s '
+#yambar -c /home/jet/.config/yambar/config-dwl-weasel.yml &
+#' > /home/jet/.cache/dwl_info
+#rot8 --hooks "killall lisgd; lisgd &" &
+#mako &
+#emacs --fg-daemon &
+#swaybg -i ~/pics/wallpapers/temple-of-ah.jpg &
+#foot <&-
