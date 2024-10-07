@@ -299,7 +299,27 @@
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c oc") #'org-capture)
+(global-set-key (kbd "C-c f") #'find-file)
+(global-set-key (kbd "C-c s") #'consult-find)
+(global-set-key (kbd "C-c v") #'ibuffer-other-window)
+(global-set-key (kbd "C-c b") #'consult-buffer)
+(global-set-key (kbd "C-c ca") #'eglot-code-actions)
+(global-set-key (kbd "C-c cm") #'jet/grep-for-tasks)
+(global-set-key (kbd "C-c cq") #'eglot-code-action-quickfix)
+(global-set-key (kbd "C-c cn") #'consult-flymake)
+(global-set-key (kbd "C-c d") #'kill-buffer)
+(global-set-key (kbd "C-c g") #'consult-bookmark)
+(global-set-key (kbd "C-c r") #'jet/mode-recompile)
+(global-set-key (kbd "C-c u") #'jet/mode-upload-run)
+(global-set-key (kbd "C-c l") #'jet/org-insert-link)
+(global-set-key (kbd "C-c of") #'org-open-at-point)
+(global-set-key (kbd "C-c oe") #'org-export-dispatch)
+(global-set-key (kbd "C-c .") #'comment-line)
+(global-set-key (kbd "C-c ,") #'uncomment-region)
+(global-set-key (kbd "C-c e") #'jet/eval-defun)
+(global-set-key (kbd "C-c t") #'eat-other-window)
+
 
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
