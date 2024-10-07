@@ -44,11 +44,6 @@
 (keymap-set evil-motion-state-map "SPC" 'my-leader-map)
 (keymap-set evil-normal-state-map "SPC" 'my-leader-map)
 (evil-define-key nil my-leader-map
-    ;; add your bindings here:
-    "b"  'switch-to-buffer
-    "B"  'project-switch-to-buffer
-    "pf" 'project-find-file
-    "ps" 'project-shell-command
     "f" 'find-file
     "s" 'consult-find
     "v" 'ibuffer-other-window ;'list-buffers
