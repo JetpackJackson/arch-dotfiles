@@ -70,7 +70,7 @@
 (use-package shrink-path :ensure t :demand t)
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-(use-package magit :ensure t :demand t :bind (("C-c g" . magit-status)))
+(use-package magit :ensure t :bind (("C-c g" . magit-status)))
 (use-package eat :ensure t)
 (use-package uniquify)
 
@@ -205,7 +205,7 @@
           interprogram-paste-function 'wl-paste-handler)))
 
 ;; org
-(use-package org :ensure org-contrib :demand t
+(use-package org :ensure org-contrib ;:demand t
   :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
   (setq org-latex-listings 'minted
 	org-latex-packages-alist '(("" "minted"))
@@ -224,14 +224,15 @@
   (setq org-image-actual-width nil) ;; shrink images
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
-(add-to-list 'org-latex-classes
-             '("book"
-               "\\documentclass{book}"
-               ("\\part{%s}" . "\\part*{%s}")
-               ("\\chapter{%s}" . "\\chapter*{%s}")
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+(with-eval-after-load 'org
+  (add-to-list 'org-latex-classes
+               '("book"
+		 "\\documentclass{book}"
+		 ("\\part{%s}" . "\\part*{%s}")
+		 ("\\chapter{%s}" . "\\chapter*{%s}")
+		 ("\\section{%s}" . "\\section*{%s}")
+		 ("\\subsection{%s}" . "\\subsection*{%s}")
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (org-babel-do-load-languages
  'org-babel-load-languages

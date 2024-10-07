@@ -3,7 +3,7 @@
 (use-package envrc :ensure t :hook (after-init . envrc-global-mode))
 
 ;; nice markers for indents
-(use-package indent-bars :ensure t :demand t
+(use-package indent-bars :ensure t ;:demand t
   :hook ((c++-mode c-mode python-mode) . indent-bars-mode))
 
 ;; assorted modes
