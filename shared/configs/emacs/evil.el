@@ -46,20 +46,20 @@
 (evil-define-key nil my-leader-map
     "f" 'find-file
     "s" 'consult-find
-    "v" 'ibuffer-other-window ;'list-buffers
-    "b" 'consult-buffer ;'switch-to-buffer
+    "v" 'ibuffer-other-window
+    "b" 'consult-buffer
     "ca" 'eglot-code-actions
     "cm" 'jet/grep-for-tasks
     "cq" 'eglot-code-action-quickfix
-    "cn" 'consult-flymake ;'flymake-goto-next-error
+    "cn" 'consult-flymake
     "d" 'kill-buffer
-    "g" 'consult-bookmark ;'bookmark-jump
-    "r" 'jet/mode-recompile ;'recompile
+    "g" 'consult-bookmark
+    "r" 'jet/mode-recompile
     "u" 'jet/mode-upload-run
     "l" 'jet/org-insert-link
     "of" 'org-open-at-point
     "oe" 'org-export-dispatch
-    "." 'comment-line ;comment-region
+    "." 'comment-line
     "," 'uncomment-region
     "e" 'jet/eval-defun
     "t" 'eat-other-window)
