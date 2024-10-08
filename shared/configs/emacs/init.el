@@ -307,6 +307,44 @@
 
 ;; to sort region like in neovim, M-h and then M-x sort-line
 (setq evil-disable-insert-state-bindings t)
+
+;; https://protesilaos.com/codelog/2024-01-29-emacs-prefix-map/
+(defvar-keymap test-prefix-org-map
+  "c" #'org-capture
+  "l" #'org-insert-link)
+
+(defvar-keymap test-prefix-project-map
+  "r" #'jet/mode-recompile
+  "u" #'jet/mode-upload-run)
+
+(defvar-keymap test-prefix-consult-map
+  "f" #'consult-find
+  "m" #'jet/grep-for-tasks)
+
+(defvar-keymap test-prefix-map
+  "," #'uncomment-region
+  "." #'comment-line
+  "b" #'consult-buffer
+  "c" test-prefix-consult-map
+  "d" #'kill-buffer
+  "e" #'jet/eval-defun
+  "f" #'find-file
+  "l" #'org-store-link
+  "o" test-prefix-org-map
+  "p" test-prefix-project-map
+  "t" #'eat-other-window
+  "v" #'ibuffer-other-window
+  "q" #'delete-other-windows)
+
+(global-unset-key (kbd "C-SPC"))
+(keymap-set global-map "C-SPC" test-prefix-map)
+(global-unset-key (kbd "M-SPC"))
+(keymap-set global-map "M-SPC" #'set-mark-command)
+(which-key-add-keymap-based-replacements test-prefix-map
+  "c" `("consult" . ,test-prefix-consult-map)
+  "o" `("org" . ,test-prefix-org-map)
+  "p" `("project" . ,test-prefix-project-map))
+
 (global-set-key (kbd "C-c ,") #'uncomment-region)
 (global-set-key (kbd "C-c .") #'comment-line)
 (global-set-key (kbd "C-c a") #'org-agenda)
@@ -337,6 +375,7 @@
 ;(global-unset-key (kbd "C-s"))
 ;(global-set-key (kbd "C-c C-s") #'isearch-forward)
 ;(global-set-key (kbd "C-c :w") #'save-buffer)
+
 
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
