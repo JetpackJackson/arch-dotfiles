@@ -208,7 +208,7 @@
 (use-package org :ensure org-contrib ;:demand t
     :bind (:map
            org-mode-map
-           ("C-c o e" . org-export-dispatch)
+           ;; ("C-c o e" . org-export-dispatch) ;; C-c C-e
 	   ("C-c o f" . org-open-at-point))
 
   :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
@@ -303,18 +303,20 @@
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;; save: C-x C-s
+;; try out M-SPC or C-SPC as leader key
+
 ;; to sort region like in neovim, M-h and then M-x sort-line
+(setq evil-disable-insert-state-bindings t)
 (global-set-key (kbd "C-c ,") #'uncomment-region)
 (global-set-key (kbd "C-c .") #'comment-line)
 (global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c b") #'consult-buffer)
-(global-set-key (kbd "C-c cf") #'consult-find)
+(global-set-key (kbd "C-c b") #'consult-buffer) ;; C-x b
+(global-set-key (kbd "C-c cf") #'consult-find) ;; M-s d
 (global-set-key (kbd "C-c cm") #'jet/grep-for-tasks)
-(global-set-key (kbd "C-c cn") #'consult-flymake)
-(global-set-key (kbd "C-c d") #'kill-buffer)
+;; (global-set-key (kbd "C-c cn") #'consult-flymake)
+(global-set-key (kbd "C-c d") #'kill-buffer) ;; C-x k
 (global-set-key (kbd "C-c e") #'jet/eval-defun)
-(global-set-key (kbd "C-c f") #'find-file)
+(global-set-key (kbd "C-c f") #'find-file) ;; C-x C-f
 (global-set-key (kbd "C-c l") #'org-store-link)
 (global-set-key (kbd "C-c oc") #'org-capture)
 ;(global-set-key (kbd "C-c oe") #'org-export-dispatch)
@@ -330,10 +332,11 @@
 ;(global-set-key (kbd "C-c g") #'consult-bookmark)
 ;(global-set-key (kbd "C-c w") #'delete-other-windows)
 
-(global-unset-key (kbd "C-w"))
-(global-set-key (kbd "C-w q") #'delete-other-windows)
-
-(global-set-key (kbd "C-c C-s") #'isearch-forward)
+;(global-unset-key (kbd "C-w"))
+(global-set-key (kbd "C-c q") #'delete-other-windows)
+;(global-unset-key (kbd "C-s"))
+;(global-set-key (kbd "C-c C-s") #'isearch-forward)
+;(global-set-key (kbd "C-c :w") #'save-buffer)
 
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/

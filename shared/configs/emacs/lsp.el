@@ -43,7 +43,7 @@
            ("C-c e q" . eglot-code-action-quickfix)
            ("C-c e o" . eglot-code-actions-organize-imports)
            ("C-c e r" . eglot-rename)
-	   ("C-c e e" . consult-flymake) ;; FIXME, dupe keybind
+	   ("C-c e e" . consult-flymake)
            ("C-c e f" . eglot-format))
     :hook (((c++-mode c-mode python-mode latex-mode sh-mode fish-mode bash-ts-mode arduino-mode scheme-mode rust-mode) . 'eglot-ensure)))
 (with-eval-after-load 'eglot
