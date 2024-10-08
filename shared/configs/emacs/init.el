@@ -329,6 +329,7 @@
   "d" #'kill-buffer
   "e" #'jet/eval-defun
   "f" #'find-file
+  "g" #'consult-bookmark
   "l" #'org-store-link
   "o" test-prefix-org-map
   "p" test-prefix-project-map
