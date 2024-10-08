@@ -307,6 +307,7 @@
 
 ;; to sort region like in neovim, M-h and then M-x sort-line
 (setq evil-disable-insert-state-bindings t)
+(setq evil-default-state 'emacs)
 
 ;; https://protesilaos.com/codelog/2024-01-29-emacs-prefix-map/
 (defvar-keymap test-prefix-org-map
