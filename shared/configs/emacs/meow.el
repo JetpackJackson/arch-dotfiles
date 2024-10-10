@@ -4,6 +4,7 @@
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
    '("k" . meow-prev)
+   ;'("g" . consult-bookmark)
    '("<escape>" . ignore))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
@@ -11,24 +12,24 @@
    '("k" . "H-k")
    '("f" . find-file)
    '("s" . consult-find)
-   '("v" . list-buffers)
+   '("v" . ibuffer-other-window)
    '("b" . consult-buffer)
    ;'("c" . ignore)
    ;'("ca" . eglot-code-actions)
    ;'("cq" . eglot-code-action-quickfix)
    ;'("cn" . consult-flymake)
-   '("d" . kill-buffer)
-   '("g" . consult-bookmark)
+   '("k" . kill-buffer)
+   ;'("g" . consult-bookmark)
    '("r" . my-mode-recompile)
    '("u" . my-mode-upload-run)
-   '("l" . my-org-insert-link)
+   '("l" . org-store-link)
    '("of" . org-open-at-point)
    '("oe" . org-export-dispatch)
    '("." . comment-region)
    '("," . uncomment-region)
-   '("e" . eshell)
+   '("e" . jet/eval-defun)
    '("t" . eat-other-window)
-   '("q" . delete-window)
+   '("q" . delete-other-windows)
 
    ;; Use SPC (0-9) for digit arguments.
    '("1" . meow-digit-argument)

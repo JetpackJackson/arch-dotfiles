@@ -119,6 +119,7 @@
 
 ;; MODELINE
 ;; change tag color
+
 (setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
       evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
       evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
@@ -126,6 +127,15 @@
       evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
       evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
+
+;; https://github.com/meow-edit/meow/issues/246#issuecomment-1126998900
+(custom-theme-set-faces
+   'user
+   '(meow-keypad-indicator  ((t (:background "#444488" :foreground "white"))))
+   '(meow-insert-indicator  ((t (:background "dark sea green" :foreground "black"))))
+   '(meow-normal-indicator  ((t (:background "gray35" :foreground "white"))))
+   '(meow-motion-indicator  ((t (:background "khaki" :foreground "black"))))
+   '(meow-beacon-indicator  ((t (:background "dark orange" :foreground "black")))))
 
 (setq mode-line-position (list "(%l,%c)"))
 (setq mode-line-front-space nil)
@@ -182,40 +192,6 @@
 	(t (shrink-path-dirs (file-name-directory buffer-file-truename)))))
 
 ;(setq mode-line-format nil)
-(setq-default mode-line-format
-              '("%e"
-		mode-line-front-space ;; evil-mode-line-format displays here
-		jet/ml-separator
-		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		;(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
-		(:eval (jet/dir-indicator-colorized))
-		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
-		jet/ml-separator
-		mode-line-position
-		jet/ml-separator
-		mode-line-modes ;; eat doesn't show mode when using mode-name
-		jet/ml-separator
-		mode--line-format-right-align
-                project-mode-line
-		project-mode-line-format
-		mode-line-misc-info))
-
-;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3928
-(defvar hidden-minor-modes ; example, write your own list of hidden minor modes
-  '(abbrev-mode            
-    auto-fill-function
-    flycheck-mode
-    flyspell-mode
-    company-mode
-    evil-collection-unimpaired-mode
-    which-key-mode))
-(defun purge-minor-modes ()
-  (interactive)
-  (dolist (x hidden-minor-modes nil)
-    (let ((trg (cdr (assoc x minor-mode-alist))))
-      (when trg
-        (setcar trg "")))))
-(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
 
 ;;; FUNCTIONS
 ;; consult stuff ("manual, relay instructions")

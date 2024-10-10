@@ -356,36 +356,36 @@
   "o" `("org" . ,test-prefix-org-map)
   "p" `("project" . ,test-prefix-project-map))
 
-(global-set-key (kbd "C-c ,") #'uncomment-region)
-(global-set-key (kbd "C-c .") #'comment-line)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c b") #'consult-buffer) ;; C-x b
-(global-set-key (kbd "C-c cf") #'consult-find) ;; M-s d
-(global-set-key (kbd "C-c cm") #'jet/grep-for-tasks)
-;; (global-set-key (kbd "C-c cn") #'consult-flymake)
-(global-set-key (kbd "C-c d") #'kill-buffer) ;; C-x k
-(global-set-key (kbd "C-c e") #'jet/eval-defun)
-(global-set-key (kbd "C-c f") #'find-file) ;; C-x C-f
-(global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c oc") #'org-capture)
-;(global-set-key (kbd "C-c oe") #'org-export-dispatch)
-;(global-set-key (kbd "C-c of") #'org-open-at-point)
-(global-set-key (kbd "C-c ol") #'org-insert-link)
-;; calls org-insert-link with prefix arg to make it always prompt for
-;; a file
-;(global-set-key (kbd "C-c ol") #'jet/org-insert-link)
-(global-set-key (kbd "C-c pr") #'jet/mode-recompile)
-(global-set-key (kbd "C-c pu") #'jet/mode-upload-run)
-(global-set-key (kbd "C-c t") #'eat-other-window)
-(global-set-key (kbd "C-c v") #'ibuffer-other-window)
-;(global-set-key (kbd "C-c g") #'consult-bookmark)
-;(global-set-key (kbd "C-c w") #'delete-other-windows)
+;; (global-set-key (kbd "C-c ,") #'uncomment-region)
+;; (global-set-key (kbd "C-c .") #'comment-line)
+;; (global-set-key (kbd "C-c a") #'org-agenda)
+;; (global-set-key (kbd "C-c b") #'consult-buffer) ;; C-x b
+;; (global-set-key (kbd "C-c cf") #'consult-find) ;; M-s d
+;; (global-set-key (kbd "C-c cm") #'jet/grep-for-tasks)
+;; ;; (global-set-key (kbd "C-c cn") #'consult-flymake)
+;; (global-set-key (kbd "C-c d") #'kill-buffer) ;; C-x k
+;; (global-set-key (kbd "C-c e") #'jet/eval-defun)
+;; (global-set-key (kbd "C-c f") #'find-file) ;; C-x C-f
+;; (global-set-key (kbd "C-c l") #'org-store-link)
+;; (global-set-key (kbd "C-c oc") #'org-capture)
+;; ;(global-set-key (kbd "C-c oe") #'org-export-dispatch)
+;; ;(global-set-key (kbd "C-c of") #'org-open-at-point)
+;; (global-set-key (kbd "C-c ol") #'org-insert-link)
+;; ;; calls org-insert-link with prefix arg to make it always prompt for
+;; ;; a file
+;; ;(global-set-key (kbd "C-c ol") #'jet/org-insert-link)
+;; (global-set-key (kbd "C-c pr") #'jet/mode-recompile)
+;; (global-set-key (kbd "C-c pu") #'jet/mode-upload-run)
+;; (global-set-key (kbd "C-c t") #'eat-other-window)
+;; (global-set-key (kbd "C-c v") #'ibuffer-other-window)
+;; ;(global-set-key (kbd "C-c g") #'consult-bookmark)
+;; ;(global-set-key (kbd "C-c w") #'delete-other-windows)
 
-;(global-unset-key (kbd "C-w"))
-(global-set-key (kbd "C-c q") #'delete-other-windows)
-;(global-unset-key (kbd "C-s"))
-;(global-set-key (kbd "C-c C-s") #'isearch-forward)
-;(global-set-key (kbd "C-c :w") #'save-buffer)
+;; ;(global-unset-key (kbd "C-w"))
+;; (global-set-key (kbd "C-c q") #'delete-other-windows)
+;; ;(global-unset-key (kbd "C-s"))
+;; ;(global-set-key (kbd "C-c C-s") #'isearch-forward)
+;; ;(global-set-key (kbd "C-c :w") #'save-buffer)
 
 
 ;;;; startup
@@ -400,7 +400,51 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
-(load-file "~/.config/emacs/evil.el")
+;(load-file "~/.config/emacs/evil.el")
+(load-file "~/.config/emacs/meow.el")
+
+(setq-default mode-line-format
+              '("%e"
+		mode-line-front-space ;; evil-mode-line-format displays here
+                (:eval (meow-indicator))
+		jet/ml-separator
+		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
+		;(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
+		(:eval (jet/dir-indicator-colorized))
+		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
+		jet/ml-separator
+		mode-line-position
+		jet/ml-separator
+		mode-line-modes ;; eat doesn't show mode when using mode-name
+		jet/ml-separator
+		mode--line-format-right-align
+                project-mode-line
+		project-mode-line-format
+		mode-line-misc-info))
+
+;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3928
+(defvar hidden-minor-modes ; example, write your own list of hidden minor modes
+  '(abbrev-mode            
+    auto-fill-function
+    flycheck-mode
+    flyspell-mode
+    company-mode
+    meow-mode
+    meow-normal-mode
+    meow-insert-mode
+    meow-keypad-mode
+    meow-beacon-mode
+    meow-motion-mode
+    evil-collection-unimpaired-mode
+    which-key-mode))
+(defun purge-minor-modes ()
+  (interactive)
+  (dolist (x hidden-minor-modes nil)
+    (let ((trg (cdr (assoc x minor-mode-alist))))
+      (when trg
+        (setcar trg "")))))
+(add-hook 'after-change-major-mode-hook 'purge-minor-modes)
+
 
 ;; different sonokai, more colorful, not sure if i like
 ;(use-package sonokai-emacs
