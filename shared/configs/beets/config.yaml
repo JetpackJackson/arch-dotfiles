@@ -41,6 +41,7 @@ smartplaylist:
                   'artist:"Blind Guardian"',
                   'artist:"Blutengel"',
                   'artist:"Böhse Onkelz"',
+                  'artist:"Broilers"',
                   'artist::^CRO$',
                   'artist:"Cephalgy"',
                   'artist::^Cro$',
@@ -131,7 +132,8 @@ smartplaylist:
                   'artist:"Wolfsheim"',
                   'artist:"[die!]"',
                   'artist:"voXXclub"',
-                  'artist:"witt"']
+                  'artist:"witt"',
+                  'artist:"Willkuer"']
 
         - name: belafarinrod.m3u
           query: ['artist:"Bela B"',
