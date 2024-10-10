@@ -18,7 +18,7 @@
    ;'("ca" . eglot-code-actions)
    ;'("cq" . eglot-code-action-quickfix)
    ;'("cn" . consult-flymake)
-   '("k" . kill-buffer)
+   '("d" . kill-buffer)
    ;'("g" . consult-bookmark)
    '("r" . my-mode-recompile)
    '("u" . my-mode-upload-run)
