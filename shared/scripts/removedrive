@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [[ $1 = sda* ]]
+HOSTNAME=$(cat /etc/hostname)
+if [[ $1 = sda* && $HOSTNAME = "sharky" ]]
 then
 	echo "You can't eject your home partitions!"
 else
