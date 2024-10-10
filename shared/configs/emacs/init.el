@@ -72,6 +72,15 @@
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :ensure t :bind (("C-c g" . magit-status)))
 (use-package eat :ensure t)
+(with-eval-after-load 'eat
+  (set-face-attribute 'ansi-color-blue nil :background "#76cce0" :foreground "#76cce0")
+  (set-face-attribute 'ansi-color-cyan nil :background "#85d3f2" :foreground "#85d3f2")
+  (set-face-attribute 'ansi-color-green nil :background "#9ed072" :foreground "#9ed072")
+  (set-face-attribute 'ansi-color-magenta nil :background "#dc8cc3" :foreground "#dc8cc3")
+  (set-face-attribute 'ansi-color-red nil :background "#fc5d7c" :foreground "#fc5d7c")
+  (set-face-attribute 'ansi-color-yellow nil :background "#e7c664" :foreground "#e7c664")
+  (set-face-attribute 'ansi-color-white nil :background "#e2e2e3" :foreground "#e2e2e3"))
+
 (use-package uniquify)
 
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
@@ -392,3 +401,21 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/evil.el")
+
+;; different sonokai, more colorful, not sure if i like
+;(use-package sonokai-emacs
+;  :load-path "~/.cache/emacs/sonokai-emacs")
+;(load "~/.cache/emacs/sonokai-emacs/sonokai-theme.el")
+;(load-theme 'sonokai t)
+
+;; neat theme
+;(use-package weyland-yutani-theme :demand t)
+;(load-theme 'weyland-yutani t)
+
+;; cool theme but errors
+;(use-package timu-spacegrey-theme :demand t)
+;(load-theme 'timu-spacegrey t)
+
+;; cool
+;(use-package spacegray-theme :demand t)
+;(load-theme 'spacegray t)
