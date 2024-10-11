@@ -2,15 +2,12 @@
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 
 ;; EMACS 30
- ;(global-font-lock-mode)
- ;(font-lock-ensure)
 (setq indent-tabs-mode nil)
-;(setq tab-always-indent 'complete)
 (setq tab-always-indent t)
 
-(if (version<= "30.0.60" emacs-version)
-    (font-lock-update)
-  (message "foo"))
+;; (if (version<= "30.0.60" emacs-version)
+;;     (font-lock-update)
+;;   (message "foo"))
 
 ;; uncomment for elpaca
 ;(setq package-enable-at-startup nil)
@@ -117,7 +114,7 @@
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
 (require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
 
-
+;; modeline functions
 (setq mode-line-position (list "(%l,%c)"))
 (setq mode-line-front-space nil)
 (setq evil-mode-line-format '(before . mode-line-front-space))
@@ -172,26 +169,7 @@
   (cond ((string-equal-ignore-case (buffer-name) "*scratch*") "")
 	(t (shrink-path-dirs (file-name-directory buffer-file-truename)))))
 
-;(setq mode-line-format nil)
-
 ;;; FUNCTIONS
-;; consult stuff ("manual, relay instructions")
-(defun consult-info-emacs ()
-  "Search through Emacs info pages."
-  (interactive)
-  (consult-info "emacs" "efaq" "elisp" "cl" "compat"))
-
-(defun consult-info-org ()
-  "Search through the Org info page."
-  (interactive)
-  (consult-info "org"))
-
-(defun consult-info-completion ()
-  "Search through completion info pages."
-  (interactive)
-  (consult-info "vertico" "consult" "marginalia" "orderless" "embark"
-                "corfu" "cape" "tempel"))
-
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
 (defun org-insert-sub-task ()
   (interactive)
@@ -204,6 +182,7 @@
 (defun jet/org-insert-link () "bind org insert" (interactive)
    (let ((current-prefix-arg '(4))) (call-interactively #'org-insert-link)))
 
+;; TODO remove?
 ;; Returns the parent directory containing a .project.el file, if any,
 ;; to override the standard project.el detection logic when needed.
 (defun my-project-override (dir)
@@ -213,10 +192,7 @@
       (cons 'vc override)
       nil)))
 
-;; activate platformio-mode when we have an arduino file
-(defun turn-on-pio () (platformio-mode 1))
-(define-derived-mode arduino-mode c++-mode "Arduino")
-
+;; TODO remove?
 ;; https://code.whatever.social/exchange/emacs/questions/20954/compile-from-parent-directory-in-emacs#20964
 (defun my-compile-project ()
   (interactive)
@@ -225,7 +201,6 @@
          (compilation-read-command nil))
     (call-interactively 'compile)))
 
-;; TODO figure out better way + comint or no?
 (defun jet/project-compile-build () "Run `make' in the project root."
   (interactive)
   (declare (interactive-only compile))
@@ -246,7 +221,7 @@
              compilation-buffer-name-function)))
     (compile "make test")))
 
-
+;; keep these
 (defun jet/mode-recompile () "Recompile a project based on its type" (interactive)
   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
 	((eq major-mode 'c++-mode) (jet/project-compile-build));(my-compile-project))
@@ -274,16 +249,16 @@
          ("\\<\\(FIXME\\(?:(.*)\\)?:?\\)\\>" 1 'error prepend)
 	 ("\\<\\(WIP\\(?:(.*)\\)?:?\\)\\>" 1 'info-title-2 prepend))))
 
-(defun comment-auto-fill ()
-  (setq-local comment-auto-fill-only-comments t)
-  (auto-fill-mode 1))
-
 (defun jet/grep-for-tasks () "grep for tasks" (interactive)
   (consult-ripgrep (consult--project-root) "\\(TODO\\|FIXME\\|WIP\\)"))
 
 (defun colorize-compilation-buffer ()
   (require 'ansi-color)
   (ansi-color-apply-on-region compilation-filter-start (point)))
+
+(defun comment-auto-fill ()
+  (setq-local comment-auto-fill-only-comments t)
+  (auto-fill-mode 1))
 
 (defun jet/dashboard ()
   (interactive)

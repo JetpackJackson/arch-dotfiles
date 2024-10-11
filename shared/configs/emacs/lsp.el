@@ -4,10 +4,15 @@
 
 ;; nice markers for indents
 (use-package indent-bars :ensure t ;:demand t
-  :hook ((c++-mode c-mode python-mode) . indent-bars-mode))
+  :hook ((c++-mode c-mode python-mode rust-mode) . indent-bars-mode))
+
+;; platformio mode
+(use-package platformio-mode :ensure t)
+;; activate platformio-mode when we have an arduino file
+(defun turn-on-pio () (platformio-mode 1))
+(define-derived-mode arduino-mode c++-mode "Arduino")
 
 ;; assorted modes
-(use-package platformio-mode :ensure t)
 (use-package fish-mode :ensure t)
 (use-package lua-mode :ensure t)
 (use-package rust-mode :ensure t)
@@ -66,7 +71,6 @@
   (add-hook mode (lambda ()
 		   (display-line-numbers-mode 0)
 		   (visual-line-mode))))
-
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (setq eglot-autoshutdown t)
@@ -113,7 +117,7 @@
 ;; snippets
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all)
   :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode rust-mode) . yas-minor-mode))
-;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; check if scheme has snippets elsewhere
+;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; TODO check if scheme has snippets elsewhere
 
 ;; code indents
 (setq c-default-style "k&r"
