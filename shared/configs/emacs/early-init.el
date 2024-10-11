@@ -131,8 +131,8 @@
 ;; https://github.com/meow-edit/meow/issues/246#issuecomment-1126998900
 (custom-theme-set-faces
    'user
-   '(meow-keypad-indicator  ((t (:background "#444488" :foreground "white"))))
-   '(meow-insert-indicator  ((t (:background "dark sea green" :foreground "black"))))
+   '(meow-insert-indicator  ((t (:background "#444488" :foreground "white"))))
+   '(meow-keypad-indicator  ((t (:background "#85d3f2" :foreground "black"))))
    '(meow-normal-indicator  ((t (:background "gray35" :foreground "white"))))
    '(meow-motion-indicator  ((t (:background "khaki" :foreground "black"))))
    '(meow-beacon-indicator  ((t (:background "dark orange" :foreground "black")))))
