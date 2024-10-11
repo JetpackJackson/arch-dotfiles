@@ -23,13 +23,13 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(use-package uniquify)
-(use-package valign :ensure t)
-(use-package shrink-path :ensure t :demand t)
-(use-package which-key :ensure t :demand t :config (which-key-mode))
-(use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-(use-package magit :ensure t :bind (("C-c g" . magit-status)))
-(use-package eat :ensure t)
+(use-package uniquify :ensure nil)
+(use-package valign)
+(use-package shrink-path :demand t)
+(use-package which-key :demand t :config (which-key-mode))
+(use-package rainbow-delimiters :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(use-package magit :bind (("C-c g" . magit-status)))
+(use-package eat)
 (with-eval-after-load 'eat
   (set-face-attribute 'ansi-color-blue nil :background "#76cce0" :foreground "#76cce0")
   (set-face-attribute 'ansi-color-cyan nil :background "#85d3f2" :foreground "#85d3f2")
@@ -40,7 +40,7 @@
   (set-face-attribute 'ansi-color-white nil :background "#e2e2e3" :foreground "#e2e2e3"))
 
 ;; dired
-(use-package dirvish :ensure t :init (dirvish-override-dired-mode)
+(use-package dirvish :init (dirvish-override-dired-mode)
   :custom
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
    '(("g" "~/"                               "home")
@@ -96,27 +96,24 @@
    ("<left>" . dired-up-directory)
    ("<right>" . dired-find-file)))
 
-(use-package project)
-  ;; Cannot use :hook because 'project-find-functions does not end in -hook
-  ;; Cannot use :init (must use :config) because otherwise
-  ;; project-find-functions is not yet initialized.
-;  :config
-;  (add-hook 'project-find-functions #'my-project-override))
-(use-package project-butler :ensure t :demand t)
-(customize-set-variable 'project-butler-projects-list
-                        '(("~/docs/notes/school/COP3503C/project3-p3/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
-;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
-(keymap-set project-prefix-map "k" #'project-butler-cleanup)
+(use-package project :ensure nil)
+
+;; (use-package project-butler :ensure t :demand t)
+;; ;(customize-set-variable 'project-butler-projects-list
+;; ;                        '(("~/docs/notes/school/COP3503C/project3-p3/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
+;; ;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
+;; (keymap-set project-prefix-map "k" #'project-butler-cleanup)
 
 ;; path
-(use-package exec-path-from-shell :ensure t :demand t
+(use-package exec-path-from-shell :demand t
   :init (when (daemonp)
 	  (require 'exec-path-from-shell)
 	  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "GUILE_LOAD_PATH" "GUILE_LOAD_COMPILED_PATH" "RUSTUP_HOME" "CARGO_HOME"))
 	    (add-to-list 'exec-path-from-shell-variables var))
 	  (exec-path-from-shell-initialize)))
 
-(use-package recentf :demand t
+;; recentf
+(use-package recentf :ensure nil :demand t
   :config
   (setq recentf-max-menu-items 10)
   (setq recentf-max-saved-items 10)
@@ -128,12 +125,12 @@
   (recentf-mode 1))
 
 ;; vertico
-(use-package vertico :ensure t
+(use-package vertico
   :custom
   (vertico-count 20) ;; Show more candidates
   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
   :init (vertico-mode)
-  :config (use-package savehist :ensure t :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
+  :config (use-package savehist :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package vertico-directory
   :after vertico
   :ensure nil
@@ -147,7 +144,7 @@
 
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
 ;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
-(use-package select
+(use-package select :ensure nil
   :demand t
   :custom
   (save-interprogram-paste-before-kill t)
@@ -171,7 +168,7 @@
           interprogram-paste-function 'wl-paste-handler)))
 
 ;; org
-(use-package org-fragtog :ensure t)
+(use-package org-fragtog)
 (use-package org :ensure org-contrib ;:demand t
     :bind (:map
            org-mode-map
@@ -223,7 +220,7 @@
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ;; does not work in emacs 30, missing compat-macs
-(use-package org-timeblock :ensure t)
+(use-package org-timeblock)
 
 ;; templates
 (setq org-capture-templates
@@ -262,7 +259,7 @@
 
 ;; ligatures in GUI emacs
 (if (display-graphic-p)
-    (use-package fira-code-mode :ensure t
+    (use-package fira-code-mode
       :custom (fira-code-mode-disabled-ligatures '("[]" "x" ":" "::" ":::"))
       :hook prog-mode))
 

@@ -106,7 +106,7 @@
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . ignore)))
-(use-package meow :ensure t :demand t)
+(use-package meow :demand t)
 (meow-setup)
 (meow-global-mode 1)
 

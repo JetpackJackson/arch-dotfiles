@@ -1,27 +1,27 @@
 ;; -*- lexical-binding: t -*-
-(use-package guix :ensure t)
-(use-package envrc :ensure t :hook (after-init . envrc-global-mode))
+(use-package guix)
+(use-package envrc :hook (after-init . envrc-global-mode))
 
 ;; nice markers for indents
-(use-package indent-bars :ensure t ;:demand t
+(use-package indent-bars ;:demand t
   :hook ((c++-mode c-mode python-mode rust-mode) . indent-bars-mode))
 
 ;; platformio mode
-(use-package platformio-mode :ensure t)
+(use-package platformio-mode)
 ;; activate platformio-mode when we have an arduino file
 (defun turn-on-pio () (platformio-mode 1))
 (define-derived-mode arduino-mode c++-mode "Arduino")
 
 ;; assorted modes
-(use-package fish-mode :ensure t)
-(use-package lua-mode :ensure t)
-(use-package rust-mode :ensure t)
+(use-package fish-mode)
+(use-package lua-mode)
+(use-package rust-mode)
 (add-hook 'rust-mode-hook
           (lambda () (setq indent-tabs-mode nil)))
-(use-package cargo-mode :ensure t
+(use-package cargo-mode
   :hook ((rust-mode) . cargo-minor-mode))
-(use-package geiser-guile :ensure t)
-(use-package eglot-java :ensure t
+(use-package geiser-guile)
+(use-package eglot-java
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
   :hook (((java-mode) . 'eglot-java-mode)))
 
@@ -33,7 +33,7 @@
         (setq eglot-ltex-communication-channel 'tcp))         ; 'stdio or 'tcp
 
 ;; lisp goodies
-(use-package sly :ensure t
+(use-package sly
   :config
   (setq sly-lisp-host "127.0.0.1")
   (setq inferior-lisp-program "sbcl")
@@ -41,7 +41,7 @@
 	 sly-mode-map
 	 ("C-c e f" . sly-eval-defun)))
 
-(use-package eglot :ensure t
+(use-package eglot
     :bind (:map
            eglot-mode-map
            ("C-c e a" . eglot-code-actions)
@@ -78,7 +78,7 @@
 ;; change autocomplete method based on emacs version
 (defun jet/use-corfu ()
   ;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
-  (use-package corfu :ensure t :init (global-corfu-mode)
+  (use-package corfu :init (global-corfu-mode)
     :custom (corfu-auto t) (corfu-preselect 'prompt)
     :bind (("<TAB>" . completion-at-point)))
   ;; Enable auto completion and configure quitting
@@ -99,7 +99,7 @@
 
 (defun jet/use-company ()
   (use-package company-c-headers)
-  (use-package company :ensure t :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
+  (use-package company :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))
   (with-eval-after-load 'company
     (define-key company-active-map
 		(kbd "TAB")
@@ -115,7 +115,7 @@
   (jet/use-company))
 
 ;; snippets
-(use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all)
+(use-package yasnippet :config (use-package yasnippet-snippets) (yas-reload-all)
   :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode rust-mode) . yas-minor-mode))
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; TODO check if scheme has snippets elsewhere
 
