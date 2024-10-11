@@ -74,3 +74,4 @@
       evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
       evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
       evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
+(setq evil-mode-line-format '(before . mode-line-front-space))

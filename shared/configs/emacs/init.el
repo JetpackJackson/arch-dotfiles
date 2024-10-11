@@ -19,50 +19,6 @@
 ;; - C-h C-q: Pull up the quick-help cheatsheet
 
 ;;; Code:
-
-;(defvar elpaca-installer-version 0.7)
-;(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-;(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-;(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
-;(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-;                              :ref nil :depth 1
-;                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-;                              :build (:not elpaca--activate-package)))
-;(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
-;       (build (expand-file-name "elpaca/" elpaca-builds-directory))
-;       (order (cdr elpaca-order))
-;       (default-directory repo))
-;  (add-to-list 'load-path (if (file-exists-p build) build repo))
-;  (unless (file-exists-p repo)
-;    (make-directory repo t)
-;    (when (< emacs-major-version 28) (require 'subr-x))
-;    (condition-case-unless-debug err
-;        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-;                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-;                                                 ,@(when-let ((depth (plist-get order :depth)))
-;                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
-;                                                 ,(plist-get order :repo) ,repo))))
-;                 ((zerop (call-process "git" nil buffer t "checkout"
-;                                       (or (plist-get order :ref) "--"))))
-;                 (emacs (concat invocation-directory invocation-name))
-;                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-;                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-;                 ((require 'elpaca))
-;                 ((elpaca-generate-autoloads "elpaca" repo)))
-;            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-;          (error "%s" (with-current-buffer buffer (buffer-string))))
-;      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
-;  (unless (require 'elpaca-autoloads nil t)
-;    (require 'elpaca)
-;    (elpaca-generate-autoloads "elpaca" repo)
-;    (load "./elpaca-autoloads")))
-;(add-hook 'after-init-hook #'elpaca-process-queues)
-;(elpaca `(,@elpaca-order))
-;(elpaca elpaca-use-package
-;  ;; Enable use-package :ensure support for Elpaca.
-;  (elpaca-use-package-mode))
-
-
 (require 'use-package)
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -215,6 +171,7 @@
           interprogram-paste-function 'wl-paste-handler)))
 
 ;; org
+(use-package org-fragtog :ensure t)
 (use-package org :ensure org-contrib ;:demand t
     :bind (:map
            org-mode-map
@@ -267,8 +224,8 @@
 
 ;; does not work in emacs 30, missing compat-macs
 (use-package org-timeblock :ensure t)
-(use-package org-fragtog :ensure t)
 
+;; templates
 (setq org-capture-templates
       '(
 	("g" "General To-Do"
@@ -315,8 +272,6 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c l") #'org-store-link)
 
-;; to sort region like in neovim, M-h and then M-x sort-line
-
 ;; C-SPC leader key without any packages
 ;; https://protesilaos.com/codelog/2024-01-29-emacs-prefix-map/
 (defvar-keymap test-prefix-org-map
@@ -358,7 +313,6 @@
 
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
-;;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
 (unless (cadr command-line-args) (jet/dashboard))
 (setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (recentf-open-files))))
 
@@ -368,8 +322,8 @@
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
-;(load-file "~/.config/emacs/evil.el")
 (load-file "~/.config/emacs/meow.el")
+;(org-babel-load-file "~/.config/emacs/init.org")
 
 ;; set modeline stuff here now because we want it to pick up meow
 ;; related stuff
