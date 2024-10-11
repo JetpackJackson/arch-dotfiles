@@ -39,6 +39,8 @@
 ;; TODO remove? learn how to use better?
 (use-package evil-surround :ensure t :demand t
   :config (global-evil-surround-mode 1))
+(setq evil-disable-insert-state-bindings t)
+(setq evil-default-state 'emacs)
 
 (define-prefix-command 'my-leader-map)
 (keymap-set evil-motion-state-map "SPC" 'my-leader-map)
@@ -63,3 +65,12 @@
     "," 'uncomment-region
     "e" 'jet/eval-defun
     "t" 'eat-other-window)
+
+;; change tag color
+(setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
+      evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
+      evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
+      evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
+      evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
+      evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))

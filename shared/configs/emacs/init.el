@@ -67,6 +67,8 @@
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+(use-package uniquify)
+(use-package valign :ensure t)
 (use-package shrink-path :ensure t :demand t)
 (use-package which-key :ensure t :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :ensure t :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -81,8 +83,7 @@
   (set-face-attribute 'ansi-color-yellow nil :background "#e7c664" :foreground "#e7c664")
   (set-face-attribute 'ansi-color-white nil :background "#e2e2e3" :foreground "#e2e2e3"))
 
-(use-package uniquify)
-
+;; dired
 (use-package dirvish :ensure t :init (dirvish-override-dired-mode)
   :custom
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
@@ -219,7 +220,6 @@
            org-mode-map
            ;; ("C-c o e" . org-export-dispatch) ;; C-c C-e
 	   ("C-c o f" . org-open-at-point))
-
   :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
   (setq org-latex-listings 'minted
 	org-latex-packages-alist '(("" "minted"))
@@ -265,8 +265,7 @@
 (add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
-(use-package valign :ensure t)
-;(add-hook 'org-mode-hook 'valign-mode)
+;; does not work in emacs 30, missing compat-macs
 (use-package org-timeblock :ensure t)
 (use-package org-fragtog :ensure t)
 
@@ -304,20 +303,21 @@
         ;("OBE" . (:foreground "LimeGreen" :weight bold))
         ("WONT-DO" . (:foreground "LimeGreen" :weight bold))))
 
+;; ligatures in GUI emacs
 (if (display-graphic-p)
     (use-package fira-code-mode :ensure t
       :custom (fira-code-mode-disabled-ligatures '("[]" "x" ":" "::" ":::"))
       :hook prog-mode))
 
+;; global binds
 (global-set-key (kbd "C-c 0") #'add-file-local-variable-prop-line)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
-;; try out M-SPC or C-SPC as leader key
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c l") #'org-store-link)
 
 ;; to sort region like in neovim, M-h and then M-x sort-line
-(setq evil-disable-insert-state-bindings t)
-(setq evil-default-state 'emacs)
 
+;; C-SPC leader key without any packages
 ;; https://protesilaos.com/codelog/2024-01-29-emacs-prefix-map/
 (defvar-keymap test-prefix-org-map
   "c" #'org-capture
@@ -356,38 +356,6 @@
   "o" `("org" . ,test-prefix-org-map)
   "p" `("project" . ,test-prefix-project-map))
 
-;; (global-set-key (kbd "C-c ,") #'uncomment-region)
-;; (global-set-key (kbd "C-c .") #'comment-line)
-;; (global-set-key (kbd "C-c a") #'org-agenda)
-;; (global-set-key (kbd "C-c b") #'consult-buffer) ;; C-x b
-;; (global-set-key (kbd "C-c cf") #'consult-find) ;; M-s d
-;; (global-set-key (kbd "C-c cm") #'jet/grep-for-tasks)
-;; ;; (global-set-key (kbd "C-c cn") #'consult-flymake)
-;; (global-set-key (kbd "C-c d") #'kill-buffer) ;; C-x k
-;; (global-set-key (kbd "C-c e") #'jet/eval-defun)
-;; (global-set-key (kbd "C-c f") #'find-file) ;; C-x C-f
-;; (global-set-key (kbd "C-c l") #'org-store-link)
-;; (global-set-key (kbd "C-c oc") #'org-capture)
-;; ;(global-set-key (kbd "C-c oe") #'org-export-dispatch)
-;; ;(global-set-key (kbd "C-c of") #'org-open-at-point)
-;; (global-set-key (kbd "C-c ol") #'org-insert-link)
-;; ;; calls org-insert-link with prefix arg to make it always prompt for
-;; ;; a file
-;; ;(global-set-key (kbd "C-c ol") #'jet/org-insert-link)
-;; (global-set-key (kbd "C-c pr") #'jet/mode-recompile)
-;; (global-set-key (kbd "C-c pu") #'jet/mode-upload-run)
-;; (global-set-key (kbd "C-c t") #'eat-other-window)
-;; (global-set-key (kbd "C-c v") #'ibuffer-other-window)
-;; ;(global-set-key (kbd "C-c g") #'consult-bookmark)
-;; ;(global-set-key (kbd "C-c w") #'delete-other-windows)
-
-;; ;(global-unset-key (kbd "C-w"))
-;; (global-set-key (kbd "C-c q") #'delete-other-windows)
-;; ;(global-unset-key (kbd "C-s"))
-;; ;(global-set-key (kbd "C-c C-s") #'isearch-forward)
-;; ;(global-set-key (kbd "C-c :w") #'save-buffer)
-
-
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
 ;;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (get-buffer (recentf-open-files)))))
@@ -403,6 +371,8 @@
 ;(load-file "~/.config/emacs/evil.el")
 (load-file "~/.config/emacs/meow.el")
 
+;; set modeline stuff here now because we want it to pick up meow
+;; related stuff
 (setq-default mode-line-format
               '("%e"
 		mode-line-front-space ;; evil-mode-line-format displays here

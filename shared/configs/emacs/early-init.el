@@ -117,25 +117,6 @@
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
 (require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
 
-;; MODELINE
-;; change tag color
-
-(setq evil-normal-state-tag   (propertize "  NORMAL " 'face '((:background "gray35" :foreground "white")))
-      evil-emacs-state-tag    (propertize "  EMACS  " 'face '((:background "#444488" :foreground "white")))
-      evil-insert-state-tag   (propertize "  INSERT " 'face '((:background "dark sea green" :foreground "black")))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "dark orange" :foreground "black")))
-      evil-motion-state-tag   (propertize "  MOTION " 'face '((:background "khaki" :foreground "black")))
-      evil-visual-state-tag   (propertize "  VISUAL " 'face '((:background "light salmon" :foreground "black")))
-      evil-operator-state-tag (propertize " OPERATE " 'face '((:background "sandy brown" :foreground "black"))))
-
-;; https://github.com/meow-edit/meow/issues/246#issuecomment-1126998900
-(custom-theme-set-faces
-   'user
-   '(meow-insert-indicator  ((t (:background "#444488" :foreground "white"))))
-   '(meow-keypad-indicator  ((t (:background "#85d3f2" :foreground "black"))))
-   '(meow-normal-indicator  ((t (:background "gray35" :foreground "white"))))
-   '(meow-motion-indicator  ((t (:background "khaki" :foreground "black"))))
-   '(meow-beacon-indicator  ((t (:background "dark orange" :foreground "black")))))
 
 (setq mode-line-position (list "(%l,%c)"))
 (setq mode-line-front-space nil)

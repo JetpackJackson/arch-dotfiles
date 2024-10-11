@@ -71,7 +71,7 @@
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (setq eglot-autoshutdown t)
 
-
+;; change autocomplete method based on emacs version
 (defun jet/use-corfu ()
   ;;(use-package corfu-terminal :ensure t :demand t :init (corfu-terminal-mode))
   (use-package corfu :ensure t :init (global-corfu-mode)
@@ -106,12 +106,9 @@
                   (interactive)
                   (company-complete-common-or-cycle -1)))))
 
-
-;; corfu
 (if (version= emacs-version "30.0.60")
     (jet/use-corfu)
   (jet/use-company))
-
 
 ;; snippets
 (use-package yasnippet :ensure t :config (use-package yasnippet-snippets :ensure t) (yas-reload-all)
