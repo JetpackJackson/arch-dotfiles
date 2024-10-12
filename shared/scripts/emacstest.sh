@@ -10,4 +10,4 @@
 #else if test $TERM = "xterm-kitty"
 #    emacsclient -nw $argv
 #end
-TERM=xterm-direct emacsclient -t $argv
+TERM=xterm-direct emacsclient -t -a "" $argv
