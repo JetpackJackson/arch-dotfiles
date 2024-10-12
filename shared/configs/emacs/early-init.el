@@ -42,8 +42,8 @@
 ")
 
 ;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
-(setq use-package-always-defer t)
-(setq use-package-always-ensure t)
+(setq use-package-always-defer t
+      use-package-always-ensure t)
 (setq uniquify-buffer-name-style 'forward
       window-resize-pixelwise t
       frame-resize-pixelwise t
@@ -60,20 +60,27 @@
 (savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
 (global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
 
+;; autosave
 (auto-save-mode 1)
 (auto-save-visited-mode 1)
-(setq auto-save-interval 5)
-(setq auto-save-timeout 3)
- 
+(setq auto-save-interval 5
+      auto-save-timeout 3)
+
+;; line nums
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
- 
+
+;; ediff
 (setq ediff-split-window-function 'split-window-horizontally
-      truncate-partial-width-windows t)
-(setq split-width-threshold 100)
+      truncate-partial-width-windows t
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      split-width-threshold 100)
+
+;; eldoc
 (setq eldoc-echo-area-use-multiline-p nil) ;; make eldoc quieter
 (global-eldoc-mode -1) ;; disable eldoc instead
 
+;; gui
 (setq inhibit-splash-screen t ;; no thanks
       use-file-dialog nil ;; don't use system file dialog
       tab-bar-new-button-show nil ;; don't show new tab button
@@ -84,23 +91,24 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ;; No sound
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
+(setq visible-bell t
+      ring-bell-function 'ignore)
 
+;; move around with alt+up/down/left/right
 (windmove-default-keybindings 'meta)
 
 (setq fill-column 80)
 
-(setq browse-url-firefox-new-window-is-tab t)
-(setq browse-url-firefox-program "firefox")
-(setq browse-url-generic-program "badwolf")
+(setq browse-url-firefox-new-window-is-tab t
+      browse-url-firefox-program "firefox"
+      browse-url-generic-program "badwolf")
 (setq org-roam-ui-browser-function 'browse-url-generic)
 
 (setenv "LANG" "en_US.UTF-8")
 (setenv "LC_ALL" "en_US.UTF-8")
 
- ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
- ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
+;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
+;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
 (add-to-list 'term-file-aliases '("foot" . "xterm"))
 
 ;; clean up elpa stuff
