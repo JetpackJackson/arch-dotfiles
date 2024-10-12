@@ -106,9 +106,11 @@
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . ignore)))
-(use-package meow :demand t)
-(meow-setup)
-(meow-global-mode 1)
+(use-package meow :demand t
+  :config (meow-setup)
+  :hook (after-init . meow-global-mode))
+;(meow-setup)
+;(meow-global-mode 1)
 
 ;; https://github.com/meow-edit/meow/issues/246#issuecomment-1126998900
 (custom-theme-set-faces

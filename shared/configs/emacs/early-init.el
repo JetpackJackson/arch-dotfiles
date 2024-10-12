@@ -1,17 +1,6 @@
 ;; -*- lexical-binding: t -*-
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 
-;; EMACS 30
-(setq indent-tabs-mode nil)
-(setq tab-always-indent t)
-
-;; (if (version<= "30.0.60" emacs-version)
-;;     (font-lock-update)
-;;   (message "foo"))
-
-;; uncomment for elpaca
-;(setq package-enable-at-startup nil)
-
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
 (setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
 
@@ -41,81 +30,21 @@
 
 ")
 
-;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
-(setq use-package-always-defer t
-      use-package-always-ensure t)
-(setq uniquify-buffer-name-style 'forward
-      window-resize-pixelwise t
-      frame-resize-pixelwise t
-      load-prefer-newer t
-      backup-by-copying t
-      ;; Backups are placed into your Emacs directory, e.g. ~/.config/emacs/backups
-      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
-      ;; put M-x customize changes into a separate file
-      custom-file (expand-file-name "custom.el" user-emacs-directory))
-
-(electric-pair-mode t) ;; Automatically insert closing parens
-(show-paren-mode 1) ;; Visualize matching parens
-(save-place-mode t) ;;; Automatically save your place in files
-(savehist-mode t) ;;; Save history in minibuffer to keep recent commands easily accessible
-(global-auto-revert-mode t) ;; Keep files up-to-date when they change outside Emacs
-
-;; autosave
-(auto-save-mode 1)
-(auto-save-visited-mode 1)
-(setq auto-save-interval 5
-      auto-save-timeout 3)
-
-;; line nums
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
-
-;; ediff
-(setq ediff-split-window-function 'split-window-horizontally
-      truncate-partial-width-windows t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      split-width-threshold 100)
-
-;; eldoc
-(setq eldoc-echo-area-use-multiline-p nil) ;; make eldoc quieter
-(global-eldoc-mode -1) ;; disable eldoc instead
-
-;; gui
-(setq inhibit-splash-screen t ;; no thanks
+(setq inhibit-splash-screen t
       use-file-dialog nil ;; don't use system file dialog
       tab-bar-new-button-show nil ;; don't show new tab button
       tab-bar-close-button-show nil ;; don't show tab close button
       tab-line-close-button-show nil) ;; don't show tab close button
-;; Remove extra UI clutter by hiding the scrollbar, menubar, and toolbar.
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-;; No sound
-(setq visible-bell t
-      ring-bell-function 'ignore)
-
-;; move around with alt+up/down/left/right
-(windmove-default-keybindings 'meta)
-
-(setq fill-column 80)
-
-(setq browse-url-firefox-new-window-is-tab t
-      browse-url-firefox-program "firefox"
-      browse-url-generic-program "badwolf")
-(setq org-roam-ui-browser-function 'browse-url-generic)
-
-(setenv "LANG" "en_US.UTF-8")
-(setenv "LC_ALL" "en_US.UTF-8")
-
-;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
-;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
-(add-to-list 'term-file-aliases '("foot" . "xterm"))
 
 ;; clean up elpa stuff
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
 (setcar native-comp-eln-load-path
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
-(require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
+;(require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
+;(startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
 
 ;; modeline functions
 (setq mode-line-position (list "(%l,%c)"))
@@ -132,7 +61,7 @@
   "Face used for buffer id part of the mode line when the buffer is read-only."
   :group 'mode-line-faces)
 
-;; FIXME errors with special buffers not having a file dir
+;; fixed?
 (defvar trunc-name)
 (defun jet/modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
        ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
@@ -147,7 +76,6 @@
         (setq trunc-name (shrink-path-dirs (file-name-directory buffer-file-truename)))))
     (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
           (t (propertize trunc-name 'face '(:foreground "#ffffff"))))))
-
 
 ;;; FUNCTIONS
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode

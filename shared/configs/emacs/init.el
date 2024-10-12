@@ -19,12 +19,75 @@
 ;; - C-h C-q: Pull up the quick-help cheatsheet
 
 ;;; Code:
+;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
+(setq use-package-always-defer t
+      use-package-always-ensure t)
+
 (require 'use-package)
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(use-package uniquify :ensure nil)
+(use-package emacs :ensure nil
+  :config
+  (setq window-resize-pixelwise t
+      	frame-resize-pixelwise t
+     	load-prefer-newer t
+	backup-by-copying t
+	;; Backups are placed into your Emacs directory, e.g. ~/.config/emacs/backups
+	backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+	;; put M-x customize changes into a separate file
+	custom-file (expand-file-name "custom.el" user-emacs-directory))
+  ;; Automatically insert closing parens
+  (electric-pair-mode t) 
+  ;; Visualize matching parens
+  (show-paren-mode 1) 
+  ;; Automatically save your place in files
+  (save-place-mode t) 
+  ;; Save history in minibuffer to keep recent commands easily accessible
+  (savehist-mode t) 
+  ;; Keep files up-to-date when they change outside Emacs
+  (global-auto-revert-mode t)
+
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode)
+  ;; No sound
+  (setq visible-bell t
+	ring-bell-function 'ignore)
+  ;; move around with alt+up/down/left/right
+  (windmove-default-keybindings 'meta)
+  (setq browse-url-firefox-new-window-is-tab t
+	browse-url-firefox-program "firefox"
+	browse-url-generic-program "badwolf")
+
+  (setenv "LANG" "en_US.UTF-8")
+  (setenv "LC_ALL" "en_US.UTF-8")
+
+  ;; https://code.whatever.social/exchange/emacs/questions/56214/use-the-terminal-background-color-for-the-emacs-nw
+  ;; https://www.reddit.com/r/emacs/comments/10lkwgr/emacsclient_in_terminal_doesnt_show_theme/
+  (add-to-list 'term-file-aliases '("foot" . "xterm"))) 
+
+(use-package auto-save :ensure nil
+  :init
+  (auto-save-mode 1)
+  (auto-save-visited-mode 1)
+  :config (setq auto-save-interval 5
+		auto-save-timeout 3))
+
+(use-package ediff :ensure nil
+  :config
+  (setq ediff-split-window-function 'split-window-horizontally
+	truncate-partial-width-windows t
+	ediff-window-setup-function 'ediff-setup-windows-plain
+	split-width-threshold 100))
+
+(use-package eldoc :ensure nil
+  :config (setq eldoc-echo-area-use-multiline-p nil)) ;; make eldoc quieter
+
+(use-package uniquify :ensure nil
+  :config (setq uniquify-buffer-name-style 'forward))
+
 (use-package valign)
+(use-package project :ensure nil)
 (use-package shrink-path :demand t)
 (use-package which-key :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
@@ -39,70 +102,63 @@
   (set-face-attribute 'ansi-color-yellow nil :background "#e7c664" :foreground "#e7c664")
   (set-face-attribute 'ansi-color-white nil :background "#e2e2e3" :foreground "#e2e2e3"))
 
+;; TODO keep or remove?
 ;; dired
-(use-package dirvish :init (dirvish-override-dired-mode)
-  :custom
-  (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
-   '(("g" "~/"                               "home")
-     ("d" "~/dl/"                            "downloads")
-     ("m" "/run/media/"                      "drives")
-     ("t" "~/.cache/mytrash/"                "trash")
-     ("c" "~/.local/share/"                  "data")
-     ("n" "~/docs/notes/notes-zettelkasten/" "notes")
-     ("p" "~/docs/notes/projects/git/"       "projects")
-     ("s" "~/docs/notes/school/"             "school")))
-  :config
-  (dirvish-peek-mode) ; Preview files in minibuffer
-  (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
-  (setq dirvish-open-with-programs
-	'((("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
-	  "/usr/bin/mpv" "--profile=builtin-pseudo-gui" "%f")
-	 (("f4v" "rmvb" "wvx" "wmx" "wmv" "wm" "asx" "mk3d" "mkv" "fxm" "flv" "axv" "webm" "viv" "yt" "s1q" "smo" "smov" "ssw" "sswf" "s14" "s11" "smpg" "smk" "bk2" "bik" "nim" "pyv" "m4u" "mxu" "fvt" "dvb" "uvvv" "uvv" "uvvs" "uvs" "uvvp" "uvp" "uvvu" "uvu" "uvvm" "uvm" "uvvh" "uvh" "ogv" "m2v" "m1v" "m4v" "mpg4" "mp4" "mjp2" "mj2" "m4s" "3gpp2" "3g2" "3gpp" "3gp" "avi" "mov" "movie" "mpe" "mpeg" "mpegv" "mpg" "mpv" "qt" "vbs" "gif")
-	  "mpv" "%f")
-	 (("jpg" "jpeg" "png" "tga" "webp")
-	  "feh" "%f")
-	 (("pdf" "epub")
-	  "zathura" "%f")
-	 (("ods" "odt" "ppt" "pptx" "doc" "docx" "xlsx" "csv")
-	  "libreoffice" "%f")))
-  (setq dirvish-hide-details nil)
-  (setq dirvish-mode-line-format
-        '(:left (sort symlink) :right (omit yank index)))
-  (setq dirvish-attributes
-        '(file-time file-size collapse subtree-state vc-state git-msg))
-  (setq delete-by-moving-to-trash t)
-  (setq dired-listing-switches
-        "-l --almost-all --human-readable --group-directories-first --no-group")
-  :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-  (("C-c f" . dirvish-fd)
-   :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
-   ("g"   . dirvish-quick-access) ;; binds from lf config
-   ("f"   . dirvish-file-info-menu)
-   ("y"   . dirvish-yank-menu)
-   ("N"   . dirvish-narrow)
-   ("^"   . dirvish-history-last)
-   ("h"   . dirvish-history-jump) ; remapped `describe-mode'
-   ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
-   ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
-   ("TAB" . dirvish-subtree-toggle)
-   ("M-f" . dirvish-history-go-forward)
-   ("M-b" . dirvish-history-go-backward)
-   ("M-l" . dirvish-ls-switches-menu)
-   ("M-m" . dirvish-mark-menu)
-   ("M-t" . dirvish-layout-toggle)
-   ("M-s" . dirvish-setup-menu)
-   ("M-e" . dirvish-emerge-menu)
-   ("M-j" . dirvish-fd-jump)
-   ("<left>" . dired-up-directory)
-   ("<right>" . dired-find-file)))
-
-(use-package project :ensure nil)
-
-;; (use-package project-butler :ensure t :demand t)
-;; ;(customize-set-variable 'project-butler-projects-list
-;; ;                        '(("~/docs/notes/school/COP3503C/project3-p3/" . ("1|2<" ("src/main.cpp" "src/game_gui.h")))))
-;; ;; Replace the binding C-x p k, originally bound to `project-kill-buffers'
-;; (keymap-set project-prefix-map "k" #'project-butler-cleanup)
+;; (use-package dirvish :init (dirvish-override-dired-mode)
+;;   :custom
+;;   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
+;;    '(("g" "~/"                               "home")
+;;      ("d" "~/dl/"                            "downloads")
+;;      ("m" "/run/media/"                      "drives")
+;;      ("t" "~/.cache/mytrash/"                "trash")
+;;      ("c" "~/.local/share/"                  "data")
+;;      ("n" "~/docs/notes/notes-zettelkasten/" "notes")
+;;      ("p" "~/docs/notes/projects/git/"       "projects")
+;;      ("s" "~/docs/notes/school/"             "school")))
+;;   :config
+;;   (dirvish-peek-mode) ; Preview files in minibuffer
+;;   (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
+;;   (setq dirvish-open-with-programs
+;; 	'((("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
+;; 	  "/usr/bin/mpv" "--profile=builtin-pseudo-gui" "%f")
+;; 	 (("f4v" "rmvb" "wvx" "wmx" "wmv" "wm" "asx" "mk3d" "mkv" "fxm" "flv" "axv" "webm" "viv" "yt" "s1q" "smo" "smov" "ssw" "sswf" "s14" "s11" "smpg" "smk" "bk2" "bik" "nim" "pyv" "m4u" "mxu" "fvt" "dvb" "uvvv" "uvv" "uvvs" "uvs" "uvvp" "uvp" "uvvu" "uvu" "uvvm" "uvm" "uvvh" "uvh" "ogv" "m2v" "m1v" "m4v" "mpg4" "mp4" "mjp2" "mj2" "m4s" "3gpp2" "3g2" "3gpp" "3gp" "avi" "mov" "movie" "mpe" "mpeg" "mpegv" "mpg" "mpv" "qt" "vbs" "gif")
+;; 	  "mpv" "%f")
+;; 	 (("jpg" "jpeg" "png" "tga" "webp")
+;; 	  "feh" "%f")
+;; 	 (("pdf" "epub")
+;; 	  "zathura" "%f")
+;; 	 (("ods" "odt" "ppt" "pptx" "doc" "docx" "xlsx" "csv")
+;; 	  "libreoffice" "%f")))
+;;   (setq dirvish-hide-details nil)
+;;   (setq dirvish-mode-line-format
+;;         '(:left (sort symlink) :right (omit yank index)))
+;;   (setq dirvish-attributes
+;;         '(file-time file-size collapse subtree-state vc-state git-msg))
+;;   (setq delete-by-moving-to-trash t)
+;;   (setq dired-listing-switches
+;;         "-l --almost-all --human-readable --group-directories-first --no-group")
+;;   :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
+;;   (("C-c f" . dirvish-fd)
+;;    :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
+;;    ("g"   . dirvish-quick-access) ;; binds from lf config
+;;    ("f"   . dirvish-file-info-menu)
+;;    ("y"   . dirvish-yank-menu)
+;;    ("N"   . dirvish-narrow)
+;;    ("^"   . dirvish-history-last)
+;;    ("h"   . dirvish-history-jump) ; remapped `describe-mode'
+;;    ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
+;;    ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
+;;    ("TAB" . dirvish-subtree-toggle)
+;;    ("M-f" . dirvish-history-go-forward)
+;;    ("M-b" . dirvish-history-go-backward)
+;;    ("M-l" . dirvish-ls-switches-menu)
+;;    ("M-m" . dirvish-mark-menu)
+;;    ("M-t" . dirvish-layout-toggle)
+;;    ("M-s" . dirvish-setup-menu)
+;;    ("M-e" . dirvish-emerge-menu)
+;;    ("M-j" . dirvish-fd-jump)
+;;    ("<left>" . dired-up-directory)
+;;    ("<right>" . dired-find-file)))
 
 ;; path
 (use-package exec-path-from-shell :demand t
@@ -115,13 +171,11 @@
 ;; recentf
 (use-package recentf :ensure nil :demand t
   :config
-  (setq recentf-max-menu-items 10)
-  (setq recentf-max-saved-items 10)
-  (setq recentf-exclude '("emacs/bookmarks" "agenda.org" "custom.el" "Makefile" ".gitignore"))
-  ;(setq recentf-filename-handlers '(shrink-path-file))
-  (setq recentf-filename-handlers '(abbreviate-file-name))
-  ;(setq recentf-menu-action '(shrink-path-file-expand))
-  (setq recentf-filter-changer-current '(recentf-arrange-by-dir))
+  (setq recentf-max-menu-items 10
+	recentf-max-saved-items 10
+	recentf-exclude '("emacs/bookmarks" "agenda.org" "custom.el" "Makefile" ".gitignore")
+	recentf-filename-handlers '(abbreviate-file-name)
+	recentf-filter-changer-current '(recentf-arrange-by-dir))
   (recentf-mode 1))
 
 ;; vertico
@@ -175,6 +229,7 @@
            ;; ("C-c o e" . org-export-dispatch) ;; C-c C-e
 	   ("C-c o f" . org-open-at-point))
   :config (require 'ox-extra) (ox-extras-activate '(ignore-headlines))
+  (setq org-roam-ui-browser-function 'browse-url-generic)
   (setq org-latex-listings 'minted
 	org-latex-packages-alist '(("" "minted"))
 	org-latex-pdf-process
@@ -220,9 +275,8 @@
 (add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ;; does not work in emacs 30, missing compat-macs
-(use-package org-timeblock)
+;(use-package org-timeblock)
 
-;; templates
 (setq org-capture-templates
       '(
 	("g" "General To-Do"
@@ -320,17 +374,13 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/meow.el")
-;(org-babel-load-file "~/.config/emacs/init.org")
 
-;; set modeline stuff here now because we want it to pick up meow
-;; related stuff
+;; set modeline stuff here because we want it to pick up meow
 (setq-default mode-line-format
               '("%e"
-		mode-line-front-space ;; evil-mode-line-format displays here
                 (:eval (meow-indicator))
 		jet/ml-separator
 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		;(:eval (jet/dir-indicator-colorized (shrink-path-dirs (file-name-directory buffer-file-truename))))
 		(:eval (jet/dir-indicator-colorized))
 		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
 		jet/ml-separator
@@ -365,22 +415,3 @@
       (when trg
         (setcar trg "")))))
 (add-hook 'after-change-major-mode-hook 'purge-minor-modes)
-
-
-;; different sonokai, more colorful, not sure if i like
-;(use-package sonokai-emacs
-;  :load-path "~/.cache/emacs/sonokai-emacs")
-;(load "~/.cache/emacs/sonokai-emacs/sonokai-theme.el")
-;(load-theme 'sonokai t)
-
-;; neat theme
-;(use-package weyland-yutani-theme :demand t)
-;(load-theme 'weyland-yutani t)
-
-;; cool theme but errors
-;(use-package timu-spacegrey-theme :demand t)
-;(load-theme 'timu-spacegrey t)
-
-;; cool
-;(use-package spacegray-theme :demand t)
-;(load-theme 'spacegray t)
