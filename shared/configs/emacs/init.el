@@ -402,9 +402,9 @@
 		jet/ml-separator
 		mode-line-position
 		jet/ml-separator
-		mode-line-modes ;; eat doesn't show mode when using mode-name
+		mode-line-modes
 		jet/ml-separator
-		mode--line-format-right-align
+		;mode--line-format-right-align
                 project-mode-line
 		project-mode-line-format
 		mode-line-misc-info))
