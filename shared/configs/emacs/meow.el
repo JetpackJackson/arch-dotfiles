@@ -27,7 +27,7 @@
    '("oe" . org-export-dispatch)
    '("." . comment-region)
    '("," . uncomment-region)
-   '("e" . jet/eval-defun)
+   ;'("e" . jet/eval-defun)
    '("t" . eat-other-window)
    '("q" . delete-other-windows)
 
