@@ -239,6 +239,10 @@
 
 ;; org
 (use-package org-fragtog)
+(add-hook 'org-mode-hook 'org-indent-mode)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'org-fragtog-mode)
+
 (use-package org :ensure org-contrib ;:demand t
     :bind (:map
            org-mode-map
@@ -271,61 +275,49 @@
 		 ("\\chapter{%s}" . "\\chapter*{%s}")
 		 ("\\section{%s}" . "\\section*{%s}")
 		 ("\\subsection{%s}" . "\\subsection*{%s}")
-		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((R . t) (emacs-lisp . t) (java . t) (C . t) (lisp . t) (dot . t) (shell . t)))
-(with-eval-after-load 'org
+		 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t) (emacs-lisp . t) (java . t) (C . t) (lisp . t) (dot . t) (shell . t)))
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
-  (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task))
+  (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task)
+  (setq org-capture-templates
+	'(
+	  ("g" "General To-Do"
+           entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
+           "* TODO [#B] %?\n:Created: %T\n "
+           :empty-lines 0)
+	  ("c" "Code To-Do"
+	   entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
+	   "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
+	   :empty-lines 0)))
+  ;; todo/task states
+  (setq org-todo-keywords
+	;; TODO tweak keywords to fit usage
+	;; ! means add timestamp, @ adds note w/time
+	'((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "WONT-DO(w@/!)" )))
+
+  ;; todo/task colors
+  (setq org-todo-keyword-faces
+	'(
+          ("TODO" . (:foreground "GoldenRod" :weight bold))
+          ("PLANNING" . (:foreground "DeepPink" :weight bold))
+          ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
+          ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
+          ("BLOCKED" . (:foreground "Red" :weight bold))
+          ("DONE" . (:foreground "LimeGreen" :weight bold))
+	  ("WONT-DO" . (:foreground "LimeGreen" :weight bold)))))
 (with-eval-after-load 'org-faces
   (set-face-attribute 'org-level-3 nil :foreground "white")
   (set-face-attribute 'org-agenda-done nil :foreground "gray")
   (set-face-attribute 'org-scheduled nil :foreground "green yellow")
   (set-face-attribute 'org-scheduled-today nil :foreground "green yellow"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
-(add-hook 'org-mode-hook 'org-indent-mode)
-(add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'org-fragtog-mode)
 
 ;; does not work in emacs 30, missing compat-macs
 ;(use-package org-timeblock)
-
-(setq org-capture-templates
-      '(
-	("g" "General To-Do"
-         entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "General Tasks")
-         "* TODO [#B] %?\n:Created: %T\n "
-         :empty-lines 0)
-	("c" "Code To-Do"
-	 entry (file+headline "~/docs/notes/notes-zettelkasten/todo.org" "Code Related Tasks")
-	 "* TODO [#B] %?\n:Created: %T\n%a\nProposed Solution: "
-	 :empty-lines 0)))
-
-;; todo/task states
-(setq org-todo-keywords
-      ;; TODO tweak keywords to fit usage
-      ;; ! means add timestamp, @ adds note w/time
-
-      ;; manual:
-      ;; "With X and Y being either "@" or "!", "X/Y" means
-      ;; use X when entering the state, and use Y when leaving the
-      ;; state if and only if the *target* state does not define X."
-      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "WONT-DO(w@/!)" )))
-
-;; todo/task colors
-(setq org-todo-keyword-faces
-      '(
-        ("TODO" . (:foreground "GoldenRod" :weight bold))
-        ("PLANNING" . (:foreground "DeepPink" :weight bold))
-        ("IN-PROGRESS" . (:foreground "Cyan" :weight bold))
-        ("VERIFYING" . (:foreground "DarkOrange" :weight bold))
-        ("BLOCKED" . (:foreground "Red" :weight bold))
-        ("DONE" . (:foreground "LimeGreen" :weight bold))
-        ;("OBE" . (:foreground "LimeGreen" :weight bold))
-        ("WONT-DO" . (:foreground "LimeGreen" :weight bold))))
 
 ;; ligatures in GUI emacs
 (if (display-graphic-p)
@@ -380,8 +372,8 @@
 
 ;;;; startup
 ;; https://www.reddit.com/r/emacs/comments/8n3lhc/launch_default_buffer_if_emacs_is_not_opening_a/
-(unless (cadr command-line-args) (jet/dashboard))
-(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (recentf-open-files))))
+;(unless (cadr command-line-args) (jet/dashboard))
+;(setq initial-buffer-choice (unless (cadr command-line-args) (lambda () (recentf-open-files))))
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
