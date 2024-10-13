@@ -113,10 +113,16 @@
 ;(meow-global-mode 1)
 
 ;; https://github.com/meow-edit/meow/issues/246#issuecomment-1126998900
-(custom-theme-set-faces
-   'user
-   '(meow-insert-indicator  ((t (:background "#444488" :foreground "white"))))
-   '(meow-keypad-indicator  ((t (:background "#85d3f2" :foreground "black"))))
-   '(meow-normal-indicator  ((t (:background "gray35" :foreground "white"))))
-   '(meow-motion-indicator  ((t (:background "khaki" :foreground "black"))))
-   '(meow-beacon-indicator  ((t (:background "dark orange" :foreground "black")))))
+;; (custom-theme-set-faces
+;;    'user
+;;    '(meow-insert-indicator  ((t (:background "#444488" :foreground "white"))))
+;;    '(meow-keypad-indicator  ((t (:background "#85d3f2" :foreground "black"))))
+;;    '(meow-normal-indicator  ((t (:background "gray35" :foreground "white"))))
+;;    '(meow-motion-indicator  ((t (:background "khaki" :foreground "black"))))
+;;    '(meow-beacon-indicator  ((t (:background "dark orange" :foreground "black")))))
+(with-eval-after-load 'meow
+  (set-face-attribute 'meow-insert-indicator nil :background "#444488" :foreground "white")
+  (set-face-attribute 'meow-keypad-indicator nil :background "#85d3f2" :foreground "black")
+  (set-face-attribute 'meow-normal-indicator nil :background "gray35" :foreground "white")
+  (set-face-attribute 'meow-motion-indicator nil :background "khaki" :foreground "black")
+  (set-face-attribute 'meow-beacon-indicator nil :background "dark orange" :foreground "black"))

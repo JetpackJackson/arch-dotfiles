@@ -19,11 +19,33 @@
 ;; - C-h C-q: Pull up the quick-help cheatsheet
 
 ;;; Code:
+(require 'use-package)
+
+;;;; use-package :mark-selected
+;; Make it possible to kinda manage package-selected-packages' from
+;; use-package by adding `:mark-selected' as a keyword...
+
+;; (defcustom use-package-always-mark nil
+;;   "If non-nil, assume `:mark-selected t' unless `:mark-selected' is used."
+;;   :type 'boolean
+;;   :group 'use-package)
+
+;; (defun use-package-normalize/:mark-selected (_name keyword args)
+;;   (use-package-only-one (symbol-name keyword)
+;;     args #'(lambda (_label arg) (or arg nil))))
+
+;; (defun use-package-handler/:mark-selected (name _keyword arg rest state)
+;;   (let ((body (use-package-process-keywords name rest state)))
+;;     (if arg (package--update-selected-packages `(,name) '())) body))
+
+;; (add-to-list 'use-package-keywords :mark-selected t) 
+
 ;; https://www.reddit.com/r/emacs/comments/119mp95/emacs_can_be_heavy_but_still_blazingly_fast/
 (setq use-package-always-defer t
       use-package-always-ensure t)
+;use-package-always-mark t
 
-(require 'use-package)
+;(require 'use-package)
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
@@ -53,6 +75,7 @@
   ;; No sound
   (setq visible-bell t
 	ring-bell-function 'ignore)
+  (setq fill-column 100)
   ;; move around with alt+up/down/left/right
   (windmove-default-keybindings 'meta)
   (setq browse-url-firefox-new-window-is-tab t

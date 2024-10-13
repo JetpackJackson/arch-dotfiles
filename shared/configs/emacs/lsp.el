@@ -8,8 +8,9 @@
 (use-package arduino-mode :ensure nil
   :init
   (define-derived-mode arduino-mode c++-mode "Arduino")
-  (use-package platformio-mode
-    :hook ((arduino-mode) . platformio-mode))
+  ;; can just use a Makefile with pio run
+  ;; (use-package platformio-mode
+  ;;   :hook ((arduino-mode) . platformio-mode))
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
   (add-hook 'platformio-compilation-filter-hook 'colorize-compilation-buffer))
 
