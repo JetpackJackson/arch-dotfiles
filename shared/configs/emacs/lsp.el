@@ -5,10 +5,13 @@
 (use-package indent-bars ;:demand t
   :hook ((c++-mode c-mode python-mode rust-mode arduino-mode) . indent-bars-mode))
 
-(define-derived-mode arduino-mode c++-mode "Arduino")
-(use-package platformio-mode
+(use-package arduino-mode :ensure nil
+  :init
+  (define-derived-mode arduino-mode c++-mode "Arduino")
+  (use-package platformio-mode
     :hook ((arduino-mode) . platformio-mode))
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
+  (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
+  (add-hook 'platformio-compilation-filter-hook 'colorize-compilation-buffer))
 
 (use-package envrc :hook (after-init . envrc-global-mode))
 (use-package fish-mode)
