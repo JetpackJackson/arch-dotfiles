@@ -30,7 +30,7 @@ function fish_prompt
     else
         set -l symbol ' $ '
         set -l color $fish_color_cwd
-	set_color "#f39660"
+	set_color "cyan"
 	echo -n $USER
 	set_color "white"
 	echo -n @$hostname
