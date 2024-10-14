@@ -27,7 +27,7 @@ function fish_prompt
         echo -n (prompt_pwd)
         set_color normal
         echo -n $symbol
-    else
+    else if test $hostname = "weasel"
         set -l symbol ' $ '
         set -l color $fish_color_cwd
 	set_color "cyan"
@@ -38,5 +38,17 @@ function fish_prompt
         echo -n (prompt_pwd)
         set_color normal
         echo -n $symbol
+    else
+        set -l symbol ' $ '
+        set -l color $fish_color_cwd
+	set_color "white"
+	echo -n $USER
+	set_color "white"
+	echo -n @$hostname
+	set_color $color
+        echo -n (prompt_pwd)
+        set_color normal
+        echo -n $symbol
+
     end
 end
