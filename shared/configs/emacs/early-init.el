@@ -2,8 +2,7 @@
 ;; UI and other settings that aren't necessarily related to a package/fit better elsewhere.
 
 (set-face-attribute 'default nil :font "Ärzte Sans Mono" :height 120)
-(setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12")))
-
+(setq default-frame-alist '((font . "Ärzte Sans Mono Roman-12") (undecorated . t)))
 ;; transparent background
 (set-frame-parameter nil 'alpha-background 80)
 (add-to-list 'default-frame-alist '(alpha-background . 80))
