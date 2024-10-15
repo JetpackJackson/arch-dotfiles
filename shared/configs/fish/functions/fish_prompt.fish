@@ -30,7 +30,7 @@ function fish_prompt
     else if test $hostname = "weasel"
         set -l symbol ' $ '
         set -l color $fish_color_cwd
-	set_color "cyan"
+	set_color "#76cce0"
 	echo -n $USER
 	set_color "white"
 	echo -n @$hostname
