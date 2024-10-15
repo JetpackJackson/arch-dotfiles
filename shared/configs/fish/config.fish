@@ -142,6 +142,7 @@ if status is-interactive
     abbr -a guix-listpro 'guix package --list-profiles'
     #abbr -a ft-clear 'printf "\033]11;[80]#2c2e34"'
     #abbr -a ft-solid 'printf "\033]11;[100]#2c2e34"'
+    abbr -a ard-cli --set-cursor 'arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml %'
 
 end
 

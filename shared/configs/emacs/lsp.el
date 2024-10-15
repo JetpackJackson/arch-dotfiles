@@ -58,7 +58,7 @@
   (add-to-list 'eglot-server-programs
                '(scheme-mode . ("guile-lsp-server")))
   (add-to-list 'eglot-server-programs
-	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli" "-clangd" "clangd")))
+	       '(arduino-mode . ("arduino-language-server" "-cli" "arduino-cli --config-file /home/jet/.config/arduino15/arduino-cli.yaml" "-clangd" "clangd")))
   (add-to-list 'eglot-server-programs
 	       '(sh-mode . ("bash-language-server" "start")))
   (add-to-list 'eglot-server-programs
