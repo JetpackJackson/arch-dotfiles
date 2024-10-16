@@ -292,7 +292,9 @@
   (setq org-agenda-todo-ignore-with-date t) ;; clean up todo list
   (setq org-image-actual-width nil) ;; shrink images
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75)))
+  (if (equal (system-name) "weasel")
+      (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.00))
+    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.75))))
 (with-eval-after-load 'org
   (add-to-list 'org-latex-classes
                '("book"
