@@ -426,8 +426,10 @@
 		jet/ml-separator
 		mode-line-modes
 		jet/ml-separator
+		mode-line-format-right-align
 		project-mode-line
 		project-mode-line-format
+		"  "
 		mode-line-misc-info))
 
 (setq-default tab-bar-format '(tab-bar-format-global
