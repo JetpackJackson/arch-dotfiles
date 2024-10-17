@@ -410,6 +410,8 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/meow.el")
+(load-file "~/.config/emacs/jabber.el")
+(load-file "~/.config/emacs/private.el")
 
 ;; set modeline stuff here because we want it to pick up meow
 (setq-default mode-line-format
