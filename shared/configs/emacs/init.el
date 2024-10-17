@@ -426,10 +426,16 @@
 		jet/ml-separator
 		mode-line-modes
 		jet/ml-separator
-		;mode--line-format-right-align
-                project-mode-line
+		project-mode-line
 		project-mode-line-format
 		mode-line-misc-info))
+
+(setq-default tab-bar-format '(tab-bar-format-global
+					;tab-bar-format-history
+		       ;tab-bar-format-tabs
+					;tab-bar-separator tab-bar-format-add-tab
+		       ))
+(set-face-attribute 'tab-bar nil :background "gray15" :foreground "white")
 
 ;; https://code.whatever.social/exchange/emacs/questions/3925/hide-list-of-minor-modes-in-mode-line#3928
 (defvar hidden-minor-modes ; example, write your own list of hidden minor modes
