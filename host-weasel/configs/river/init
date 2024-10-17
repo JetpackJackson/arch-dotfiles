@@ -167,7 +167,7 @@ riverctl rule-add -app-id 'launcher*' float
 
 riverctl input pointer-1739-52856-SYNA2BA6:00_06CB:CE78_Touchpad tap enabled
 riverctl input pointer-1739-52856-SYNA2BA6:00_06CB:CE78_Touchpad natural-scroll enabled
-riverctl input pointer-7847-102-2.4G_Mouse natural-scroll enabled
+riverctl input pointer-7847-102-2.4G_Mouse natural-scroll disabled
 riverctl focus-follows-cursor normal
 
 riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
