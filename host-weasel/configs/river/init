@@ -118,7 +118,7 @@ riverctl map normal Super X spawn "foot -a launcher -e clipman pick --print0 --t
 
 # The scratchpad will live on an unused tag. Which tags are used depends on your
 # config, but rivers default uses the first 9 tags.
-scratch_tag=$((1 << 20 ))
+scratch_tag=$((1 << 20))
 
 # Toggle the scratchpad with Super+P
 riverctl map normal Super Tab toggle-focused-tags ${scratch_tag}

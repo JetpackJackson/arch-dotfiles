@@ -30,6 +30,7 @@ bar:
 
   left:
     - river:
+        title: {string: {text: "{title} ({layout}/{mode})", left-margin: 20}}
         anchors:
           - base: &river_base
               left-margin: 10
@@ -40,9 +41,10 @@ bar:
                 id == 2: {string: {text: "2"}} #, font: *nerd}}
                 id == 3: {string: {text: "3"}} #, font: *nerd}}
                 id == 4: {string: {text: "4"}} #, font: *nerd}}
-                id == 5: {string: {text: , font: *nerd}}
-                id == 10: {string: {text: "scratchpad", font: *nerd}}
-                id == 11: {string: {text: "work", font: *nerd}}
+                id == 10: {string: {text: "me"}} #, font: *nerd}}
+                id == 21: {string: {text: , font: *nerd}}
+                # id == 10: {string: {text: "scratchpad", font: *nerd}}
+                # id == 11: {string: {text: "work", font: *nerd}}
 
         content:
           map:
