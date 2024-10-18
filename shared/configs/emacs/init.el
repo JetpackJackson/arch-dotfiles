@@ -419,7 +419,7 @@
                 (:eval (meow-indicator))
 		jet/ml-separator
 		(:propertize (buffer-read-only "! " "") face mode-line-readonly-buffer-id)
-		(:eval (jet/dir-indicator-colorized))
+		;(:eval (jet/dir-indicator-colorized))
 		(:eval (jet/modified-buffer-indicator-colorized (buffer-name)))
 		jet/ml-separator
 		mode-line-position
