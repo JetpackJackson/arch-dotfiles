@@ -40,12 +40,16 @@ riverctl map normal Super+Shift Comma send-to-output previous
 riverctl map normal Super+Alt Return zoom
 
 # Super+H and Super+L to decrease/increase the main ratio of rivertile(1)
-riverctl map normal Super Left send-layout-cmd rivertile "main-ratio -0.05"
-riverctl map normal Super Right send-layout-cmd rivertile "main-ratio +0.05"
+#riverctl map normal Super Left send-layout-cmd rivertile "main-ratio -0.05"
+#riverctl map normal Super Right send-layout-cmd rivertile "main-ratio +0.05"
+riverctl map normal Super Left send-layout-cmd rivercarro "main-ratio -0.05"
+riverctl map normal Super Right send-layout-cmd rivercarro "main-ratio +0.05"
 
 # Super+Shift+H and Super+Shift+L to increment/decrement the main count of rivertile(1)
-riverctl map normal Super+Shift Left send-layout-cmd rivertile "main-count +1"
-riverctl map normal Super+Shift Right send-layout-cmd rivertile "main-count -1"
+#riverctl map normal Super+Shift Left send-layout-cmd rivertile "main-count +1"
+#riverctl map normal Super+Shift Right send-layout-cmd rivertile "main-count -1"
+riverctl map normal Super+Shift Left send-layout-cmd rivercarro "main-count +1"
+riverctl map normal Super+Shift Right send-layout-cmd rivercarro "main-count -1"
 
 # Super+Alt+{H,J,K,L} to move views
 riverctl map normal Super+Alt Left move left 100
@@ -104,14 +108,21 @@ riverctl map normal Super Space toggle-float
 riverctl map normal Super F toggle-fullscreen
 
 # Super+{Up,Right,Down,Left} to change layout orientation
-riverctl map normal Super H    send-layout-cmd rivertile "main-location top"
-riverctl map normal Super L send-layout-cmd rivertile "main-location right"
-riverctl map normal Super J  send-layout-cmd rivertile "main-location bottom"
-riverctl map normal Super K  send-layout-cmd rivertile "main-location left"
+#riverctl map normal Super H    send-layout-cmd rivertile "main-location top"
+#riverctl map normal Super L send-layout-cmd rivertile "main-location right"
+#riverctl map normal Super J  send-layout-cmd rivertile "main-location bottom"
+#riverctl map normal Super K  send-layout-cmd rivertile "main-location left"
+riverctl map normal Super H send-layout-cmd rivercarro "main-location top"
+riverctl map normal Super L send-layout-cmd rivercarro "main-location right"
+riverctl map normal Super J send-layout-cmd rivercarro "main-location bottom"
+riverctl map normal Super K send-layout-cmd rivercarro "main-location left"
 
-#riverctl map normal Super P spawn "grim && notify-send -t 2000 'Screenshot taken'"
+# And for monocle
+riverctl map normal Super M     send-layout-cmd rivercarro "main-location monocle"
+# Cycle through layout
+riverctl map normal Super W     send-layout-cmd rivercarro "main-location-cycle left,monocle"
+
 riverctl map normal Super P spawn "grim ~/pics/screenshots/primary_$(date +'%Y%m%d%H%M%S').png && notify-send 'screenshot taken'"
-
 riverctl map normal Super R spawn "foot -a launcher -e sway-launcher-desktop"
 riverctl map normal Super C spawn "slurp | grim -g - - | swappy -f -"
 riverctl map normal Super X spawn "foot -a launcher -e clipman pick --print0 --tool=CUSTOM --tool-args=\"fzf --cycle --read0\""
@@ -196,5 +207,15 @@ riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"
 
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
-riverctl default-layout rivertile
-rivertile -view-padding 3 -outer-padding 3 &
+#riverctl default-layout rivertile
+#rivertile -view-padding 3 -outer-padding 3 &
+
+# Set the default layout generator to be rivercarro and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivercarro
+rivercarro -no-smart-gaps -inner-gaps 6 -outer-gaps 6 -per-tag &
+
+
+# riverctl map normal $mod <keys> send-layout-cmd rivercarro "width-ratio -0.1"
+# riverctl map normal $mod <keys> send-layout-cmd rivercarro "width-ratio +0.1"
+
