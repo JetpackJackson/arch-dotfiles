@@ -30,7 +30,7 @@ bar:
 
   left:
     - river:
-        title: {string: {text: "{title} ({layout}/{mode})", left-margin: 20}}
+        title: {string: {text: "{title}", left-margin: 20, max: 30}}
         anchors:
           - base: &river_base
               left-margin: 10
@@ -76,6 +76,20 @@ bar:
                 map:
                   <<: *river_base
                   deco: {background: {color: 00101399}} #{underline: {size: 3, color: ea6962ff}}
+
+    - river:
+        title: {string: {text: "({layout}/{mode})"}} #, left-margin: 20}}
+        content:
+          map:
+            conditions:
+              state == urgent: {empty: {}}
+              state == focused: {empty: {}}
+              state == visible && ~occupied: {empty: {}}
+              state == visible && occupied: {empty: {}}
+              state == unfocused: {empty: {}}
+              state == invisible && ~occupied: {empty: {}}
+              state == invisible && occupied: {empty: {}}
+               
 
           #  center:
     #    - script:
