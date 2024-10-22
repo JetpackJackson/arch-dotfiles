@@ -341,7 +341,8 @@
   (set-face-attribute 'org-level-3 nil :foreground "white")
   (set-face-attribute 'org-agenda-done nil :foreground "gray")
   (set-face-attribute 'org-scheduled nil :foreground "green yellow")
-  (set-face-attribute 'org-scheduled-today nil :foreground "green yellow"))
+  (set-face-attribute 'org-scheduled-today nil :foreground "green yellow")
+  (set-face-attribute 'org-priority nil :foreground "gray"))
   ;(set-face-attribute 'org-special-keyword nil :foreground "lightslategray")
 
 ;; does not work in emacs 30, missing compat-macs
