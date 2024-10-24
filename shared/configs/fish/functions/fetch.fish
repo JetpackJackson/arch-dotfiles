@@ -7,7 +7,8 @@ function fetch --description 'fastfetch + cowsay'
     set -g counter 1
     set -g char -1
     set -g filelength $(wc -l /tmp/fold.txt | awk -F\  '{ print $1 }')
-    set -g max $(wc --max-line-length /tmp/fold.txt | awk -F\  '{ print $1 }')
+    #set -g max $(wc --max-line-length /tmp/fold.txt | awk -F\  '{ print $1 }')
+    set -g max $(awk '{ if (length($0) > max) max = length($0) } END { print max }' /tmp/fold.txt)
 
     # clear cow if exists
     true > /tmp/cow
