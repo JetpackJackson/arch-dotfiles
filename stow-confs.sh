@@ -3,9 +3,9 @@ HOSTNAME=$(cat /etc/hostname)
 cd shared/configs || exit
 stow -R . -t ~/.config/
 cd ..
-cd arduino15 || exit
-stow -R . -t ~/.arduino15/
-cd ..
+#cd arduino15 || exit
+#stow -R . -t ~/.arduino15/
+#cd ..
 cd scripts || exit
 stow -R . -t ~/docs/scripts/
 cd ..
