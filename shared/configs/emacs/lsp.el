@@ -68,7 +68,7 @@
 (add-hook 'prog-mode-hook #'eos/add-watchwords)
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 (dolist (mode '(ibuffer-mode-hook
-		doc-view-mode-hook))
+		docview-mode-hook))
   (add-hook mode (lambda ()
 		   (display-line-numbers-mode -1))))
 
