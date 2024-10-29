@@ -122,7 +122,8 @@ riverctl map normal Super M     send-layout-cmd rivercarro "main-location monocl
 # Cycle through layout
 riverctl map normal Super W     send-layout-cmd rivercarro "main-location-cycle left,monocle"
 
-riverctl map normal Super P spawn "grim ~/pics/screenshots/primary_$(date +'%Y%m%d%H%M%S').png && notify-send 'screenshot taken'"
+riverctl map normal Super P spawn "grim-primary.sh"
+#riverctl map normal Super P spawn "grim ~/pics/screenshots/primary_$(date +'%Y%m%d%H%M%S').png && notify-send 'screenshot taken'"
 riverctl map normal Super R spawn "foot -a launcher -e sway-launcher-desktop"
 riverctl map normal Super C spawn "slurp | grim -g - - | swappy -f -"
 riverctl map normal Super X spawn "foot -a launcher -e clipman pick --print0 --tool=CUSTOM --tool-args=\"fzf --cycle --read0\""
