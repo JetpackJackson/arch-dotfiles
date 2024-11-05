@@ -64,6 +64,11 @@ backup() {
     sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
     sudo rsync -aAXHvu --delete /home/jet/.gnupg /run/media/jet/$1/sharky/
     sudo rsync -aAXHvu --delete /var/lib/prosody /run/media/jet/$1/sharky/prosody/
+    sudo rsync -aAXHvu --delete /var/lib/sonarr /run/media/jet/$1/sharky/sonarr/
+    sudo rsync -aAXHvu --delete /var/lib/radarr /run/media/jet/$1/sharky/radarr/
+    sudo rsync -aAXHvu --delete /var/lib/prowlarr /run/media/jet/$1/sharky/prowlarr/
+    sudo rsync -aAXHvu --delete /var/lib/navidrome /run/media/jet/$1/sharky/navidrome/
+    sudo rsync -aAXHvu --delete /var/lib/recyclarr /run/media/jet/$1/sharky/recyclarr/
     #gpg --export --armor --output /tmp/key.asc JetpackJackson
     #gpg --export-secret-keys --armor --output /tmp/seckey.asc JetpackJackson
     #gpg --export-secret-subkeys --armor --output /tmp/secsubkey.asc JetpackJackson
