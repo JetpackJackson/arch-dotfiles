@@ -71,7 +71,10 @@
   (global-auto-revert-mode t)
 
   (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode)
+  ;; (global-display-line-numbers-mode)
+  (add-hook 'text-mode-hook #'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+
   ;; No sound
   (setq visible-bell t
 	ring-bell-function 'ignore)

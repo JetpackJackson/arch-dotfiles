@@ -67,16 +67,16 @@
 (add-hook 'prog-mode-hook #'comment-auto-fill)
 (add-hook 'prog-mode-hook #'eos/add-watchwords)
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-(dolist (mode '(ibuffer-mode-hook
-		docview-mode-hook))
-  (add-hook mode (lambda ()
-		   (display-line-numbers-mode -1))))
+;; (dolist (mode '(ibuffer-mode-hook
+;; 		docview-mode-hook))
+;;   (add-hook mode (lambda ()
+;; 		   (display-line-numbers-mode -1))))
 
 (dolist (mode '(compilation-mode-hook
 		eat-mode-hook
 		comint-mode-hook))
   (add-hook mode (lambda ()
-		   (display-line-numbers-mode -1)
+		   ;; (display-line-numbers-mode -1)
 		   (visual-line-mode))))
 
 ;; change autocomplete method based on emacs version
