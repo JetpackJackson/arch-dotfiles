@@ -149,61 +149,74 @@
 
 ;; TODO keep or remove?
 ;; dired
-;; (use-package dirvish :init (dirvish-override-dired-mode)
-;;   :custom
-;;   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
-;;    '(("g" "~/"                               "home")
-;;      ("d" "~/dl/"                            "downloads")
-;;      ("m" "/run/media/"                      "drives")
-;;      ("t" "~/.cache/mytrash/"                "trash")
-;;      ("c" "~/.local/share/"                  "data")
-;;      ("n" "~/docs/notes/notes-zettelkasten/" "notes")
-;;      ("p" "~/docs/notes/projects/git/"       "projects")
-;;      ("s" "~/docs/notes/school/"             "school")))
-;;   :config
-;;   (dirvish-peek-mode) ; Preview files in minibuffer
-;;   (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
-;;   (setq dirvish-open-with-programs
-;; 	'((("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
-;; 	  "/usr/bin/mpv" "--profile=builtin-pseudo-gui" "%f")
-;; 	 (("f4v" "rmvb" "wvx" "wmx" "wmv" "wm" "asx" "mk3d" "mkv" "fxm" "flv" "axv" "webm" "viv" "yt" "s1q" "smo" "smov" "ssw" "sswf" "s14" "s11" "smpg" "smk" "bk2" "bik" "nim" "pyv" "m4u" "mxu" "fvt" "dvb" "uvvv" "uvv" "uvvs" "uvs" "uvvp" "uvp" "uvvu" "uvu" "uvvm" "uvm" "uvvh" "uvh" "ogv" "m2v" "m1v" "m4v" "mpg4" "mp4" "mjp2" "mj2" "m4s" "3gpp2" "3g2" "3gpp" "3gp" "avi" "mov" "movie" "mpe" "mpeg" "mpegv" "mpg" "mpv" "qt" "vbs" "gif")
-;; 	  "mpv" "%f")
-;; 	 (("jpg" "jpeg" "png" "tga" "webp")
-;; 	  "feh" "%f")
-;; 	 (("pdf" "epub")
-;; 	  "zathura" "%f")
-;; 	 (("ods" "odt" "ppt" "pptx" "doc" "docx" "xlsx" "csv")
-;; 	  "libreoffice" "%f")))
-;;   (setq dirvish-hide-details nil)
-;;   (setq dirvish-mode-line-format
-;;         '(:left (sort symlink) :right (omit yank index)))
-;;   (setq dirvish-attributes
-;;         '(file-time file-size collapse subtree-state vc-state git-msg))
-;;   (setq delete-by-moving-to-trash t)
-;;   (setq dired-listing-switches
-;;         "-l --almost-all --human-readable --group-directories-first --no-group")
-;;   :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
-;;   (("C-c f" . dirvish-fd)
-;;    :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
-;;    ("g"   . dirvish-quick-access) ;; binds from lf config
-;;    ("f"   . dirvish-file-info-menu)
-;;    ("y"   . dirvish-yank-menu)
-;;    ("N"   . dirvish-narrow)
-;;    ("^"   . dirvish-history-last)
-;;    ("h"   . dirvish-history-jump) ; remapped `describe-mode'
-;;    ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
-;;    ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
-;;    ("TAB" . dirvish-subtree-toggle)
-;;    ("M-f" . dirvish-history-go-forward)
-;;    ("M-b" . dirvish-history-go-backward)
-;;    ("M-l" . dirvish-ls-switches-menu)
-;;    ("M-m" . dirvish-mark-menu)
-;;    ("M-t" . dirvish-layout-toggle)
-;;    ("M-s" . dirvish-setup-menu)
-;;    ("M-e" . dirvish-emerge-menu)
-;;    ("M-j" . dirvish-fd-jump)
-;;    ("<left>" . dired-up-directory)
-;;    ("<right>" . dired-find-file)))
+(use-package dirvish :init (dirvish-override-dired-mode)
+  :custom
+  (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
+   '(("g" "~/"                               "home")
+     ("d" "~/dl/"                            "downloads")
+     ("m" "/run/media/"                      "drives")
+     ("t" "~/.cache/mytrash/"                "trash")
+     ("c" "~/.local/share/"                  "data")
+     ("n" "~/docs/notes/notes-zettelkasten/" "notes")
+     ("p" "~/docs/notes/projects/git/"       "projects")
+     ("s" "~/docs/notes/school/"             "school")))
+  :config
+  (dirvish-peek-mode) ; Preview files in minibuffer
+  (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
+  (setq dirvish-open-with-programs
+	'((("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
+	  "/usr/bin/mpv" "--profile=builtin-pseudo-gui" "%f")
+	 (("f4v" "rmvb" "wvx" "wmx" "wmv" "wm" "asx" "mk3d" "mkv" "fxm" "flv" "axv" "webm" "viv" "yt" "s1q" "smo" "smov" "ssw" "sswf" "s14" "s11" "smpg" "smk" "bk2" "bik" "nim" "pyv" "m4u" "mxu" "fvt" "dvb" "uvvv" "uvv" "uvvs" "uvs" "uvvp" "uvp" "uvvu" "uvu" "uvvm" "uvm" "uvvh" "uvh" "ogv" "m2v" "m1v" "m4v" "mpg4" "mp4" "mjp2" "mj2" "m4s" "3gpp2" "3g2" "3gpp" "3gp" "avi" "mov" "movie" "mpe" "mpeg" "mpegv" "mpg" "mpv" "qt" "vbs" "gif")
+	  "mpv" "%f")
+	 (("jpg" "jpeg" "png" "tga" "webp")
+	  "feh" "%f")
+	 (("pdf" "epub")
+	  "zathura" "%f")
+	 (("ods" "odt" "ppt" "pptx" "doc" "docx" "xlsx" "csv")
+	  "libreoffice" "%f")))
+  (setq dirvish-hide-details t)
+  (setq dired-hide-details t)
+
+  (setq dirvish-use-header-line nil)     ; hide header line (show the classic dired header)
+;; (setq dirvish-use-mode-line nil)       ; hide mode line
+(setq dirvish-use-mode-line t)
+(setq dirvish-mode-line-height 25) ; shorthand for '(25 . 25)
+
+  (setq dirvish-mode-line-format
+        '(:left (sort symlink) :right (omit yank index)))
+
+  (setq dirvish-header-line-format
+      '(:left (path) :right (free-space))
+      dirvish-mode-line-format
+      '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
+  
+  (setq dirvish-attributes
+        '(file-time file-size collapse subtree-state vc-state git-msg))
+  (setq delete-by-moving-to-trash t)
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
+  :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
+  (("C-c f" . dirvish)
+   :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
+   ("g"   . dirvish-quick-access) ;; binds from lf config
+   ("f"   . dirvish-file-info-menu)
+   ("y"   . dirvish-yank-menu)
+   ("N"   . dirvish-narrow)
+   ("^"   . dirvish-history-last)
+   ("h"   . dirvish-history-jump) ; remapped `describe-mode'
+   ("s"   . dirvish-quicksort)    ; remapped `dired-sort-toggle-or-edit'
+   ("v"   . dirvish-vc-menu)      ; remapped `dired-view-file'
+   ("TAB" . dirvish-subtree-toggle)
+   ("M-f" . dirvish-history-go-forward)
+   ("M-b" . dirvish-history-go-backward)
+   ("M-l" . dirvish-ls-switches-menu)
+   ("M-m" . dirvish-mark-menu)
+   ("M-t" . dirvish-layout-toggle)
+   ("M-s" . dirvish-setup-menu)
+   ("M-e" . dirvish-emerge-menu)
+   ("M-j" . dirvish-fd-jump)
+   ("<left>" . dired-up-directory)
+   ("<right>" . dired-find-file)))
 
 ;; path
 (use-package exec-path-from-shell :demand t
