@@ -13,52 +13,79 @@ dry2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.
 real2VerboseBackup="create --exclude-from /home/jet/docs/notes/paclist/borg-list.txt --exclude-caches --progress --filter=ACME /run/media/jet/$1/borg-sharky::{hostname}-{now:%Y-%m-%d_%H:%M:%S} /home/jet/$2"
 
 backup() {
-    echo "1: Review and backup (verbose)"
-    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
-    echo "2: Review and backup (progress)"
-    echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
-    echo "3: View progress of writeback"
-    echo "4: test"
-    read choice
-    case "$choice" in
-        1) borg $dryVerboseBackup
-           echo "Continue with backup? [y/n] "
-           read review
-           if [[ $review == "y" ]]
-           then
-               borg $realVerboseBackup
-           else
-               echo "Exiting."
-           fi
-        ;;
-        2) borg $dry2VerboseBackup
-           echo "Continue with backup? [y/n] "
-           read review
-           if [[ $review == "y" ]]
-           then
-               borg $real2VerboseBackup
-           else
-               echo "Exiting."
-           fi
-        ;;
-        3) watch -d grep -e Dirty: -e Writeback: /proc/meminfo
-        ;;
-        4) if [[ $flag -eq 0 ]]; then
-              borg $dry2VerboseBackup
-              flag=1
-           fi
-           echo "Continue with backup? [y/n] "
-           read review
-           if [[ $review == "y" ]]
-           then
-               borg $real2VerboseBackup
-           else
-               echo "Exiting."
-           fi
-        ;;
-        *) echo "Exiting."
-        ;;
-    esac
+    # echo "1: Review and backup (verbose)"
+    # echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
+    # echo "2: Review and backup (progress)"
+    # echo $(<$XDG_DOCUMENTS_DIR/notes/paclist/borg-list.txt)
+    # echo "3: View progress of writeback"
+    # echo "4: test"
+    # read choice
+    # case "$choice" in
+    #     1) borg $dryVerboseBackup
+    #        echo "Continue with backup? [y/n] "
+    #        read review
+    #        if [[ $review == "y" ]]
+    #        then
+    #            borg $realVerboseBackup
+    #        else
+    #            echo "Exiting."
+    #        fi
+    #     ;;
+    #     2) borg $dry2VerboseBackup
+    #        echo "Continue with backup? [y/n] "
+    #        read review
+    #        if [[ $review == "y" ]]
+    #        then
+    #            borg $real2VerboseBackup
+    #        else
+    #            echo "Exiting."
+    #        fi
+    #     ;;
+    #     3) watch -d grep -e Dirty: -e Writeback: /proc/meminfo
+    #     ;;
+    #     4) if [[ $flag -eq 0 ]]; then
+    #           borg $dry2VerboseBackup
+    #           flag=1
+    #        fi
+    #        echo "Continue with backup? [y/n] "
+    #        read review
+    #        if [[ $review == "y" ]]
+    #        then
+    #            borg $real2VerboseBackup
+    #        else
+    #            echo "Exiting."
+    #        fi
+    #     ;;
+    #     *) echo "Exiting."
+    #     ;;
+    # esac
+
+    export BORG_REPO=/run/media/jet/$1/borg-sharky
+    
+    borg create \
+	 --exclude-from /home/jet/docs/notes/paclist/borg-list.txt \
+	 --exclude-caches \
+	 --exclude 'var/tmp/*' \
+	 --list \
+	 ::{hostname}-{now:%Y-%m-%d_%H:%M:%S} \
+	 /home \
+	 /mnt
+	 # /var/lib/prosody \
+	 # /var/lib/sonarr \
+	 # /var/lib/radarr \
+	 # /var/lib/prowlarr \
+	 # /var/lib/navidrome \
+	 # /var/lib/recyclarr \
+	 # /var/lib/jellyfin \
+
+    borg prune \
+	 --list \
+	 --glob-archives '{hostname}-*' \
+	 --show-rc \
+	 --keep-daily 3
+
+    borg compact --progress
+    
     sudo rsync -aAXHvu --delete /home/jet/.cache/borg /run/media/jet/$1/sharky/.cache
     sudo rsync -aAXHvu --delete /home/jet/.config/borg /run/media/jet/$1/sharky/.config
     sudo rsync -aAXHvu --delete /home/jet/.ssh /run/media/jet/$1/sharky/
@@ -69,13 +96,6 @@ backup() {
     sudo rsync -aAXHvu --delete /var/lib/prowlarr /run/media/jet/$1/sharky/prowlarr/
     sudo rsync -aAXHvu --delete /var/lib/navidrome /run/media/jet/$1/sharky/navidrome/
     sudo rsync -aAXHvu --delete /var/lib/recyclarr /run/media/jet/$1/sharky/recyclarr/
-    #gpg --export --armor --output /tmp/key.asc JetpackJackson
-    #gpg --export-secret-keys --armor --output /tmp/seckey.asc JetpackJackson
-    #gpg --export-secret-subkeys --armor --output /tmp/secsubkey.asc JetpackJackson
-    #sudo mv /tmp/key.asc /run/media/jet/$1/sharky/key.asc
-    #sudo mv /tmp/seckey.asc /run/media/jet/$1/sharky/seckey.asc
-    #sudo mv /tmp/secsubkey.asc /run/media/jet/$1/sharky/secsubkey.asc
-
 }
 
 checkMount() {
