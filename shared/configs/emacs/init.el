@@ -176,21 +176,16 @@
 	  "libreoffice" "%f")))
   (setq dirvish-hide-details t)
   (setq dired-hide-details t)
-
-  (setq dirvish-use-header-line nil)     ; hide header line (show the classic dired header)
-;; (setq dirvish-use-mode-line nil)       ; hide mode line
-(setq dirvish-use-mode-line t)
-(setq dirvish-mode-line-height 25) ; shorthand for '(25 . 25)
-
-  (setq dirvish-mode-line-format
-        '(:left (sort symlink) :right (omit yank index)))
-
+  (setq dirvish-use-header-line nil)
+  (setq dirvish-use-mode-line t)
+  (setq dirvish-mode-line-height 25) ; shorthand for '(25 . 25)
+  ;; (setq dirvish-mode-line-format
+  ;;       '(:left (sort symlink) :right (omit yank index)))
   (setq dirvish-header-line-format
       '(:left (path) :right (free-space))
       dirvish-mode-line-format
       '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
-  
-  (setq dirvish-attributes
+    (setq dirvish-attributes
         '(file-time file-size collapse subtree-state vc-state git-msg))
   (setq delete-by-moving-to-trash t)
   (setq dired-listing-switches
@@ -217,6 +212,132 @@
    ("M-j" . dirvish-fd-jump)
    ("<left>" . dired-up-directory)
    ("<right>" . dired-find-file)))
+
+;; (use-package diredfl
+;;   :hook
+;;   ((dired-mode . diredfl-mode)
+;;    ;; highlight parent and directory preview as well
+;;    ;(dirvish-directory-view-mode . diredfl-mode)
+;;    )
+;;   :config
+;;   (set-face-attribute 'diredfl-compressed-file-name nil :foreground "#76cce0" :background nil)
+;;   (set-face-attribute 'diredfl-compressed-file-suffix nil :foreground "#76cce0" :background nil)
+;;   (set-face-attribute 'diredfl-dir-name nil :foreground "#85d3f2" :background nil)
+;;   (set-face-attribute 'diredfl-file-name nil :foreground "#e7c664" :background nil)
+;;   (set-face-attribute 'diredfl-file-suffix nil :foreground "#9ed072")
+;;   (set-face-attribute 'diredfl-symlink nil :foreground "#fc5d7c")
+;;   (set-face-attribute 'diredfl-write-priv nil :background "#9ed072")
+;;   (set-face-attribute 'diredfl-dir-heading nil :foreground "light gray")
+;; )
+
+(use-package dired-filetype-face
+  :init
+  (require 'dired-filetype-face)
+  :config
+  (deffiletype-face "audio" "#e7c664")
+  (deffiletype-face-regexp audio
+			   :extensions '("mp3" "aac" "opus" "ogg" "m4a" "wav" "flac") :type-for-docstring "my type")
+  (deffiletype-setup "audio"))
+
+  ;; (set-face-attribute 'diredfl-compressed-file-name nil :foreground "#76cce0" :background nil)
+  ;; (set-face-attribute 'diredfl-compressed-file-suffix nil :foreground "#76cce0" :background nil)
+  ;; (set-face-attribute 'diredfl-dir-name nil :foreground "#85d3f2" :background nil)
+  ;; (set-face-attribute 'diredfl-file-name nil :foreground "#e7c664" :background nil)
+  ;; (set-face-attribute 'diredfl-file-suffix nil :foreground "#9ed072")
+  ;; (set-face-attribute 'diredfl-symlink nil :foreground "#fc5d7c")
+  ;; (set-face-attribute 'diredfl-write-priv nil :background "#9ed072")
+  ;; (set-face-attribute 'diredfl-dir-heading nil :foreground "light gray")
+
+
+;; (use-package dired-preview :init (dired-preview-global-mode)
+;;   :config
+;;   (setq dired-preview-delay 0.0)
+;;   (setq dired-preview-max-size (expt 2 20))
+;;   (setq dired-preview-ignored-extensions-regex
+;; 	(concat "\\."
+;; 		"\\(gz\\|"
+;;                 "zst\\|"
+;;                 "tar\\|"
+;;                 "xz\\|"
+;;                 "rar\\|"
+;;                 "zip\\|"
+;;                 "iso\\|"
+;;                 "epub"
+;;                 "\\)"))
+;;   (setq dired-recursive-deletes 'always)
+;;   (setq dired-recursive-copies 'always)
+;;   :bind (:map dired-mode-map
+;; 	      ("<left>" . dired-up-directory)
+;; 	      ("<right>" . dired-find-file))
+;;   :hook (dired-mode . dired-omit-mode)
+;;   :hook (dired-mode . dired-hide-details-mode))
+
+;; STOCK DIRED W/SORT TOGGLE
+;; (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
+;; (defvar dired-listing-switches-name "by date") ; by date by default here.
+;; (defvar dired-listing-switches-others
+;;       '(("by name" . "-Alh")
+;;         ("by size" . "-AlSh")
+;;         ("by ext" . "-AlXh")))
+
+;; (defun get-next-item-by-string-value (clist value)
+;;   (cl-loop for pair in clist
+;;            for i from 1
+;;            when (string-equal (cdr pair) value)
+;;            do (cl-return (nth i clist))
+;;            finally return nil))
+
+;; (defun dired-sort-toggle()
+;;   "Rewrite of `dired-sort-toggle'.
+;; Loop over `dired-listing-switches' +
+;; `dired-listing-switches-others' and set next sorting switch."
+;;   (interactive)
+;;   (let* ((new-clist
+;;           ;; loop of switches
+;;           (append (list (cons dired-listing-switches-name dired-listing-switches))
+;;                   dired-listing-switches-others
+;;                   (list (cons dired-listing-switches-name dired-listing-switches))))
+;;          ;; next item
+;;          (pair (get-next-item-by-string-value new-clist dired-actual-switches))
+;;          (name (if pair
+;;                   (car pair)
+;;                 ;; else
+;;                 dired-listing-switches-name))
+;;          (switch (if pair
+;;                   (cdr pair)
+;;                 ;; else
+;;                 dired-listing-switches)))
+;;     (setq dired-actual-switches switch)
+;;     (setq mode-name (concat "Dired " name))
+;;     (revert-buffer)))
+
+;; (use-package dired :ensure nil
+;;   :config
+;;   (setq dired-recursive-deletes 'always)
+;;   (setq dired-recursive-copies 'always)
+;;   ;; (setq dired-listing-switches "-alvFh --group-directories-first")
+;;   :bind (:map dired-mode-map
+;;    	      ("<left>" . dired-up-directory)
+;;    	      ("<right>" . dired-find-file))
+;;   :hook (dired-mode . dired-omit-mode)
+;;   :hook (dired-mode . dired-hide-details-mode))
+
+;; CASUAL DIRED
+;; (use-package casual :init (require 'casual-dired)
+;;   :config
+;;   (setq dired-recursive-deletes 'always)
+;;   (setq dired-recursive-copies 'always)
+;;   (setq dired-listing-switches "-alvFh --group-directories-first")
+;;   :bind (:map dired-mode-map
+;; 	      ("?" . casual-dired-tmenu)
+;; 	      ("s" . casual-dired-sort-by-tmenu) ; optional
+;; 	      ("/" . casual-dired-search-replace-tmenu) ; optional
+;; 	      ("]" . dired-next-subdir)
+;; 	      ("[" . dired-prev-subdir)
+;; 	      ("<left>" . dired-up-directory)
+;; 	      ("<right>" . dired-find-file))
+;;   :hook (dired-mode . dired-omit-mode)
+;;   :hook (dired-mode . dired-hide-details-mode))
 
 ;; path
 (use-package exec-path-from-shell :demand t
@@ -427,8 +548,8 @@
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/meow.el")
-(load-file "~/.config/emacs/jabber.el")
-(load-file "~/.config/emacs/private.el")
+;; (load-file "~/.config/emacs/jabber.el")
+;; (load-file "~/.config/emacs/private.el")
 
 ;; set modeline stuff here because we want it to pick up meow
 (setq-default mode-line-format
