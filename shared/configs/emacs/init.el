@@ -402,9 +402,9 @@
 
 ;; org
 (use-package org-fragtog)
-(add-hook 'org-mode-hook 'org-indent-mode)
+;; (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'org-fragtog-mode)
+;; (add-hook 'org-mode-hook 'org-fragtog-mode)
 
 (use-package org :ensure org-contrib ;:demand t
     :bind (:map
@@ -417,6 +417,7 @@
 	org-latex-packages-alist '(("" "minted"))
 	org-latex-pdf-process
 	'("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-latex-compilers '("pdflatex" "xelatex" "lualatex" "tectonic"))
   (setq org-agenda-span 20
 	org-agenda-start-on-weekday nil
 	org-agenda-start-day "-3d"
