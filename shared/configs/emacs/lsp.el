@@ -5,6 +5,10 @@
 (use-package indent-bars ;:demand t
   :hook ((c++-mode c-mode python-mode rust-mode arduino-mode) . indent-bars-mode))
 
+(use-package papis
+  :load-path "~/.cache/emacs/papis.el")
+  ;; :init (require 'papis))
+
 (use-package arduino-mode :ensure nil
   :init
   (define-derived-mode arduino-mode c++-mode "Arduino")
