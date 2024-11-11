@@ -149,7 +149,7 @@
 
 ;; TODO keep or remove?
 ;; dired
-(use-package dirvish :init (dirvish-override-dired-mode)
+(use-package dirvish :init (dirvish-override-dired-mode) :disabled t
   :custom
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
    '(("g" "~/"                               "home")
@@ -249,78 +249,82 @@
   ;; (set-face-attribute 'diredfl-dir-heading nil :foreground "light gray")
 
 
-;; (use-package dired-preview :init (dired-preview-global-mode)
-;;   :config
-;;   (setq dired-preview-delay 0.0)
-;;   (setq dired-preview-max-size (expt 2 20))
-;;   (setq dired-preview-ignored-extensions-regex
-;; 	(concat "\\."
-;; 		"\\(gz\\|"
-;;                 "zst\\|"
-;;                 "tar\\|"
-;;                 "xz\\|"
-;;                 "rar\\|"
-;;                 "zip\\|"
-;;                 "iso\\|"
-;;                 "epub"
-;;                 "\\)"))
-;;   (setq dired-recursive-deletes 'always)
-;;   (setq dired-recursive-copies 'always)
-;;   :bind (:map dired-mode-map
-;; 	      ("<left>" . dired-up-directory)
-;; 	      ("<right>" . dired-find-file))
-;;   :hook (dired-mode . dired-omit-mode)
-;;   :hook (dired-mode . dired-hide-details-mode))
+(use-package dired-preview :init (dired-preview-global-mode) :disabled t
+  :config
+  (setq dired-preview-delay 0.0)
+  (setq dired-preview-max-size (expt 2 20))
+  (setq dired-preview-ignored-extensions-regex
+	(concat "\\."
+		"\\(gz\\|"
+                "zst\\|"
+                "tar\\|"
+                "xz\\|"
+                "rar\\|"
+                "zip\\|"
+                "iso\\|"
+                "epub"
+                "\\)"))
+  (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-copies 'always)
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  :bind (:map dired-mode-map
+	      ("<left>" . dired-up-directory)
+	      ("<right>" . dired-find-alternate-file))
+  :hook (dired-mode . dired-omit-mode)
+  :hook (dired-mode . dired-hide-details-mode))
 
 ;; STOCK DIRED W/SORT TOGGLE
-;; (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
-;; (defvar dired-listing-switches-name "by date") ; by date by default here.
-;; (defvar dired-listing-switches-others
-;;       '(("by name" . "-Alh")
-;;         ("by size" . "-AlSh")
-;;         ("by ext" . "-AlXh")))
+(defun get-next-item-by-string-value (clist value)
+  (cl-loop for pair in clist
+           for i from 1
+           when (string-equal (cdr pair) value)
+           do (cl-return (nth i clist))
+           finally return nil))
 
-;; (defun get-next-item-by-string-value (clist value)
-;;   (cl-loop for pair in clist
-;;            for i from 1
-;;            when (string-equal (cdr pair) value)
-;;            do (cl-return (nth i clist))
-;;            finally return nil))
+(defun dired-sort-toggle()
+  "Rewrite of `dired-sort-toggle'.
+Loop over `dired-listing-switches' +
+`dired-listing-switches-others' and set next sorting switch."
+  (interactive)
+  (let* ((new-clist
+          ;; loop of switches
+          (append (list (cons dired-listing-switches-name dired-listing-switches))
+                  dired-listing-switches-others
+                  (list (cons dired-listing-switches-name dired-listing-switches))))
+         ;; next item
+         (pair (get-next-item-by-string-value new-clist dired-actual-switches))
+         (name (if pair
+                  (car pair)
+                ;; else
+                dired-listing-switches-name))
+         (switch (if pair
+                  (cdr pair)
+                ;; else
+                dired-listing-switches)))
+    (setq dired-actual-switches switch)
+    (setq mode-name (concat "Dired " name))
+    (revert-buffer)))
 
-;; (defun dired-sort-toggle()
-;;   "Rewrite of `dired-sort-toggle'.
-;; Loop over `dired-listing-switches' +
-;; `dired-listing-switches-others' and set next sorting switch."
-;;   (interactive)
-;;   (let* ((new-clist
-;;           ;; loop of switches
-;;           (append (list (cons dired-listing-switches-name dired-listing-switches))
-;;                   dired-listing-switches-others
-;;                   (list (cons dired-listing-switches-name dired-listing-switches))))
-;;          ;; next item
-;;          (pair (get-next-item-by-string-value new-clist dired-actual-switches))
-;;          (name (if pair
-;;                   (car pair)
-;;                 ;; else
-;;                 dired-listing-switches-name))
-;;          (switch (if pair
-;;                   (cdr pair)
-;;                 ;; else
-;;                 dired-listing-switches)))
-;;     (setq dired-actual-switches switch)
-;;     (setq mode-name (concat "Dired " name))
-;;     (revert-buffer)))
+(put 'dired-find-alternate-file 'disabled nil)
 
-;; (use-package dired :ensure nil
-;;   :config
-;;   (setq dired-recursive-deletes 'always)
-;;   (setq dired-recursive-copies 'always)
-;;   ;; (setq dired-listing-switches "-alvFh --group-directories-first")
-;;   :bind (:map dired-mode-map
-;;    	      ("<left>" . dired-up-directory)
-;;    	      ("<right>" . dired-find-file))
-;;   :hook (dired-mode . dired-omit-mode)
-;;   :hook (dired-mode . dired-hide-details-mode))
+(use-package dired :ensure nil
+  :custom
+  (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
+  (defvar dired-listing-switches-name "by date") ; by date by default here.
+  (defvar dired-listing-switches-others
+    '(("by name" . "-Alh")
+      ("by size" . "-AlSh")
+      ("by ext" . "-AlXh")))
+  :config
+  (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-copies 'always)
+  (setq dired-kill-when-opening-new-dired-buffer t)
+  ;; (setq dired-listing-switches "-alvFh --group-directories-first")
+  :bind (:map dired-mode-map
+   	      ("<left>" . dired-up-directory)
+   	      ("<right>" . dired-find-alternate-file))
+  :hook (dired-mode . dired-omit-mode)
+  :hook (dired-mode . dired-hide-details-mode))
 
 ;; CASUAL DIRED
 ;; (use-package casual :init (require 'casual-dired)
