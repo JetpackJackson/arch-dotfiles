@@ -281,6 +281,13 @@
            do (cl-return (nth i clist))
            finally return nil))
 
+(setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
+(defvar dired-listing-switches-name "by date") ; by date by default here.
+(defvar dired-listing-switches-others
+  '(("by name" . "-Alh")
+    ("by size" . "-AlSh")
+    ("by ext" . "-AlXh")))
+
 (defun dired-sort-toggle()
   "Rewrite of `dired-sort-toggle'.
 Loop over `dired-listing-switches' +
@@ -307,14 +314,22 @@ Loop over `dired-listing-switches' +
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+(defun jet/dired-jump-test (path)
+  "Jump to the directory PATH in Dired."
+  (lambda () (interactive)
+  ;(interactive "Directory: ")
+    (dired-jump nil path)))
+
+(define-key dired-mode-map (kbd "b") nil)
+(define-key dired-mode-map (kbd "g") nil)
+(define-key dired-mode-map (kbd "g r") (jet/dired-jump-test "/"))
+(define-key dired-mode-map (kbd "g g") (jet/dired-jump-test "/home/jet/dl"))
+(define-key dired-mode-map (kbd "g i") (jet/dired-jump-test "/run/media/jet"))
+(define-key dired-mode-map (kbd "g n") (jet/dired-jump-test "/home/jet/docs/notes/notes-zettelkasten/agenda"))
+(define-key dired-mode-map (kbd "g s") (jet/dired-jump-test "/home/jet/docs/notes/school/resume"))
+(define-key dired-mode-map (kbd "g p") (jet/dired-jump-test "/home/jet/docs/notes/projects/git"))
+
 (use-package dired :ensure nil
-  :custom
-  (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
-  (defvar dired-listing-switches-name "by date") ; by date by default here.
-  (defvar dired-listing-switches-others
-    '(("by name" . "-Alh")
-      ("by size" . "-AlSh")
-      ("by ext" . "-AlXh")))
   :config
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
@@ -322,9 +337,11 @@ Loop over `dired-listing-switches' +
   ;; (setq dired-listing-switches "-alvFh --group-directories-first")
   :bind (:map dired-mode-map
    	      ("<left>" . dired-up-directory)
-   	      ("<right>" . dired-find-alternate-file))
+   	      ("<right>" . dired-find-alternate-file)
+	      ("b" . revert-buffer))
   :hook (dired-mode . dired-omit-mode)
   :hook (dired-mode . dired-hide-details-mode))
+
 
 ;; CASUAL DIRED
 ;; (use-package casual :init (require 'casual-dired)
