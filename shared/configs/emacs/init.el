@@ -316,8 +316,8 @@ Loop over `dired-listing-switches' +
 
 (defun jet/dired-jump-test (path)
   "Jump to the directory PATH in Dired."
+  ;:which-key "foo"
   (lambda () (interactive)
-  ;(interactive "Directory: ")
     (dired-jump nil path)))
 
 (define-key dired-mode-map (kbd "b") nil)
@@ -328,6 +328,21 @@ Loop over `dired-listing-switches' +
 (define-key dired-mode-map (kbd "g n") (jet/dired-jump-test "/home/jet/docs/notes/notes-zettelkasten/agenda"))
 (define-key dired-mode-map (kbd "g s") (jet/dired-jump-test "/home/jet/docs/notes/school/resume"))
 (define-key dired-mode-map (kbd "g p") (jet/dired-jump-test "/home/jet/docs/notes/projects/git"))
+
+;(which-key-add-major-mode-key-based-replacements dired-mode "b" '("function" . "Unicode keys"))
+;(which-key-add-major-mode-key-based-replacements 'dired-mode "g g" '(jet/dired-jump-test "/" . "Unicode keys"))
+
+(which-key-add-major-mode-key-based-replacements 'dired-mode
+  "g r" "root"
+  "g g" "home"
+  "g i" "/run/media"
+  "g n" "zk"
+  "g s" "school"
+  "g p" "projects")
+
+;(define-key dired-mode-map "gr" '("go to root" . '(jet/dired-jump-test "/")))
+;(which-key-add-major-mode-key-based-replacements 'dired-mode "g r" '("go to root" . #'(jet/dired-jump-test "/")))
+
 
 (use-package dired :ensure nil
   :config
