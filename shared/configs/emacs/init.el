@@ -149,7 +149,7 @@
 
 ;; TODO keep or remove?
 ;; dired
-(use-package dirvish :init (dirvish-override-dired-mode) :disabled t
+(use-package dirvish :init (dirvish-override-dired-mode) ;:disabled t
   :custom
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
    '(("g" "~/"                               "home")
@@ -164,7 +164,10 @@
   (dirvish-peek-mode) ; Preview files in minibuffer
   (dirvish-side-follow-mode) ; similar to `treemacs-follow-mode'
   (setq dirvish-open-with-programs
-	'((("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
+	'(
+	  ;(("*")
+	   ;"pistol" "%f")
+	  (("ape" "stm" "s3m" "ra" "rm" "ram" "wma" "wax" "m3u" "med" "669" "mtm" "m15" "uni" "ult" "mka" "flac" "axa" "kar" "midi" "mid" "s1m" "smp" "smp3" "rip" "multitrack" "ecelp9600" "ecelp7470" "ecelp4800" "vbk" "pya" "lvp" "plj" "dtshd" "dts" "mlp" "eol" "uvva" "uva" "koz" "xhe" "loas" "sofa" "smv" "qcp" "psid" "sid" "spx" "opus" "ogg" "oga" "mp1" "mpga" "m4a" "mxmf" "mhas" "l16" "lbc" "evw" "enw" "evb" "evc" "dls" "omg" "aa3" "at3" "atx" "aal" "acn" "awb" "amr" "ac3" "ass" "aac" "adts" "726" "abs" "aif" "aifc" "aiff" "au" "mp2" "mp3" "mp2a" "mpa" "mpa2" "mpega" "snd" "vox" "wav")
 	  "/usr/bin/mpv" "--profile=builtin-pseudo-gui" "%f")
 	 (("f4v" "rmvb" "wvx" "wmx" "wmv" "wm" "asx" "mk3d" "mkv" "fxm" "flv" "axv" "webm" "viv" "yt" "s1q" "smo" "smov" "ssw" "sswf" "s14" "s11" "smpg" "smk" "bk2" "bik" "nim" "pyv" "m4u" "mxu" "fvt" "dvb" "uvvv" "uvv" "uvvs" "uvs" "uvvp" "uvp" "uvvu" "uvu" "uvvm" "uvm" "uvvh" "uvh" "ogv" "m2v" "m1v" "m4v" "mpg4" "mp4" "mjp2" "mj2" "m4s" "3gpp2" "3g2" "3gpp" "3gp" "avi" "mov" "movie" "mpe" "mpeg" "mpegv" "mpg" "mpv" "qt" "vbs" "gif")
 	  "mpv" "%f")
@@ -176,7 +179,7 @@
 	  "libreoffice" "%f")))
   (setq dirvish-hide-details t)
   (setq dired-hide-details t)
-  (setq dirvish-use-header-line nil)
+  (setq dirvish-use-header-line t)
   (setq dirvish-use-mode-line t)
   (setq dirvish-mode-line-height 25) ; shorthand for '(25 . 25)
   ;; (setq dirvish-mode-line-format
@@ -185,6 +188,7 @@
       '(:left (path) :right (free-space))
       dirvish-mode-line-format
       '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
+  (setq dirvish-default-layout '(0 0.4 0.5))
     (setq dirvish-attributes
         '(file-time file-size collapse subtree-state vc-state git-msg))
   (setq delete-by-moving-to-trash t)
@@ -213,23 +217,6 @@
    ("<left>" . dired-up-directory)
    ("<right>" . dired-find-file)))
 
-;; (use-package diredfl
-;;   :hook
-;;   ((dired-mode . diredfl-mode)
-;;    ;; highlight parent and directory preview as well
-;;    ;(dirvish-directory-view-mode . diredfl-mode)
-;;    )
-;;   :config
-;;   (set-face-attribute 'diredfl-compressed-file-name nil :foreground "#76cce0" :background nil)
-;;   (set-face-attribute 'diredfl-compressed-file-suffix nil :foreground "#76cce0" :background nil)
-;;   (set-face-attribute 'diredfl-dir-name nil :foreground "#85d3f2" :background nil)
-;;   (set-face-attribute 'diredfl-file-name nil :foreground "#e7c664" :background nil)
-;;   (set-face-attribute 'diredfl-file-suffix nil :foreground "#9ed072")
-;;   (set-face-attribute 'diredfl-symlink nil :foreground "#fc5d7c")
-;;   (set-face-attribute 'diredfl-write-priv nil :background "#9ed072")
-;;   (set-face-attribute 'diredfl-dir-heading nil :foreground "light gray")
-;; )
-
 (use-package dired-filetype-face
   :init
   (require 'dired-filetype-face)
@@ -238,16 +225,6 @@
   (deffiletype-face-regexp audio
 			   :extensions '("mp3" "aac" "opus" "ogg" "m4a" "wav" "flac") :type-for-docstring "my type")
   (deffiletype-setup "audio"))
-
-  ;; (set-face-attribute 'diredfl-compressed-file-name nil :foreground "#76cce0" :background nil)
-  ;; (set-face-attribute 'diredfl-compressed-file-suffix nil :foreground "#76cce0" :background nil)
-  ;; (set-face-attribute 'diredfl-dir-name nil :foreground "#85d3f2" :background nil)
-  ;; (set-face-attribute 'diredfl-file-name nil :foreground "#e7c664" :background nil)
-  ;; (set-face-attribute 'diredfl-file-suffix nil :foreground "#9ed072")
-  ;; (set-face-attribute 'diredfl-symlink nil :foreground "#fc5d7c")
-  ;; (set-face-attribute 'diredfl-write-priv nil :background "#9ed072")
-  ;; (set-face-attribute 'diredfl-dir-heading nil :foreground "light gray")
-
 
 (use-package dired-preview :init (dired-preview-global-mode) :disabled t
   :config
@@ -329,9 +306,6 @@ Loop over `dired-listing-switches' +
 (define-key dired-mode-map (kbd "g s") (jet/dired-jump-test "/home/jet/docs/notes/school/resume"))
 (define-key dired-mode-map (kbd "g p") (jet/dired-jump-test "/home/jet/docs/notes/projects/git"))
 
-;(which-key-add-major-mode-key-based-replacements dired-mode "b" '("function" . "Unicode keys"))
-;(which-key-add-major-mode-key-based-replacements 'dired-mode "g g" '(jet/dired-jump-test "/" . "Unicode keys"))
-
 (which-key-add-major-mode-key-based-replacements 'dired-mode
   "g r" "root"
   "g g" "home"
@@ -339,10 +313,6 @@ Loop over `dired-listing-switches' +
   "g n" "zk"
   "g s" "school"
   "g p" "projects")
-
-;(define-key dired-mode-map "gr" '("go to root" . '(jet/dired-jump-test "/")))
-;(which-key-add-major-mode-key-based-replacements 'dired-mode "g r" '("go to root" . #'(jet/dired-jump-test "/")))
-
 
 (use-package dired :ensure nil
   :config
@@ -356,7 +326,6 @@ Loop over `dired-listing-switches' +
 	      ("b" . revert-buffer))
   :hook (dired-mode . dired-omit-mode)
   :hook (dired-mode . dired-hide-details-mode))
-
 
 ;; CASUAL DIRED
 ;; (use-package casual :init (require 'casual-dired)
