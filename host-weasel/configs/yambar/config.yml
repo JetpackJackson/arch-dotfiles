@@ -4,7 +4,8 @@ aerzte: &aerzte Ärzte Sans Mono Roman:pixelsize=30
 highlight: &highlight fabd2fff
 textcolor: &textcolor d0d0d0ff
  #a0262680}]}}
-focus: &focus 831c1cff
+# focus: &focus 831c1cff
+focus: &focus 597ec5a0
 foreground-highlight: &foreground-highlight 000000ff
 grey: &grey ffffff66
 lightred: &lightred ffa0a0ff
