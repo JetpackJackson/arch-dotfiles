@@ -154,7 +154,7 @@
   (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
    '(("g" "~/"                               "home")
      ("d" "~/dl/"                            "downloads")
-     ("m" "/run/media/"                      "drives")
+     ("i" "/run/media/"                      "drives")
      ("t" "~/.cache/mytrash/"                "trash")
      ("c" "~/.local/share/"                  "data")
      ("n" "~/docs/notes/notes-zettelkasten/" "notes")
