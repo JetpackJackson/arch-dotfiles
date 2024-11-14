@@ -188,7 +188,7 @@
       '(:left (path) :right (free-space))
       dirvish-mode-line-format
       '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
-  (setq dirvish-default-layout '(0 0.4 0.5))
+  (setq dirvish-default-layout '(1 0.4 0.5))
     (setq dirvish-attributes
         '(file-time file-size collapse subtree-state vc-state git-msg))
   (setq delete-by-moving-to-trash t)
@@ -258,12 +258,12 @@
            do (cl-return (nth i clist))
            finally return nil))
 
-(setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
-(defvar dired-listing-switches-name "by date") ; by date by default here.
-(defvar dired-listing-switches-others
-  '(("by name" . "-Alh")
-    ("by size" . "-AlSh")
-    ("by ext" . "-AlXh")))
+;; (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
+;; (defvar dired-listing-switches-name "by date") ; by date by default here.
+;; (defvar dired-listing-switches-others
+;;   '(("by name" . "-Alh")
+;;     ("by size" . "-AlSh")
+;;     ("by ext" . "-AlXh")))
 
 (defun dired-sort-toggle()
   "Rewrite of `dired-sort-toggle'.
