@@ -206,6 +206,8 @@ riverctl spawn "rot8 --hooks 'killall lisgd; lisgd &'"
 riverctl spawn "yambar -c /home/jet/.config/yambar/config-river.yml"
 riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"
 
+riverctl keyboard-layout -options "grp:rctrl_toggle" "us,noted"
+
 # Set the default layout generator to be rivertile and start it.
 # River will send the process group of the init executable SIGTERM on exit.
 #riverctl default-layout rivertile
