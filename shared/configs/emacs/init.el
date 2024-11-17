@@ -432,6 +432,7 @@ Loop over `dired-listing-switches' +
 	org-M-RET-may-split-line '(default . nil)
 	org-babel-lisp-eval-fn #'sly-eval
 	org-priority-lowest ?H)
+  (setq org-tags-column 0)
   (setq org-agenda-todo-ignore-with-date t) ;; clean up todo list
   (setq org-image-actual-width nil) ;; shrink images
   (setq org-agenda-inhibit-startup t) ;; https://orgmode.org/manual/Speeding-Up-Your-Agendas.html
