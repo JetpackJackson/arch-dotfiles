@@ -9,6 +9,12 @@
   :load-path "~/.cache/emacs/papis.el")
   ;; :init (require 'papis))
 
+;; (use-package eplot
+;;   :load-path "~/.cache/emacs/eplot"
+;;   :init
+;;   ;(require 'eplot)
+;;   (add-to-list 'auto-mode-alist '("\\.plt\\'" . eplot-mode)))
+
 (use-package arduino-mode :ensure nil
   :init
   (define-derived-mode arduino-mode c++-mode "Arduino")

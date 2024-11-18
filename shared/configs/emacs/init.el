@@ -451,7 +451,7 @@ Loop over `dired-listing-switches' +
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((R . t) (emacs-lisp . t) (java . t) (C . t) (lisp . t) (dot . t) (shell . t)))
+   '((R . t) (emacs-lisp . t) (java . t) (C . t) (lisp . t) (dot . t) (shell . t) (gnuplot . t)))
   (define-key org-mode-map (kbd "C-c <TAB>") #'org-shiftmetaright)
   (define-key org-mode-map (kbd "C-c <DEL>") #'org-shiftmetaleft)
   (define-key org-mode-map (kbd "C-c s") #'org-insert-sub-task)
