@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-pipbeet/bin/beet up
-pipbeet/bin/beet splupdate
+/home/jet/docs/pip-stuff/pip-beet/bin/beet up
+/home/jet/docs/pip-stuff/pip-beet/bin/beet splupdate
 cp ~/music/playlists/everything.m3u ~/music-android/playlists/everything.m3u
 cp ~/music/playlists/deutschemusik.m3u ~/music-android/playlists/deutschemusik.m3u
 sed -i -e 's/^/\/storage\/emulated\/0\/Music\//' ~/music-android/playlists/deutschemusik.m3u
@@ -32,7 +32,7 @@ awk -F '/' '{ print $2 }' < ~/music/playlists/deutschemusik.m3u | sort | uniq > 
 #     beet convert -y "artist:$artist"
 # done < /tmp/auf.txt
 
-pipbeet/bin/beet alt update droid
+/home/jet/docs/pip-stuff/pip-beet/bin/beet alt update droid
 
 # lrc files
 find ~/music/ -name "*.lrc" -printf '%P\n' > /tmp/lrc-all.txt
