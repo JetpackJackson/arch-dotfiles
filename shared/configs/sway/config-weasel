@@ -122,8 +122,8 @@ input * {
     xkb_layout "us,noted"
     xkb_variant ",noted"
     xkb_options "grp:rctrl_toggle"
-    repeat_delay 200
-    repeat_rate 25
+    #repeat_delay 200
+    #repeat_rate 25
 }
 
 set $mybindsym bindsym --to-code
