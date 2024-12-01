@@ -8,7 +8,11 @@
     "kernel",
     "uptime",
     "packages",
-    "shell",
+    {
+        "type": "command",
+	"text": "$SHELL -v | sed -e 's/, version//g'",
+	"key": "Shell"
+    },
     "display",
     "de",
     "wm",

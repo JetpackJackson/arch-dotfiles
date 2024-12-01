@@ -1,8 +1,10 @@
-function fetch --description 'fastfetch + cowsay'
-    if test ! -f ~/.local/share/cowz/deutsch.dat
-        daikichi pack ~/.local/share/cowz/deutsch ~/.local/share/cowz/deutsch.dat
-    end
-    daikichi randstr ~/.local/share/cowz/deutsch.dat > /tmp/quote.txt
+function fetch-fishonly --description 'fastfetch + cowsay'
+#    if test ! -f ~/.local/share/cowz/deutsch.dat
+#        daikichi pack ~/.local/share/cowz/deutsch ~/.local/share/cowz/deutsch.dat
+#    end
+#    daikichi randstr ~/.local/share/cowz/deutsch.dat > /tmp/quote.txt
+    fortune deutsch > /tmp/quote.txt
+    #rust-cowz > /tmp/quote.txt
     fold -w 34 -s /tmp/quote.txt > /tmp/fold.txt
     set -g counter 1
     set -g char -1
