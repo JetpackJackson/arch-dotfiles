@@ -137,6 +137,7 @@
 (use-package which-key :demand t :config (which-key-mode))
 (use-package rainbow-delimiters :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :bind (("C-c g" . magit-status)))
+(use-package elfeed)
 (use-package eat)
 (with-eval-after-load 'eat
   (set-face-attribute 'ansi-color-blue nil :background "#76cce0" :foreground "#76cce0")
@@ -556,7 +557,7 @@ Loop over `dired-listing-switches' +
 (load-file "~/.config/emacs/consult.el")
 (load-file "~/.config/emacs/meow.el")
 ;; (load-file "~/.config/emacs/jabber.el")
-;; (load-file "~/.config/emacs/private.el")
+(load-file "~/.config/emacs/private.el")
 
 ;; set modeline stuff here because we want it to pick up meow
 (setq-default mode-line-format
