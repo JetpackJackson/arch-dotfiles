@@ -18,9 +18,9 @@
 (use-package arduino-mode :ensure nil
   :init
   (define-derived-mode arduino-mode c++-mode "Arduino")
-  ;; can just use a Makefile with pio run
-  ;; (use-package platformio-mode
-  ;;   :hook ((arduino-mode) . platformio-mode))
+  ;; can use a Makefile with pio run as well if desired
+  (use-package platformio-mode
+    :hook ((arduino-mode) . platformio-mode))
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
   (add-hook 'platformio-compilation-filter-hook 'colorize-compilation-buffer))
 
@@ -29,8 +29,6 @@
 (use-package lua-mode)
 (use-package rust-mode
   :hook ((rust-mode) . (lambda () (setq indent-tabs-mode nil))))
-;(add-hook 'rust-mode-hook
-;          (lambda () (setq indent-tabs-mode nil)))
 ;(use-package cargo-mode
 ;  :hook ((rust-mode) . cargo-minor-mode))
 (use-package eglot-java
@@ -132,7 +130,7 @@
   :hook ((c++-mode c-mode python-mode latex-mode lua-mode lisp-mode sh-mode conf-unix-mode conf-desktop-mode fish-mode yaml-mode m4-mode rust-mode) . yas-minor-mode))
 ;(add-hook 'scheme-mode-hook 'yas-minor-mode) ;; TODO check if scheme has snippets elsewhere
 
-;; code indents
+;; code indents FIXME
 (setq c-default-style "k&r"
   c-basic-offset 4)
 ;; testing
@@ -156,4 +154,5 @@
              (arglist-cont-nonempty))
            (c-offsets-alist
              (access-label . -))))
-(setq c-default-style "1tbs")
+;; (setq c-default-style "1tbs")
+;(add-hook 'c-mode-hook '(c-set-style "1tbs"))
