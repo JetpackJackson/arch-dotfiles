@@ -252,12 +252,12 @@
   :hook (dired-mode . dired-hide-details-mode))
 
 ;; STOCK DIRED W/SORT TOGGLE
-(defun get-next-item-by-string-value (clist value)
-  (cl-loop for pair in clist
-           for i from 1
-           when (string-equal (cdr pair) value)
-           do (cl-return (nth i clist))
-           finally return nil))
+;; (defun get-next-item-by-string-value (clist value)
+;;   (cl-loop for pair in clist
+;;            for i from 1
+;;            when (string-equal (cdr pair) value)
+;;            do (cl-return (nth i clist))
+;;            finally return nil))
 
 ;; (setopt dired-listing-switches "-AlthG") ;;  --group-directories-first
 ;; (defvar dired-listing-switches-name "by date") ; by date by default here.
@@ -266,82 +266,65 @@
 ;;     ("by size" . "-AlSh")
 ;;     ("by ext" . "-AlXh")))
 
-(defun dired-sort-toggle()
-  "Rewrite of `dired-sort-toggle'.
-Loop over `dired-listing-switches' +
-`dired-listing-switches-others' and set next sorting switch."
-  (interactive)
-  (let* ((new-clist
-          ;; loop of switches
-          (append (list (cons dired-listing-switches-name dired-listing-switches))
-                  dired-listing-switches-others
-                  (list (cons dired-listing-switches-name dired-listing-switches))))
-         ;; next item
-         (pair (get-next-item-by-string-value new-clist dired-actual-switches))
-         (name (if pair
-                  (car pair)
-                ;; else
-                dired-listing-switches-name))
-         (switch (if pair
-                  (cdr pair)
-                ;; else
-                dired-listing-switches)))
-    (setq dired-actual-switches switch)
-    (setq mode-name (concat "Dired " name))
-    (revert-buffer)))
+;; (defun dired-sort-toggle()
+;;   "Rewrite of `dired-sort-toggle'.
+;; Loop over `dired-listing-switches' +
+;; `dired-listing-switches-others' and set next sorting switch."
+;;   (interactive)
+;;   (let* ((new-clist
+;;           ;; loop of switches
+;;           (append (list (cons dired-listing-switches-name dired-listing-switches))
+;;                   dired-listing-switches-others
+;;                   (list (cons dired-listing-switches-name dired-listing-switches))))
+;;          ;; next item
+;;          (pair (get-next-item-by-string-value new-clist dired-actual-switches))
+;;          (name (if pair
+;;                   (car pair)
+;;                 ;; else
+;;                 dired-listing-switches-name))
+;;          (switch (if pair
+;;                   (cdr pair)
+;;                 ;; else
+;;                 dired-listing-switches)))
+;;     (setq dired-actual-switches switch)
+;;     (setq mode-name (concat "Dired " name))
+;;     (revert-buffer)))
 
-(put 'dired-find-alternate-file 'disabled nil)
+;; (put 'dired-find-alternate-file 'disabled nil)
 
-(defun jet/dired-jump-test (path)
-  "Jump to the directory PATH in Dired."
-  ;:which-key "foo"
-  (lambda () (interactive)
-    (dired-jump nil path)))
+;; (defun jet/dired-jump-test (path)
+;;   "Jump to the directory PATH in Dired."
+;;   ;:which-key "foo"
+;;   (lambda () (interactive)
+;;     (dired-jump nil path)))
 
-(define-key dired-mode-map (kbd "b") nil)
-(define-key dired-mode-map (kbd "g") nil)
-(define-key dired-mode-map (kbd "g r") (jet/dired-jump-test "/"))
-(define-key dired-mode-map (kbd "g g") (jet/dired-jump-test "/home/jet/dl"))
-(define-key dired-mode-map (kbd "g i") (jet/dired-jump-test "/run/media/jet"))
-(define-key dired-mode-map (kbd "g n") (jet/dired-jump-test "/home/jet/docs/notes/notes-zettelkasten/agenda"))
-(define-key dired-mode-map (kbd "g s") (jet/dired-jump-test "/home/jet/docs/notes/school/resume"))
-(define-key dired-mode-map (kbd "g p") (jet/dired-jump-test "/home/jet/docs/notes/projects/git"))
+;; (define-key dired-mode-map (kbd "b") nil)
+;; (define-key dired-mode-map (kbd "g") nil)
+;; (define-key dired-mode-map (kbd "g r") (jet/dired-jump-test "/"))
+;; (define-key dired-mode-map (kbd "g g") (jet/dired-jump-test "/home/jet/dl"))
+;; (define-key dired-mode-map (kbd "g i") (jet/dired-jump-test "/run/media/jet"))
+;; (define-key dired-mode-map (kbd "g n") (jet/dired-jump-test "/home/jet/docs/notes/notes-zettelkasten/agenda"))
+;; (define-key dired-mode-map (kbd "g s") (jet/dired-jump-test "/home/jet/docs/notes/school/resume"))
+;; (define-key dired-mode-map (kbd "g p") (jet/dired-jump-test "/home/jet/docs/notes/projects/git"))
 
-(which-key-add-major-mode-key-based-replacements 'dired-mode
-  "g r" "root"
-  "g g" "home"
-  "g i" "/run/media"
-  "g n" "zk"
-  "g s" "school"
-  "g p" "projects")
+;; (which-key-add-major-mode-key-based-replacements 'dired-mode
+;;   "g r" "root"
+;;   "g g" "home"
+;;   "g i" "/run/media"
+;;   "g n" "zk"
+;;   "g s" "school"
+;;   "g p" "projects")
 
-(use-package dired :ensure nil
-  :config
-  (setq dired-recursive-deletes 'always)
-  (setq dired-recursive-copies 'always)
-  (setq dired-kill-when-opening-new-dired-buffer t)
-  ;; (setq dired-listing-switches "-alvFh --group-directories-first")
-  :bind (:map dired-mode-map
-   	      ("<left>" . dired-up-directory)
-   	      ("<right>" . dired-find-alternate-file)
-	      ("b" . revert-buffer))
-  :hook (dired-mode . dired-omit-mode)
-  :hook (dired-mode . dired-hide-details-mode))
-
-;; CASUAL DIRED
-;; (use-package casual :init (require 'casual-dired)
+;; (use-package dired :ensure nil
 ;;   :config
 ;;   (setq dired-recursive-deletes 'always)
 ;;   (setq dired-recursive-copies 'always)
-;;   (setq dired-listing-switches "-alvFh --group-directories-first")
+;;   (setq dired-kill-when-opening-new-dired-buffer t)
+;;   ;; (setq dired-listing-switches "-alvFh --group-directories-first")
 ;;   :bind (:map dired-mode-map
-;; 	      ("?" . casual-dired-tmenu)
-;; 	      ("s" . casual-dired-sort-by-tmenu) ; optional
-;; 	      ("/" . casual-dired-search-replace-tmenu) ; optional
-;; 	      ("]" . dired-next-subdir)
-;; 	      ("[" . dired-prev-subdir)
-;; 	      ("<left>" . dired-up-directory)
-;; 	      ("<right>" . dired-find-file))
+;;    	      ("<left>" . dired-up-directory)
+;;    	      ("<right>" . dired-find-alternate-file)
+;; 	      ("b" . revert-buffer))
 ;;   :hook (dired-mode . dired-omit-mode)
 ;;   :hook (dired-mode . dired-hide-details-mode))
 
