@@ -18,12 +18,11 @@
 (use-package arduino-mode :ensure nil
   :init
   (define-derived-mode arduino-mode c++-mode "Arduino")
-  ;; can use a Makefile with pio run as well if desired
-  (use-package platformio-mode
-    :hook ((arduino-mode) . platformio-mode))
   (add-to-list 'auto-mode-alist '("\\.ino\\'" . arduino-mode))
   (add-hook 'platformio-compilation-filter-hook 'colorize-compilation-buffer))
 
+;; can use a Makefile with pio run as well if desired
+(use-package platformio-mode :hook ((arduino-mode) . platformio-mode))
 (use-package envrc :hook (after-init . envrc-global-mode))
 (use-package fish-mode)
 (use-package lua-mode)
