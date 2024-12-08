@@ -215,6 +215,7 @@
    ("M-s" . dirvish-setup-menu)
    ("M-e" . dirvish-emerge-menu)
    ("M-j" . dirvish-fd-jump)
+   ("b" . revert-buffer)
    ("<left>" . dired-up-directory)
    ("<right>" . dired-find-file)))
 
