@@ -167,7 +167,7 @@ do
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     #riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPlay  spawn 'mpc toggle'
+    riverctl map $mode None XF86AudioPlay  spawn 'mpd-notif.sh'
     riverctl map $mode None XF86AudioPrev  spawn 'mpc prev'
     riverctl map $mode None XF86AudioNext  spawn 'mpc next'
 
