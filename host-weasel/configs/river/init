@@ -197,6 +197,10 @@ riverctl input pointer-1739-52856-SYNA2BA6:00_06CB:CE78_Touchpad natural-scroll 
 riverctl input pointer-7847-102-2.4G_Mouse natural-scroll disabled
 riverctl focus-follows-cursor normal
 
+riverctl spawn "pkill pipewire"
+riverctl spawn "pkill pipewire-pulse"
+riverctl spawn "pkill wireplumber"
+
 riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
 riverctl spawn "swaybg -i /home/jet/pics/wallpapers/temple-of-ah.jpg"
 riverctl spawn "mako"
@@ -205,6 +209,13 @@ riverctl spawn "wl-paste -p -t text --watch clipman store -P --histpath=/home/je
 riverctl spawn "rot8 --hooks 'killall lisgd; lisgd &'"
 riverctl spawn "yambar -c /home/jet/.config/yambar/config-river.yml"
 riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"
+
+riverctl spawn "pipewire &"
+riverctl spawn "pipewire-pulse &"
+riverctl spawn "wireplumber &"
+riverctl spawn "mpd --no-daemon"
+riverctl spawn "listenbrainz-mpd"
+#riverctl spawn "mpd-notification"
 
 riverctl keyboard-layout -options "grp:rctrl_toggle" "us,noted"
 

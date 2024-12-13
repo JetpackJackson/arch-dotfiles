@@ -98,7 +98,7 @@ bar:
     #        content: {string: {text: "{caps}"}}
   center:
     - mpd:
-        host: /var/run/user/1000/mpd/socket
+        host: /tmp/mpd.socket
         anchors:
           list: &artist_title
             #change to artist_album_title to show album
