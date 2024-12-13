@@ -16,6 +16,7 @@ item_fields:
     multidisc: 1 if disctotal > 1 else 0
 convert:
     dest: ~/music-android
+    hardlink: true
 chroma:
     auto: yes
 lyrics:
@@ -182,7 +183,8 @@ alternatives:
         default: external/$albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
         singleton: external/$albumartist/$album%aunique{}/$track $title
         comp: external/Various Artists/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
-      formats: opus mp3
+      formats: opus mp3 #link
+      #link_type: relative
       #query: "onplayer:true"
       query:
         "'All diese Gewalt',
