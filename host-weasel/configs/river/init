@@ -167,7 +167,7 @@ do
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     #riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPlay  spawn 'mpd-notif.sh'
+    riverctl map $mode None XF86AudioPlay  spawn 'mpc toggle'
     riverctl map $mode None XF86AudioPrev  spawn 'mpc prev'
     riverctl map $mode None XF86AudioNext  spawn 'mpc next'
 
@@ -207,15 +207,16 @@ riverctl spawn "mako"
 riverctl spawn "wl-paste -t text --watch clipman store -P"
 riverctl spawn "wl-paste -p -t text --watch clipman store -P --histpath=/home/jet/.local/share/clipman-primary.json"
 riverctl spawn "rot8 --hooks 'killall lisgd; lisgd &'"
-riverctl spawn "yambar -c /home/jet/.config/yambar/config-river.yml"
-riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"
 
 riverctl spawn "pipewire &"
 riverctl spawn "pipewire-pulse &"
 riverctl spawn "wireplumber &"
 riverctl spawn "mpd --no-daemon"
 riverctl spawn "listenbrainz-mpd"
-#riverctl spawn "mpd-notification"
+riverctl spawn "mpd-notification" # build from source
+
+riverctl spawn "yambar -c /home/jet/.config/yambar/config-river.yml" # start yambar after mpd
+riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"
 
 riverctl keyboard-layout -options "grp:rctrl_toggle" "us,noted"
 
