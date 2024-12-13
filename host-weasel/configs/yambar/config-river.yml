@@ -132,36 +132,36 @@ bar:
                    muted: {string: {text: "stumm.", foreground: *grey}}
                    ~muted: {string: {text: "VOL {cubic_volume}%", foreground: *white, font: *aerzte}}
                  default: {string: {text: "test"}}
-    - network:
-        content:
-          map:
-            default: {empty: {}}
-            conditions:
-              name == wlp0s20f3:
-                map:
-                  conditions:
-                    ~carrier: {empty: {}}
-                    carrier:
-                      map:
-                        default: {string: {text: , font: *nerd, foreground: *grey}} #"suche nach Signal...", foreground: *grey}}
-                        conditions:
-                          #state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
-                          #state == up && ipv6 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
-                          state == down: {string: {text: "suche nach Signal...", foreground: *grey}}
-                          #state == down: {string: {text: , font: *nerd, foreground: *grey}}
-                          state == up:
-                            map:
-                              default:
-                                - string: {text: , font: *nerd}
-                                - string: {text: " {ssid}"} #{dl-speed:mb}/{ul-speed:mb} Mb/s"}
+    # - network:
+    #     content:
+    #       map:
+    #         default: {empty: {}}
+    #         conditions:
+    #           name == wlp0s20f3:
+    #             map:
+    #               conditions:
+    #                 ~carrier: {empty: {}}
+    #                 carrier:
+    #                   map:
+    #                     default: {string: {text: , font: *nerd, foreground: *grey}} #"suche nach Signal...", foreground: *grey}}
+    #                     conditions:
+    #                       #state == up && ipv4 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+    #                       #state == up && ipv6 != "": {string: {text: "verbunden"}} #, right-margin: 5}}
+    #                       state == down: {string: {text: "suche nach Signal...", foreground: *grey}}
+    #                       #state == down: {string: {text: , font: *nerd, foreground: *grey}}
+    #                       state == up:
+    #                         map:
+    #                           default:
+    #                             - string: {text: , font: *nerd}
+    #                             - string: {text: " {ssid}"} #{dl-speed:mb}/{ul-speed:mb} Mb/s"}
                                   
-                              conditions:
-                                ipv4 == "":
-                                  - string: {text: , font: *nerd, foreground: *grey}
-                                  - string: {text: " {ssid}", foreground: *grey}
-                                ipv6 == "":
-                                  - string: {text: , font: *nerd, foreground: *white}
-                                  - string: {text: " {ssid}", foreground: *white}
+    #                           conditions:
+    #                             ipv4 == "":
+    #                               - string: {text: , font: *nerd, foreground: *grey}
+    #                               - string: {text: " {ssid}", foreground: *grey}
+    #                             ipv6 == "":
+    #                               - string: {text: , font: *nerd, foreground: *white}
+    #                               - string: {text: " {ssid}", foreground: *white}
 
 
     - backlight:
