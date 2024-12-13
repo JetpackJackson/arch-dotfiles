@@ -1,0 +1,7 @@
+[manager]
+ratio = [ 1, 3, 4 ]
+sort_by = "natural"
+
+[preview]
+max_height = 1200
+max_width = 1800

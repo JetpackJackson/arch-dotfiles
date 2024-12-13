@@ -1,0 +1,21 @@
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { fg = "reset", bg = "#363646" } # light bg
+
+# default bg
+mode_normal = { fg = "#1f1f28", bg = "#85a6ea", bold = true } # blue
+mode_select = { fg = "#1f1f28", bg = "#957fb8", bold = true } # magenta
+mode_unset  = { fg = "#1f1f28", bg = "#e6c384", bold = true } # yellow
+
+# blue - light bg
+progress_label  = { fg = "#85a6ea", bg = "#363646", bold = true }
+# light bg - default bg
+progress_normal = { fg = "#363646", bg = "#1f1f28" }
+progress_error  = { fg = "#363646", bg = "#1f1f28" }
+
+permissions_t = { fg = "#98bb6c" } # green
+permissions_r = { fg = "#e6c384" } # yellow
+permissions_w = { fg = "#e82424" } # red
+permissions_x = { fg = "#7aa89f" } # cyan
+permissions_s = { fg = "#938aa9" } # magenta

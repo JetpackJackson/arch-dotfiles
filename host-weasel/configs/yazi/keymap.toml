@@ -1,0 +1,30 @@
+[manager]
+prepend_keymap = [
+        { on = ",",         run = "search --via=fd",             desc = "Search files by name via fd" },
+	{ on = "<C-s>",     run = "search --via=rg",             desc = "Search files by content via ripgrep" },
+	{ on = "<C-g>",     run = "escape --search",             desc = "Cancel the ongoing search" },
+
+	{ on = ["s", "m"], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
+	{ on = ["s", "M"], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
+	{ on = ["s", "b"], run = [ "sort btime --reverse=no", "linemode btime" ], desc = "Sort by birth time" },
+	{ on = ["s", "B"], run = [ "sort btime --reverse", "linemode btime" ],    desc = "Sort by birth time (reverse)" },
+	{ on = ["s", "e"], run = "sort extension --reverse=no",                   desc = "Sort by extension" },
+	{ on = ["s", "E"], run = "sort extension --reverse",                      desc = "Sort by extension (reverse)" },
+	{ on = ["s", "a"], run = "sort alphabetical --reverse=no",                desc = "Sort alphabetically" },
+	{ on = ["s", "A"], run = "sort alphabetical --reverse",                   desc = "Sort alphabetically (reverse)" },
+	{ on = ["s", "n"], run = "sort natural --reverse=no",                     desc = "Sort naturally" },
+	{ on = ["s", "N"], run = "sort natural --reverse",                        desc = "Sort naturally (reverse)" },
+	{ on = ["s", "s"], run = [ "sort size --reverse=no", "linemode size" ],   desc = "Sort by size" },
+	{ on = ["s", "S"], run = [ "sort size --reverse", "linemode size" ],      desc = "Sort by size (reverse)" },
+	{ on = ["s", "r"], run = "sort random --reverse=no",                      desc = "Sort randomly" },
+
+
+	{ on = ["g", "g"], run = 'cd ~/', desc = "Just for test!" },
+	{ on = ["g", "i"], run = 'cd /run/media', desc = "Just for test!" },
+	{ on = ["g", "c"], run = 'cd ~/.local/share', desc = "Just for test!" },
+	{ on = ["g", "l"], run = 'cd ~/.config/nvim/lua/plugins', desc = "Just for test!" },
+	{ on = ["g", "d"], run = 'cd ~/dl', desc = "Just for test!" },
+	{ on = ["g", "n"], run = 'cd ~/docs/notes/notes-zettelkasten', desc = "Just for test!" },
+	{ on = ["g", "s"], run = 'cd ~/docs/notes/school', desc = "Just for test!" },
+	{ on = ["g", "p"], run = 'cd ~/docs/notes/projects/git', desc = "Just for test!" },
+]
