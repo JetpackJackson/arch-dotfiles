@@ -161,15 +161,19 @@ do
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ +5%'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
-    riverctl map $mode None XF86AudioMute         spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+    # riverctl map $mode None XF86AudioRaiseVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ +5%'
+    # riverctl map $mode None XF86AudioLowerVolume  spawn 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
+    # riverctl map $mode None XF86AudioMute         spawn 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
+
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-'
+    riverctl map $mode None XF86AudioMute         spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     #riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
-    riverctl map $mode None XF86AudioPlay  spawn 'mpc toggle'
-    riverctl map $mode None XF86AudioPrev  spawn 'mpc prev'
-    riverctl map $mode None XF86AudioNext  spawn 'mpc next'
+    riverctl map $mode None XF86AudioPlay  spawn 'rmpc togglepause'
+    riverctl map $mode None XF86AudioPrev  spawn 'rmpc prev'
+    riverctl map $mode None XF86AudioNext  spawn 'rmpc next'
 
     # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
     riverctl map $mode None XF86MonBrightnessUp   spawn 'brightnessctl set +5%'
@@ -197,9 +201,11 @@ riverctl input pointer-1739-52856-SYNA2BA6:00_06CB:CE78_Touchpad natural-scroll 
 riverctl input pointer-7847-102-2.4G_Mouse natural-scroll disabled
 riverctl focus-follows-cursor normal
 
-riverctl spawn "pkill pipewire"
-riverctl spawn "pkill pipewire-pulse"
-riverctl spawn "pkill wireplumber"
+# riverctl spawn "pkill pipewire"
+# riverctl spawn "pkill pipewire-pulse"
+# riverctl spawn "pkill wireplumber"
+# riverctl spawn "pkill mpd"
+# riverctl spawn "pkill listenbrainz-mpd"
 
 riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
 riverctl spawn "swaybg -i /home/jet/pics/wallpapers/temple-of-ah.jpg"
@@ -208,12 +214,12 @@ riverctl spawn "wl-paste -t text --watch clipman store -P"
 riverctl spawn "wl-paste -p -t text --watch clipman store -P --histpath=/home/jet/.local/share/clipman-primary.json"
 riverctl spawn "rot8 --hooks 'killall lisgd; lisgd &'"
 
-riverctl spawn "pipewire &"
-riverctl spawn "pipewire-pulse &"
-riverctl spawn "wireplumber &"
+riverctl spawn "pipewire"
+riverctl spawn "pipewire-pulse"
+riverctl spawn "wireplumber"
 riverctl spawn "mpd --no-daemon"
-riverctl spawn "listenbrainz-mpd"
-riverctl spawn "mpd-notification" # build from source
+riverctl spawn "sleep 1; listenbrainz-mpd"
+riverctl spawn "sleep 1; mpd-notification" # build from source
 
 riverctl spawn "yambar -c /home/jet/.config/yambar/config-river.yml" # start yambar after mpd
 riverctl spawn "wlr-randr --output eDP-1 --scale 1.5"

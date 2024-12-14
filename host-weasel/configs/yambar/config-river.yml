@@ -98,7 +98,8 @@ bar:
     #        content: {string: {text: "{caps}"}}
   center:
     - mpd:
-        host: /tmp/mpd.socket
+        host: 127.0.0.1 #/tmp/mpd.socket
+        port: 6600
         anchors:
           list: &artist_title
             #change to artist_album_title to show album
