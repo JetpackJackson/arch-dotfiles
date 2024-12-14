@@ -4,6 +4,10 @@ prepend_keymap = [
 	{ on = "<C-s>",     run = "search --via=rg",             desc = "Search files by content via ripgrep" },
 	{ on = "<C-g>",     run = "escape --search",             desc = "Cancel the ongoing search" },
 
+	{ on = "~", run = "tasks_show", desc = "Show task manager" },
+	{ on = [ "d" ], run = '''shell --interactive 'mv "$@" ~/.cache/mytrash'''' },
+	{ on = [ "w", "w" ], run = '''shell --interactive 'rm -r ~/.cache/mytrash && mkdir ~/.cache/mytrash'''' },
+
 	{ on = ["s", "m"], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = "Sort by modified time" },
 	{ on = ["s", "M"], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = "Sort by modified time (reverse)" },
 	{ on = ["s", "b"], run = [ "sort btime --reverse=no", "linemode btime" ], desc = "Sort by birth time" },
@@ -18,13 +22,13 @@ prepend_keymap = [
 	{ on = ["s", "S"], run = [ "sort size --reverse", "linemode size" ],      desc = "Sort by size (reverse)" },
 	{ on = ["s", "r"], run = "sort random --reverse=no",                      desc = "Sort randomly" },
 
-
-	{ on = ["g", "g"], run = 'cd ~/', desc = "Just for test!" },
-	{ on = ["g", "i"], run = 'cd /run/media', desc = "Just for test!" },
-	{ on = ["g", "c"], run = 'cd ~/.local/share', desc = "Just for test!" },
-	{ on = ["g", "l"], run = 'cd ~/.config/nvim/lua/plugins', desc = "Just for test!" },
-	{ on = ["g", "d"], run = 'cd ~/dl', desc = "Just for test!" },
-	{ on = ["g", "n"], run = 'cd ~/docs/notes/notes-zettelkasten', desc = "Just for test!" },
-	{ on = ["g", "s"], run = 'cd ~/docs/notes/school', desc = "Just for test!" },
-	{ on = ["g", "p"], run = 'cd ~/docs/notes/projects/git', desc = "Just for test!" },
+	{ on = ["g", "h"], run = "noop" },
+	{ on = ["g", "g"], run = 'cd ~/' },
+	{ on = ["g", "i"], run = 'cd /run/media' },
+	{ on = ["g", "c"], run = 'cd ~/.local/share' },
+	{ on = ["g", "l"], run = 'cd ~/.config/nvim/lua/plugins' },
+	{ on = ["g", "d"], run = 'cd ~/dl' },
+	{ on = ["g", "n"], run = 'cd ~/docs/notes/notes-zettelkasten' },
+	{ on = ["g", "s"], run = 'cd ~/docs/notes/school' },
+	{ on = ["g", "p"], run = 'cd ~/docs/notes/projects/git' },
 ]

@@ -1,21 +1,202 @@
+#[flavor]
+#dark = "catppuccin-macchiato"
+# vim:fileencoding=utf-8:foldmethod=marker
+
+# : Manager {{{
+
+# [manager]
+# cwd = { fg = "#76cce0" }
+
+# # Hovered
+# hovered         = { reversed = true }
+# preview_hovered = { underline = true }
+
+# # Find
+# find_keyword  = { fg = "#e7c664", bold = true, italic = true, underline = true }
+# find_position = { fg = "#b39df3", bg = "reset", bold = true, italic = true }
+
+# # Marker
+# marker_copied   = { fg = "#9ed072",  bg = "#9ed072" }
+# marker_cut      = { fg = "#fc5d7c",    bg = "#fc5d7c" }
+# marker_marked   = { fg = "#76cce0",   bg = "#76cce0" }
+# marker_selected = { fg = "#e7c664", bg = "#e7c664" }
+
+# # Tab
+# tab_active   = { reversed = true }
+# tab_inactive = {}
+# tab_width    = 1
+
+# # Count
+# count_copied   = { fg = "#33353f", bg = "#9ed072" }
+# count_cut      = { fg = "#33353f", bg = "#fc5d7c" }
+# count_selected = { fg = "#33353f", bg = "#e7c664" }
+
+# # Border
+# border_symbol = "│"
+# border_style  = { fg = "#4f585e" }
+
+# # Highlighting
+# syntect_theme = ""
+
+# # : }}}
+
+
+# # : Status {{{
+
+# [status]
+# separator_open  = ""
+# separator_close = ""
+# separator_style = { fg = "#33353f", bg = "#33353f" }
+
+# # Mode
+# mode_normal = { bg = "#76cce0", bold = true }
+# mode_select = { bg = "#fc5d7c", bold = true }
+# mode_unset  = { bg = "#fc5d7c", bold = true }
+
+# # Progress
+# progress_label  = { bold = true }
+# progress_normal = { fg = "#76cce0", bg = "#222327" }
+# progress_error  = { fg = "#fc5d7c", bg = "#222327" }
+
+# # Permissions
+# permissions_t = { fg = "#9ed072" }
+# permissions_r = { fg = "#e7c664" }
+# permissions_w = { fg = "#fc5d7c" }
+# permissions_x = { fg = "#76cce0" }
+# permissions_s = { fg = "#2c2e34" }
+
+# # : }}}
+
+
+# # : Select {{{
+
+# [select]
+# border   = { fg = "#76cce0" }
+# active   = { fg = "#b39df3", bold = true }
+# inactive = {}
+
+# # : }}}
+
+
+# # : Input {{{
+
+# [input]
+# border   = { fg = "#76cce0" }
+# title    = {}
+# value    = {}
+# selected = { reversed = true }
+
+# # : }}}
+
+
+# # : Completion {{{
+
+# [completion]
+# border   = { fg = "#76cce0" }
+# active   = { reversed = true }
+# inactive = {}
+
+# # Icons
+# icon_file    = ""
+# icon_folder  = ""
+# icon_command = ""
+
+# # : }}}
+
+
+# # : Tasks {{{
+
+# [tasks]
+# border  = { fg = "#76cce0" }
+# title   = {}
+# hovered = { fg = "#b39df3", underline = true }
+
+# # : }}}
+
+
+# # : Which {{{
+
+# [which]
+# cols            = 3
+# mask            = { bg = "#222327" }
+# cand            = { fg = "#76cce0" }
+# rest            = { fg = "#2c2e34" }
+# desc            = { fg = "#b39df3" }
+# separator       = "  "
+# separator_style = { fg = "#2c2e34" }
+
+# # : }}}
+
+
+# # : Help {{{
+
+# [help]
+# on      = { fg = "#76cce0" }
+# run     = { fg = "#b39df3" }
+# desc    = {}
+# hovered = { reversed = true, bold = true }
+# footer  = { fg = "#222327", bg = "#e2e2e3" }
+
+# # : }}}
+
+
+# # : Notify {{{
+
+# [notify]
+# title_info  = { fg = "#9ed072" }
+# title_warn  = { fg = "#e7c664" }
+# title_error = { fg = "#fc5d7c" }
+
+# # Icons
+# icon_info  = ""
+# icon_warn  = ""
+# icon_error = ""
+
+# # : }}}
+
+
+# # : File-specific styles {{{
+
+# [filetype]
+
+# rules = [
+# 	# Images
+# 	{ mime = "image/*", fg = "#76cce0" },
+
+# 	# Media
+# 	{ mime = "{audio,video}/*", fg = "#b39df3" },
+
+# 	# Archives
+# 	{ mime = "application/*zip", fg = "#fc5d7c" },
+# 	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#fc5d7c" },
+
+# 	# Documents
+# 	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#76cce0" },
+
+# 	# Fallback
+# 	{ name = "*", fg = "#85d3f2" },
+# 	{ name = "*/", fg = "#9ed072" }
+# ]
+
+# # : }}}
+
+
 [status]
 separator_open = ""
 separator_close = ""
-separator_style = { fg = "reset", bg = "#363646" } # light bg
 
-# default bg
-mode_normal = { fg = "#1f1f28", bg = "#85a6ea", bold = true } # blue
-mode_select = { fg = "#1f1f28", bg = "#957fb8", bold = true } # magenta
-mode_unset  = { fg = "#1f1f28", bg = "#e6c384", bold = true } # yellow
+perm_type = { fg = "#98bb6c" } # green
+perm_read = { fg = "#e6c384" } # yellow
+perm_write = { fg = "#e82424" } # red
+perm_exec = { fg = "#7aa89f" } # cyan
+perm_sep = { fg = "#938aa9" } # magenta
 
-# blue - light bg
-progress_label  = { fg = "#85a6ea", bg = "#363646", bold = true }
-# light bg - default bg
-progress_normal = { fg = "#363646", bg = "#1f1f28" }
-progress_error  = { fg = "#363646", bg = "#1f1f28" }
+[mode]
+normal_main = { fg = "#1e1e2e", bg = "#f9e2af", bold = true }
+normal_alt  = { fg = "#f9e2af", bg = "#313244"}
 
-permissions_t = { fg = "#98bb6c" } # green
-permissions_r = { fg = "#e6c384" } # yellow
-permissions_w = { fg = "#e82424" } # red
-permissions_x = { fg = "#7aa89f" } # cyan
-permissions_s = { fg = "#938aa9" } # magenta
+select_main = { fg = "#1e1e2e", bg = "#a6e3a1", bold = true }
+select_alt  = { fg = "#a6e3a1", bg = "#313244"}
+
+unset_main  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
+unset_alt   = { fg = "#f2cdcd", bg = "#313244"}
