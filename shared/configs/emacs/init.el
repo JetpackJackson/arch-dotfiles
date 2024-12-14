@@ -303,7 +303,6 @@
 ;;   (lambda () (interactive)
 ;;     (dired-jump nil path)))
 
-;; (define-key dired-mode-map (kbd "b") nil)
 ;; (define-key dired-mode-map (kbd "g") nil)
 ;; (define-key dired-mode-map (kbd "g r") (jet/dired-jump-test "/"))
 ;; (define-key dired-mode-map (kbd "g g") (jet/dired-jump-test "/home/jet/dl"))
