@@ -138,6 +138,10 @@
 (use-package rainbow-delimiters :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :bind (("C-c g" . magit-status)))
 (use-package elfeed)
+(use-package eee
+  :load-path "~/.cache/emacs/eee.el/"
+  :config (setq ee-terminal-command "foot"))
+
 (use-package eat)
 (with-eval-after-load 'eat
   (set-face-attribute 'ansi-color-blue nil :background "#76cce0" :foreground "#76cce0")
