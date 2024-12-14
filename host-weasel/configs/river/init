@@ -207,7 +207,8 @@ riverctl focus-follows-cursor normal
 # riverctl spawn "pkill mpd"
 # riverctl spawn "pkill listenbrainz-mpd"
 
-riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
+#riverctl spawn "dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
+riverctl spawn "dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river"
 riverctl spawn "swaybg -i /home/jet/pics/wallpapers/temple-of-ah.jpg"
 riverctl spawn "mako"
 riverctl spawn "wl-paste -t text --watch clipman store -P"
