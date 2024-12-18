@@ -349,24 +349,6 @@
 	recentf-filter-changer-current '(recentf-arrange-by-dir))
   (recentf-mode 1))
 
-;; vertico
-(use-package vertico
-  :custom
-  (vertico-count 20) ;; Show more candidates
-  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
-  :init (vertico-mode)
-  :config (use-package savehist :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package vertico-directory
-  :after vertico
-  :ensure nil
-  ;; More convenient directory navigation commands
-  :bind (:map vertico-map
-              ("RET" . vertico-directory-enter)
-              ("DEL" . vertico-directory-delete-char)
-              ("M-DEL" . vertico-directory-delete-word))
-  ;; Tidy shadowed file names
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
-
 ;; https://old.reddit.com/r/emacs/comments/qch2n1/how_can_i_copy_out_of_emacs_in_terminal_mode_with/
 ;; https://github.com/Crandel/home/blob/master/.config/emacs/recipes/base-rcp.el#L357-L379
 (use-package select :ensure nil
@@ -540,7 +522,7 @@
 (load-file "~/.config/emacs/sonokai-theme.el")
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
-(load-file "~/.config/emacs/consult.el")
+(load-file "~/.config/emacs/completion.el")
 (load-file "~/.config/emacs/meow.el")
 ;; (load-file "~/.config/emacs/jabber.el")
 (load-file "~/.config/emacs/private.el")

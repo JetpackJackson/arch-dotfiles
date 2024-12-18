@@ -86,30 +86,6 @@
 
 ;; change autocomplete method based on emacs version
 ;(defun jet/use-corfu ()
-(use-package corfu :init (global-corfu-mode)
-  :custom
-  (corfu-auto t)
-  (corfu-preselect 'prompt)
-  (corfu-quit-no-match 'separator)
-  (corfu-separator "<spc>"))
-
-  ;; :bind (:map corfu-map
-  ;; 	      ("<TAB>" . completion-at-point)))
-;	      ("<TAB>" . corfu-complete)))
-  ;:bind (("<TAB>" . completion-at-point)))
-
-;; corfu in the eshell
-(add-hook 'eshell-mode-hook
-          (lambda ()
-	    (setq-local corfu-auto nil)
-	    (corfu-mode)))
-;; make corfu not mess with other stuff
-(setq global-corfu-minibuffer
-      (lambda ()
-	(not (or (bound-and-true-p mct--active)
-		 (bound-and-true-p vertico--input)
-                 (eq (current-local-map) read-passwd-map)))));)
-
 ;; (defun jet/use-company ()
 ;;   (use-package company-c-headers)
 ;;   (use-package company :init (global-company-mode) (setq company-idle-delay 0) (setq company-minimum-prefix-length 2))

@@ -1,11 +1,72 @@
 ;; -*- lexical-binding: t -*-
+(use-package corfu :init (global-corfu-mode)
+  :custom
+  (corfu-auto t)
+  (corfu-preselect 'prompt)
+  (corfu-quit-no-match 'separator)
+  (corfu-separator "<spc>"))
+
+  ;; :bind (:map corfu-map
+  ;; 	      ("<TAB>" . completion-at-point)))
+;	      ("<TAB>" . corfu-complete)))
+  ;:bind (("<TAB>" . completion-at-point)))
+
+;; corfu in the eshell
+(add-hook 'eshell-mode-hook
+          (lambda ()
+	    (setq-local corfu-auto nil)
+	    (corfu-mode)))
+;; make corfu not mess with other stuff
+(setq global-corfu-minibuffer
+      (lambda ()
+	(not (or (bound-and-true-p mct--active)
+		 (bound-and-true-p vertico--input)
+                 (eq (current-local-map) read-passwd-map)))));)
+
+(use-package vertico ;:disabled t
+  :custom
+  (vertico-count 20) ;; Show more candidates
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  :init (vertico-mode))
+  ;:config (use-package savehist :init (savehist-mode))) ;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package vertico-directory ;:disabled t
+  :after vertico
+  :ensure nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+;; Enable rich annotations using the Marginalia package
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  ;; The :init section is always executed.
+  :init
+
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+
 ;; Example configuration for Consult
-(use-package consult :demand t
+(use-package consult ;:demand t
   ;; Replace bindings. Lazily loaded by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)
-         ("C-c k" . consult-kmacro)
          ("C-c m" . consult-man)
          ("C-c i" . consult-info)
          ([remap Info-search] . consult-info)
