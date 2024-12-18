@@ -45,7 +45,6 @@
       use-package-always-ensure t)
 ;use-package-always-mark t
 
-;(require 'use-package)
 (setq use-package-compute-statistics t)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 

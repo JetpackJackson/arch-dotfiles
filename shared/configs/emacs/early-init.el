@@ -42,8 +42,6 @@
 (setq package-user-dir (string-replace ".config" ".cache" package-user-dir))
 (setcar native-comp-eln-load-path
         (string-replace ".config" ".cache" (car native-comp-eln-load-path)))
-;(require 'xdg) (startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
-;(startup-redirect-eln-cache (expand-file-name "emacs/elpa" (xdg-cache-home)))
 
 ;; modeline functions
 (setq mode-line-position (list "(%l,%c)"))
