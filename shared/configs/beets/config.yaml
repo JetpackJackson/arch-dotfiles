@@ -7,7 +7,7 @@ import:
     copy: no
     incremental: no
     autotag: yes
-plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert edit alternatives
+plugins: chroma mbsync smartplaylist replaygain fish badfiles inline lyrics duplicates convert edit #alternatives
 paths:
     default: external/$albumartist/$album%aunique{}/%if{$multidisc,Disc $disc/}$track $title
     singleton: external/$albumartist/$album%aunique{}/$track $title
@@ -52,6 +52,7 @@ smartplaylist:
                   'artist:"Das Lumpenpack"',
                   '"artist:David Bowie" "helden"',
                   'artist:"Diary of Dreams"',
+                  'artist:"Die Fantastischen Vier"',
                   'artist:"Die Kreatur"',
                   'artist:"Die Krupps"',
                   'artist:"Die Lochis"',
@@ -209,6 +210,7 @@ alternatives:
         'Das Lumpenpack',
         'David Bowie helden',
         'Diary of Dreams',
+        'Die Fantastischen Vier',
         'Die Kreatur',
         'Die Krupps',
         'Die Lochis',
