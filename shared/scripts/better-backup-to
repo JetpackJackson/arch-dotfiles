@@ -70,7 +70,10 @@ backup() {
 	 --filter=ACME \
 	 ::{hostname}-{now:%Y-%m-%d_%H:%M:%S} \
 	 /home \
-	 /mnt/data/media
+	 /mnt/data/media/shows-german \
+	 /mnt/data/media/movies-german \
+	 /mnt/data/media/disney
+	 # /mnt/data/media/fix \
 	 # /var/lib/prosody
 	 # /var/lib/sonarr \
 	 # /var/lib/radarr \
