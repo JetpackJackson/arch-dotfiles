@@ -28,8 +28,6 @@
 (use-package lua-mode)
 (use-package rust-mode
   :hook ((rust-mode) . (lambda () (setq indent-tabs-mode nil))))
-;(use-package cargo-mode
-;  :hook ((rust-mode) . cargo-minor-mode))
 (use-package eglot-java
   :config (setq eglot-java-run-main-jvm-args '("--enable-preview"))
   :hook (((java-mode) . 'eglot-java-mode)))

@@ -538,7 +538,7 @@
 
 ;; https://github.com/sainnhe/sonokai-vscode/blob/master/themes/sonokai-default.json
 ;; https://nice.github.io/themeforge/
-(load "~/.config/emacs/sonokai-theme.el")
+(load-file "~/.config/emacs/sonokai-theme.el")
 (load-theme 'sonokai t)
 (load-file "~/.config/emacs/lsp.el")
 (load-file "~/.config/emacs/consult.el")
