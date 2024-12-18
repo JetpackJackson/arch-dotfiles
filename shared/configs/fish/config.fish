@@ -120,6 +120,8 @@ if status is-interactive
 
     abbr -a scu --set-cursor 'systemctl --user %' 
     abbr -a sc --set-cursor 'systemctl %' 
+    abbr -a rcs --set-cursor 'sudo rc-service %'
+    abbr -a rcu --set-cursor 'sudo rc-update %'
 
     #abbr -a npi --set-cursor 'nix profile install nixpkgs#%'
     #abbr -a ncg --set-cursor 'nix-collect-garbage%'
