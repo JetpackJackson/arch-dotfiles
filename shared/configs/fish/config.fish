@@ -68,7 +68,9 @@ if status is-interactive
     set -gx FZF_PREVIEW_LINES 48
     set -gx FZF_PREVIEW_COLUMNS 88
     set -gx FZF_DEFAULT_COMMAND "ls -r -1"
-    set -gx FZF_DEFAULT_OPTS "--color=bg+:#33353f,bg:#2c2e34,border:#7f8490,spinner:#b39df3,hl:#7f8490,fg:#e2e2e3,header:#7f8490,info:#fc5d7c,pointer:#fc5d7c,marker:#fc5d7c,fg+:#e2e2e3,preview-bg:#363944,prompt:#fc5d7c,hl+:#fc5d7c"
+    #set -gx FZF_DEFAULT_OPTS "--color=bg+:#33353f,bg:#2c2e34,border:#7f8490,spinner:#b39df3,hl:#7f8490,fg:#e2e2e3,header:#7f8490,info:#fc5d7c,pointer:#fc5d7c,marker:#fc5d7c,fg+:#e2e2e3,preview-bg:#363944,prompt:#fc5d7c,hl+:#fc5d7c"
+    # like above but w/transparent bg
+    set -gx FZF_DEFAULT_OPTS "--color=bg+:#33353f,border:#7f8490,spinner:#b39df3,hl:#7f8490,fg:#e2e2e3,header:#7f8490,info:#fc5d7c,pointer:#fc5d7c,marker:#fc5d7c,fg+:#e2e2e3,prompt:#fc5d7c,hl+:#fc5d7c"
 
     # zk and projects
     set -gx ZK_NOTEBOOK_DIR "$XDG_DOCUMENTS_DIR/notes/notes-zettelkasten"
@@ -134,8 +136,6 @@ if status is-interactive
     # no cmdline completion for cmdline args other than files but the
     # other option doesn't do that either
     abbr -a e --set-cursor 'emacsclient -a "" -c % &; disown'
-    abbr -a en --set-cursor 'emacs -nw %'
-    #abbr -a icat --set-cursor 'kitty +kitten icat %'
 
     abbr -a guix-listgen 'guix package --list-generations -p "$GUIX_PROFILE"'
     abbr -a guix-listin 'guix package --list-installed -p "$GUIX_PROFILE"'
@@ -161,4 +161,6 @@ set fish_cursor_visual block
 
 set fish_vi_force_cursor 0
 
+# Set up fzf key bindings
+fzf --fish | source
 direnv hook fish | source
