@@ -145,7 +145,7 @@ if status is-interactive
     #abbr -a ft-clear 'printf "\033]11;[80]#2c2e34"'
     #abbr -a ft-solid 'printf "\033]11;[100]#2c2e34"'
     abbr -a ard-cli --set-cursor 'arduino-cli --config-file $XDG_CONFIG_HOME/arduino15/arduino-cli.yaml %'
-
+    abbr -a nm-rm --set-cursor 'notmuch search --output=files --format=text0 tag:killed | xargs -r0 rm %'
 end
 
 # Emulates vim's cursor shape behavior

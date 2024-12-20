@@ -93,6 +93,10 @@
 
   (setq revert-without-query '(".pdf"))
 
+  ;; send email with msmtp (thanks wgreenhouse)
+  (setopt message-send-mail-function 'message-send-mail-with-sendmail)
+  (setopt sendmail-program "/usr/bin/msmtp")
+
   :custom
   ;; TAB cycle if there are only few candidates
   ;; (completion-cycle-threshold 3)
