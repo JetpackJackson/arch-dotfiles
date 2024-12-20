@@ -3,7 +3,7 @@
 SETUVAR --export GNUPGHOME:/home/jet/\x2egnupg/
 SETUVAR --export GPG_TTY:/dev/pts/1
 SETUVAR --export SSH_AUTH_SOCK:/run/user/1000/ssh\x2dagent\x2esocket
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR _fish_abbr_n:\x2d\x2dset\x2dcursor\x20nvim\x20\x25
 SETUVAR _fish_abbr_ncg:\x2d\x2dset\x2dcursor\x20nix\x2dcollect\x2dgarbage\x25
 SETUVAR _fish_abbr_npi:\x2d\x2dset\x2dcursor\x20nix\x20profile\x20install\x20nixpkgs\x23\x25
