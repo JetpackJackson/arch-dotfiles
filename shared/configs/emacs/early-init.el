@@ -61,18 +61,17 @@
 ;; fixed?
 (defvar trunc-name)
 (defun jet/modified-buffer-indicator-colorized (trunc-name) "Show buffer status in the mode line."
-       ;(if (buffer-file-name) nil (propertize buffer-file-name 'face 'hide))
        (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
 	     (t (propertize trunc-name 'face 'mode-line-buffer-id))))
 
-(defun jet/dir-indicator-colorized () "Show directory in the mode line with thin font."
-  (let ((trunc-name ""))
-    (if (string-equal-ignore-case (buffer-name) "*scratch*")
-        (setq trunc-name "")
-      (when buffer-file-name
-        (setq trunc-name (shrink-path-dirs (file-name-directory buffer-file-truename)))))
-    (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
-          (t (propertize trunc-name 'face '(:foreground "#ffffff"))))))
+;; (defun jet/dir-indicator-colorized () "Show directory in the mode line with thin font."
+;;   (let ((trunc-name ""))
+;;     (if (string-equal-ignore-case (buffer-name) "*scratch*")
+;;         (setq trunc-name "")
+;;       (when buffer-file-name
+;;         (setq trunc-name (shrink-path-dirs (file-name-directory buffer-file-truename)))))
+;;     (cond ((buffer-modified-p) (propertize trunc-name 'face 'mode-line-modified-buffer-id))
+;;           (t (propertize trunc-name 'face '(:foreground "#ffffff"))))))
 
 ;;; FUNCTIONS
 ;; https://stackoverflow.com/questions/4872088/is-there-any-way-for-subtasks-to-inherit-deadlines-in-org-mode
@@ -84,25 +83,25 @@
     (when parent-deadline
       (org-deadline nil parent-deadline))))
 
-(defun jet/mode-recompile () "Recompile a project based on its type" (interactive)
-  (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (project-compile));(jet/project-compile-build));(my-compile-project))
-	((bound-and-true-p sly-mode) (sly-compile-file))
-	((bound-and-true-p eglot-java-mode) (project-compile)) ;(eglot-java-run-main)) ; FIXME
-	(t (message "recompile command not defined for this mode"))))
+;; (defun jet/mode-recompile () "Recompile a project based on its type" (interactive)
+;;   (cond ((bound-and-true-p platformio-mode) (platformio-build buffer-file-name)) ;; if platformio minor mode
+;; 	((eq major-mode 'c++-mode) (project-compile));(jet/project-compile-build));(my-compile-project))
+;; 	((bound-and-true-p sly-mode) (sly-compile-file))
+;; 	((bound-and-true-p eglot-java-mode) (project-compile)) ;(eglot-java-run-main)) ; FIXME
+;; 	(t (message "recompile command not defined for this mode"))))
 
-(defun jet/mode-upload-run () "Upload/run a project based on its type" (interactive)
-  (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
-	((eq major-mode 'c++-mode) (project-compile));(my-compile-project))
-	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
-	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
-	(t (message "upload command not defined for this mode"))))
+;; (defun jet/mode-upload-run () "Upload/run a project based on its type" (interactive)
+;;   (cond ((bound-and-true-p platformio-mode) (platformio-upload buffer-file-name)) ;; if platformio minor mode
+;; 	((eq major-mode 'c++-mode) (project-compile));(my-compile-project))
+;; 	((bound-and-true-p sly-mode) (sly-compile-and-load-file))
+;; 	((bound-and-true-p eglot-java-mode) (eglot-java-run-main))
+;; 	(t (message "upload command not defined for this mode"))))
 
-(defun jet/eval-defun () "Eval functions" (interactive)
-  (cond ((eq major-mode 'emacs-lisp-mode) (eval-defun)) 
-	((bound-and-true-p sly-mode) (sly-eval-defun))
-	((eq major-mode 'org-mode) (org-babel-execute-src-block))
-	(t (message "eval function not defined for this mode"))))
+;; (defun jet/eval-defun () "Eval functions" (interactive)
+;;   (cond ((eq major-mode 'emacs-lisp-mode) (eval-defun)) 
+;; 	((bound-and-true-p sly-mode) (sly-eval-defun))
+;; 	((eq major-mode 'org-mode) (org-babel-execute-src-block))
+;; 	(t (message "eval function not defined for this mode"))))
 
 (defun eos/add-watchwords ()
   "Highlight `FIXME' and `TODO' in code"
