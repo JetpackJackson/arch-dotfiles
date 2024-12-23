@@ -96,6 +96,8 @@
   ;; send email with msmtp (thanks wgreenhouse)
   (setopt message-send-mail-function 'message-send-mail-with-sendmail)
   (setopt sendmail-program "/usr/bin/msmtp")
+  (setq message-kill-buffer-on-exit t)
+  (setopt notmuch-search-oldest-first nil)
 
   :custom
   ;; TAB cycle if there are only few candidates
@@ -141,6 +143,22 @@
 (use-package rainbow-delimiters :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 (use-package magit :bind (("C-c g" . magit-status)))
 (use-package elfeed)
+(use-package mu4e
+  :ensure nil
+  :load-path "/usr/share/emacs/site-lisp/mu4e/"
+  ;; :defer 20 ; Wait until 20 seconds after startup
+  :config
+
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
+
+  ;; Refresh mail using isync every 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -c ~/.config/isync/mbsyncrc -a")
+  (setq mu4e-maildir "~/.local/share/mail")
+  (setq send-mail-function 'sendmail-send-it))
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+
 (use-package eee
   :load-path "~/.cache/emacs/eee.el/"
   :config (setq ee-terminal-command "foot"))
